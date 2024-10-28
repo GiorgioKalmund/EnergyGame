@@ -1,0 +1,1 @@
+Hallo. Ich bin eine Readme, aber als .txt , weil ich ein Noob bin und vor .md Angst hab.

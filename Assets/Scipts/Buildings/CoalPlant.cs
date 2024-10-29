@@ -14,16 +14,15 @@ public class CoalPlant : EnergyProducer
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         double produced = this.Produce();
-        print(title + " produced: "+produced);
+        print(title + " produced: "+ produced + " energy units left: "+source.GetAmount());
         energyStored += produced;
     }
     
     override protected double Produce(){
-        double producedRespources = energyIn.GiveResources();
-        print(energyIn.title + " produces "+ producedRespources);
-        return energyIn.GiveResources() * efficiency;
+        double producedRespources = source.GiveResources();
+        return producedRespources * efficiency;
     }
 }

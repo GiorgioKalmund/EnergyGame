@@ -9,7 +9,7 @@ using UnityEngine.UIElements;
 // For example a coal-fired power plant
 public abstract class EnergyProducer : MonoBehaviour
 {
-    [SerializeField] protected EnergyOccurence energyIn;
+    [SerializeField] protected EnergyOccurence source;
     [SerializeField] protected double efficiency = 1;
     [SerializeField] public string title = "";
 

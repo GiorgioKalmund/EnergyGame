@@ -8,7 +8,7 @@ using UnityEngine;
 public class CoalOccurence : EnergyOccurence
 {   
     public override double GiveResources(){
-        if (amount > 1){
+        if (amount >= 1){
             double resourcesToBeReturned =  energyType.GetEnergyPerUnit();
             amount--;
             return resourcesToBeReturned;

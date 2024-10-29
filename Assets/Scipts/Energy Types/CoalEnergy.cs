@@ -8,7 +8,6 @@ using UnityEngine;
 public class CoalEnergy : EnergyType
 {
     void Start(){
-        this.energyPerUnit = 5;
         this.title = "Coal Energy Item";
     }
 }

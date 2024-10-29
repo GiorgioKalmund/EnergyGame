@@ -23,4 +23,8 @@ public abstract class EnergyOccurence : MonoBehaviour
     public void SetAmount(double amount){
         this.amount = amount;
     }
+
+    public double GetAmount(){
+        return this.amount;
+    }
 }

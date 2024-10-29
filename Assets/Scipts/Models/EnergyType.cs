@@ -6,6 +6,10 @@ using UnityEngine;
 // For example coal
 public abstract class EnergyType : MonoBehaviour
 {
-    protected String title;
-    protected double energyPerUnit;
+    [SerializeField] public String title;
+    [SerializeField] protected double energyPerUnit;
+
+    public double GetEnergyPerUnit(){
+        return this.energyPerUnit;
+    }
 }

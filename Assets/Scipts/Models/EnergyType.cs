@@ -12,4 +12,9 @@ public abstract class EnergyType : MonoBehaviour
     public double GetEnergyPerUnit(){
         return this.energyPerUnit;
     }
+
+    public override String ToString()
+    {
+        return title;
+    }
 }

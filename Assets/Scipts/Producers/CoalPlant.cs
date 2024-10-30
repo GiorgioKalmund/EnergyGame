@@ -23,7 +23,7 @@ public class CoalPlant : EnergyProducer
         SetText();
     }
 
-    protected override double Produce(){
+    protected new double Produce(){
         double producedRespources = source.GiveResources();
         return producedRespources * efficiency;
     }
@@ -31,10 +31,15 @@ public class CoalPlant : EnergyProducer
     void SetText()
     {
         textElement.text = $@"
-            ${title}
+            {title}
 
-            Stored: $ {energyStored}
-            #Available: $ {source.GetAmount()} * ${source.energyType}
+            Source:  {source}
+            Energy Type: {source.GetEnergyType()}
+            Energy per Unit: {source.GetEnergyType().GetEnergyPerUnit()}
+
+            Units Available: {source.GetAmount()} * {source.GetEnergyType().GetEnergyPerUnit()}
+
+            Stored: {energyStored}
         ";
     }
 }

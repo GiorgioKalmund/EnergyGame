@@ -17,9 +17,27 @@ public abstract class EnergyProducer : MonoBehaviour
     //[SerializeField] protected string coordinate;
 
     [SerializeField] protected double energyStored = 0;
-    protected double energyOut = 0;
 
-    protected abstract double Produce();
+    protected double Produce()
+    {
+        double producedRespources = source.GiveResources();
+        return producedRespources * efficiency;
+    }
+
+    public double GetEnergyOut(double amount)
+    {
+        double difference = this.energyStored - amount;
+        if (difference < 0)
+        {
+            return 0;
+        }
+        return difference;
+    }
+
+    public double GetEfficiency()
+    {
+        return this.efficiency;
+    }
 
 
 }

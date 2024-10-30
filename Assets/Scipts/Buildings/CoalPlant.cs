@@ -21,7 +21,7 @@ public class CoalPlant : EnergyProducer
         energyStored += produced;
     }
     
-    override protected double Produce(){
+    protected override double Produce(){
         double producedRespources = source.GiveResources();
         return producedRespources * efficiency;
     }

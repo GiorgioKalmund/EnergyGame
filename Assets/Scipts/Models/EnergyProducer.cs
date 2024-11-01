@@ -13,7 +13,6 @@ public abstract class EnergyProducer : MonoBehaviour
     [SerializeField] protected EnergyOccurence source;
     [SerializeField] protected double efficiency = 1;
     [SerializeField] public string title = "";
-    public TMP_Text textElement;
     //[SerializeField] protected string coordinate;
 
     [SerializeField] protected double energyStored = 0;

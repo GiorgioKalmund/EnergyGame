@@ -12,7 +12,7 @@ public class FollowMouse : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !collision.colliding)
         {
             following = false;
             collision.HideSprite();

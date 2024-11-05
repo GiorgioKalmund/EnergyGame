@@ -121,5 +121,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   title: Coal Occurence
-  energyType: {fileID: 0}
+  energyType: {fileID: 7564112590587087262, guid: cd184375ef324434ab01df4eaff88fdb, type: 3}
   amount: 500

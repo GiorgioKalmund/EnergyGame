@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
+using JetBrains.Annotations;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlacementSystem : MonoBehaviour
@@ -21,6 +23,7 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField]
     private GameObject gridOnOff;
 
+    [SerializeField] [CanBeNull] private GameObject currentGameObject = null;
 
     private void Start()
     {
@@ -34,6 +37,8 @@ public class PlacementSystem : MonoBehaviour
         
         gridOnOff.SetActive(true);
         cellIndicator.SetActive(true);
+        currentGameObject = Instantiate(database.objectsData[selectedObjectIndex].Prefab);
+
         inputManager.OnClicked += PlaceStructure;
         inputManager.OnExit += StopPlacement;
     }
@@ -43,8 +48,15 @@ public class PlacementSystem : MonoBehaviour
         
         Vector3 mousePosition = inputManager.GetSelectedMapPosition();
         Vector3Int gridPosition = grid.WorldToCell(mousePosition);
-        GameObject gameObject = Instantiate(database.objectsData[selectedObjectIndex].Prefab);
-        gameObject.transform.position = grid.CellToWorld(gridPosition);
+        if (currentGameObject)
+        {
+            StopPlacement();
+        }
+        else
+        {
+            gameObject.transform.position = grid.CellToWorld(gridPosition);
+        }
+
     }
     private void StopPlacement()
     {
@@ -53,6 +65,7 @@ public class PlacementSystem : MonoBehaviour
         cellIndicator.SetActive(false);
         inputManager.OnClicked -= PlaceStructure;
         inputManager.OnExit -= StopPlacement;
+        currentGameObject = null;
     }
 
     private void Update()
@@ -60,8 +73,13 @@ public class PlacementSystem : MonoBehaviour
         if (selectedObjectIndex < 0)
             return;
         Vector3 mousePosition = inputManager.GetSelectedMapPosition();
-        Vector3Int gridPosition = grid.WorldToCell(mousePosition); 
+        Vector3Int gridPosition = grid.WorldToCell(mousePosition);
         mouseIndicator.transform.position = mousePosition;
-        cellIndicator.transform.position = grid.CellToWorld(gridPosition);
+        Vector3 targetPostion = grid.CellToWorld(gridPosition);
+        cellIndicator.transform.position = new Vector3(targetPostion.x, 0.2f, targetPostion.z);
+        if (currentGameObject)
+        {
+            currentGameObject.transform.position = cellIndicator.transform.position;
+        }
     }
 }

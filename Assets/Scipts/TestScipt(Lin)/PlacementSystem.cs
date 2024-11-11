@@ -40,6 +40,7 @@ public class PlacementSystem : MonoBehaviour
         currentGameObject = Instantiate(database.objectsData[selectedObjectIndex].Prefab);
 
         inputManager.OnClicked += PlaceStructure;
+        inputManager.OnExit += ResetCurrentGameObject;
         inputManager.OnExit += StopPlacement;
     }
 
@@ -53,12 +54,16 @@ public class PlacementSystem : MonoBehaviour
         {
             StopPlacement();
         }
-
         else
         {
             gameObject.transform.position = grid.CellToWorld(gridPosition);
         }
 
+    }
+
+    private void ResetCurrentGameObject()
+    {
+        Destroy(currentGameObject);
     }
     private void StopPlacement()
     {
@@ -67,6 +72,7 @@ public class PlacementSystem : MonoBehaviour
         cellIndicator.SetActive(false);
         inputManager.OnClicked -= PlaceStructure;
         inputManager.OnExit -= StopPlacement;
+        inputManager.OnExit -= ResetCurrentGameObject;
         currentGameObject = null;
     }
 

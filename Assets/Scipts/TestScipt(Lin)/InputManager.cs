@@ -20,7 +20,7 @@ public class InputManager : MonoBehaviour
     public event Action OnExit;
 
 
-    private void Update()#intoBuildingsystem
+    private void Update()//intoBuildingsystem
     {
         if (Input.GetMouseButtonDown(0))
             OnClicked?.Invoke();

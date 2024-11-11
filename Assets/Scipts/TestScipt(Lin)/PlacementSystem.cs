@@ -30,7 +30,7 @@ public class PlacementSystem : MonoBehaviour
         StopPlacement();
     }
 
-    public void StartPlacement(int ID)
+    public void StartPlacement(int ID)//placement which is linked with Inventory
     {
         StopPlacement();
         selectedObjectIndex = database.objectsData.FindIndex(data => data.ID == ID);
@@ -48,10 +48,12 @@ public class PlacementSystem : MonoBehaviour
         
         Vector3 mousePosition = inputManager.GetSelectedMapPosition();
         Vector3Int gridPosition = grid.WorldToCell(mousePosition);
+        //check if building already exist
         if (currentGameObject)
         {
             StopPlacement();
         }
+
         else
         {
             gameObject.transform.position = grid.CellToWorld(gridPosition);
@@ -74,9 +76,10 @@ public class PlacementSystem : MonoBehaviour
             return;
         Vector3 mousePosition = inputManager.GetSelectedMapPosition();
         Vector3Int gridPosition = grid.WorldToCell(mousePosition);
+
         mouseIndicator.transform.position = mousePosition;
         Vector3 targetPostion = grid.CellToWorld(gridPosition);
-        cellIndicator.transform.position = new Vector3(targetPostion.x, 0.2f, targetPostion.z);
+        cellIndicator.transform.position = new Vector3(targetPostion.x + 0.5f, 0.2f, targetPostion.z + 0.5f);
         if (currentGameObject)
         {
             currentGameObject.transform.position = cellIndicator.transform.position;

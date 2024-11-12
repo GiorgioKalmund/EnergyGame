@@ -1,10 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Diagnostics;
 using JetBrains.Annotations;
-using Unity.VisualScripting;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
@@ -29,6 +24,8 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField] private LayerMask blockedLayer;
     [SerializeField] private Sprite defaultSelector;
     [SerializeField] private Sprite warningSelector;
+    [SerializeField] private Texture2D cursorDefaultTexture;
+    [SerializeField] private Texture2D cursorDownTexture;
     [SerializeField] [CanBeNull] private GameObject currentGameObject = null;
     private SpriteRenderer cellSprite;
     [SerializeField] private bool blocked;
@@ -40,6 +37,7 @@ public class PlacementSystem : MonoBehaviour
         {
             cellSprite = cellIndicator.GetComponentInChildren<SpriteRenderer>();
             Debug.Log(cellSprite);
+            Cursor.SetCursor(cursorDefaultTexture, Vector2.zero, CursorMode.Auto);
         }
     }
 
@@ -95,8 +93,21 @@ public class PlacementSystem : MonoBehaviour
         currentGameObject = null;
     }
 
+    private void ChangeCursor()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Cursor.SetCursor(cursorDownTexture, Vector2.zero, CursorMode.Auto);
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            Cursor.SetCursor(cursorDefaultTexture, Vector2.zero, CursorMode.Auto);
+        }
+    }
+
     private void Update()
     {
+        ChangeCursor();
         if (selectedObjectIndex < 0)
             return;
         Vector3 mousePosition = inputManager.GetSelectedMapPosition();

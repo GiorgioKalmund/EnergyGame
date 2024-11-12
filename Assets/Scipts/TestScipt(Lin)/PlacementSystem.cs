@@ -6,6 +6,7 @@ using System.Diagnostics;
 using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 public class PlacementSystem : MonoBehaviour
 {
@@ -23,11 +24,23 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField]
     private GameObject gridOnOff;
 
+    [SerializeField] private LayerMask defaultLayer;
+    [SerializeField] private LayerMask waterLayer;
+    [SerializeField] private LayerMask blockedLayer;
+    [SerializeField] private Sprite defaultSelector;
+    [SerializeField] private Sprite warningSelector;
     [SerializeField] [CanBeNull] private GameObject currentGameObject = null;
+    private SpriteRenderer cellSprite;
+    [SerializeField] private bool blocked;
 
     private void Start()
     {
         StopPlacement();
+        if (cellIndicator)
+        {
+            cellSprite = cellIndicator.GetComponentInChildren<SpriteRenderer>();
+            Debug.Log(cellSprite);
+        }
     }
 
     public void StartPlacement(int ID)//placement which is linked with Inventory
@@ -64,15 +77,21 @@ public class PlacementSystem : MonoBehaviour
     private void ResetCurrentGameObject()
     {
         Destroy(currentGameObject);
+        currentGameObject = null;
     }
     private void StopPlacement()
     {
+        if (blocked && currentGameObject)
+        {
+            Debug.Log("You are not allowed to place here!");
+            return;
+        }
         selectedObjectIndex = -1;
         gridOnOff.SetActive(false);
         cellIndicator.SetActive(false);
         inputManager.OnClicked -= PlaceStructure;
-        inputManager.OnExit -= StopPlacement;
         inputManager.OnExit -= ResetCurrentGameObject;
+        inputManager.OnExit -= StopPlacement;
         currentGameObject = null;
     }
 
@@ -89,6 +108,23 @@ public class PlacementSystem : MonoBehaviour
         if (currentGameObject)
         {
             currentGameObject.transform.position = cellIndicator.transform.position;
+        }
+
+        RaycastHit hit;
+        if (Physics.Raycast(mouseIndicator.transform.position, Vector3.down, out hit, 10f))
+        {
+            LayerMask hitLayer = hit.transform.gameObject.layer;
+            // TODO: Actually compare layers, based on parameterized values up top
+            if (hitLayer.value == 0)
+            {
+                blocked = false;
+                cellSprite.sprite = defaultSelector;
+            }
+            else if (hitLayer.value == 4 || hitLayer.value == 6)
+            {
+                blocked = true;
+                cellSprite.sprite = warningSelector;
+            }
         }
     }
 }

@@ -10,7 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2279490593036899876}
   - component: {fileID: 8569927462012742698}
-  m_Layer: 0
+  - component: {fileID: 5610844731751424660}
+  - component: {fileID: 2117251125348778322}
+  m_Layer: 6
   m_Name: Factory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f9a2ab7d2d377400e9c4f1bd19212cec, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 92446b8b49b614ced969b81f8198dbf3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -84,3 +86,40 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5610844731751424660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3185191973051478979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddc24fade6ba06f49b18cb35300f79e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: 
+  placement: 0
+  cost: 0
+  placed: 0
+--- !u!65 &2117251125348778322
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3185191973051478979}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 5.59, y: 3.640001, z: 0.20000005}
+  m_Center: {x: 0, y: 0, z: 0}

@@ -1,5 +1,6 @@
 using System;
 using JetBrains.Annotations;
+using Unity.VisualScripting;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
@@ -36,7 +37,6 @@ public class PlacementSystem : MonoBehaviour
         if (cellIndicator)
         {
             cellSprite = cellIndicator.GetComponentInChildren<SpriteRenderer>();
-            Debug.Log(cellSprite);
             Cursor.SetCursor(cursorDefaultTexture, Vector2.zero, CursorMode.Auto);
         }
     }
@@ -45,7 +45,7 @@ public class PlacementSystem : MonoBehaviour
     {
         StopPlacement();
         selectedObjectIndex = database.objectsData.FindIndex(data => data.ID == ID);
-        
+
         gridOnOff.SetActive(true);
         cellIndicator.SetActive(true);
         currentGameObject = Instantiate(database.objectsData[selectedObjectIndex].Prefab);
@@ -57,17 +57,13 @@ public class PlacementSystem : MonoBehaviour
 
     private void PlaceStructure()
     {
-        
+
         Vector3 mousePosition = inputManager.GetSelectedMapPosition();
         Vector3Int gridPosition = grid.WorldToCell(mousePosition);
         //check if building already exist
         if (currentGameObject)
         {
             StopPlacement();
-        }
-        else
-        {
-            gameObject.transform.position = grid.CellToWorld(gridPosition);
         }
 
     }
@@ -83,6 +79,11 @@ public class PlacementSystem : MonoBehaviour
         {
             Debug.Log("You are not allowed to place here!");
             return;
+        }
+
+        if (currentGameObject)
+        {
+            currentGameObject.GetComponent<BuildingDesriptor>().Place();
         }
         selectedObjectIndex = -1;
         gridOnOff.SetActive(false);
@@ -118,24 +119,33 @@ public class PlacementSystem : MonoBehaviour
         cellIndicator.transform.position = new Vector3(targetPostion.x + 0.5f, 0.2f, targetPostion.z + 0.5f);
         if (currentGameObject)
         {
+            BuildingDesriptor buildingDescriptor = currentGameObject.GetComponent<BuildingDesriptor>();
+            PlacementType currentPlacementType = PlacementType.Default;
+            if (!buildingDescriptor)
+            {
+                throw new MissingComponentException($"{currentGameObject.name} requires  BuildingDescriptor.");
+            }
+            
+            currentPlacementType = currentGameObject.GetComponent<BuildingDesriptor>().Placement;
+            
             currentGameObject.transform.position = cellIndicator.transform.position;
-        }
-
-        RaycastHit hit;
-        if (Physics.Raycast(mouseIndicator.transform.position, Vector3.down, out hit, 10f))
-        {
-            LayerMask hitLayer = hit.transform.gameObject.layer;
-            // TODO: Actually compare layers, based on parameterized values up top
-            if (hitLayer.value == 0)
+            RaycastHit hit;
+            if (Physics.Raycast(mouseIndicator.transform.position, Vector3.down, out hit, 10f))
             {
-                blocked = false;
-                cellSprite.sprite = defaultSelector;
-            }
-            else if (hitLayer.value == 4 || hitLayer.value == 6)
-            {
-                blocked = true;
-                cellSprite.sprite = warningSelector;
+                LayerMask hitLayer = hit.transform.gameObject.layer;
+                // TODO: Actually compare layers, based on parameterized values up top
+                if (hitLayer.value == 0 || (hitLayer.value == 4 && currentPlacementType.Equals(PlacementType.Water)))
+                {
+                    blocked = false;
+                    cellSprite.sprite = defaultSelector;
+                }
+                else if (hitLayer.value == 4 || hitLayer.value == 6)
+                {
+                    blocked = true;
+                    cellSprite.sprite = warningSelector;
+                }
             }
         }
+        
     }
 }

@@ -15,9 +15,13 @@ MonoBehaviour:
   objectsData:
   - <Name>k__BackingField: CoalEnergy
     <ID>k__BackingField: 0
-    <Size>k__BackingField: {x: 0.5, y: 0.5}
+    <Size>k__BackingField: {x: 1, y: 1}
     <Prefab>k__BackingField: {fileID: 3185191973051478979, guid: a033a956a6fb1410e965cb75d09986b1, type: 3}
   - <Name>k__BackingField: SampleBuilding
     <ID>k__BackingField: 1
-    <Size>k__BackingField: {x: 0.5, y: 0.5}
+    <Size>k__BackingField: {x: 1, y: 1}
     <Prefab>k__BackingField: {fileID: 3185191973051478979, guid: c4deed534ea434ab6bb711a6bf78d704, type: 3}
+  - <Name>k__BackingField: 3D Factory
+    <ID>k__BackingField: 2
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 4698825477065934905, guid: 15aef9d353e622d478b27af6c1254224, type: 3}

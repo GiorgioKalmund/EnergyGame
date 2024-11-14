@@ -116,33 +116,40 @@ public class PlacementSystem : MonoBehaviour
 
         mouseIndicator.transform.position = mousePosition;
         Vector3 targetPostion = grid.CellToWorld(gridPosition);
-        cellIndicator.transform.position = new Vector3(targetPostion.x + 0.5f, 0.2f, targetPostion.z + 0.5f);
+        Vector3 adjustedTargetPosition =  new Vector3(targetPostion.x + 0.5f, 0.2f, targetPostion.z + 0.5f); 
+        cellIndicator.transform.position = Vector3.Lerp(cellIndicator.transform.position, adjustedTargetPosition, Time.deltaTime * 50f);
         if (currentGameObject)
         {
             BuildingDesriptor buildingDescriptor = currentGameObject.GetComponent<BuildingDesriptor>();
-            PlacementType currentPlacementType = PlacementType.Default;
             if (!buildingDescriptor)
             {
                 throw new MissingComponentException($"{currentGameObject.name} requires  BuildingDescriptor.");
             }
             
-            currentPlacementType = currentGameObject.GetComponent<BuildingDesriptor>().Placement;
-            
+            PlacementType currentPlacementType = currentGameObject.GetComponent<BuildingDesriptor>().Placement;
             currentGameObject.transform.position = cellIndicator.transform.position;
             RaycastHit hit;
             if (Physics.Raycast(mouseIndicator.transform.position, Vector3.down, out hit, 10f))
             {
                 LayerMask hitLayer = hit.transform.gameObject.layer;
                 // TODO: Actually compare layers, based on parameterized values up top
-                if (hitLayer.value == 0 || (hitLayer.value == 4 && currentPlacementType.Equals(PlacementType.Water)))
-                {
-                    blocked = false;
-                    cellSprite.sprite = defaultSelector;
-                }
-                else if (hitLayer.value == 4 || hitLayer.value == 6)
+                if (hitLayer.value == 6)
                 {
                     blocked = true;
                     cellSprite.sprite = warningSelector;
+                }
+                else
+                {
+                    if (currentPlacementType.Equals(PlacementType.Water))
+                    {
+                        blocked = hitLayer.value != 4;
+                        cellSprite.sprite = blocked ? warningSelector : defaultSelector;
+                    }
+                    else
+                    {
+                        blocked = hitLayer.value != 0; 
+                        cellSprite.sprite = blocked ? warningSelector : defaultSelector;
+                    }
                 }
             }
         }

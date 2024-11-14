@@ -158,9 +158,9 @@ RectTransform:
   - {fileID: 423334652}
   m_Father: {fileID: 474944031}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -850, y: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 80, y: 0}
   m_SizeDelta: {x: 121, y: 536}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3337879
@@ -172,9 +172,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3337877}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aeab093189d3ee640adc44458aab80f8, type: 3}
+  m_Script: {fileID: 11500000, guid: 7885663fc7ab43b46b73580161a17add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  overlay: {fileID: 410898186}
+  currentActiveToggle: {fileID: 0}
 --- !u!1 &70271887
 GameObject:
   m_ObjectHideFlags: 0
@@ -644,6 +646,7 @@ GameObject:
   - component: {fileID: 423334654}
   - component: {fileID: 423334656}
   - component: {fileID: 423334657}
+  - component: {fileID: 423334658}
   m_Layer: 5
   m_Name: Thermo View
   m_TagString: Untagged
@@ -764,7 +767,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 423334656}
+      - m_Target: {fileID: 423334658}
         m_TargetAssemblyTypeName: OverlayToggle, Assembly-CSharp
         m_MethodName: Toggle
         m_Mode: 1
@@ -776,6 +779,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &423334658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 423334651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30f6652ccb5bcc541af55415f5983c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOn: 0
+  toggleOffSprite: {fileID: 21300000, guid: 9d23314df66f1194b9ea3803e8d83013, type: 3}
+  toggleOnSprite: {fileID: 21300000, guid: 99af49c51e49b434fbac5419f79c6e58, type: 3}
+  overlaySprite: {fileID: 21300000, guid: 514366c8a703e9a478574a7794552abb, type: 3}
+  manager: {fileID: 3337879}
 --- !u!1 &449543566
 GameObject:
   m_ObjectHideFlags: 0
@@ -889,10 +909,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -1035,7 +1055,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!81 &506505582
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1489,6 +1509,7 @@ GameObject:
   - component: {fileID: 662031176}
   - component: {fileID: 662031178}
   - component: {fileID: 662031179}
+  - component: {fileID: 662031180}
   m_Layer: 5
   m_Name: Wind View
   m_TagString: Untagged
@@ -1609,7 +1630,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 662031178}
+      - m_Target: {fileID: 662031180}
         m_TargetAssemblyTypeName: OverlayToggle, Assembly-CSharp
         m_MethodName: Toggle
         m_Mode: 1
@@ -1621,6 +1642,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &662031180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662031173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30f6652ccb5bcc541af55415f5983c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOn: 0
+  toggleOffSprite: {fileID: 21300000, guid: 9d61d0a6f8b26e343981acd965d2dfa7, type: 3}
+  toggleOnSprite: {fileID: 21300000, guid: ebb6068e84df06b4a9f933c8e486f150, type: 3}
+  overlaySprite: {fileID: 21300000, guid: 3f9ab0b01140d1d4abe12792e472c3f0, type: 3}
+  manager: {fileID: 3337879}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1865,7 +1903,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &963194226
 AudioListener:
   m_ObjectHideFlags: 0
@@ -2265,6 +2303,7 @@ GameObject:
   - component: {fileID: 1306187911}
   - component: {fileID: 1306187913}
   - component: {fileID: 1306187914}
+  - component: {fileID: 1306187915}
   m_Layer: 5
   m_Name: Water View
   m_TagString: Untagged
@@ -2385,7 +2424,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1306187913}
+      - m_Target: {fileID: 1306187915}
         m_TargetAssemblyTypeName: OverlayToggle, Assembly-CSharp
         m_MethodName: Toggle
         m_Mode: 1
@@ -2397,6 +2436,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1306187915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1306187908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30f6652ccb5bcc541af55415f5983c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOn: 0
+  toggleOffSprite: {fileID: 21300000, guid: 9f36dcfd524c90943b772ef5a5682be6, type: 3}
+  toggleOnSprite: {fileID: 21300000, guid: 02ec993577b78194dba53428e96d5e45, type: 3}
+  overlaySprite: {fileID: 21300000, guid: b90be0e02d1ee584997667bbbb66eaef, type: 3}
+  manager: {fileID: 3337879}
 --- !u!1 &1373047363
 GameObject:
   m_ObjectHideFlags: 0
@@ -2553,6 +2609,7 @@ GameObject:
   - component: {fileID: 1456491703}
   - component: {fileID: 1456491705}
   - component: {fileID: 1456491706}
+  - component: {fileID: 1456491707}
   m_Layer: 5
   m_Name: Home View
   m_TagString: Untagged
@@ -2673,7 +2730,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1456491705}
+      - m_Target: {fileID: 1456491707}
         m_TargetAssemblyTypeName: OverlayToggle, Assembly-CSharp
         m_MethodName: Toggle
         m_Mode: 1
@@ -2685,6 +2742,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1456491707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1456491700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30f6652ccb5bcc541af55415f5983c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOn: 0
+  toggleOffSprite: {fileID: 21300000, guid: 27e7cb473097f8d4c81b873c3ee54f4c, type: 3}
+  toggleOnSprite: {fileID: 21300000, guid: cdad7ac04a3593e4aacf5b8241656076, type: 3}
+  overlaySprite: {fileID: 21300000, guid: d60813398c89a6745a17d0efa868feb7, type: 3}
+  manager: {fileID: 3337879}
 --- !u!1 &1500840965
 GameObject:
   m_ObjectHideFlags: 0
@@ -3853,7 +3927,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e31d5e21eea4fc448708445f911d423, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneCamera: {fileID: 963194227}
+  sceneCamera: {fileID: 506505583}
   placementLayermask:
     serializedVersion: 2
     m_Bits: 1

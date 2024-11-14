@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6514593421504746893}
   - component: {fileID: 9037397844602288563}
   m_Layer: 0
-  m_Name: fieldIndicator
+  m_Name: Cell Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 568455131247407364}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.2, z: 0}
+  m_LocalPosition: {x: 1.4300002, y: 0.2, z: -0.99999994}
   m_LocalScale: {x: 1, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

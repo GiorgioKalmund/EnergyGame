@@ -20,6 +20,8 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField]
     private GameObject gridOnOff;
 
+    [SerializeField] private float gridOffset;
+
     [SerializeField] private LayerMask defaultLayer;
     [SerializeField] private LayerMask waterLayer;
     [SerializeField] private LayerMask blockedLayer;
@@ -111,23 +113,22 @@ public class PlacementSystem : MonoBehaviour
         ChangeCursor();
         if (selectedObjectIndex < 0)
             return;
+        
         Vector3 mousePosition = inputManager.GetSelectedMapPosition();
-        Vector3Int gridPosition = grid.WorldToCell(mousePosition);
-
         mouseIndicator.transform.position = mousePosition;
+        Vector3Int gridPosition = grid.WorldToCell(mousePosition);
         Vector3 targetPostion = grid.CellToWorld(gridPosition);
-        Vector3 adjustedTargetPosition =  new Vector3(targetPostion.x + 0.5f, 0.2f, targetPostion.z + 0.5f); 
+        Vector3 adjustedTargetPosition =  new Vector3(targetPostion.x + gridOffset, 0.03f, targetPostion.z + gridOffset); 
         cellIndicator.transform.position = Vector3.Lerp(cellIndicator.transform.position, adjustedTargetPosition, Time.deltaTime * 50f);
         if (currentGameObject)
         {
+           currentGameObject.transform.position = cellIndicator.transform.position;
             BuildingDesriptor buildingDescriptor = currentGameObject.GetComponent<BuildingDesriptor>();
             if (!buildingDescriptor)
             {
                 throw new MissingComponentException($"{currentGameObject.name} requires  BuildingDescriptor.");
             }
-            
             PlacementType currentPlacementType = currentGameObject.GetComponent<BuildingDesriptor>().Placement;
-            currentGameObject.transform.position = cellIndicator.transform.position;
             RaycastHit hit;
             if (Physics.Raycast(mouseIndicator.transform.position, Vector3.down, out hit, 10f))
             {

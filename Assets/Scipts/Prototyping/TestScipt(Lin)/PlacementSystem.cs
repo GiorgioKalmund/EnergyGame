@@ -17,8 +17,6 @@ public class PlacementSystem : MonoBehaviour
     private ObjectsDatabase database;
     private int selectedObjectIndex = -1;
 
-    [SerializeField]
-    private GameObject gridOnOff;
 
     [SerializeField] private float gridOffset;
 
@@ -48,7 +46,6 @@ public class PlacementSystem : MonoBehaviour
         StopPlacement();
         selectedObjectIndex = database.objectsData.FindIndex(data => data.ID == ID);
 
-        gridOnOff.SetActive(true);
         cellIndicator.SetActive(true);
         currentGameObject = Instantiate(database.objectsData[selectedObjectIndex].Prefab);
 
@@ -88,7 +85,6 @@ public class PlacementSystem : MonoBehaviour
             currentGameObject.GetComponent<BuildingDesriptor>().Place();
         }
         selectedObjectIndex = -1;
-        gridOnOff.SetActive(false);
         cellIndicator.SetActive(false);
         inputManager.OnClicked -= PlaceStructure;
         inputManager.OnExit -= ResetCurrentGameObject;

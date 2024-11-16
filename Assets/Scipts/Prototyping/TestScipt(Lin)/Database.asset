@@ -21,3 +21,7 @@ MonoBehaviour:
     <ID>k__BackingField: 1
     <Size>k__BackingField: {x: 0, y: 0}
     <Prefab>k__BackingField: {fileID: 2698100121599932702, guid: d0972884f8d7cd042b8a8a14b8d24443, type: 3}
+  - <Name>k__BackingField: Waterplant
+    <ID>k__BackingField: 2
+    <Size>k__BackingField: {x: 0, y: 0}
+    <Prefab>k__BackingField: {fileID: 7185595045433911012, guid: 0b3f9324124ed1043a510b343067be47, type: 3}

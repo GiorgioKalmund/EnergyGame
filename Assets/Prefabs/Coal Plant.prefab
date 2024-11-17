@@ -510,7 +510,7 @@ GameObject:
   - component: {fileID: -5050048849474577431}
   - component: {fileID: 4471740698071347746}
   m_Layer: 6
-  m_Name: EnergyBuildings
+  m_Name: Coal Plant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -560,9 +560,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddc24fade6ba06f49b18cb35300f79e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 3D Factory
+  buildngName: Coal Plant
   placement: 0
   cost: 0
+  production: 500
   placed: 0
 --- !u!65 &4471740698071347746
 BoxCollider:

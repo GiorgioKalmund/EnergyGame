@@ -440,9 +440,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddc24fade6ba06f49b18cb35300f79e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Waterplant
+  buildngName: Waterplant
   placement: 1
   cost: 0
+  production: 200
   placed: 0
 --- !u!1 &8465016442759146058
 GameObject:

@@ -113,12 +113,11 @@ public class PlacementSystem : MonoBehaviour
         Vector3 mousePosition = inputManager.GetSelectedMapPosition();
         mouseIndicator.transform.position = mousePosition;
         Vector3Int gridPosition = grid.WorldToCell(mousePosition);
-        Vector3 targetPostion = grid.CellToWorld(gridPosition);
-        Vector3 adjustedTargetPosition =  new Vector3(targetPostion.x + gridOffset, 0.03f, targetPostion.z + gridOffset); 
-        cellIndicator.transform.position = Vector3.Lerp(cellIndicator.transform.position, adjustedTargetPosition, Time.deltaTime * 50f);
+        Vector3 targetPostion = grid.CellToWorld(gridPosition); 
+        cellIndicator.transform.position = new Vector3(targetPostion.x + gridOffset, 0.03f, targetPostion.z + gridOffset);
         if (currentGameObject)
         {
-           currentGameObject.transform.position = cellIndicator.transform.position;
+           currentGameObject.transform.position =  Vector3.Lerp(currentGameObject.transform.position, cellIndicator.transform.position, Time.deltaTime * 50f);
             BuildingDesriptor buildingDescriptor = currentGameObject.GetComponent<BuildingDesriptor>();
             if (!buildingDescriptor)
             {

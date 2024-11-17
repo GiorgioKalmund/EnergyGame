@@ -38,7 +38,6 @@ public class OverlayToggle : MonoBehaviour
         {
             manager.ClearOverlay();
         }
-        Debug.Log(isOn);
     }
 
     public void ToggleOff()

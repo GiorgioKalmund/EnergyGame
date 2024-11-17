@@ -1,14 +1,16 @@
 using UnityEngine;
 using System;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(BoxCollider))]
 public class BuildingDesriptor : MonoBehaviour
 {
-    public String name;
+    public String buildngName;
     [SerializeField]
     private PlacementType placement;
 
     [SerializeField] private float cost;
+    [SerializeField] private float production; 
     [SerializeField] private bool placed = false;
     private BoxCollider _collider;
     
@@ -21,9 +23,9 @@ public class BuildingDesriptor : MonoBehaviour
 
     public void Awake()
     {
-        if (name == "")
+        if (buildngName == "")
         {
-            name = gameObject.name;
+            buildngName = gameObject.name;
         }
 
         _collider = GetComponent<BoxCollider>();
@@ -39,9 +41,9 @@ public class BuildingDesriptor : MonoBehaviour
     {
         placed = true;
         _collider.enabled = true;
-
+        Debug.Log($"{buildngName} added {production}");
+        LevelController.Instance.AddProduce(production);
     }
-
     public void Sell()
     {
         

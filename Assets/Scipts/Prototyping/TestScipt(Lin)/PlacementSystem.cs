@@ -21,16 +21,17 @@ public class PlacementSystem : MonoBehaviour
 
     [SerializeField] private float gridOffset;
 
-    [SerializeField] private LayerMask defaultLayer;
-    [SerializeField] private LayerMask waterLayer;
-    [SerializeField] private LayerMask blockedLayer;
+    // TODO: Check using these instead of numbers, however currently numbers to do match :/
+    [SerializeField]
+    private LayerMask defaultLayer, waterLayer, blockedLayer;
 
-    [SerializeField] private Sprite defaultSelector;
-
-    [SerializeField] private Texture2D cursorDefaultTexture;
-    [SerializeField] private Texture2D cursorDownTexture;
-    [SerializeField] [CanBeNull] private GameObject currentGameObject = null;
     private SpriteRenderer cellSprite;
+    [SerializeField]
+    Color spriteColorRegular, spriteColorWarning, spriteColorConnecting;
+
+    [SerializeField]
+    private Texture2D cursorDefaultTexture, cursorDownTexture;
+    [SerializeField] [CanBeNull] private GameObject currentGameObject = null;
     [SerializeField] private bool blocked;
 
     /// <changes>
@@ -81,7 +82,7 @@ public class PlacementSystem : MonoBehaviour
             //prepare for citySelection
             citySelectionActive = true;
             Debug.Log("Building placed. Please select a city.");
-            cellSprite.color = Color.yellow;
+            cellSprite.color = spriteColorConnecting;
             inputManager.OnClicked += SelectCity;
         }
 
@@ -92,7 +93,7 @@ public class PlacementSystem : MonoBehaviour
     {
         if (!citySelectionActive)
         {
-            cellSprite.color = Color.white;
+            cellSprite.color = spriteColorRegular;
             return;
         }
 
@@ -199,19 +200,19 @@ public class PlacementSystem : MonoBehaviour
                 if (hitLayer.value == 6)
                 {
                     blocked = true;
-                    cellSprite.color = Color.red;
+                    cellSprite.color = spriteColorWarning;
                 }
                 else
                 {
                     if (currentPlacementType.Equals(PlacementType.Water))
                     {
                         blocked = hitLayer.value != 4;
-                        cellSprite.color = blocked ? Color.red : Color.white;
+                        cellSprite.color = blocked ? spriteColorWarning : spriteColorRegular;
                     }
                     else
                     {
                         blocked = hitLayer.value != 0; 
-                        cellSprite.color = blocked ? Color.red : Color.white;
+                        cellSprite.color = blocked ? spriteColorWarning : spriteColorRegular;
                     }
                 }
             }

@@ -1687,7 +1687,9 @@ MonoBehaviour:
   blockedLayer:
     serializedVersion: 2
     m_Bits: 64
-  defaultSelector: {fileID: 21300000, guid: 19dc30d018b52457eae0a750a9df6615, type: 3}
+  spriteColorRegular: {r: 1, g: 1, b: 1, a: 1}
+  spriteColorWarning: {r: 1, g: 0.06132078, b: 0.06132078, a: 1}
+  spriteColorConnecting: {r: 1, g: 0.8873908, b: 0, a: 1}
   cursorDefaultTexture: {fileID: 2800000, guid: 4e2e0555c7ab84ffeac393e1819fe904, type: 3}
   cursorDownTexture: {fileID: 2800000, guid: e1250c16ce63b436f86c8757abef3648, type: 3}
   currentGameObject: {fileID: 0}
@@ -4341,7 +4343,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.14199083, y: -0.85796756, z: 0.3445048, w: 0.35361943}
+  m_LocalRotation: {x: 0.14199078, y: -0.8579677, z: 0.34450468, w: 0.35361946}
   m_LocalPosition: {x: 28.4, y: 20.3, z: 28.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

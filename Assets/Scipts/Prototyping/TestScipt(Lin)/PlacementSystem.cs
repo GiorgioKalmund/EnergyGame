@@ -126,6 +126,9 @@ public class PlacementSystem : MonoBehaviour
 
                 Debug.Log($"City selected. Distance to building: {distance} units.");
 
+                //turn curser off
+                cellSprite.color = spriteColorRegular;
+                cellIndicator.SetActive(false);
                 inputManager.OnClicked -= SelectCity;
             }
             else

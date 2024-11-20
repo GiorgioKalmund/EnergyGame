@@ -1,8 +1,8 @@
 using System;
 using JetBrains.Annotations;
-using Unity.VisualScripting;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
+using System.Collections;
 
 
 public class PlacementSystem : MonoBehaviour
@@ -25,9 +25,11 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField]
     private LayerMask defaultLayer, waterLayer, blockedLayer;
 
+    // Cell Indicator
     private SpriteRenderer cellSprite;
     [SerializeField]
     Color spriteColorRegular, spriteColorWarning, spriteColorConnecting;
+    private bool _flickering;
 
     [SerializeField]
     private Texture2D cursorDefaultTexture, cursorDownTexture;
@@ -134,6 +136,10 @@ public class PlacementSystem : MonoBehaviour
             else
             {
                 Debug.Log("Please select a valid city.");
+                if (!_flickering)
+                {
+                    StartCoroutine(FlickerIndicator(spriteColorWarning));
+                }
             }
         }
     }
@@ -222,4 +228,14 @@ public class PlacementSystem : MonoBehaviour
         }
         
     }
+    IEnumerator FlickerIndicator(Color flickerColor)
+    {
+        _flickering = true;
+        Color old = cellSprite.color;
+        cellSprite.color = flickerColor;
+        yield return new WaitForSeconds(0.05f);
+        cellSprite.color = old;
+        _flickering = false;
+    }
 }
+

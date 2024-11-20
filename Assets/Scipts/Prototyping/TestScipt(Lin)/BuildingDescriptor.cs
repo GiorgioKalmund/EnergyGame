@@ -10,7 +10,7 @@ public class BuildingDesriptor : MonoBehaviour
     private PlacementType placement;
 
     [SerializeField] private float cost;
-    [SerializeField] private float production; 
+    [SerializeField] public float production; 
     [SerializeField] private bool placed = false;
     private BoxCollider _collider;
     
@@ -42,12 +42,15 @@ public class BuildingDesriptor : MonoBehaviour
         placed = true;
         _collider.enabled = true;
         Debug.Log($"{buildngName} added {production}");
-        LevelController.Instance.AddProduce(production);
+        //LevelController.Instance.AddProduce(production);
     }
     public void Sell()
     {
         
     }
+
+
+
 }
 
 public enum PlacementType

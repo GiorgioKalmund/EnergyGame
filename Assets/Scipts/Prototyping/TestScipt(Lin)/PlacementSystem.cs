@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
+
 public class PlacementSystem : MonoBehaviour
 {
     [SerializeField]
@@ -31,6 +32,11 @@ public class PlacementSystem : MonoBehaviour
     private SpriteRenderer cellSprite;
     [SerializeField] private bool blocked;
 
+    /// <changes>
+    private GameObject lastPlacedBuilding = null;
+    private bool citySelectionActive = false;
+    /// </changes>
+
     private void Start()
     {
         StopPlacement();
@@ -41,9 +47,10 @@ public class PlacementSystem : MonoBehaviour
         }
     }
 
-    public void StartPlacement(int ID)//placement which is linked with Inventory
+    public void StartPlacement(int ID)
     {
         StopPlacement();
+        //placement which is linked with Inventory
         selectedObjectIndex = database.objectsData.FindIndex(data => data.ID == ID);
 
         cellIndicator.SetActive(true);
@@ -54,17 +61,71 @@ public class PlacementSystem : MonoBehaviour
         inputManager.OnExit += StopPlacement;
     }
 
+
+
     private void PlaceStructure()
     {
 
         Vector3 mousePosition = inputManager.GetSelectedMapPosition();
         Vector3Int gridPosition = grid.WorldToCell(mousePosition);
-        //check if building already exist
-        if (currentGameObject)
+
+        //after a building is placed, we want to select a city to connect
+        if (currentGameObject && !blocked)
         {
-            StopPlacement();
+            currentGameObject.GetComponent<BuildingDesriptor>().Place();
+
+            lastPlacedBuilding = currentGameObject;
+            currentGameObject = null;
+
+            //prepare for citySelection
+            citySelectionActive = true;
+            Debug.Log("Building placed. Please select a city.");
+            inputManager.OnClicked += SelectCity;
         }
 
+    }
+    //Select City current is at layer 6 -> TODO: adding new layer and change it to the city layer
+    //TODO: while clicking on a powerPlant highlight the linked City, also opposite way
+    private void SelectCity()
+    {
+        if (!citySelectionActive) return;
+
+        RaycastHit hit;
+        if (Physics.Raycast(mouseIndicator.transform.position, Vector3.down, out hit, 10f))
+        {
+            if (hit.transform.gameObject.layer == 6) // City layer
+            {
+                GameObject selectedCity = hit.transform.gameObject;
+                citySelectionActive = false;
+
+                Vector3 cityPosition = selectedCity.transform.position;
+                Vector3 buildingPosition = lastPlacedBuilding.transform.position;
+
+                //caculate the relative dis between city and powerPlant
+                float distance = Vector3.Distance(buildingPosition, cityPosition);
+
+                //lastPlacedBuilding is the powerPlant
+                if (lastPlacedBuilding)
+                {
+                    BuildingDesriptor buildingDescriptor = lastPlacedBuilding.GetComponent<BuildingDesriptor>();
+                    if (buildingDescriptor != null)
+                    {
+                        float productionValue = buildingDescriptor.production;
+                        LevelController.Instance.AddProduce(productionValue, distance);
+                    }
+                }
+               
+
+
+                Debug.Log($"City selected. Distance to building: {distance} units.");
+
+                inputManager.OnClicked -= SelectCity;
+            }
+            else
+            {
+                Debug.Log("Please select a valid city.");
+            }
+        }
     }
 
     private void ResetCurrentGameObject()

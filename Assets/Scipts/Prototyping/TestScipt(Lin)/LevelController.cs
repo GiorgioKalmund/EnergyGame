@@ -1,10 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
+using Debug = UnityEngine.Debug;
 
 public class LevelController : MonoBehaviour
 {
@@ -28,9 +30,10 @@ public class LevelController : MonoBehaviour
        UpdateDemandText();
    }
 
-   public void AddProduce(float value)
+   public void AddProduce(float value, float distance)
    {
-       currentProduction += value;
+       currentProduction += value - distance;
+       Debug.Log($"currentProduction: {currentProduction}.");
        CheckIfDemandIsMet();
        UpdateDemandText();
    }

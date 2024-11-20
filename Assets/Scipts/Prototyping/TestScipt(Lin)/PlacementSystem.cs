@@ -24,8 +24,9 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField] private LayerMask defaultLayer;
     [SerializeField] private LayerMask waterLayer;
     [SerializeField] private LayerMask blockedLayer;
+
     [SerializeField] private Sprite defaultSelector;
-    [SerializeField] private Sprite warningSelector;
+
     [SerializeField] private Texture2D cursorDefaultTexture;
     [SerializeField] private Texture2D cursorDownTexture;
     [SerializeField] [CanBeNull] private GameObject currentGameObject = null;
@@ -80,6 +81,7 @@ public class PlacementSystem : MonoBehaviour
             //prepare for citySelection
             citySelectionActive = true;
             Debug.Log("Building placed. Please select a city.");
+            cellSprite.color = Color.yellow;
             inputManager.OnClicked += SelectCity;
         }
 
@@ -88,7 +90,11 @@ public class PlacementSystem : MonoBehaviour
     //TODO: while clicking on a powerPlant highlight the linked City, also opposite way
     private void SelectCity()
     {
-        if (!citySelectionActive) return;
+        if (!citySelectionActive)
+        {
+            cellSprite.color = Color.white;
+            return;
+        }
 
         RaycastHit hit;
         if (Physics.Raycast(mouseIndicator.transform.position, Vector3.down, out hit, 10f))
@@ -193,19 +199,19 @@ public class PlacementSystem : MonoBehaviour
                 if (hitLayer.value == 6)
                 {
                     blocked = true;
-                    cellSprite.sprite = warningSelector;
+                    cellSprite.color = Color.red;
                 }
                 else
                 {
                     if (currentPlacementType.Equals(PlacementType.Water))
                     {
                         blocked = hitLayer.value != 4;
-                        cellSprite.sprite = blocked ? warningSelector : defaultSelector;
+                        cellSprite.color = blocked ? Color.red : Color.white;
                     }
                     else
                     {
                         blocked = hitLayer.value != 0; 
-                        cellSprite.sprite = blocked ? warningSelector : defaultSelector;
+                        cellSprite.color = blocked ? Color.red : Color.white;
                     }
                 }
             }

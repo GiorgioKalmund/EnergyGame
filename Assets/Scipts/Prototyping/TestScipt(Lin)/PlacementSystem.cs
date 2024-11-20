@@ -124,10 +124,8 @@ public class PlacementSystem : MonoBehaviour
         {
             if (hit.transform.gameObject.layer == 6) // City layer
             {
-                GameObject selectedCity = hit.transform.gameObject;
                 citySelectionActive = false;
-
-                Vector3 cityPosition = selectedCity.transform.position;
+                Vector3 cityPosition = cellIndicator.transform.position;
                 Vector3 buildingPosition = lastPlacedBuilding.transform.position;
 
                 //caculate the relative dis between city and powerPlant

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using UnityEngine.Serialization;
+using Scipts.Prototyping.TestScipt_Lin_;
 
 [RequireComponent(typeof(BoxCollider))]
 public class BuildingDesriptor : MonoBehaviour
@@ -49,12 +50,6 @@ public class BuildingDesriptor : MonoBehaviour
         
     }
 
-
-
 }
 
-public enum PlacementType
-{
-    Default, Water
-}
 

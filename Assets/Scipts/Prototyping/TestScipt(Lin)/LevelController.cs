@@ -13,7 +13,8 @@ public class LevelController : MonoBehaviour
    [SerializeField] private float currentDemand;
    [SerializeField] private float currentProduction;
    [SerializeField] private bool demandMet = false;
-   [SerializeField] private TMP_Text demandText;
+   [SerializeField] 
+   private TMP_Text demandText, budgetText;
    public Dictionary<float, float> SubGoals;
    public static LevelController Instance { get; private set; }
 
@@ -70,6 +71,6 @@ public class LevelController : MonoBehaviour
 
    private void UpdateDemandText()
    {
-       demandText.text = $"{currentProduction}/{currentDemand}kWh";
+       demandText.text = $"{currentProduction}/{currentDemand} MW";
    }
 }

@@ -3,6 +3,10 @@ using JetBrains.Annotations;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 using System.Collections;
+using Microsoft.Unity.VisualStudio.Editor;
+using Scipts.Prototyping.TestScipt_Lin_;
+using TMPro;
+using UnityEngine.Serialization;
 
 
 public class PlacementSystem : MonoBehaviour
@@ -17,6 +21,11 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField]
     private ObjectsDatabase database;
     private int selectedObjectIndex = -1;
+    
+    // TODO: Possibly outsource?
+    private LineRenderer _lineRenderer;
+    [SerializeField] private int lineVertexCount;
+    [SerializeField] private float lineFunctionDivisor = 64;
 
 
     [SerializeField] private float gridOffset;
@@ -35,6 +44,8 @@ public class PlacementSystem : MonoBehaviour
     private Texture2D cursorDefaultTexture, cursorDownTexture;
     [SerializeField] [CanBeNull] private GameObject currentGameObject = null;
     [SerializeField] private bool blocked;
+    // TODO: UI Should be handled via some type of UI Manager
+    [SerializeField] private GameObject connectingModeIndicatorImage;
 
     /// <changes>
     private GameObject lastPlacedBuilding = null;
@@ -49,6 +60,14 @@ public class PlacementSystem : MonoBehaviour
             cellSprite = cellIndicator.GetComponentInChildren<SpriteRenderer>();
             Cursor.SetCursor(cursorDefaultTexture, Vector2.zero, CursorMode.Auto);
         }
+        connectingModeIndicatorImage.SetActive(false);
+
+    }
+
+    private void Awake()
+    {
+        _lineRenderer = GetComponent<LineRenderer>();
+        _lineRenderer.positionCount = lineVertexCount;
     }
 
     public void StartPlacement(int ID)
@@ -59,7 +78,6 @@ public class PlacementSystem : MonoBehaviour
 
         cellIndicator.SetActive(true);
         currentGameObject = Instantiate(database.objectsData[selectedObjectIndex].Prefab);
-
         inputManager.OnClicked += PlaceStructure;
         inputManager.OnExit += ResetCurrentGameObject;
         inputManager.OnExit += StopPlacement;
@@ -70,8 +88,8 @@ public class PlacementSystem : MonoBehaviour
     private void PlaceStructure()
     {
 
-        Vector3 mousePosition = inputManager.GetSelectedMapPosition();
-        Vector3Int gridPosition = grid.WorldToCell(mousePosition);
+        //Vector3 mousePosition = inputManager.GetSelectedMapPosition();
+        //Vector3Int gridPosition = grid.WorldToCell(mousePosition);
 
         //after a building is placed, we want to select a city to connect
         if (currentGameObject && !blocked)
@@ -85,6 +103,7 @@ public class PlacementSystem : MonoBehaviour
             citySelectionActive = true;
             Debug.Log("Building placed. Please select a city.");
             cellSprite.color = spriteColorConnecting;
+            connectingModeIndicatorImage.SetActive(true);
             inputManager.OnClicked += SelectCity;
         }
 
@@ -96,6 +115,7 @@ public class PlacementSystem : MonoBehaviour
         if (!citySelectionActive)
         {
             cellSprite.color = spriteColorRegular;
+            connectingModeIndicatorImage.SetActive(false);
             return;
         }
 
@@ -123,14 +143,13 @@ public class PlacementSystem : MonoBehaviour
                         LevelController.Instance.AddProduce(productionValue, distance);
                     }
                 }
-               
-
 
                 Debug.Log($"City selected. Distance to building: {distance} units.");
 
                 //turn curser off
                 cellSprite.color = spriteColorRegular;
                 cellIndicator.SetActive(false);
+                connectingModeIndicatorImage.SetActive(false);
                 inputManager.OnClicked -= SelectCity;
             }
             else
@@ -228,6 +247,37 @@ public class PlacementSystem : MonoBehaviour
         }
         
     }
+    
+    void LateUpdate() {
+        DrawCable();
+    }
+    
+    void DrawCable()
+    {
+        if (!citySelectionActive)
+        {
+            return;
+        }
+        Vector3 startPos = lastPlacedBuilding.transform.position + (Vector3.up * 0.3f);
+        Vector3 endPos = cellIndicator.transform.position + (Vector3.up * 0.3f);
+        Vector3 direction = endPos - startPos;
+        _lineRenderer.SetPosition(0, startPos);
+        _lineRenderer.SetPosition(lineVertexCount - 1 , endPos);
+        int half = lineVertexCount / 2;
+        for (int index = 1; index < lineVertexCount - 1; index++)
+        {
+            Vector3 pointToDraw = startPos + (index * direction / lineVertexCount);
+            pointToDraw.y += MathIsMathin((index - half) / lineFunctionDivisor) - MathIsMathin((half) / lineFunctionDivisor);
+            _lineRenderer.SetPosition(index, pointToDraw);
+        }
+    }
+
+    float MathIsMathin(float x)
+    {
+        return Mathf.Sqrt(Mathf.Pow(x, 2f) + 1);
+        //return Mathf.Sin(x);
+    }
+    
     IEnumerator FlickerIndicator(Color flickerColor)
     {
         _flickering = true;

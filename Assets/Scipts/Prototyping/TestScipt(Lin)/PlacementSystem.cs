@@ -101,7 +101,7 @@ public class PlacementSystem : MonoBehaviour
         //after a building is placed, we want to select a city to connect
         if (currentGameObject && !blocked)
         {
-            currentGameObject.GetComponent<BuildingDesriptor>().Place();
+            currentGameObject.GetComponent<BuildingDescriptor>().Place();
 
             lastPlacedBuilding = currentGameObject;
             currentGameObject = null;
@@ -141,10 +141,10 @@ public class PlacementSystem : MonoBehaviour
                 //lastPlacedBuilding is the powerPlant
                 if (lastPlacedBuilding)
                 {
-                    BuildingDesriptor buildingDescriptor = lastPlacedBuilding.GetComponent<BuildingDesriptor>();
+                    BuildingDescriptor buildingDescriptor = lastPlacedBuilding.GetComponent<BuildingDescriptor>();
                     if (buildingDescriptor != null)
                     {
-                        float productionValue = buildingDescriptor.production;
+                        float productionValue = buildingDescriptor.GetProduction();
                         LevelController.Instance.AddProduce(productionValue, distance);
                     }
                 }
@@ -183,7 +183,7 @@ public class PlacementSystem : MonoBehaviour
 
         if (currentGameObject)
         {
-            currentGameObject.GetComponent<BuildingDesriptor>().Place();
+            currentGameObject.GetComponent<BuildingDescriptor>().Place();
         }
         placingObjectIndex = -1;
         cellIndicator.SetActive(false);
@@ -221,12 +221,12 @@ public class PlacementSystem : MonoBehaviour
         if (currentGameObject)
         {
            currentGameObject.transform.position =  Vector3.Lerp(currentGameObject.transform.position, cellIndicator.transform.position, Time.deltaTime * 50f);
-            BuildingDesriptor buildingDescriptor = currentGameObject.GetComponent<BuildingDesriptor>();
+            BuildingDescriptor buildingDescriptor = currentGameObject.GetComponent<BuildingDescriptor>();
             if (!buildingDescriptor)
             {
                 throw new MissingComponentException($"{currentGameObject.name} requires  BuildingDescriptor.");
             }
-            PlacementType currentPlacementType = currentGameObject.GetComponent<BuildingDesriptor>().Placement;
+            PlacementType currentPlacementType = currentGameObject.GetComponent<BuildingDescriptor>().Placement;
             RaycastHit hit;
             if (Physics.Raycast(mouseIndicator.transform.position, Vector3.down, out hit, 10f))
             {
@@ -261,10 +261,10 @@ public class PlacementSystem : MonoBehaviour
                 
                     Debug.Log("Found selectable Object");
                     GameObject selectedGameObject = hit.collider.gameObject;
-                    BuildingDesriptor buildingDesriptor = selectedGameObject.GetComponent<BuildingDesriptor>();
-                    if (buildingDesriptor)
+                    BuildingDescriptor buildingDescriptor = selectedGameObject.GetComponent<BuildingDescriptor>();
+                    if (buildingDescriptor)
                     {
-                        buildingDesriptor.ToggleSelection();
+                        SelectionManager.Instance.Select(buildingDescriptor);
                     }
             }
         }

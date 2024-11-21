@@ -18,8 +18,11 @@ public class LevelController : MonoBehaviour
    public Dictionary<float, float> SubGoals;
    public static LevelController Instance { get; private set; }
 
+   public int nextID = 0;
+   
    private void Awake()
    {
+        // Singleton
        if (Instance && Instance != this)
        {
            Destroy(this);
@@ -34,7 +37,6 @@ public class LevelController : MonoBehaviour
    public void AddProduce(float value, float distance)
    {
        currentProduction += value - distance;
-       Debug.Log($"currentProduction: {currentProduction}.");
        CheckIfDemandIsMet();
        UpdateDemandText();
    }

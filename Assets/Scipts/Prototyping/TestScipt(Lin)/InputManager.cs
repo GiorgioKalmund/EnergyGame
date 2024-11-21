@@ -46,4 +46,5 @@ public class InputManager : MonoBehaviour
         }
         return lastPosition;
     }
+    
 }

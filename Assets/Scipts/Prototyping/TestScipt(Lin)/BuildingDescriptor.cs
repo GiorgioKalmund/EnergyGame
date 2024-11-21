@@ -13,8 +13,10 @@ public class BuildingDesriptor : MonoBehaviour
     [SerializeField] private float cost;
     [SerializeField] public float production; 
     [SerializeField] private bool placed = false;
-    private BoxCollider _collider;
+    [SerializeField] private bool selected = false;
     
+    private BoxCollider _collider;
+    [SerializeField] private GameObject selectionIndicator = null;
 
     public PlacementType Placement
     {
@@ -48,6 +50,37 @@ public class BuildingDesriptor : MonoBehaviour
     public void Sell()
     {
         
+    }
+
+    public void Select()
+    {
+            Debug.Log("Selected "+ this.buildngName);
+            selectionIndicator.SetActive(true);
+            selected = true;
+    }
+
+    public void Deselect()
+    {
+        Debug.Log("Deselected "+ this.buildngName);
+        selectionIndicator.SetActive(false);
+        selected = false;
+    }
+
+    public void ToggleSelection()
+    {
+        if (selected)
+        {
+            Deselect();
+        }
+        else
+        {
+            Select();
+        }
+    }
+
+    public bool IsSelected()
+    {
+        return selected;
     }
 
 }

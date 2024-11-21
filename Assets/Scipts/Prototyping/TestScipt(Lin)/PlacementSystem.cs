@@ -3,9 +3,9 @@ using JetBrains.Annotations;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 using System.Collections;
-using Microsoft.Unity.VisualStudio.Editor;
 using Scipts.Prototyping.TestScipt_Lin_;
 using TMPro;
+using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 
@@ -20,29 +20,36 @@ public class PlacementSystem : MonoBehaviour
 
     [SerializeField]
     private ObjectsDatabase database;
-    private int selectedObjectIndex = -1;
+    private int placingObjectIndex = -1;
     
     // TODO: Possibly outsource?
+    [Header("Cables")]
     private LineRenderer _lineRenderer;
     [SerializeField] private int lineVertexCount;
     [SerializeField] private float lineFunctionDivisor = 64;
 
-
+    [Header("Camera")]
+    [SerializeField] private Camera mainCamera;
     [SerializeField] private float gridOffset;
 
     // TODO: Check using these instead of numbers, however currently numbers to do match :/
-    [SerializeField]
-    private LayerMask defaultLayer, waterLayer, blockedLayer;
+    [Header("Layers")] 
+    [SerializeField] private LayerMask defaultLayer; 
+    [SerializeField]private LayerMask waterLayer; 
+    [SerializeField] private LayerMask blockedLayer;
 
     // Cell Indicator
+    [Header("Cell Indicator")]
     private SpriteRenderer cellSprite;
-    [SerializeField]
-    Color spriteColorRegular, spriteColorWarning, spriteColorConnecting;
+    [SerializeField] private Color spriteColorRegular;
+    [SerializeField] private Color spriteColorWarning;
+    [SerializeField] private Color spriteColorConnecting;
     private bool _flickering;
 
+    [Header("Cursor")]
     [SerializeField]
     private Texture2D cursorDefaultTexture, cursorDownTexture;
-    [SerializeField] [CanBeNull] private GameObject currentGameObject = null;
+    [CanBeNull] private GameObject currentGameObject = null;
     [SerializeField] private bool blocked;
     // TODO: UI Should be handled via some type of UI Manager
     [SerializeField] private GameObject connectingModeIndicatorImage;
@@ -74,10 +81,10 @@ public class PlacementSystem : MonoBehaviour
     {
         StopPlacement();
         //placement which is linked with Inventory
-        selectedObjectIndex = database.objectsData.FindIndex(data => data.ID == ID);
+        placingObjectIndex = database.objectsData.FindIndex(data => data.ID == ID);
 
         cellIndicator.SetActive(true);
-        currentGameObject = Instantiate(database.objectsData[selectedObjectIndex].Prefab);
+        currentGameObject = Instantiate(database.objectsData[placingObjectIndex].Prefab);
         inputManager.OnClicked += PlaceStructure;
         inputManager.OnExit += ResetCurrentGameObject;
         inputManager.OnExit += StopPlacement;
@@ -178,7 +185,7 @@ public class PlacementSystem : MonoBehaviour
         {
             currentGameObject.GetComponent<BuildingDesriptor>().Place();
         }
-        selectedObjectIndex = -1;
+        placingObjectIndex = -1;
         cellIndicator.SetActive(false);
         inputManager.OnClicked -= PlaceStructure;
         inputManager.OnExit -= ResetCurrentGameObject;
@@ -200,15 +207,17 @@ public class PlacementSystem : MonoBehaviour
 
     private void Update()
     {
+        // TODO: Make reactive instead of busy waiting
         ChangeCursor();
-        if (selectedObjectIndex < 0)
-            return;
+        // if (placingObjectIndex < 0)
+        //     return;
         
         Vector3 mousePosition = inputManager.GetSelectedMapPosition();
         mouseIndicator.transform.position = mousePosition;
         Vector3Int gridPosition = grid.WorldToCell(mousePosition);
         Vector3 targetPostion = grid.CellToWorld(gridPosition); 
         cellIndicator.transform.position = new Vector3(targetPostion.x + gridOffset, 0.03f, targetPostion.z + gridOffset);
+        // If we are placing 
         if (currentGameObject)
         {
            currentGameObject.transform.position =  Vector3.Lerp(currentGameObject.transform.position, cellIndicator.transform.position, Time.deltaTime * 50f);
@@ -243,7 +252,22 @@ public class PlacementSystem : MonoBehaviour
                 }
             }
         }
-        
+        else // If we are strolling & selecting
+        {
+            RaycastHit hit;
+            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+            if (Input.GetMouseButtonDown(0) && Physics.Raycast(ray, out hit,  blockedLayer))
+            {
+                
+                    Debug.Log("Found selectable Object");
+                    GameObject selectedGameObject = hit.collider.gameObject;
+                    BuildingDesriptor buildingDesriptor = selectedGameObject.GetComponent<BuildingDesriptor>();
+                    if (buildingDesriptor)
+                    {
+                        buildingDesriptor.ToggleSelection();
+                    }
+            }
+        }
     }
     
     void LateUpdate() {

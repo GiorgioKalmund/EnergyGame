@@ -507,8 +507,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 521560530849244358}
-  - component: {fileID: -5050048849474577431}
-  - component: {fileID: 4471740698071347746}
   m_Layer: 2
   m_Name: Coal Plant Outline
   m_TagString: Untagged
@@ -548,46 +546,6 @@ Transform:
   - {fileID: 5949167683247951589}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-5050048849474577431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4698825477065934905}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ddc24fade6ba06f49b18cb35300f79e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buildngName: Coal Plant
-  placement: 0
-  cost: 0
-  production: 500
-  placed: 0
-  selected: 0
-  selectionIndicator: {fileID: 0}
---- !u!65 &4471740698071347746
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4698825477065934905}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 0.02, y: 0.02, z: 0.001}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4860439438263813055
 GameObject:
   m_ObjectHideFlags: 0

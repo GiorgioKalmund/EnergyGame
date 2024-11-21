@@ -266,6 +266,10 @@ public class PlacementSystem : MonoBehaviour
                     {
                         SelectionManager.Instance.Select(buildingDescriptor);
                     }
+                    else
+                    {
+                        SelectionManager.Instance.ClearSelection();
+                    }
             }
         }
     }

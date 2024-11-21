@@ -18,6 +18,7 @@ public class BuildingDescriptor : MonoBehaviour
     private BoxCollider _collider;
     [SerializeField] private GameObject selectionIndicator = null;
     [SerializeField] private Sprite imageSprite;
+    public bool isOnLeftHalfOfScreen;
     
     public PlacementType Placement
     {
@@ -40,6 +41,7 @@ public class BuildingDescriptor : MonoBehaviour
 
         _collider = GetComponent<BoxCollider>();
         _collider.enabled = false;
+        CheckForHalfPositionOnScreen();
     }
 
     public bool isPlaced()
@@ -51,8 +53,7 @@ public class BuildingDescriptor : MonoBehaviour
     {
         placed = true;
         _collider.enabled = true;
-        Debug.Log($"{buildingName} added {production}");
-        //LevelController.Instance.AddProduce(production);
+        CheckForHalfPositionOnScreen();
     }
     public void Sell()
     {
@@ -107,6 +108,20 @@ public class BuildingDescriptor : MonoBehaviour
     public int GetID()
     {
         return id;
+    }
+
+    private void CheckForHalfPositionOnScreen()
+    {
+        float screenWidth = Screen.width;
+        Vector3 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
+        if (screenPosition.x >= screenWidth / 2)
+        {
+            isOnLeftHalfOfScreen = false;
+        }
+        else
+        {
+            isOnLeftHalfOfScreen = true;
+        }
     }
 
 }

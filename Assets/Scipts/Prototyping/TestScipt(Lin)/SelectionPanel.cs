@@ -24,4 +24,9 @@ public class SelectionPanel : MonoBehaviour
        productionTextElement.text = $"Production {buildingDescriptor.GetProduction()} MW";
        costTextElement.text = $"Cost {buildingDescriptor.GetCost()} €";
     }
+
+    public void Close()
+    {
+       SelectionManager.Instance.ClearSelection(); 
+    }
 }

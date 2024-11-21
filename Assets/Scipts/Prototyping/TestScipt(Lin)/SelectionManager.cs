@@ -42,10 +42,29 @@ public class SelectionManager : MonoBehaviour
         _selectionPanel.SetPanel(newSelection);
         _currentlySelected = newSelection;
         selectionPanelObjectGameObject.SetActive(true);
+        RectTransform rect = selectionPanelObjectGameObject.GetComponent<RectTransform>();
+        if (newSelection.isOnLeftHalfOfScreen)
+        {
+            rect.anchorMin = new Vector2(1f, 0.5f);
+            rect.anchorMax = new Vector2(1f, 0.5f);
+            rect.pivot = new Vector2(1f, 0.5f);
+        }
+        else
+        {
+            rect.anchorMin = new Vector2(0f, 0.5f);
+            rect.anchorMax = new Vector2(0f, 0.5f);
+            rect.pivot = new Vector2(0f, 0.5f);
+        }
+
+        rect.anchoredPosition = new Vector2(0f, -80f);
     }
 
     public void ClearSelection()
     {
+        if (_currentlySelected)
+        {
+            _currentlySelected.Deselect();
+        }
         _currentlySelected = null;
         selectionPanelObjectGameObject.SetActive(false);
     }

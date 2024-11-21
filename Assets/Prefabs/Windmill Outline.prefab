@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3815039674986130829}
   - component: {fileID: 3360444623816131733}
   - component: {fileID: 23879956294643379}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: Cylinder.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a3d51b4af24a8b441ad7d0a79b2435a7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4770475694755114064}
   - component: {fileID: 8185320407476273307}
   - component: {fileID: 2244177565547099587}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: Vert
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,7 +144,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a3d51b4af24a8b441ad7d0a79b2435a7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 5223289111685476943}
   - component: {fileID: 1918355149371091301}
   - component: {fileID: 131290178195888647}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: Cylinder.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -227,8 +227,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7922251121040759823, guid: b13e2d96b88d20347a2ca063385c40e2, type: 3}
-  - {fileID: 3998981659316576727, guid: b13e2d96b88d20347a2ca063385c40e2, type: 3}
+  - {fileID: 2100000, guid: a3d51b4af24a8b441ad7d0a79b2435a7, type: 2}
+  - {fileID: 2100000, guid: a3d51b4af24a8b441ad7d0a79b2435a7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -261,8 +261,8 @@ GameObject:
   - component: {fileID: 3020603047093061210}
   - component: {fileID: 3864889695037877949}
   - component: {fileID: 7922940028491775095}
-  m_Layer: 6
-  m_Name: Windmill
+  m_Layer: 2
+  m_Name: Windmill Outline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -289,7 +289,6 @@ Transform:
   - {fileID: 4770475694755114064}
   - {fileID: 8241870527463561713}
   - {fileID: 1973101050052339871}
-  - {fileID: 7859745857938202686}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &3864889695037877949
@@ -331,7 +330,7 @@ MonoBehaviour:
   production: 300
   placed: 0
   selected: 0
-  selectionIndicator: {fileID: 7028333975531036538}
+  selectionIndicator: {fileID: 0}
 --- !u!1 &4481338823864832879
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,7 +342,7 @@ GameObject:
   - component: {fileID: 8241870527463561713}
   - component: {fileID: 7781311846396910046}
   - component: {fileID: 5841512540976596726}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: Vert.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -393,7 +392,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a3d51b4af24a8b441ad7d0a79b2435a7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -426,7 +425,7 @@ GameObject:
   - component: {fileID: 2137784586505995089}
   - component: {fileID: 8252613906859657781}
   - component: {fileID: 598874611342974810}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: Cylinder.007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -476,7 +475,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 4156002973242278026, guid: b13e2d96b88d20347a2ca063385c40e2, type: 3}
+  - {fileID: 2100000, guid: a3d51b4af24a8b441ad7d0a79b2435a7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -509,7 +508,7 @@ GameObject:
   - component: {fileID: 786041468375902784}
   - component: {fileID: 3712590850661072043}
   - component: {fileID: 3208252448199780576}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -559,8 +558,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7922251121040759823, guid: b13e2d96b88d20347a2ca063385c40e2, type: 3}
-  - {fileID: 3998981659316576727, guid: b13e2d96b88d20347a2ca063385c40e2, type: 3}
+  - {fileID: 2100000, guid: a3d51b4af24a8b441ad7d0a79b2435a7, type: 2}
+  - {fileID: 2100000, guid: a3d51b4af24a8b441ad7d0a79b2435a7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -593,7 +592,7 @@ GameObject:
   - component: {fileID: 1973101050052339871}
   - component: {fileID: 7449016615962088947}
   - component: {fileID: 6734251744325582953}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: Vert.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -643,7 +642,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a3d51b4af24a8b441ad7d0a79b2435a7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -676,7 +675,7 @@ GameObject:
   - component: {fileID: 5354542723223129568}
   - component: {fileID: 4642628502628735459}
   - component: {fileID: 3492488180283663773}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: Cylinder.008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -726,7 +725,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 4156002973242278026, guid: b13e2d96b88d20347a2ca063385c40e2, type: 3}
+  - {fileID: 2100000, guid: a3d51b4af24a8b441ad7d0a79b2435a7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -748,86 +747,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1001 &4969787337588401764
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 3020603047093061210}
-    m_Modifications:
-    - target: {fileID: 2698100121599932702, guid: d13d0d5548d1d428d8de2419b83852bc, type: 3}
-      propertyPath: m_Name
-      value: Windmill Outline
-      objectReference: {fileID: 0}
-    - target: {fileID: 2698100121599932702, guid: d13d0d5548d1d428d8de2419b83852bc, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3020603047093061210, guid: d13d0d5548d1d428d8de2419b83852bc, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3020603047093061210, guid: d13d0d5548d1d428d8de2419b83852bc, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3020603047093061210, guid: d13d0d5548d1d428d8de2419b83852bc, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3020603047093061210, guid: d13d0d5548d1d428d8de2419b83852bc, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3020603047093061210, guid: d13d0d5548d1d428d8de2419b83852bc, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3020603047093061210, guid: d13d0d5548d1d428d8de2419b83852bc, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3020603047093061210, guid: d13d0d5548d1d428d8de2419b83852bc, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3020603047093061210, guid: d13d0d5548d1d428d8de2419b83852bc, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3020603047093061210, guid: d13d0d5548d1d428d8de2419b83852bc, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3020603047093061210, guid: d13d0d5548d1d428d8de2419b83852bc, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3020603047093061210, guid: d13d0d5548d1d428d8de2419b83852bc, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3020603047093061210, guid: d13d0d5548d1d428d8de2419b83852bc, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3020603047093061210, guid: d13d0d5548d1d428d8de2419b83852bc, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d13d0d5548d1d428d8de2419b83852bc, type: 3}
---- !u!1 &7028333975531036538 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2698100121599932702, guid: d13d0d5548d1d428d8de2419b83852bc, type: 3}
-  m_PrefabInstance: {fileID: 4969787337588401764}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &7859745857938202686 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3020603047093061210, guid: d13d0d5548d1d428d8de2419b83852bc, type: 3}
-  m_PrefabInstance: {fileID: 4969787337588401764}
-  m_PrefabAsset: {fileID: 0}

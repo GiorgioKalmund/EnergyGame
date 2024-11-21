@@ -23,6 +23,7 @@ public class SelectionPanel : MonoBehaviour
        infoTextElement.text = "Some random info text might appear here.";
        productionTextElement.text = $"Production {buildingDescriptor.GetProduction()} MW";
        costTextElement.text = $"Cost {buildingDescriptor.GetCost()} €";
+       currentBuilding = buildingDescriptor;
     }
 
     public void Close()

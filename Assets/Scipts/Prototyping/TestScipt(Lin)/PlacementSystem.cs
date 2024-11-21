@@ -258,18 +258,17 @@ public class PlacementSystem : MonoBehaviour
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             if (Input.GetMouseButtonDown(0) && Physics.Raycast(ray, out hit,  blockedLayer))
             {
-                
-                    Debug.Log("Found selectable Object");
-                    GameObject selectedGameObject = hit.collider.gameObject;
-                    BuildingDescriptor buildingDescriptor = selectedGameObject.GetComponent<BuildingDescriptor>();
-                    if (buildingDescriptor)
-                    {
-                        SelectionManager.Instance.Select(buildingDescriptor);
-                    }
-                    else
-                    {
-                        SelectionManager.Instance.ClearSelection();
-                    }
+                Debug.Log("Found selectable Object");
+                GameObject selectedGameObject = hit.collider.gameObject;
+                BuildingDescriptor buildingDescriptor = selectedGameObject.GetComponent<BuildingDescriptor>();
+                if (buildingDescriptor)
+                {
+                    SelectionManager.Instance.Select(buildingDescriptor);
+                }
+                else
+                {
+                    SelectionManager.Instance.ClearSelection();
+                }
             }
         }
     }

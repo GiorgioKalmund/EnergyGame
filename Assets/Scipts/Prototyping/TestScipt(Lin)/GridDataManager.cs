@@ -8,26 +8,28 @@ using UnityEngine.Serialization;
 
 public class GridDataManager : MonoBehaviour
 {
+    [Header("Textures")]
     [SerializeField] public Texture2D mapTexture; // Assign your input texture here
     [SerializeField] [CanBeNull] public Texture2D sunTexture;
     [SerializeField] [CanBeNull] public Texture2D windTexture;
     [SerializeField] [CanBeNull] public Texture2D waterTexture;
-
+    
+    [Header("Map")]
+    [SerializeField] private Color colorOne;
+    [SerializeField] private GameObject firstGameObject;
+    [SerializeField] private Color colorTwo;
+    [SerializeField] private GameObject secondGameObject;
+    [SerializeField] private Color colorThree;
+    [SerializeField] private GameObject thirdGameObject;
     private Dictionary<Color, GameObject> ColorToGameObjectMap;
-    [SerializeField] private GameObject whiteGameObject; 
-    [SerializeField] private GameObject blackGameObject;
 
     [Header("Grid")] 
     [SerializeField] private Grid grid;
+    [SerializeField] private Transform tilesCenter;
     private int textureWidth;
     private int textureHeight;
 
-    const float cellWidth = 1f;
-    const float cellHeight = 1f;
-
     private TileData[,] gridData;
-
-    [SerializeField] private Transform parent;
 
     void Start()
     {
@@ -39,9 +41,11 @@ public class GridDataManager : MonoBehaviour
         textureWidth = mapTexture.width;
         textureHeight = mapTexture.height;
         ColorToGameObjectMap = new Dictionary<Color, GameObject>();
-        ColorToGameObjectMap[Color.white] = whiteGameObject;
-        ColorToGameObjectMap[Color.black] = blackGameObject;
-        parent.transform.position = new Vector3((int)textureHeight / 2f, 1f, (int)textureWidth / 2f);
+        // Better naming scheme for colors and objects?
+        ColorToGameObjectMap[colorOne] = firstGameObject;
+        ColorToGameObjectMap[colorTwo] = secondGameObject;
+        ColorToGameObjectMap[colorThree] = thirdGameObject;
+        tilesCenter.transform.position = new Vector3((int)textureHeight / 2f, 1f, (int)textureWidth / 2f);
     }
 
     void InitializeGridData()
@@ -63,23 +67,28 @@ public class GridDataManager : MonoBehaviour
                 float sunlight = 1f;
                 float windSpeed = 1f; 
                 float waterSpeed = 1f; 
+                PlacementType placementType = PlacementType.Blocked; 
                 if (sunTexture)
                 {
                     sunlight = sunTexture.GetPixel(x, y).a;
+                    placementType = PlacementType.Default;
                 }
                 if (windTexture)
                 {
                     windSpeed = windTexture.GetPixel(x, y).a;
+                    placementType = PlacementType.Default;
                 }
                 if (waterTexture)
                 {
                     waterSpeed = waterTexture.GetPixel(x, y).a;
+                    placementType = PlacementType.Water;
                 }
-                gridData[x, y] = new TileData(sunlight, windSpeed, waterSpeed);
+                // Define Grid Data Object with corresponding stats
+                gridData[x, y] = new TileData(sunlight, windSpeed, waterSpeed, placementType);
                 // Map color channels to your values
                 GameObject objectToInstantiate = ColorToGameObjectMap[pixelColor];
                 GameObject instance = Instantiate(objectToInstantiate, new Vector3(x, 1, y), Quaternion.identity);
-                instance.transform.parent = parent;
+                instance.transform.parent = tilesCenter;
             }
         }
 
@@ -99,13 +108,12 @@ public class TileData
     public float waterSpeed;
     public PlacementType placementType;
 
-    public TileData(float sunlight, float wind, float water)
+    public TileData(float sunlight, float wind, float water, PlacementType type)
     {
         sunlightHours = sunlight;
         windSpeed = wind;
         waterSpeed = water;
-        placementType = PlacementType.Default;
+        placementType = type;
         // BuidlingDescriptor: currentBuilding
-        // PlacementType: type
     }
 }

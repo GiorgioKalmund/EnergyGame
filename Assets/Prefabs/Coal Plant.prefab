@@ -567,8 +567,10 @@ MonoBehaviour:
   production: 500
   placed: 0
   selected: 0
+  id: 0
   selectionIndicator: {fileID: 4841697175453476164}
   imageSprite: {fileID: 21300000, guid: 4b727f2cebfcc724fb8e7b048add920a, type: 3}
+  isOnLeftHalfOfScreen: 0
 --- !u!65 &4471740698071347746
 BoxCollider:
   m_ObjectHideFlags: 0

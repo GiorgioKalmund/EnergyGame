@@ -2205,7 +2205,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseIndicator: {fileID: 1455943911}
   cellIndicator: {fileID: 306706746}
-  inputManager: {fileID: 2132516997}
   grid: {fileID: 2124310285}
   database: {fileID: 11400000, guid: 0c6f349871d57a840890f745515a7c91, type: 2}
   lineVertexCount: 101
@@ -2224,8 +2223,6 @@ MonoBehaviour:
   spriteColorRegular: {r: 1, g: 1, b: 1, a: 1}
   spriteColorWarning: {r: 1, g: 0.06132078, b: 0.06132078, a: 1}
   spriteColorConnecting: {r: 0, g: 1, b: 0.7803633, a: 1}
-  cursorDefaultTexture: {fileID: 2800000, guid: 4e2e0555c7ab84ffeac393e1819fe904, type: 3}
-  cursorDownTexture: {fileID: 2800000, guid: e1250c16ce63b436f86c8757abef3648, type: 3}
   blocked: 0
   connectingModeIndicatorImage: {fileID: 437969441}
 --- !u!120 &449543569
@@ -9551,7 +9548,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1814493836
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10575,10 +10572,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e31d5e21eea4fc448708445f911d423, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneCamera: {fileID: 963194227}
-  placementLayermask:
+  mainCamera: {fileID: 963194227}
+  defaultLayer:
     serializedVersion: 2
     m_Bits: 1
+  waterLayer:
+    serializedVersion: 2
+    m_Bits: 16
+  blockedLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  cursorDefaultTexture: {fileID: 2800000, guid: 4e2e0555c7ab84ffeac393e1819fe904, type: 3}
+  cursorDownTexture: {fileID: 2800000, guid: e1250c16ce63b436f86c8757abef3648, type: 3}
 --- !u!4 &2134415881 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5798067330042255330, guid: 32bb56aab2db76c4285e88bf1bc7039c, type: 3}

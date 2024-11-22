@@ -1,20 +1,15 @@
-using System;
 using JetBrains.Annotations;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 using System.Collections;
 using Scipts.Prototyping.TestScipt_Lin_;
-using TMPro;
-using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
+using Unity.VisualScripting;
 
 
 public class PlacementSystem : MonoBehaviour
 {
     [SerializeField]
     GameObject mouseIndicator, cellIndicator;
-    [SerializeField]
-    private InputManager inputManager;
     [SerializeField]
     private Grid grid;
 
@@ -46,18 +41,15 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField] private Color spriteColorConnecting;
     private bool _flickering;
 
-    [Header("Cursor")]
-    [SerializeField]
-    private Texture2D cursorDefaultTexture, cursorDownTexture;
-    [CanBeNull] private GameObject currentGameObject = null;
+    [CanBeNull] private GameObject currentGameObject;
     [SerializeField] private bool blocked;
     // TODO: UI Should be handled via some type of UI Manager
     [SerializeField] private GameObject connectingModeIndicatorImage;
 
-    /// <changes>
-    private GameObject lastPlacedBuilding = null;
-    private bool citySelectionActive = false;
-    /// </changes>
+    // <changes>
+    private GameObject lastPlacedBuilding;
+    private bool citySelectionActive;
+    // </changes>
 
     private void Start()
     {
@@ -65,11 +57,11 @@ public class PlacementSystem : MonoBehaviour
         if (cellIndicator)
         {
             cellSprite = cellIndicator.GetComponentInChildren<SpriteRenderer>();
-            Cursor.SetCursor(cursorDefaultTexture, Vector2.zero, CursorMode.Auto);
+            Debug.Log("Cell Sprite "+cellSprite);
         }
         connectingModeIndicatorImage.SetActive(false);
-
     }
+    
 
     private void Awake()
     {
@@ -85,18 +77,15 @@ public class PlacementSystem : MonoBehaviour
 
         cellIndicator.SetActive(true);
         currentGameObject = Instantiate(database.objectsData[placingObjectIndex].Prefab);
-        inputManager.OnClicked += PlaceStructure;
-        inputManager.OnExit += ResetCurrentGameObject;
-        inputManager.OnExit += StopPlacement;
+        InputManager.Instance.OnClicked += PlaceStructure;
+        InputManager.Instance.OnExit += ResetCurrentGameObject;
+        InputManager.Instance.OnExit += StopPlacement;
     }
 
 
 
     private void PlaceStructure()
     {
-
-        //Vector3 mousePosition = inputManager.GetSelectedMapPosition();
-        //Vector3Int gridPosition = grid.WorldToCell(mousePosition);
 
         //after a building is placed, we want to select a city to connect
         if (currentGameObject && !blocked)
@@ -111,7 +100,7 @@ public class PlacementSystem : MonoBehaviour
             Debug.Log("Building placed. Please select a city.");
             cellSprite.color = spriteColorConnecting;
             connectingModeIndicatorImage.SetActive(true);
-            inputManager.OnClicked += SelectCity;
+            InputManager.Instance.OnClicked += SelectCity;
         }
 
     }
@@ -155,7 +144,7 @@ public class PlacementSystem : MonoBehaviour
                 cellSprite.color = spriteColorRegular;
                 cellIndicator.SetActive(false);
                 connectingModeIndicatorImage.SetActive(false);
-                inputManager.OnClicked -= SelectCity;
+                InputManager.Instance.OnClicked -= SelectCity;
             }
             else
             {
@@ -187,32 +176,16 @@ public class PlacementSystem : MonoBehaviour
         }
         placingObjectIndex = -1;
         cellIndicator.SetActive(false);
-        inputManager.OnClicked -= PlaceStructure;
-        inputManager.OnExit -= ResetCurrentGameObject;
-        inputManager.OnExit -= StopPlacement;
+        InputManager.Instance.OnClicked -= PlaceStructure;
+        InputManager.Instance.OnExit -= ResetCurrentGameObject;
+        InputManager.Instance.OnExit -= StopPlacement;
         currentGameObject = null;
     }
 
-    private void ChangeCursor()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Cursor.SetCursor(cursorDownTexture, Vector2.zero, CursorMode.Auto);
-        }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            Cursor.SetCursor(cursorDefaultTexture, Vector2.zero, CursorMode.Auto);
-        }
-    }
 
     private void Update()
     {
-        // TODO: Make reactive instead of busy waiting
-        ChangeCursor();
-        // if (placingObjectIndex < 0)
-        //     return;
-        
-        Vector3 mousePosition = inputManager.GetSelectedMapPosition();
+        Vector3 mousePosition = InputManager.Instance.GetMousePositionInWorldSpace();
         mouseIndicator.transform.position = mousePosition;
         Vector3Int gridPosition = grid.WorldToCell(mousePosition);
         Vector3 targetPostion = grid.CellToWorld(gridPosition); 
@@ -224,7 +197,7 @@ public class PlacementSystem : MonoBehaviour
             BuildingDescriptor buildingDescriptor = currentGameObject.GetComponent<BuildingDescriptor>();
             if (!buildingDescriptor)
             {
-                throw new MissingComponentException($"{currentGameObject.name} requires  BuildingDescriptor.");
+                throw new MissingComponentException($"{currentGameObject.name} requires BuildingDescriptor!");
             }
             PlacementType currentPlacementType = currentGameObject.GetComponent<BuildingDescriptor>().Placement;
             RaycastHit hit;
@@ -254,22 +227,7 @@ public class PlacementSystem : MonoBehaviour
         }
         else // If we are strolling & selecting
         {
-            RaycastHit hit;
-            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-            if (Input.GetMouseButtonDown(0) && Physics.Raycast(ray, out hit,  blockedLayer))
-            {
-                Debug.Log("Found selectable Object");
-                GameObject selectedGameObject = hit.collider.gameObject;
-                BuildingDescriptor buildingDescriptor = selectedGameObject.GetComponent<BuildingDescriptor>();
-                if (buildingDescriptor)
-                {
-                    SelectionManager.Instance.Select(buildingDescriptor);
-                }
-                else
-                {
-                    SelectionManager.Instance.ClearSelection();
-                }
-            }
+            InputManager.Instance.CheckForSelection();
         }
     }
     

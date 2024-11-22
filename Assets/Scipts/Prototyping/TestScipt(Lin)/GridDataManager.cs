@@ -1,57 +1,85 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
+using JetBrains.Annotations;
+using Scipts.Prototyping.TestScipt_Lin_;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
+using UnityEngine.Serialization;
 
 public class GridDataManager : MonoBehaviour
 {
-    [SerializeField]
-    public Texture2D inputTexture; // Assign your input texture here
+    [SerializeField] public Texture2D mapTexture; // Assign your input texture here
+    [SerializeField] [CanBeNull] public Texture2D sunTexture;
+    [SerializeField] [CanBeNull] public Texture2D windTexture;
+    [SerializeField] [CanBeNull] public Texture2D waterTexture;
 
+    private Dictionary<Color, GameObject> ColorToGameObjectMap;
+    [SerializeField] private GameObject whiteGameObject; 
+    [SerializeField] private GameObject blackGameObject;
 
-    public int gridWidth;
-    public int gridHeight;
+    [Header("Grid")] 
+    [SerializeField] private Grid grid;
+    private int textureWidth;
+    private int textureHeight;
+
+    const float cellWidth = 1f;
+    const float cellHeight = 1f;
 
     private TileData[,] gridData;
 
-
+    [SerializeField] private Transform parent;
 
     void Start()
     {
         InitializeGridData();
+    }
 
+    private void Awake()
+    {
+        textureWidth = mapTexture.width;
+        textureHeight = mapTexture.height;
+        ColorToGameObjectMap = new Dictionary<Color, GameObject>();
+        ColorToGameObjectMap[Color.white] = whiteGameObject;
+        ColorToGameObjectMap[Color.black] = blackGameObject;
+        parent.transform.position = new Vector3((int)textureHeight / 2f, 1f, (int)textureWidth / 2f);
     }
 
     void InitializeGridData()
     {
-        if (inputTexture == null)
+        if (mapTexture == null)
         {
             Debug.LogError("Input texture is missing!");
             return;
         }
 
-        gridData = new TileData[gridWidth, gridHeight];
+        gridData = new TileData[textureWidth, textureHeight];
 
-        float cellWidth = inputTexture.width / (float)gridWidth;
-        float cellHeight = inputTexture.height / (float)gridHeight;
-
-        for (int x = 0; x < gridWidth; x++)
+        for (int x = 0; x < textureHeight; x++)
         {
-            for (int y = 0; y < gridHeight; y++)
+            for (int y = 0; y < textureWidth; y++)
             {
-                // Calculate the corresponding pixel position
-                int pixelX = Mathf.FloorToInt(x * cellWidth);
-                int pixelY = Mathf.FloorToInt(y * cellHeight);
 
-                Color pixelColor = inputTexture.GetPixel(pixelX, pixelY);
-
-                // Map color channels to your values
-                float sunlight = pixelColor.r; 
-                float windSpeed = pixelColor.g; 
-                float waterSpeed = pixelColor.b; 
-
+                Color pixelColor = mapTexture.GetPixel(x, y);
+                float sunlight = 1f;
+                float windSpeed = 1f; 
+                float waterSpeed = 1f; 
+                if (sunTexture)
+                {
+                    sunlight = sunTexture.GetPixel(x, y).a;
+                }
+                if (windTexture)
+                {
+                    windSpeed = windTexture.GetPixel(x, y).a;
+                }
+                if (waterTexture)
+                {
+                    waterSpeed = waterTexture.GetPixel(x, y).a;
+                }
                 gridData[x, y] = new TileData(sunlight, windSpeed, waterSpeed);
+                // Map color channels to your values
+                GameObject objectToInstantiate = ColorToGameObjectMap[pixelColor];
+                GameObject instance = Instantiate(objectToInstantiate, new Vector3(x, 1, y), Quaternion.identity);
+                instance.transform.parent = parent;
             }
         }
 
@@ -61,7 +89,6 @@ public class GridDataManager : MonoBehaviour
     {
         return gridData;
     }
-
 }
 
 [System.Serializable]
@@ -70,11 +97,15 @@ public class TileData
     public float sunlightHours;
     public float windSpeed;
     public float waterSpeed;
+    public PlacementType placementType;
 
     public TileData(float sunlight, float wind, float water)
     {
         sunlightHours = sunlight;
         windSpeed = wind;
         waterSpeed = water;
+        placementType = PlacementType.Default;
+        // BuidlingDescriptor: currentBuilding
+        // PlacementType: type
     }
 }

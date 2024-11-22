@@ -57,7 +57,6 @@ public class PlacementSystem : MonoBehaviour
         if (cellIndicator)
         {
             cellSprite = cellIndicator.GetComponentInChildren<SpriteRenderer>();
-            Debug.Log("Cell Sprite "+cellSprite);
         }
         connectingModeIndicatorImage.SetActive(false);
     }

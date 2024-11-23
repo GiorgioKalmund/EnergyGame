@@ -11,14 +11,13 @@ using Debug = UnityEngine.Debug;
 public class GridDataManager : MonoBehaviour
 {
     [Header("Textures")]
-    [SerializeField] public Texture2D mapTexture; // Assign your input texture here
+    [SerializeField] public Texture2D mapTexture;
     [SerializeField] [CanBeNull] public Texture2D sunTexture;
     [SerializeField] [CanBeNull] public Texture2D windTexture;
     [SerializeField] [CanBeNull] public Texture2D waterTexture;
     
 
-    [FormerlySerializedAs("colorOne")]
-    [Header("Map")]
+    [Header("Tiles")]
     [SerializeField] private Color color1;
     [SerializeField] private GameObject prefab1;
     [SerializeField] private Color color2;
@@ -35,6 +34,8 @@ public class GridDataManager : MonoBehaviour
     [SerializeField] private GameObject prefab7;
     [SerializeField] private Color color8;
     [SerializeField] private GameObject prefab8;
+    
+    [Header("Map")]
     private Dictionary<Color, GameObject> ColorToGameObjectMap;
     private Dictionary<Color, PlacementType> placementMappings;
 
@@ -45,11 +46,6 @@ public class GridDataManager : MonoBehaviour
     private int textureHeight;
 
     private TileData[,] gridData;
-
-    void Start()
-    {
-        //GenerateMapInformation();
-    }
 
     private void Awake()
     {
@@ -124,33 +120,9 @@ public class GridDataManager : MonoBehaviour
 
                     //map each block with placementType
                     placementMappings.TryGetValue(pixelColor, out PlacementType placementType);
-                    //commercial
-                    //if (pixelColor == color1)
-                    //    placementType = PlacementType.Blocked;
-                    //Default
-                    //if (pixelColor == color2)
-                    //    placementType = PlacementType.Default;
-                    //Forest
-                    //if (pixelColor == color3)
-                    //    placementType = PlacementType.Blocked;
-                    //Railroad
-                    //if (pixelColor == color4)
-                    //    placementType = PlacementType.Blocked;
-                    //Residential
-                    //if (pixelColor == color5)
-                    //    placementType = PlacementType.Endpoint;
-                    //Shore
-                    //if (pixelColor == color6)
-                    //    placementType = PlacementType.Shore;
-                    //Street
-                    //if (pixelColor == color7)
-                    //    placementType = PlacementType.Blocked;
-                    //Water
-                    //if (pixelColor == color8)
-                    //    placementType = PlacementType.Water;
-
-
+                    
                     TileData tileData = new TileData(sunlight, windSpeed, waterSpeed, placementType);
+                   
                     //assign tileDataInformation to each block
                     GridDataInformation information = instance.AddComponent<GridDataInformation>();
                     information.tileData = tileData;

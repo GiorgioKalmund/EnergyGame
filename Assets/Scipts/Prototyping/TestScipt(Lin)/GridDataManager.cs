@@ -79,8 +79,8 @@ public class GridDataManager : MonoBehaviour
             { color8, PlacementType.Water }      // Water
         };
 
-        GenerateMap();
         tilesCenter.transform.position = new Vector3((int)textureHeight / 2f, 1f, (int)textureWidth / 2f);
+        GenerateMap();
         
         //SetUp for Grid default (1x1)
         grid.cellSize = new Vector3(1, 1, 1);
@@ -107,6 +107,7 @@ public class GridDataManager : MonoBehaviour
                     Vector3 position = new Vector3(x, 1, y);
                     //get each GameObject
                     GameObject instance = Instantiate(prefab, position, Quaternion.identity);
+                    instance.transform.parent = tilesCenter;
 
                     if (sunTexture)
                     {

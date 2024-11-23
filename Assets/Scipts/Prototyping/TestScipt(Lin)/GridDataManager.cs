@@ -14,13 +14,24 @@ public class GridDataManager : MonoBehaviour
     [SerializeField] [CanBeNull] public Texture2D windTexture;
     [SerializeField] [CanBeNull] public Texture2D waterTexture;
     
+    [FormerlySerializedAs("colorOne")]
     [Header("Map")]
-    [SerializeField] private Color colorOne;
-    [SerializeField] private GameObject firstGameObject;
-    [SerializeField] private Color colorTwo;
-    [SerializeField] private GameObject secondGameObject;
-    [SerializeField] private Color colorThree;
-    [SerializeField] private GameObject thirdGameObject;
+    [SerializeField] private Color color1;
+    [SerializeField] private GameObject prefab1;
+    [SerializeField] private Color color2;
+    [SerializeField] private GameObject prefab2;
+    [SerializeField] private Color color3;
+    [SerializeField] private GameObject prefab3;
+    [SerializeField] private Color color4;
+    [SerializeField] private GameObject prefab4;
+    [SerializeField] private Color color5;
+    [SerializeField] private GameObject prefab5;
+    [SerializeField] private Color color6;
+    [SerializeField] private GameObject prefab6;
+    [SerializeField] private Color color7;
+    [SerializeField] private GameObject prefab7;
+    [SerializeField] private Color color8;
+    [SerializeField] private GameObject prefab8;
     private Dictionary<Color, GameObject> ColorToGameObjectMap;
 
     [Header("Grid")] 
@@ -42,9 +53,14 @@ public class GridDataManager : MonoBehaviour
         textureHeight = mapTexture.height;
         ColorToGameObjectMap = new Dictionary<Color, GameObject>();
         // Better naming scheme for colors and objects?
-        ColorToGameObjectMap[colorOne] = firstGameObject;
-        ColorToGameObjectMap[colorTwo] = secondGameObject;
-        ColorToGameObjectMap[colorThree] = thirdGameObject;
+        ColorToGameObjectMap[color1] = prefab1;
+        ColorToGameObjectMap[color2] = prefab2;
+        ColorToGameObjectMap[color3] = prefab3;
+        ColorToGameObjectMap[color4] = prefab4;
+        ColorToGameObjectMap[color5] = prefab5;
+        ColorToGameObjectMap[color6] = prefab6;
+        ColorToGameObjectMap[color7] = prefab7;
+        ColorToGameObjectMap[color8] = prefab8;
         tilesCenter.transform.position = new Vector3((int)textureHeight / 2f, 1f, (int)textureWidth / 2f);
     }
 

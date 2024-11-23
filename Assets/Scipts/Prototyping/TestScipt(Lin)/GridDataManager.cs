@@ -1,10 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using JetBrains.Annotations;
 using Scipts.Prototyping.TestScipt_Lin_;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Debug = UnityEngine.Debug;
 
 public class GridDataManager : MonoBehaviour
 {
@@ -14,6 +16,7 @@ public class GridDataManager : MonoBehaviour
     [SerializeField] [CanBeNull] public Texture2D windTexture;
     [SerializeField] [CanBeNull] public Texture2D waterTexture;
     
+
     [FormerlySerializedAs("colorOne")]
     [Header("Map")]
     [SerializeField] private Color color1;
@@ -33,6 +36,7 @@ public class GridDataManager : MonoBehaviour
     [SerializeField] private Color color8;
     [SerializeField] private GameObject prefab8;
     private Dictionary<Color, GameObject> ColorToGameObjectMap;
+    private Dictionary<Color, PlacementType> placementMappings;
 
     [Header("Grid")] 
     [SerializeField] private Grid grid;
@@ -44,75 +48,115 @@ public class GridDataManager : MonoBehaviour
 
     void Start()
     {
-        InitializeGridData();
+        //GenerateMapInformation();
     }
 
     private void Awake()
     {
         textureWidth = mapTexture.width;
         textureHeight = mapTexture.height;
-        ColorToGameObjectMap = new Dictionary<Color, GameObject>();
-        // Better naming scheme for colors and objects?
-        ColorToGameObjectMap[color1] = prefab1;
-        ColorToGameObjectMap[color2] = prefab2;
-        ColorToGameObjectMap[color3] = prefab3;
-        ColorToGameObjectMap[color4] = prefab4;
-        ColorToGameObjectMap[color5] = prefab5;
-        ColorToGameObjectMap[color6] = prefab6;
-        ColorToGameObjectMap[color7] = prefab7;
-        ColorToGameObjectMap[color8] = prefab8;
+        
+        ColorToGameObjectMap = new Dictionary<Color, GameObject>
+        {
+            { color1, prefab1 },
+            { color2, prefab2 },
+            { color3, prefab3 },
+            { color4, prefab4 },
+            { color5, prefab5 },
+            { color6, prefab6 },
+            { color7, prefab7 },
+            { color8, prefab8 }
+        };
+        placementMappings = new Dictionary<Color, PlacementType>
+        {
+            { color1, PlacementType.Blocked },    // Commercial
+            { color2, PlacementType.Default },   // Default
+            { color3, PlacementType.Blocked },   // Forest
+            { color4, PlacementType.Blocked },   // Railroad
+            { color5, PlacementType.Endpoint },  // Residential
+            { color6, PlacementType.Shore },     // Shore
+            { color7, PlacementType.Blocked },   // Street
+            { color8, PlacementType.Water }      // Water
+        };
+
+        GenerateMap();
         tilesCenter.transform.position = new Vector3((int)textureHeight / 2f, 1f, (int)textureWidth / 2f);
+        
+        //SetUp for Grid default (1x1)
+        grid.cellSize = new Vector3(1, 1, 1);
+        grid.transform.position = tilesCenter.position;
+        
+        Debug.Log($"Grid setup complete. Center position : {tilesCenter.position}, Grid position: {grid.transform.position}");
+
+
     }
-
-    void InitializeGridData()
+    private void GenerateMap()
     {
-        if (mapTexture == null)
+        float sunlight = 0;
+        float waterSpeed = 0; 
+        float windSpeed = 0;
+        for (int x = 0; x < textureWidth; x++)
         {
-            Debug.LogError("Input texture is missing!");
-            return;
-        }
-
-        gridData = new TileData[textureWidth, textureHeight];
-
-        for (int x = 0; x < textureHeight; x++)
-        {
-            for (int y = 0; y < textureWidth; y++)
+            for (int y = 0; y < textureHeight; y++)
             {
-
                 Color pixelColor = mapTexture.GetPixel(x, y);
-                float sunlight = 1f;
-                float windSpeed = 1f; 
-                float waterSpeed = 1f; 
-                PlacementType placementType = PlacementType.Blocked; 
-                if (sunTexture)
+                // Check if the color matches a prefab
+                if (ColorToGameObjectMap.TryGetValue(pixelColor, out GameObject prefab))
                 {
-                    sunlight = sunTexture.GetPixel(x, y).a;
-                    placementType = PlacementType.Default;
+                    // Instantiate the prefab
+                    Vector3 position = new Vector3(x, 1, y);
+                    //get each GameObject
+                    GameObject instance = Instantiate(prefab, position, Quaternion.identity);
+
+                    if (sunTexture)
+                    {
+                        sunlight = sunTexture.GetPixel(x, y).a;
+                    }
+                    if (windTexture)
+                    {
+                        windSpeed = windTexture.GetPixel(x, y).a;
+                    }
+                    if (waterTexture)
+                    {
+                        waterSpeed = waterTexture.GetPixel(x, y).a;
+                    }
+
+                    //map each block with placementType
+                    placementMappings.TryGetValue(pixelColor, out PlacementType placementType);
+                    //commercial
+                    //if (pixelColor == color1)
+                    //    placementType = PlacementType.Blocked;
+                    //Default
+                    //if (pixelColor == color2)
+                    //    placementType = PlacementType.Default;
+                    //Forest
+                    //if (pixelColor == color3)
+                    //    placementType = PlacementType.Blocked;
+                    //Railroad
+                    //if (pixelColor == color4)
+                    //    placementType = PlacementType.Blocked;
+                    //Residential
+                    //if (pixelColor == color5)
+                    //    placementType = PlacementType.Endpoint;
+                    //Shore
+                    //if (pixelColor == color6)
+                    //    placementType = PlacementType.Shore;
+                    //Street
+                    //if (pixelColor == color7)
+                    //    placementType = PlacementType.Blocked;
+                    //Water
+                    //if (pixelColor == color8)
+                    //    placementType = PlacementType.Water;
+
+
+                    TileData tileData = new TileData(sunlight, windSpeed, waterSpeed, placementType);
+                    //assign tileDataInformation to each block
+                    GridDataInformation information = instance.AddComponent<GridDataInformation>();
+                    information.tileData = tileData;
+
                 }
-                if (windTexture)
-                {
-                    windSpeed = windTexture.GetPixel(x, y).a;
-                    placementType = PlacementType.Default;
-                }
-                if (waterTexture)
-                {
-                    waterSpeed = waterTexture.GetPixel(x, y).a;
-                    placementType = PlacementType.Water;
-                }
-                // Define Grid Data Object with corresponding stats
-                gridData[x, y] = new TileData(sunlight, windSpeed, waterSpeed, placementType);
-                // Map color channels to your values
-                GameObject objectToInstantiate = ColorToGameObjectMap[pixelColor];
-                GameObject instance = Instantiate(objectToInstantiate, new Vector3(x, 1, y), Quaternion.identity);
-                instance.transform.parent = tilesCenter;
             }
         }
-
-        Debug.Log("Grid data initialized!");
-    }
-    public TileData[,] GetGridData()
-    {
-        return gridData;
     }
 }
 

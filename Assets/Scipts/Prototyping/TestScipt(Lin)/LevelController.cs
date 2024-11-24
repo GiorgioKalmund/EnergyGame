@@ -73,6 +73,6 @@ public class LevelController : MonoBehaviour
 
    private void UpdateDemandText()
    {
-       demandText.text = $"{currentProduction}/{currentDemand} MW";
+       //demandText.text = $"{currentProduction}/{currentDemand} MW";
    }
 }

@@ -80,8 +80,8 @@ public class GridDataManager : MonoBehaviour
         
         //SetUp for Grid default (1x1)
         grid.cellSize = new Vector3(1, 1, 1);
-        grid.transform.position = tilesCenter.position;
-        
+        grid.transform.position = new Vector3((int)textureHeight , 1f, (int)textureWidth );
+
         Debug.Log($"Grid setup complete. Center position : {tilesCenter.position}, Grid position: {grid.transform.position}");
 
 
@@ -148,5 +148,9 @@ public class TileData
         waterSpeed = water;
         placementType = type;
         // BuidlingDescriptor: currentBuilding
+    }
+    public void setPlacementType(PlacementType type)
+    {
+        placementType = type;
     }
 }

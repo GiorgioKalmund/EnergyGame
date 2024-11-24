@@ -2,10 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Diagnostics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
+using Debug = UnityEngine.Debug;
 
 public class InputManager : MonoBehaviour
 {
@@ -65,14 +67,18 @@ public class InputManager : MonoBehaviour
     public Vector3 GetMousePositionInWorldSpace()
     {
         Vector3 mousePos = Input.mousePosition;
+        
         mousePos.z = mainCamera.nearClipPlane;
+
         Ray ray = mainCamera.ScreenPointToRay(mousePos);
+        //Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red);
         RaycastHit hit;
 
-        if(Physics.Raycast(ray,out hit, 100, defaultLayer))
+        if(Physics.Raycast(ray,out hit))
         {
             lastPosition = hit.point;
         }
+        
         return lastPosition;
     }
     

@@ -21,12 +21,6 @@ public class BuildingDescriptor : MonoBehaviour
     [SerializeField] private Sprite imageSprite;
     public bool isOnLeftHalfOfScreen;
     
-    public PlacementType Placement
-    {
-        get => placement;
-        set => placement = value;
-    }
-
     public void Start()
     {
         id = LevelController.Instance.nextID;

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3360444623816131733}
   - component: {fileID: 23879956294643379}
   - component: {fileID: 8521532475819843484}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: Cylinder.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 4770475694755114064}
   - component: {fileID: 8185320407476273307}
   - component: {fileID: 2244177565547099587}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: Vert
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: 5223289111685476943}
   - component: {fileID: 1918355149371091301}
   - component: {fileID: 131290178195888647}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: Cylinder.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -284,7 +284,7 @@ GameObject:
   - component: {fileID: 3020603047093061210}
   - component: {fileID: 3864889695037877949}
   - component: {fileID: 7922940028491775095}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: Windmill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -348,8 +348,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddc24fade6ba06f49b18cb35300f79e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingName: 
-  placement: 1
+  buildingName: Epic Windmill
+  placement: 3
   cost: 0
   production: 300
   placed: 0
@@ -369,7 +369,7 @@ GameObject:
   - component: {fileID: 8241870527463561713}
   - component: {fileID: 7781311846396910046}
   - component: {fileID: 5841512540976596726}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: Vert.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -452,7 +452,7 @@ GameObject:
   - component: {fileID: 2137784586505995089}
   - component: {fileID: 8252613906859657781}
   - component: {fileID: 598874611342974810}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: Cylinder.007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -535,7 +535,7 @@ GameObject:
   - component: {fileID: 786041468375902784}
   - component: {fileID: 3712590850661072043}
   - component: {fileID: 3208252448199780576}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -619,7 +619,7 @@ GameObject:
   - component: {fileID: 1973101050052339871}
   - component: {fileID: 7449016615962088947}
   - component: {fileID: 6734251744325582953}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: Vert.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -702,7 +702,7 @@ GameObject:
   - component: {fileID: 5354542723223129568}
   - component: {fileID: 4642628502628735459}
   - component: {fileID: 3492488180283663773}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: Cylinder.008
   m_TagString: Untagged
   m_Icon: {fileID: 0}

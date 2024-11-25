@@ -5,6 +5,7 @@ using System.Collections;
 using Scipts.Prototyping.TestScipt_Lin_;
 using Unity.VisualScripting;
 using System.IO.Pipes;
+using UnityEngine.Serialization;
 
 
 public class PlacementSystem : MonoBehaviour
@@ -21,7 +22,7 @@ public class PlacementSystem : MonoBehaviour
     // TODO: Possibly outsource?
     [Header("Cables")]
     private LineRenderer _lineRenderer;
-    [SerializeField] private int lineVertexCount;
+    [SerializeField] private int lineVertexCount = 10;
     [SerializeField] private float lineFunctionDivisor = 64;
 
     [Header("Camera")]
@@ -47,10 +48,11 @@ public class PlacementSystem : MonoBehaviour
     // TODO: UI Should be handled via some type of UI Manager
     [Header("Visuals")]
     [SerializeField] private GameObject connectingModeIndicatorImage;
-    // <changes>
+    [FormerlySerializedAs("buildingPlacementY")] public float cellIndicatorPlacementY = 1.51f;
+    
     private GameObject lastPlacedBuilding;
+    private TileData lastHoveredTileData;
     private bool citySelectionActive;
-    // </changes>
     private GameObject ground = null;
 
     private void Start()
@@ -94,13 +96,14 @@ public class PlacementSystem : MonoBehaviour
         //after a building is placed, we want to select a city to connect
         if (currentGameObject && !blocked)
         {
-
-            currentGameObject.GetComponent<BuildingDescriptor>().Place();
-
+            BuildingDescriptor buildingDescriptor = currentGameObject.GetComponent<BuildingDescriptor>();
+            buildingDescriptor.Place();
             
-            ground.GetComponent<GridDataInformation>().tileData.setPlacementType(PlacementType.Blocked);
-
             lastPlacedBuilding = currentGameObject;
+            lastHoveredTileData.setPlacementType(PlacementType.Blocked);
+            Debug.Log("Tile at "+lastHoveredTileData.coords + " should be blocked");
+            lastHoveredTileData.setCurrentBuilding(buildingDescriptor);
+            Debug.Log("Tile at "+lastHoveredTileData.coords + "should have the building: "+buildingDescriptor.buildingName);
             currentGameObject = null;
 
             //prepare for citySelection
@@ -132,7 +135,7 @@ public class PlacementSystem : MonoBehaviour
         if (Physics.Raycast(mouseIndicator.transform.position + Vector3.up * 0.2f, Vector3.down, out hit, 10f))
         {
             Transform hitTransform = hit.transform;
-            if (hitTransform.GetComponent<GridDataInformation>().tileData.placementType == PlacementType.Endpoint) // City layer
+            if (hitTransform.GetComponent<TileDataWrapper>().tileData.placementType == PlacementType.Endpoint) // City layer
             {
                 citySelectionActive = false;
                 Vector3 cityPosition = cellIndicator.transform.position;
@@ -204,103 +207,40 @@ public class PlacementSystem : MonoBehaviour
         mouseIndicator.transform.position = mousePosition;
         Vector3Int gridPosition = grid.WorldToCell(mousePosition);
         Vector3 targetPostion = grid.CellToWorld(gridPosition); 
-        cellIndicator.transform.position = new Vector3(targetPostion.x + gridOffset, 1.6f, targetPostion.z + gridOffset);
+        cellIndicator.transform.position = new Vector3(targetPostion.x + gridOffset, cellIndicatorPlacementY, targetPostion.z + gridOffset);
         
         // If we are placing 
         if (currentGameObject)
         {
             
-            currentGameObject.transform.position =  Vector3.Lerp(currentGameObject.transform.position, cellIndicator.transform.position, Time.deltaTime * 50f);
+            //currentGameObject.transform.position =  Vector3.Lerp(currentGameObject.transform.position, cellIndicator.transform.position, Time.deltaTime * 50f);
+            currentGameObject.transform.position = cellIndicator.transform.position - Vector3.up * 0.01f; 
             BuildingDescriptor buildingDescriptor = currentGameObject.GetComponent<BuildingDescriptor>();
+            //currentBuilding for placing 
             if (!buildingDescriptor)
             {
                 throw new MissingComponentException($"{currentGameObject.name} requires BuildingDescriptor!");
             }
-            //currentBuilding for placing 
-            PlacementType currentPlacementType = currentGameObject.GetComponent<BuildingDescriptor>().Placement;
+            
+            PlacementType currentPlacementType = buildingDescriptor.GetPlacementType(); 
             RaycastHit hit;
-
-            Vector3 mousePos = Input.mousePosition;
-            ////////////
-            mousePos.z = mainCamera.nearClipPlane;
-            Ray ray = mainCamera.ScreenPointToRay(mousePos);
-            ////////////
-            //Debug.Log($"{Physics.Raycast(mouseIndicator.transform.position, Vector3.down, out hit, 10f)}");
-            
-            
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast( cellIndicator.transform.position + Vector3.up * 0.2f, Vector3.down, out hit, 10f))
             {
-                
                 ground = hit.transform.gameObject;
-                if (ground.GetComponent<GridDataInformation>())
+                if (ground.GetComponent<TileDataWrapper>())
                 {
-                    PlacementType groundType = ground.GetComponent<GridDataInformation>().tileData.placementType;
-
-
-                    // TODO: Actually compare layers, based on parameterized values up top
-                    if (groundType.Equals(PlacementType.Blocked))
-                    {
-
-                        blocked = true;
-                        cellSprite.color = spriteColorWarning;
-                    }
-                    else
-                    {
-                        //WaterBuilding
-                        if (currentPlacementType.Equals(PlacementType.Water))
-                        {
-                            //if ground is also water then placeable
-                            if (groundType.Equals(PlacementType.Water))
-                            {
-                                blocked = false;
-                            }
-                            else
-                            {
-                                blocked = true;
-                            }
-                            //blocked = hitLayer.value != 4;
-                            cellSprite.color = blocked ? spriteColorWarning : spriteColorRegular;
-                        }
-                        if (currentPlacementType.Equals(PlacementType.Default))
-                        {
-
-                            if (groundType.Equals(PlacementType.Default))
-                            {
-                                blocked = false;
-                            }
-                            else
-                            {
-                                blocked = true;
-                            }
-
-                            cellSprite.color = blocked ? spriteColorWarning : spriteColorRegular;
-                        }
-                        //ShoreBuilding
-                        if (currentPlacementType.Equals(PlacementType.Shore))
-                        {
-                            //if ground is also water then placeable
-                            if (groundType.Equals(PlacementType.Shore))
-                            {
-                                blocked = false;
-                            }
-                            else
-                            {
-                                blocked = true;
-                            }
-
-                            cellSprite.color = blocked ? spriteColorWarning : spriteColorRegular;
-                        }
-
-                        //blocked = hitLayer.value != 0; 
-                        // cellSprite.color = blocked ? spriteColorWarning : spriteColorRegular;
-
-                    }
+                    TileData tileData = ground.GetComponent<TileDataWrapper>().tileData;
+                    lastHoveredTileData = tileData; 
+                    PlacementType groundType = tileData.placementType;
+                    blocked = !currentPlacementType.Equals(groundType);
+                    cellSprite.color = blocked ? spriteColorWarning : spriteColorRegular;
                 }
                 
             }
         }
-        else // If we are strolling & selecting
+        else if (!citySelectionActive) // If we are strolling & selecting
         {
+            // TODO
             InputManager.Instance.CheckForSelection();
         }
     }

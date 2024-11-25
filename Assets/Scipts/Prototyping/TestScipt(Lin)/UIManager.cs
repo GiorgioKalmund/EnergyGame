@@ -28,20 +28,32 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        
+        SetCursorTextureDefault();
     }
 
     void Update()
     {
-        // ChangeCursor();
+        ChangeCursor();
     }
     private void ChangeCursor()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Cursor.SetCursor(cursorDownTexture, Vector2.zero, CursorMode.Auto);
-            return;
+            SetCursorTextureDown();
         }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            SetCursorTextureDefault();
+        }
+    }
+
+    private void SetCursorTextureDefault()
+    {
         Cursor.SetCursor(cursorDefaultTexture, Vector2.zero, CursorMode.Auto);
+    }
+    
+    private void SetCursorTextureDown()
+    {
+        Cursor.SetCursor(cursorDownTexture, Vector2.zero, CursorMode.Auto);
     }
 }

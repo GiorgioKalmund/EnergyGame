@@ -124,11 +124,11 @@ public class GridDataManager : MonoBehaviour
                     //map each block with placementType
                     placementMappings.TryGetValue(pixelColor, out PlacementType placementType);
                     
-                    TileData tileData = new TileData(sunlight, windSpeed, waterSpeed, placementType);
+                    TileData tileData = new TileData(sunlight, windSpeed, waterSpeed, placementType, new Vector2(x, y), null);
                    
                     //assign tileDataInformation to each block
-                    GridDataInformation information = instance.AddComponent<GridDataInformation>();
-                    information.tileData = tileData;
+                    TileDataWrapper wrapper = instance.AddComponent<TileDataWrapper>();
+                    wrapper.tileData = tileData;
 
                 }
             }
@@ -139,21 +139,29 @@ public class GridDataManager : MonoBehaviour
 [System.Serializable]
 public class TileData
 {
-    public float sunlightHours;
+    float sunlightHours;
     public float windSpeed;
     public float waterSpeed;
     public PlacementType placementType;
+    [CanBeNull] public BuildingDescriptor currentBuilding;
+    public Vector2 coords;
 
-    public TileData(float sunlight, float wind, float water, PlacementType type)
+    public TileData(float sunlight, float wind, float water, PlacementType type, Vector2 coords, BuildingDescriptor currentBuilding)
     {
         sunlightHours = sunlight;
         windSpeed = wind;
         waterSpeed = water;
         placementType = type;
-        // BuidlingDescriptor: currentBuilding
+        this.coords = coords;
+        this.currentBuilding = currentBuilding;
     }
     public void setPlacementType(PlacementType type)
     {
         placementType = type;
+    }
+
+    public void setCurrentBuilding(BuildingDescriptor building)
+    {
+        this.currentBuilding = building;
     }
 }

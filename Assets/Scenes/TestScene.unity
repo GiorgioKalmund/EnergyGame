@@ -2207,8 +2207,6 @@ MonoBehaviour:
   cellIndicator: {fileID: 306706746}
   grid: {fileID: 2124310285}
   database: {fileID: 11400000, guid: 0c6f349871d57a840890f745515a7c91, type: 2}
-  lineVertexCount: 101
-  lineFunctionDivisor: 64
   mainCamera: {fileID: 963194227}
   gridOffset: 0.5
   defaultLayer:
@@ -2224,7 +2222,6 @@ MonoBehaviour:
   spriteColorWarning: {r: 1, g: 0.06132078, b: 0.06132078, a: 1}
   spriteColorConnecting: {r: 0, g: 1, b: 0.7803633, a: 1}
   blocked: 0
-  connectingModeIndicatorImage: {fileID: 437969441}
 --- !u!120 &449543569
 LineRenderer:
   serializedVersion: 2
@@ -10581,8 +10578,6 @@ MonoBehaviour:
   blockedLayer:
     serializedVersion: 2
     m_Bits: 64
-  cursorDefaultTexture: {fileID: 2800000, guid: 4e2e0555c7ab84ffeac393e1819fe904, type: 3}
-  cursorDownTexture: {fileID: 2800000, guid: e1250c16ce63b436f86c8757abef3648, type: 3}
 --- !u!4 &2134415881 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5798067330042255330, guid: 32bb56aab2db76c4285e88bf1bc7039c, type: 3}

@@ -12,10 +12,11 @@ public class GridDataManager : MonoBehaviour
 {
     [Header("Textures")]
     [SerializeField] public Texture2D mapTexture;
-    [SerializeField] [CanBeNull] public Texture2D sunTexture;
-    [SerializeField] [CanBeNull] public Texture2D windTexture;
-    [SerializeField] [CanBeNull] public Texture2D waterTexture;
-    
+    [SerializeField] [CanBeNull] private Texture2D sunTexture;
+    [SerializeField] [CanBeNull] private Texture2D windTexture;
+    [SerializeField] [CanBeNull] private Texture2D waterTexture;
+    [SerializeField] [CanBeNull] private Texture2D displayTexture;
+    [SerializeField] private GameObject mapOverlay;
 
     [Header("Tiles")]
     [SerializeField] private Color color1;
@@ -51,6 +52,8 @@ public class GridDataManager : MonoBehaviour
     {
         textureWidth = mapTexture.width;
         textureHeight = mapTexture.height;
+
+        mapOverlay.GetComponent<Renderer>().material.mainTexture = displayTexture;
         
         ColorToGameObjectMap = new Dictionary<Color, GameObject>
         {
@@ -65,7 +68,7 @@ public class GridDataManager : MonoBehaviour
         };
         placementMappings = new Dictionary<Color, PlacementType>
         {
-            { color1, PlacementType.Blocked },    // Commercial
+            { color1, PlacementType.Endpoint},    // Commercial
             { color2, PlacementType.Default },   // Default
             { color3, PlacementType.Blocked },   // Forest
             { color4, PlacementType.Blocked },   // Railroad

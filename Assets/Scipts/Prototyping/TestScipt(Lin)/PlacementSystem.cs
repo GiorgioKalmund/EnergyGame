@@ -19,10 +19,10 @@ public class PlacementSystem : MonoBehaviour
     private int placingObjectIndex = -1;
     
     // TODO: Possibly outsource?
-    //[Header("Cables")]
-    //private LineRenderer _lineRenderer;
-    //[SerializeField] private int lineVertexCount;
-    //[SerializeField] private float lineFunctionDivisor = 64;
+    [Header("Cables")]
+    private LineRenderer _lineRenderer;
+    [SerializeField] private int lineVertexCount;
+    [SerializeField] private float lineFunctionDivisor = 64;
 
     [Header("Camera")]
     [SerializeField] private Camera mainCamera;
@@ -45,8 +45,8 @@ public class PlacementSystem : MonoBehaviour
     [CanBeNull] private GameObject currentGameObject;
     [SerializeField] private bool blocked;
     // TODO: UI Should be handled via some type of UI Manager
-    //[SerializeField] private GameObject connectingModeIndicatorImage;
-
+    [Header("Visuals")]
+    [SerializeField] private GameObject connectingModeIndicatorImage;
     // <changes>
     private GameObject lastPlacedBuilding;
     private bool citySelectionActive;
@@ -60,15 +60,15 @@ public class PlacementSystem : MonoBehaviour
         {
             cellSprite = cellIndicator.GetComponentInChildren<SpriteRenderer>();
         }
-        //connectingModeIndicatorImage.SetActive(false);
+        connectingModeIndicatorImage.SetActive(false);
     }
     
 
-    //private void Awake()
-    //{
-    //    _lineRenderer = GetComponent<LineRenderer>();
-    //    _lineRenderer.positionCount = lineVertexCount;
-    //}
+    private void Awake()
+    {
+        _lineRenderer = GetComponent<LineRenderer>();
+        _lineRenderer.positionCount = lineVertexCount;
+    }
 
     public void StartPlacement(int ID)
     {
@@ -100,9 +100,6 @@ public class PlacementSystem : MonoBehaviour
             
             ground.GetComponent<GridDataInformation>().tileData.setPlacementType(PlacementType.Blocked);
 
-
-
-
             lastPlacedBuilding = currentGameObject;
             currentGameObject = null;
 
@@ -110,8 +107,8 @@ public class PlacementSystem : MonoBehaviour
             citySelectionActive = true;
             Debug.Log("Building placed. Please select a city.");
             cellSprite.color = spriteColorConnecting;
-            //connectingModeIndicatorImage.SetActive(true);
-            //InputManager.Instance.OnClicked += SelectCity;
+            connectingModeIndicatorImage.SetActive(true);
+            InputManager.Instance.OnClicked += SelectCity;
         }
 
     }
@@ -122,14 +119,20 @@ public class PlacementSystem : MonoBehaviour
         if (!citySelectionActive)
         {
             cellSprite.color = spriteColorRegular;
-            //connectingModeIndicatorImage.SetActive(false);
+            connectingModeIndicatorImage.SetActive(false);
             return;
         }
 
-        RaycastHit hit;
-        if (Physics.Raycast(mouseIndicator.transform.position, Vector3.down, out hit, 10f))
+        if (!lastPlacedBuilding)
         {
-            if (hit.transform.gameObject.layer == 6) // City layer
+            return;
+        }
+        BuildingDescriptor buildingDescriptor = lastPlacedBuilding.GetComponent<BuildingDescriptor>();
+        RaycastHit hit;
+        if (Physics.Raycast(mouseIndicator.transform.position + Vector3.up * 0.2f, Vector3.down, out hit, 10f))
+        {
+            Transform hitTransform = hit.transform;
+            if (hitTransform.GetComponent<GridDataInformation>().tileData.placementType == PlacementType.Endpoint) // City layer
             {
                 citySelectionActive = false;
                 Vector3 cityPosition = cellIndicator.transform.position;
@@ -139,22 +142,16 @@ public class PlacementSystem : MonoBehaviour
                 float distance = Vector3.Distance(buildingPosition, cityPosition);
 
                 //lastPlacedBuilding is the powerPlant
-                if (lastPlacedBuilding)
-                {
-                    BuildingDescriptor buildingDescriptor = lastPlacedBuilding.GetComponent<BuildingDescriptor>();
-                    if (buildingDescriptor != null)
-                    {
-                        float productionValue = buildingDescriptor.GetProduction();
-                        LevelController.Instance.AddProduce(productionValue, distance);
-                    }
-                }
+                float productionValue = buildingDescriptor.GetProduction();
+                productionValue -= distance;
+                LevelController.Instance.AddProduce(productionValue);
 
                 Debug.Log($"City selected. Distance to building: {distance} units.");
 
-                //turn curser off
+                //reset CellIndicator
                 cellSprite.color = spriteColorRegular;
                 cellIndicator.SetActive(false);
-                //connectingModeIndicatorImage.SetActive(false);
+                connectingModeIndicatorImage.SetActive(false);
                 InputManager.Instance.OnClicked -= SelectCity;
             }
             else
@@ -165,6 +162,10 @@ public class PlacementSystem : MonoBehaviour
                     StartCoroutine(FlickerIndicator(spriteColorWarning));
                 }
             }
+        }
+        else
+        {
+            Debug.LogError("Raycast missed!");
         }
     }
 
@@ -187,7 +188,7 @@ public class PlacementSystem : MonoBehaviour
             currentGameObject.GetComponent<BuildingDescriptor>().Place();
         }
         placingObjectIndex = -1;
-        //cellIndicator.SetActive(false);
+        cellIndicator.SetActive(false);
         
         InputManager.Instance.OnClicked -= PlaceStructure;
         InputManager.Instance.OnExit -= ResetCurrentGameObject;
@@ -291,7 +292,7 @@ public class PlacementSystem : MonoBehaviour
                         }
 
                         //blocked = hitLayer.value != 0; 
-                        //cellSprite.color = blocked ? spriteColorWarning : spriteColorRegular;
+                        // cellSprite.color = blocked ? spriteColorWarning : spriteColorRegular;
 
                     }
                 }
@@ -304,30 +305,30 @@ public class PlacementSystem : MonoBehaviour
         }
     }
     
-    //void LateUpdate() {
-    //    DrawCable();
-    //}
+    void LateUpdate() {
+        DrawCable();
+    }
 
 
-    //void DrawCable()
-    //{
-    //    if (!citySelectionActive)
-    //    {
-    //        return;
-    //    }
-    //    Vector3 startPos = lastPlacedBuilding.transform.position + (Vector3.up * 0.3f);
-    //    Vector3 endPos = cellIndicator.transform.position + (Vector3.up * 0.3f);
-    //    Vector3 direction = endPos - startPos;
-    //    _lineRenderer.SetPosition(0, startPos);
-    //    _lineRenderer.SetPosition(lineVertexCount - 1 , endPos);
-    //    int half = lineVertexCount / 2;
-    //    for (int index = 1; index < lineVertexCount - 1; index++)
-    //    {
-    //        Vector3 pointToDraw = startPos + (index * direction / lineVertexCount);
-    //        pointToDraw.y += MathIsMathin((index - half) / lineFunctionDivisor) - MathIsMathin((half) / lineFunctionDivisor);
-    //        _lineRenderer.SetPosition(index, pointToDraw);
-    //    }
-    //}
+    void DrawCable()
+    {
+        if (!citySelectionActive)
+        {
+            return;
+        }
+        Vector3 startPos = lastPlacedBuilding.transform.position + (Vector3.up * 0.3f);
+        Vector3 endPos = cellIndicator.transform.position + (Vector3.up * 0.3f);
+        Vector3 direction = endPos - startPos;
+        _lineRenderer.SetPosition(0, startPos);
+        _lineRenderer.SetPosition(lineVertexCount - 1 , endPos);
+        int half = lineVertexCount / 2;
+        for (int index = 1; index < lineVertexCount - 1; index++)
+        {
+            Vector3 pointToDraw = startPos + (index * direction / lineVertexCount);
+            pointToDraw.y += MathIsMathin((index - half) / lineFunctionDivisor) - MathIsMathin((half) / lineFunctionDivisor);
+            _lineRenderer.SetPosition(index, pointToDraw);
+        }
+    }
 
 
     float MathIsMathin(float x)

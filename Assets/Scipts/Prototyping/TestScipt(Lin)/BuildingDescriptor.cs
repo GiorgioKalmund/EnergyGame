@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using UnityEngine.Serialization;
 using Scipts.Prototyping.TestScipt_Lin_;
+using Unity.XR.OpenVR;
 using UnityEditor;
 
 [RequireComponent(typeof(BoxCollider))]
@@ -121,6 +122,11 @@ public class BuildingDescriptor : MonoBehaviour
         {
             isOnLeftHalfOfScreen = true;
         }
+    }
+
+    public PlacementType GetPlacementType()
+    {
+        return this.placement;
     }
 
 }

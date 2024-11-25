@@ -34,9 +34,10 @@ public class LevelController : MonoBehaviour
        UpdateDemandText();
    }
 
-   public void AddProduce(float value, float distance)
+   public void AddProduce(float value)
    {
-       currentProduction += value - distance;
+       Debug.Log("Added produce of "+ value);
+       currentProduction += value;
        CheckIfDemandIsMet();
        UpdateDemandText();
    }

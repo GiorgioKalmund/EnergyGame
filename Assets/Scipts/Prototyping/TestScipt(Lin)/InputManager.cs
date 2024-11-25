@@ -22,9 +22,6 @@ public class InputManager : MonoBehaviour
     [SerializeField] private LayerMask waterLayer;
     [SerializeField] private LayerMask blockedLayer;
 
-    [Header("Cursor")]
-    [SerializeField] private Texture2D cursorDefaultTexture;
-    [SerializeField] private Texture2D cursorDownTexture;
 
     private Vector3 lastPosition;
 
@@ -47,7 +44,7 @@ public class InputManager : MonoBehaviour
 
     private void Start()
     {
-       ChangeCursor();
+        
     }
 
     private void Update() //into Building System
@@ -56,7 +53,6 @@ public class InputManager : MonoBehaviour
             OnClicked?.Invoke();
         if (Input.GetKeyDown(KeyCode.Escape))
             OnExit?.Invoke();
-        ChangeCursor();
     }
 
 
@@ -82,15 +78,6 @@ public class InputManager : MonoBehaviour
         return lastPosition;
     }
     
-    private void ChangeCursor()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Cursor.SetCursor(cursorDownTexture, Vector2.zero, CursorMode.Auto);
-            return;
-        }
-        Cursor.SetCursor(cursorDefaultTexture, Vector2.zero, CursorMode.Auto);
-    }
 
     public void CheckForSelection()
     {

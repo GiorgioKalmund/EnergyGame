@@ -16,6 +16,12 @@ public class InputManager : MonoBehaviour
     [Header("Camera")]
     [SerializeField]
     private Camera mainCamera;
+    [SerializeField] private float zoomSpeed = 5f; 
+    [SerializeField] private float minZoom = 5f;   
+    [SerializeField] private float maxZoom = 50f;
+    [SerializeField] private float panSpeed = 20f;
+    private Vector3 lastMousePosition;
+
 
     [Header("Layers")]
     [SerializeField] private LayerMask defaultLayer;
@@ -53,6 +59,36 @@ public class InputManager : MonoBehaviour
             OnClicked?.Invoke();
         if (Input.GetKeyDown(KeyCode.Escape))
             OnExit?.Invoke();
+        HandleMapMovement();
+        zoom();
+        lastMousePosition = Input.mousePosition;
+    }
+    private void HandleMapMovement()
+    {
+        if (Input.GetMouseButton(1))
+        {
+            Vector3 mouseDelta = Input.mousePosition - lastMousePosition;
+            if (mouseDelta.sqrMagnitude > Mathf.Epsilon)
+            {
+                Vector3 movement = new Vector3(-mouseDelta.x, 0, -mouseDelta.y) * Time.deltaTime * panSpeed;
+                movement = Quaternion.Euler(0, mainCamera.transform.eulerAngles.y, 0) * movement;
+                mainCamera.transform.position += movement;
+            }
+        }
+        lastMousePosition = Input.mousePosition;
+    }
+
+    private void zoom()
+    {
+        float scrollDelta = Input.GetAxis("Mouse ScrollWheel");
+        // Check for meaningful input, ignore tiny movements
+        if (Mathf.Abs(scrollDelta) > Mathf.Epsilon) 
+        {           
+            mainCamera.fieldOfView = Mathf.Clamp(
+                mainCamera.fieldOfView - scrollDelta * zoomSpeed,
+                minZoom, maxZoom
+            );         
+        }
     }
 
 

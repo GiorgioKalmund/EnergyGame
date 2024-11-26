@@ -132,7 +132,9 @@ public class PlacementSystem : MonoBehaviour
         }
         BuildingDescriptor buildingDescriptor = lastPlacedBuilding.GetComponent<BuildingDescriptor>();
         RaycastHit hit;
-        if (Physics.Raycast(mouseIndicator.transform.position + Vector3.up * 0.2f, Vector3.down, out hit, 10f))
+
+        
+        if (Physics.Raycast(cellIndicator.transform.position + Vector3.up * 0.2f, Vector3.down, out hit, 10f))
         {
             Transform hitTransform = hit.transform;
             if (hitTransform.GetComponent<TileDataWrapper>().tileData.placementType == PlacementType.Endpoint) // City layer

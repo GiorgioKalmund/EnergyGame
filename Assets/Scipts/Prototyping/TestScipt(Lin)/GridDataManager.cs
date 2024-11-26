@@ -125,6 +125,12 @@ public class GridDataManager : MonoBehaviour
                     placementMappings.TryGetValue(pixelColor, out PlacementType placementType);
                     
                     TileData tileData = new TileData(sunlight, windSpeed, waterSpeed, placementType, new Vector2(x, y), null);
+
+                    
+                    if (instance.GetComponent<BuildingDescriptor>())
+                    {
+                        tileData.setCurrentBuilding(instance.GetComponent<BuildingDescriptor>());
+                    }
                    
                     //assign tileDataInformation to each block
                     TileDataWrapper wrapper = instance.AddComponent<TileDataWrapper>();

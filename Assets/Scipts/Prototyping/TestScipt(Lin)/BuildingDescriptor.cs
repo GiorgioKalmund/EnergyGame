@@ -33,8 +33,15 @@ public class BuildingDescriptor : MonoBehaviour
         {
             buildingName = gameObject.name;
         }
+
         _collider = GetComponent<BoxCollider>();
+        //why false?
         _collider.enabled = false;
+        
+        if(buildingName == "Commercial"||buildingName == "Residential")
+        {
+            _collider.enabled = true;
+        }
         CheckForHalfPositionOnScreen();
     }
 

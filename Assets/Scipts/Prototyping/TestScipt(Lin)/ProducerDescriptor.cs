@@ -6,8 +6,9 @@ using Unity.XR.OpenVR;
 using UnityEditor;
 
 [RequireComponent(typeof(BoxCollider))]
-public class BuildingDescriptor : MonoBehaviour
+public class ProducerDescriptor : MonoBehaviour, SelectableEntity
 {
+    [Header("Info")] 
     public String buildingName;
     [SerializeField] private PlacementType placement;
     [SerializeField] private float cost;
@@ -42,7 +43,7 @@ public class BuildingDescriptor : MonoBehaviour
         {
             _collider.enabled = true;
         }
-        CheckForHalfPositionOnScreen();
+        isOnLeftHalfOfScreen = IsOnLeftHalfOfTheScreen();
     }
 
     public bool isPlaced()
@@ -54,7 +55,7 @@ public class BuildingDescriptor : MonoBehaviour
     {
         placed = true;
         _collider.enabled = true;
-        CheckForHalfPositionOnScreen();
+        isOnLeftHalfOfScreen = IsOnLeftHalfOfTheScreen();
     }
     public void Sell()
     {
@@ -73,18 +74,6 @@ public class BuildingDescriptor : MonoBehaviour
         Debug.Log("Deselected "+ this.buildingName);
         selectionIndicator.SetActive(false);
         selected = false;
-    }
-
-    public void ToggleSelection()
-    {
-        if (selected)
-        {
-            Deselect();
-        }
-        else
-        {
-            Select();
-        }
     }
 
     public bool IsSelected()
@@ -111,23 +100,21 @@ public class BuildingDescriptor : MonoBehaviour
         return id;
     }
 
-    private void CheckForHalfPositionOnScreen()
+    public bool IsOnLeftHalfOfTheScreen()
     {
         float screenWidth = Screen.width;
         Vector3 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
-        if (screenPosition.x >= screenWidth / 2)
-        {
-            isOnLeftHalfOfScreen = false;
-        }
-        else
-        {
-            isOnLeftHalfOfScreen = true;
-        }
+        return (screenPosition.x >= screenWidth / 2);
     }
 
     public PlacementType GetPlacementType()
     {
         return this.placement;
+    }
+
+    public string GetName()
+    {
+        return buildingName;
     }
 
 }

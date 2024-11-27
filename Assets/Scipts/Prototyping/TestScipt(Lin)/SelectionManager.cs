@@ -7,8 +7,10 @@ using UnityEngine.Serialization;
 public class SelectionManager : MonoBehaviour
 {
     [SerializeField] private GameObject selectionPanelObjectGameObject;
-    private BuildingDescriptor _currentlySelected = null;
+    private SelectableEntity _currentlySelected = null;
     private SelectionPanel _selectionPanel;
+    [SerializeField]
+    private Camera mainCamera;
     
     public static SelectionManager Instance { get; private set; }
 
@@ -27,9 +29,9 @@ public class SelectionManager : MonoBehaviour
        selectionPanelObjectGameObject.SetActive(false);
     }
 
-    public void Select(BuildingDescriptor newSelection)
+    public void Select(SelectableEntity newSelection)
     {
-        if (_currentlySelected)
+        if (_currentlySelected != null)
         {
             _currentlySelected.Deselect();
             if (newSelection.GetID() == _currentlySelected.GetID()) 
@@ -43,7 +45,7 @@ public class SelectionManager : MonoBehaviour
         _currentlySelected = newSelection;
         selectionPanelObjectGameObject.SetActive(true);
         RectTransform rect = selectionPanelObjectGameObject.GetComponent<RectTransform>();
-        if (newSelection.isOnLeftHalfOfScreen)
+        if (!newSelection.IsOnLeftHalfOfTheScreen())
         {
             rect.anchorMin = new Vector2(1f, 0.5f);
             rect.anchorMax = new Vector2(1f, 0.5f);
@@ -61,11 +63,39 @@ public class SelectionManager : MonoBehaviour
 
     public void ClearSelection()
     {
-        if (_currentlySelected)
+        if (_currentlySelected != null)
         {
+            // Debug.Log("Deselecting "+_currentlySelected.GetID());
             _currentlySelected.Deselect();
         }
         _currentlySelected = null;
         selectionPanelObjectGameObject.SetActive(false);
     }
+    
+      public void CheckForSelection()
+        {
+            if (InputManager.IsPointOverUI())
+            {
+                return;
+            }
+            RaycastHit hit;
+            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+            if (Input.GetMouseButtonDown(0) && Physics.Raycast(ray, out hit))
+            {
+                // Debug.Log("Found selectable Object");
+                TileData selectedTileData = hit.transform.gameObject.GetComponent<TileDataWrapper>().tileData;
+                SelectableEntity entity = selectedTileData.currentBuilding;
+                // Debug.Log("Clicked on tile: "+selectedTileData.coords);
+                if (entity != null && !entity.IsSelected())
+                {
+                    // Debug.Log("Selected "+entity.GetName() + " on "+selectedTileData.coords);
+                    Select(entity);
+                }
+                else
+                {
+                    // Debug.Log("Cleared Selection");
+                    ClearSelection();
+                }
+            }
+        }
 }

@@ -94,7 +94,7 @@ public class InputManager : MonoBehaviour
 
 
 
-    public bool IsPointOverUI()
+    public static bool IsPointOverUI()
         => EventSystem.current.IsPointerOverGameObject();
 
 
@@ -116,32 +116,4 @@ public class InputManager : MonoBehaviour
         return lastPosition;
     }
     
-
-    public void CheckForSelection()
-    {
-        if (IsPointOverUI())
-        {
-            return;
-        }
-        RaycastHit hit;
-        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-        if (Input.GetMouseButtonDown(0) && Physics.Raycast(ray, out hit))
-        {
-            Debug.Log("Found selectable Object");
-            TileData selectedTileData = hit.transform.gameObject.GetComponent<TileDataWrapper>().tileData;
-            BuildingDescriptor buildingDescriptor = selectedTileData.currentBuilding;
-            Debug.Log("Clicked on tile: "+selectedTileData.coords);
-            Debug.Log("Building exists: : "+buildingDescriptor);
-            if (buildingDescriptor && !buildingDescriptor.IsSelected())
-            {
-                Debug.Log("Selected "+buildingDescriptor.buildingName);
-                SelectionManager.Instance.Select(buildingDescriptor);
-            }
-            else
-            {
-                Debug.Log("Cleared Selection");
-                SelectionManager.Instance.ClearSelection();
-            }
-        }
-    }
 }

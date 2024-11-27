@@ -111,6 +111,7 @@ public class GridDataManager : MonoBehaviour
                     //get each GameObject
                     GameObject instance = Instantiate(prefab, position, Quaternion.identity);
                     instance.transform.parent = tilesCenter;
+                    instance.name = $"{x},{y}";
 
                     if (sunTexture)
                     {
@@ -131,9 +132,9 @@ public class GridDataManager : MonoBehaviour
                     TileData tileData = new TileData(sunlight, windSpeed, waterSpeed, placementType, new Vector2(x, y), null);
 
                     
-                    if (instance.GetComponent<BuildingDescriptor>())
+                    if (instance.GetComponent<ProducerDescriptor>())
                     {
-                        tileData.setCurrentBuilding(instance.GetComponent<BuildingDescriptor>());
+                        tileData.setCurrentBuilding(instance.GetComponent<ProducerDescriptor>());
                     }
                    
                     //assign tileDataInformation to each block
@@ -157,10 +158,10 @@ public class TileData
     public float windSpeed;
     public float waterSpeed;
     public PlacementType placementType;
-    [CanBeNull] public BuildingDescriptor currentBuilding;
+    [CanBeNull] public SelectableEntity currentBuilding;
     public Vector2 coords;
 
-    public TileData(float sunlight, float wind, float water, PlacementType type, Vector2 coords, BuildingDescriptor currentBuilding)
+    public TileData(float sunlight, float wind, float water, PlacementType type, Vector2 coords, ProducerDescriptor currentBuilding)
     {
         sunlightHours = sunlight;
         windSpeed = wind;
@@ -174,7 +175,7 @@ public class TileData
         placementType = type;
     }
 
-    public void setCurrentBuilding(BuildingDescriptor building)
+    public void setCurrentBuilding(SelectableEntity building)
     {
         this.currentBuilding = building;
     }

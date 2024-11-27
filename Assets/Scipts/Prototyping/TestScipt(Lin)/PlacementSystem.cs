@@ -96,14 +96,14 @@ public class PlacementSystem : MonoBehaviour
         //after a building is placed, we want to select a city to connect
         if (currentGameObject && !blocked)
         {
-            BuildingDescriptor buildingDescriptor = currentGameObject.GetComponent<BuildingDescriptor>();
-            buildingDescriptor.Place();
+            ProducerDescriptor producerDescriptor = currentGameObject.GetComponent<ProducerDescriptor>();
+            producerDescriptor.Place();
             
             lastPlacedBuilding = currentGameObject;
             lastHoveredTileData.setPlacementType(PlacementType.Blocked);
             Debug.Log("Tile at "+lastHoveredTileData.coords + " should be blocked");
-            lastHoveredTileData.setCurrentBuilding(buildingDescriptor);
-            Debug.Log("Tile at "+lastHoveredTileData.coords + "should have the building: "+buildingDescriptor.buildingName);
+            lastHoveredTileData.setCurrentBuilding(producerDescriptor);
+            Debug.Log("Tile at "+lastHoveredTileData.coords + "should have the building: "+producerDescriptor.buildingName);
             currentGameObject = null;
 
             //prepare for citySelection
@@ -130,7 +130,7 @@ public class PlacementSystem : MonoBehaviour
         {
             return;
         }
-        BuildingDescriptor buildingDescriptor = lastPlacedBuilding.GetComponent<BuildingDescriptor>();
+        ProducerDescriptor producerDescriptor = lastPlacedBuilding.GetComponent<ProducerDescriptor>();
         RaycastHit hit;
 
         
@@ -147,7 +147,7 @@ public class PlacementSystem : MonoBehaviour
                 float distance = Vector3.Distance(buildingPosition, cityPosition);
 
                 //lastPlacedBuilding is the powerPlant
-                float productionValue = buildingDescriptor.GetProduction();
+                float productionValue = producerDescriptor.GetProduction();
                 productionValue -= distance;
                 LevelController.Instance.AddProduce(productionValue);
 
@@ -190,7 +190,7 @@ public class PlacementSystem : MonoBehaviour
 
         if (currentGameObject)
         {
-            currentGameObject.GetComponent<BuildingDescriptor>().Place();
+            currentGameObject.GetComponent<ProducerDescriptor>().Place();
         }
         placingObjectIndex = -1;
         cellIndicator.SetActive(false);
@@ -217,14 +217,14 @@ public class PlacementSystem : MonoBehaviour
             
             //currentGameObject.transform.position =  Vector3.Lerp(currentGameObject.transform.position, cellIndicator.transform.position, Time.deltaTime * 50f);
             currentGameObject.transform.position = cellIndicator.transform.position - Vector3.up * 0.01f; 
-            BuildingDescriptor buildingDescriptor = currentGameObject.GetComponent<BuildingDescriptor>();
+            ProducerDescriptor ProducerDescriptor = currentGameObject.GetComponent<ProducerDescriptor>();
             //currentBuilding for placing 
-            if (!buildingDescriptor)
+            if (!ProducerDescriptor)
             {
-                throw new MissingComponentException($"{currentGameObject.name} requires BuildingDescriptor!");
+                throw new MissingComponentException($"{currentGameObject.name} requires ProducerDescriptor!");
             }
             
-            PlacementType currentPlacementType = buildingDescriptor.GetPlacementType(); 
+            PlacementType currentPlacementType = ProducerDescriptor.GetPlacementType(); 
             RaycastHit hit;
             if (Physics.Raycast( cellIndicator.transform.position + Vector3.up * 0.2f, Vector3.down, out hit, 10f))
             {
@@ -243,7 +243,7 @@ public class PlacementSystem : MonoBehaviour
         else if (!citySelectionActive) // If we are strolling & selecting
         {
             // TODO
-            InputManager.Instance.CheckForSelection();
+            SelectionManager.Instance.CheckForSelection();
         }
     }
     

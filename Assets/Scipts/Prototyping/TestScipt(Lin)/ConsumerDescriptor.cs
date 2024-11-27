@@ -23,27 +23,29 @@ public class ConsumerDescriptor : MonoBehaviour, SelectableEntity
    
    public void Start()
    {
-        id = LevelController.Instance.nextID;
-        LevelController.Instance.nextID += 1;
-         RaycastHit hit;
-         if (Physics.Raycast(transform.position, Vector3.down, out hit, 3f))
-         {
-            Debug.Log("HIT: "+hit.transform.gameObject.name);
-            TileDataWrapper tileDataWrapper = hit.transform.gameObject.GetComponent<TileDataWrapper>();
-            if (tileDataWrapper)
-            {
-               tileDataWrapper.tileData.setCurrentBuilding(this);
-               coords = tileDataWrapper.tileData.coords;
-            }
-            else
-            {
-               Debug.Log("Hit object isn't a tile!");
-            }
-         }
-         else
-         {
-            Debug.LogError("Consumer Descriptor Initialization Raycast missed!");
-         }
+       id = LevelController.Instance.nextID;
+       LevelController.Instance.nextID += 1;
+       
+       // TODO: Probably not the best way, but suffices for prototyping
+       RaycastHit hit;
+       if (Physics.Raycast(transform.position, Vector3.down, out hit, 3f))
+       {
+          // Debug.Log("HIT: "+hit.transform.gameObject.name);
+          TileDataWrapper tileDataWrapper = hit.transform.gameObject.GetComponent<TileDataWrapper>();
+          if (tileDataWrapper)
+          {
+             tileDataWrapper.tileData.setCurrentBuilding(this);
+             coords = tileDataWrapper.tileData.coords;
+          }
+          else
+          {
+             Debug.Log("Hit object isn't a tile!");
+          }
+       }
+       else
+       {
+          Debug.LogError("Consumer Descriptor Initialization Raycast missed!");
+       }
    }
 
    public void Select()

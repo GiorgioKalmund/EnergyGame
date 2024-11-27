@@ -313,7 +313,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 164406844}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.25909948, y: 0.38383117, z: -0.113133065, w: 0.8790574}
+  m_LocalRotation: {x: 0.25909942, y: 0.38383123, z: -0.11313304, w: 0.8790575}
   m_LocalPosition: {x: -52.1, y: 52.9, z: -47.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1189,6 +1189,8 @@ MonoBehaviour:
   prefab7: {fileID: 2643937061277584625, guid: e09bd616c09a9d64cb01ef22501d402d, type: 3}
   color8: {r: 0, g: 0.7176471, b: 0.9372549, a: 1}
   prefab8: {fileID: 2643937061277584625, guid: cda69bea3fcf6044a8b99a5d663cd259, type: 3}
+  color9: {r: 0.9490196, g: 0, b: 0.827451, a: 1}
+  prefab9: {fileID: 2643937061277584625, guid: 3f037ca6dec2e418b96937e8dc729f8d, type: 3}
   grid: {fileID: 936100650}
   tilesCenter: {fileID: 1879477452}
 --- !u!4 &449172140
@@ -4190,6 +4192,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 164406846}
+  zoomSpeed: 5
+  minZoom: 5
+  maxZoom: 50
   defaultLayer:
     serializedVersion: 2
     m_Bits: 0

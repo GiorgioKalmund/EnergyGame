@@ -35,6 +35,8 @@ public class GridDataManager : MonoBehaviour
     [SerializeField] private GameObject prefab7;
     [SerializeField] private Color color8;
     [SerializeField] private GameObject prefab8;
+    [SerializeField] private Color color9;
+    [SerializeField] private GameObject prefab9;
     
     [Header("Map")]
     private Dictionary<Color, GameObject> ColorToGameObjectMap;
@@ -64,18 +66,20 @@ public class GridDataManager : MonoBehaviour
             { color5, prefab5 },
             { color6, prefab6 },
             { color7, prefab7 },
-            { color8, prefab8 }
+            { color8, prefab8 },
+            { color9, prefab9 }
         };
         placementMappings = new Dictionary<Color, PlacementType>
         {
-            { color1, PlacementType.Endpoint},    // Commercial
+            { color1, PlacementType.Blocked},    // Commercial
             { color2, PlacementType.Default },   // Default
             { color3, PlacementType.Blocked },   // Forest
             { color4, PlacementType.Blocked },   // Railroad
-            { color5, PlacementType.Endpoint },  // Residential
+            { color5, PlacementType.Blocked},  // Residential
             { color6, PlacementType.Shore },     // Shore
             { color7, PlacementType.Blocked },   // Street
-            { color8, PlacementType.Water }      // Water
+            { color8, PlacementType.Water },    // Water
+            { color9, PlacementType.Endpoint}      // Enpoints 
         };
 
         tilesCenter.transform.position = new Vector3((int)textureHeight / 2f, 1f, (int)textureWidth / 2f);
@@ -136,6 +140,10 @@ public class GridDataManager : MonoBehaviour
                     TileDataWrapper wrapper = instance.AddComponent<TileDataWrapper>();
                     wrapper.tileData = tileData;
 
+                }
+                else
+                {
+                    Debug.Log("Could not find appropriate map entry for "+pixelColor);
                 }
             }
         }

@@ -71,15 +71,15 @@ public class GridDataManager : MonoBehaviour
         };
         placementMappings = new Dictionary<Color, PlacementType>
         {
-            { color1, PlacementType.Blocked},    // Commercial
-            { color2, PlacementType.Default },   // Default
-            { color3, PlacementType.Blocked },   // Forest
-            { color4, PlacementType.Blocked },   // Railroad
+            { color1, PlacementType.Blocked},  // Commercial
+            { color2, PlacementType.Default }, // Default
+            { color3, PlacementType.Blocked }, // Forest
+            { color4, PlacementType.Blocked }, // Railroad
             { color5, PlacementType.Blocked},  // Residential
-            { color6, PlacementType.Shore },     // Shore
-            { color7, PlacementType.Blocked },   // Street
-            { color8, PlacementType.Water },    // Water
-            { color9, PlacementType.Endpoint}      // Enpoints 
+            { color6, PlacementType.Shore },   // Shore
+            { color7, PlacementType.Blocked }, // Street
+            { color8, PlacementType.Water },   // Water
+            { color9, PlacementType.Endpoint}  // Enpoints 
         };
 
         tilesCenter.transform.position = new Vector3((int)textureHeight / 2f, 1f, (int)textureWidth / 2f);

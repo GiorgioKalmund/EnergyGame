@@ -441,7 +441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddc24fade6ba06f49b18cb35300f79e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingName: 
+  buildingName: Water Boy
   placement: 1
   cost: 0
   production: 200
@@ -450,6 +450,7 @@ MonoBehaviour:
   id: 0
   selectionIndicator: {fileID: 2377654501280022808}
   imageSprite: {fileID: 21300000, guid: 4d892b81a342b78478d19a12311696a7, type: 3}
+  isOnLeftHalfOfScreen: 0
 --- !u!1 &8465016442759146058
 GameObject:
   m_ObjectHideFlags: 0

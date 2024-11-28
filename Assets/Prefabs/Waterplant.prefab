@@ -443,8 +443,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingName: Water Boy
   placement: 1
-  cost: 0
-  production: 200
+  cost: 135
+  production: 51
   placed: 0
   selected: 0
   id: 0

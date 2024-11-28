@@ -148,7 +148,18 @@ public class PlacementSystem : MonoBehaviour
 
                 //lastPlacedBuilding is the powerPlant
                 float productionValue = producerDescriptor.GetProduction();
+                
+                // TODO: THIS IS NOT THE WAY TO DO IT, maybe an Enum for BuildingType?
+                if (producerDescriptor.buildingName == "Epic Windmill")
+                {
+                    productionValue *= lastHoveredTileData.windSpeed;
+                } else if (producerDescriptor.buildingName == "Water Boy")
+                {
+                    //Debug.Log("Applied a debuff of "+lastHoveredTileData.waterSpeed + " to "+producerDescriptor.buildingName);
+                    productionValue *= lastHoveredTileData.waterSpeed;
+                }
                 productionValue -= distance;
+                producerDescriptor.SetProduction(productionValue);
                 LevelController.Instance.AddProduce(productionValue);
 
                 Debug.Log($"City selected. Distance to building: {distance} units.");

@@ -85,6 +85,11 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
     {
         return this.production;
     }
+
+    public void SetProduction(float newProductionValue)
+    {
+        this.production = newProductionValue;
+    }
     public float GetCost()
     {
         return this.cost;

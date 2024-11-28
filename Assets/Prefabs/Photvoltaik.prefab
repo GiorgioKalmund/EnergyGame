@@ -663,8 +663,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingName: Solar Molar
   placement: 0
-  cost: 0
-  production: 150
+  cost: 99
+  production: 20
   placed: 0
   selected: 0
   id: 0

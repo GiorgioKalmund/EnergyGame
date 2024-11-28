@@ -563,8 +563,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingName: Cole
   placement: 0
-  cost: 0
-  production: 500
+  cost: 105
+  production: 153
   placed: 0
   selected: 0
   id: 0

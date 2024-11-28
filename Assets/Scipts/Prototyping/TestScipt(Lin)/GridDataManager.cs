@@ -131,7 +131,7 @@ public class GridDataManager : MonoBehaviour
                     
                     TileData tileData = new TileData(sunlight, windSpeed, waterSpeed, placementType, new Vector2(x, y), null);
 
-                    
+                    Debug.Log(instance.GetComponent<ProducerDescriptor>());
                     if (instance.GetComponent<ProducerDescriptor>())
                     {
                         tileData.setCurrentBuilding(instance.GetComponent<ProducerDescriptor>());

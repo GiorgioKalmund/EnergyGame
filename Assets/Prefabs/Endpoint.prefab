@@ -95,6 +95,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8097860240469911566}
+  - component: {fileID: 5671107914737528053}
   m_Layer: 0
   m_Name: Endpoint
   m_TagString: Untagged
@@ -119,6 +120,29 @@ Transform:
   - {fileID: 1382847476765318050}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5671107914737528053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3594782725111630582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2b67cda60dca5248b60fbfe44f6d816, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingName: 
+  consumed: 0
+  demand: 0
+  completed: 0
+  selected: 0
+  coords: {x: 0, y: 0}
+  id: 0
+  isOnLeftHalfOfScreen: 0
+  consumer: []
+  selectionIndicator: {fileID: 4698825477065934905, guid: 8a118032b572b46d8b5b9aeab0fb2808, type: 3}
+  imageSprite: {fileID: 21300000, guid: 27e7cb473097f8d4c81b873c3ee54f4c, type: 3}
 --- !u!1 &7869472802071045594
 GameObject:
   m_ObjectHideFlags: 0

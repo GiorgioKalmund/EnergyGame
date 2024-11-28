@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-public interface SelectableEntity
+public interface ISelectableEntity
 {
     public void Select();
     public void Deselect();

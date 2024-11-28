@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 using Scipts.Prototyping.TestScipt_Lin_;
 
-public class ConsumerDescriptor : MonoBehaviour, SelectableEntity
+public class ConsumerDescriptor : MonoBehaviour, ISelectableEntity
 {
    [Header("Info")] 
    public String buildingName;

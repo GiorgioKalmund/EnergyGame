@@ -158,7 +158,7 @@ public class TileData
     public float windSpeed;
     public float waterSpeed;
     public PlacementType placementType;
-    [CanBeNull] public SelectableEntity currentBuilding;
+    [CanBeNull] public ISelectableEntity currentBuilding;
     public Vector2 coords;
 
     public TileData(float sunlight, float wind, float water, PlacementType type, Vector2 coords, ProducerDescriptor currentBuilding)
@@ -175,7 +175,7 @@ public class TileData
         placementType = type;
     }
 
-    public void setCurrentBuilding(SelectableEntity building)
+    public void setCurrentBuilding(ISelectableEntity building)
     {
         this.currentBuilding = building;
     }

@@ -15,9 +15,9 @@ public class SelectionPanel : MonoBehaviour
     [SerializeField] private TMP_Text statTextElement;
     [SerializeField] private TMP_Text costTextElement;
     [Header("Building")] 
-    [SerializeField] private SelectableEntity currentEntity;
+    [SerializeField] private ISelectableEntity currentEntity;
     
-    public void SetPanel(SelectableEntity entity)
+    public void SetPanel(ISelectableEntity entity)
     {
        imageElement.sprite = entity.GetSprite();
        displayNameElement.text = entity.GetName();
@@ -42,7 +42,7 @@ public class SelectionPanel : MonoBehaviour
        SelectionManager.Instance.ClearSelection(); 
     }
 
-    public SelectableEntity GetEntity()
+    public ISelectableEntity GetEntity()
     {
         return currentEntity;
     }

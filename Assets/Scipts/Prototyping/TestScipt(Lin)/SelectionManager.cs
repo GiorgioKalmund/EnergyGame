@@ -7,7 +7,7 @@ using UnityEngine.Serialization;
 public class SelectionManager : MonoBehaviour
 {
     [SerializeField] private GameObject selectionPanelObjectGameObject;
-    private SelectableEntity _currentlySelected = null;
+    private ISelectableEntity _currentlySelected = null;
     private SelectionPanel _selectionPanel;
     [SerializeField]
     private Camera mainCamera;
@@ -29,7 +29,7 @@ public class SelectionManager : MonoBehaviour
        selectionPanelObjectGameObject.SetActive(false);
     }
 
-    public void Select(SelectableEntity newSelection)
+    public void Select(ISelectableEntity newSelection)
     {
         if (_currentlySelected != null)
         {
@@ -84,7 +84,7 @@ public class SelectionManager : MonoBehaviour
             {
                 // Debug.Log("Found selectable Object");
                 TileData selectedTileData = hit.transform.gameObject.GetComponent<TileDataWrapper>().tileData;
-                SelectableEntity entity = selectedTileData.currentBuilding;
+                ISelectableEntity entity = selectedTileData.currentBuilding;
                 // Debug.Log("Clicked on tile: "+selectedTileData.coords);
                 if (entity != null && !entity.IsSelected())
                 {

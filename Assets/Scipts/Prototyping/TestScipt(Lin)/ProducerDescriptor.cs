@@ -6,7 +6,7 @@ using Unity.XR.OpenVR;
 using UnityEditor;
 
 [RequireComponent(typeof(BoxCollider))]
-public class ProducerDescriptor : MonoBehaviour, SelectableEntity
+public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
 {
     [Header("Info")] 
     public String buildingName;

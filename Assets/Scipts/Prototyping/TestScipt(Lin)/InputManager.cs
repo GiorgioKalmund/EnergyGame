@@ -45,7 +45,6 @@ public class InputManager : MonoBehaviour
        {
            Instance = this;
        }
-       Debug.Log("Input Manager Started");
     }
 
     private void Start()

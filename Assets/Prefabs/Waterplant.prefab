@@ -444,7 +444,8 @@ MonoBehaviour:
   buildingName: Water Boy
   placement: 1
   cost: 135
-  production: 51
+  maxProduction: 51
+  currentProduction: 0
   placed: 0
   selected: 0
   id: 0

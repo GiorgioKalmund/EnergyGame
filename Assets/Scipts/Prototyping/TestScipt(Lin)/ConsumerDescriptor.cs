@@ -34,7 +34,7 @@ public class ConsumerDescriptor : MonoBehaviour, ISelectableEntity
           TileDataWrapper tileDataWrapper = hit.transform.gameObject.GetComponent<TileDataWrapper>();
           if (tileDataWrapper)
           {
-             tileDataWrapper.tileData.setCurrentBuilding(this);
+             tileDataWrapper.tileData.SetCurrentBuilding(this);
              coords = tileDataWrapper.tileData.coords;
           }
           else

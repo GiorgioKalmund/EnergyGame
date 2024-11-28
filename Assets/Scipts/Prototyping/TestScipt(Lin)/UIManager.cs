@@ -2,19 +2,26 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
 
-    [Header("Managers")]
-    [SerializeField] private OverlayManager _overlayManager;
-    [SerializeField] private SelectionManager _selectionManager;
+    // [Header("Managers")]
+    // [SerializeField] private OverlayManager _overlayManager;
+    // [SerializeField] private SelectionManager _selectionManager;
     
     [Header("Cursor")]
     [SerializeField] private Texture2D cursorDefaultTexture;
     [SerializeField] private Texture2D cursorDownTexture;
-
+    
+    [Header("Power")]
+    [SerializeField] private TMP_Text demandText;
+    [SerializeField] private TMP_Text currentProductionText;
+    
+    [Header("Budget")]
+    [SerializeField] private TMP_Text budgetText;
     private void Awake()
     {
         if (Instance && Instance != this)
@@ -29,11 +36,21 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         SetCursorTextureDefault();
+        UpdateDemandText();
     }
 
     void Update()
     {
         ChangeCursor();
+        if ((Input.GetKeyDown(KeyCode.Backspace) || Input.GetKeyDown(KeyCode.Backspace)) && SelectionManager.Instance.PanelIsOpen())
+        {
+            SelectionManager.Instance.TriggerSellAction();
+        }
+    }
+
+    public void RenderBudget()
+    {
+        budgetText.text = $"{BudgetManager.Instance.GetBudget()}€";
     }
     private void ChangeCursor()
     {
@@ -55,5 +72,19 @@ public class UIManager : MonoBehaviour
     private void SetCursorTextureDown()
     {
         Cursor.SetCursor(cursorDownTexture, Vector2.zero, CursorMode.Auto);
+    } 
+    public void UpdateDemandText()
+    { 
+        if (demandText) 
+        { 
+            demandText.text = $"Demand: {LevelController.Instance.GetCurrentDemand():F2} MW"; 
+        }
+    }
+    public void UpdateCurrentProductionText()
+    { 
+        if (currentProductionText) 
+        { 
+            currentProductionText.text = $"Current Production: {LevelController.Instance.GetCurrentProduction():F2} MW"; 
+        }
     }
 }

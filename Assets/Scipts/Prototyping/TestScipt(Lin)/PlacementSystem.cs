@@ -55,6 +55,26 @@ public class PlacementSystem : MonoBehaviour
     private bool citySelectionActive;
     private GameObject ground = null;
 
+    private bool validNewPlacement = false;
+    
+    public static PlacementSystem Instance { get; private set; }
+
+    
+
+    private void Awake()
+    {
+        _lineRenderer = GetComponent<LineRenderer>();
+        _lineRenderer.positionCount = lineVertexCount;
+         if (Instance && Instance != this)
+         {
+             Destroy(this);
+         }
+         else
+         {
+             Instance = this;
+         }
+    }
+    
     private void Start()
     {
         StopPlacement();
@@ -64,13 +84,6 @@ public class PlacementSystem : MonoBehaviour
         }
         connectingModeIndicatorImage.SetActive(false);
     }
-    
-
-    private void Awake()
-    {
-        _lineRenderer = GetComponent<LineRenderer>();
-        _lineRenderer.positionCount = lineVertexCount;
-    }
 
     public void StartPlacement(int ID)
     {
@@ -78,14 +91,25 @@ public class PlacementSystem : MonoBehaviour
         //placement which is linked with Inventory
         placingObjectIndex = database.objectsData.FindIndex(data => data.ID == ID);
 
-        cellIndicator.SetActive(true);
-        
         currentGameObject = Instantiate(database.objectsData[placingObjectIndex].Prefab);
-        currentGameObject.layer = 2;
-
-        InputManager.Instance.OnClicked += PlaceStructure;
-        InputManager.Instance.OnExit += ResetCurrentGameObject;
-        InputManager.Instance.OnExit += StopPlacement;
+        SelectionManager.Instance.ClearSelection();
+        if (currentGameObject.GetComponent<ProducerDescriptor>())
+        {
+            validNewPlacement = true;
+            cellIndicator.SetActive(true);
+            currentGameObject.layer = 2;
+            ProducerDescriptor producerDescriptor = currentGameObject.GetComponent<ProducerDescriptor>();
+            BudgetManager.Instance.CanHandleCost(producerDescriptor.GetCost());
+            InputManager.Instance.OnClicked += PlaceStructure;
+            InputManager.Instance.OnExit += ResetCurrentGameObject;
+            InputManager.Instance.OnExit += StopPlacement;
+        } 
+        else
+        {
+            StopPlacement();
+            Debug.LogError("Not enough budget!");
+            Destroy(currentGameObject); 
+        }
     }
 
 
@@ -93,25 +117,32 @@ public class PlacementSystem : MonoBehaviour
     private void PlaceStructure()
     {
 
-        //after a building is placed, we want to select a city to connect
+        // After a building is placed, we want to select a city to connect
         if (currentGameObject && !blocked)
         {
             ProducerDescriptor producerDescriptor = currentGameObject.GetComponent<ProducerDescriptor>();
-            producerDescriptor.Place();
-            
-            lastPlacedBuilding = currentGameObject;
-            lastHoveredTileData.setPlacementType(PlacementType.Blocked);
-            Debug.Log("Tile at "+lastHoveredTileData.coords + " should be blocked");
-            lastHoveredTileData.setCurrentBuilding(producerDescriptor);
-            Debug.Log("Tile at "+lastHoveredTileData.coords + "should have the building: "+producerDescriptor.buildingName);
-            currentGameObject = null;
+            if (producerDescriptor.Place(lastHoveredTileData)) // second check, however, might not be needed as this is check in StartPlacmement
+            {
+                /* Handle Building */
+                lastPlacedBuilding = currentGameObject;
+                
+                /* Handle Tile */
+                lastHoveredTileData.setPlacementType(PlacementType.Blocked);
+                lastHoveredTileData.SetCurrentBuilding(producerDescriptor);
+                currentGameObject = null;
 
-            //prepare for citySelection
-            citySelectionActive = true;
-            Debug.Log("Building placed. Please select a city.");
-            cellSprite.color = spriteColorConnecting;
-            connectingModeIndicatorImage.SetActive(true);
-            InputManager.Instance.OnClicked += SelectCity;
+                // Prepare for citySelection
+                citySelectionActive = true;
+                Debug.Log("Building placed. Please select a city.");
+                cellSprite.color = spriteColorConnecting;
+                connectingModeIndicatorImage.SetActive(true);
+                ShowCable();
+                InputManager.Instance.OnClicked += SelectCity;
+            }
+            else
+            {
+                Debug.LogError("Object somehow managed to pass invalid money check!");
+            }
         }
 
     }
@@ -137,7 +168,7 @@ public class PlacementSystem : MonoBehaviour
         if (Physics.Raycast(cellIndicator.transform.position + Vector3.up * 0.2f, Vector3.down, out hit, 10f))
         {
             Transform hitTransform = hit.transform;
-            if (hitTransform.GetComponent<TileDataWrapper>().tileData.placementType == PlacementType.Endpoint) // City layer
+            if (hitTransform.GetComponent<TileDataWrapper>().tileData.GetCurrentPlacementType()== PlacementType.Endpoint) // City layer
             {
                 citySelectionActive = false;
                 Vector3 cityPosition = cellIndicator.transform.position;
@@ -147,7 +178,7 @@ public class PlacementSystem : MonoBehaviour
                 float distance = Vector3.Distance(buildingPosition, cityPosition);
 
                 //lastPlacedBuilding is the powerPlant
-                float productionValue = producerDescriptor.GetProduction();
+                float productionValue = producerDescriptor.GetMaxProduction();
                 
                 // TODO: THIS IS NOT THE WAY TO DO IT, maybe an Enum for BuildingType?
                 if (producerDescriptor.buildingName == "Epic Windmill")
@@ -159,6 +190,7 @@ public class PlacementSystem : MonoBehaviour
                     productionValue *= lastHoveredTileData.waterSpeed;
                 }
                 productionValue -= distance;
+                productionValue = Mathf.Max(0, productionValue);
                 producerDescriptor.SetProduction(productionValue);
                 LevelController.Instance.AddProduce(productionValue);
 
@@ -199,17 +231,14 @@ public class PlacementSystem : MonoBehaviour
             return;
         }
 
-        if (currentGameObject)
-        {
-            currentGameObject.GetComponent<ProducerDescriptor>().Place();
-        }
+        
         placingObjectIndex = -1;
         cellIndicator.SetActive(false);
-        
         InputManager.Instance.OnClicked -= PlaceStructure;
         InputManager.Instance.OnExit -= ResetCurrentGameObject;
         InputManager.Instance.OnExit -= StopPlacement;
         currentGameObject = null;
+        validNewPlacement = false; 
     }
 
 
@@ -223,7 +252,7 @@ public class PlacementSystem : MonoBehaviour
         cellIndicator.transform.position = new Vector3(targetPostion.x + gridOffset, cellIndicatorPlacementY, targetPostion.z + gridOffset);
         
         // If we are placing 
-        if (currentGameObject)
+        if (currentGameObject && validNewPlacement)
         {
             
             //currentGameObject.transform.position =  Vector3.Lerp(currentGameObject.transform.position, cellIndicator.transform.position, Time.deltaTime * 50f);
@@ -244,7 +273,7 @@ public class PlacementSystem : MonoBehaviour
                 {
                     TileData tileData = ground.GetComponent<TileDataWrapper>().tileData;
                     lastHoveredTileData = tileData; 
-                    PlacementType groundType = tileData.placementType;
+                    PlacementType groundType = tileData.GetCurrentPlacementType();
                     blocked = !currentPlacementType.Equals(groundType);
                     cellSprite.color = blocked ? spriteColorWarning : spriteColorRegular;
                 }
@@ -281,6 +310,16 @@ public class PlacementSystem : MonoBehaviour
             pointToDraw.y += MathIsMathin((index - half) / lineFunctionDivisor) - MathIsMathin((half) / lineFunctionDivisor);
             _lineRenderer.SetPosition(index, pointToDraw);
         }
+    }
+
+    public void HideCable()
+    {
+        _lineRenderer.enabled = false;
+    }
+
+    void ShowCable()
+    {
+        _lineRenderer.enabled = true;
     }
 
 

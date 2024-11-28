@@ -564,7 +564,8 @@ MonoBehaviour:
   buildingName: Cole
   placement: 0
   cost: 105
-  production: 153
+  maxProduction: 153
+  currentProduction: 0
   placed: 0
   selected: 0
   id: 0

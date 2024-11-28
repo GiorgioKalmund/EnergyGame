@@ -350,8 +350,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingName: Epic Windmill
   placement: 0
-  cost: 0
-  production: 300
+  cost: 20
+  maxProduction: 25
+  currentProduction: 0
   placed: 0
   selected: 0
   id: 0

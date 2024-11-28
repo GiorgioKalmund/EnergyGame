@@ -91,8 +91,6 @@ public class GridDataManager : MonoBehaviour
         grid.transform.position = new Vector3((int)textureHeight , 1f, (int)textureWidth );
 
         Debug.Log($"Grid setup complete. Center position : {tilesCenter.position}, Grid position: {grid.transform.position}");
-
-
     }
     private void GenerateMap()
     {
@@ -140,7 +138,7 @@ public class GridDataManager : MonoBehaviour
                     
                     if (instance.GetComponent<ProducerDescriptor>())
                     {
-                        tileData.setCurrentBuilding(instance.GetComponent<ProducerDescriptor>());
+                        tileData.SetCurrentBuilding(instance.GetComponent<ProducerDescriptor>());
                     }
                    
                     //assign tileDataInformation to each block
@@ -164,7 +162,8 @@ public class TileData
     public float windSpeed;
     public float waterSpeed;
     public float coalAmount;
-    public PlacementType placementType;
+    private PlacementType placementType;
+    public PlacementType currentPlacementType;
     [CanBeNull] public ISelectableEntity currentBuilding;
     public Vector2 coords;
 
@@ -175,16 +174,28 @@ public class TileData
         waterSpeed = water;
         coalAmount = coal;
         placementType = type;
+        currentPlacementType = type;
         this.coords = coords;
         this.currentBuilding = currentBuilding;
     }
     public void setPlacementType(PlacementType type)
     {
-        placementType = type;
+        currentPlacementType = type;
     }
 
-    public void setCurrentBuilding(ISelectableEntity building)
+    public PlacementType GetCurrentPlacementType()
+    {
+        return currentPlacementType;
+    }
+
+    public void SetCurrentBuilding(ISelectableEntity building)
     {
         this.currentBuilding = building;
+    }
+
+    public void Reset()
+    {
+        currentBuilding = null;
+        currentPlacementType = placementType;
     }
 }

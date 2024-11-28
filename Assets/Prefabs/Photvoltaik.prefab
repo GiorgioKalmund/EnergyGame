@@ -663,14 +663,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingName: Solar Molar
   placement: 0
-  cost: 99
-  production: 20
+  cost: 90
+  maxProduction: 20
+  currentProduction: 0
+  environmentalImpact: 0
   placed: 0
   selected: 0
   id: 0
   selectionIndicator: {fileID: 9031495792865948788}
   imageSprite: {fileID: 21300000, guid: 6307e2340f02cf246a2e20cec5902a8e, type: 3}
   isOnLeftHalfOfScreen: 0
+  tileOn:
+    windSpeed: 0
+    waterSpeed: 0
+    coalAmount: 0
+    placementType: 0
+    coords: {x: 0, y: 0}
 --- !u!1001 &2240669983801082977
 PrefabInstance:
   m_ObjectHideFlags: 0

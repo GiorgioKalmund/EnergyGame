@@ -10,70 +10,86 @@ using Debug = UnityEngine.Debug;
 
 public class LevelController : MonoBehaviour
 {
-   [SerializeField] private float currentDemand;
-   [SerializeField] private float currentProduction;
-   [SerializeField] private bool demandMet = false;
-   [SerializeField] 
-   private TMP_Text demandText, budgetText;
-   public Dictionary<float, float> SubGoals;
-   public static LevelController Instance { get; private set; }
+    [Header("Stats")] 
+    [SerializeField] private float currentDemand;
+    public float currentProduction;
+    public float currentEnvironmentalImpact;
+    [SerializeField] private bool demandMet = false;
+    public static LevelController Instance { get; private set; }
 
-   public int nextID = 0;
-   
-   private void Awake()
-   {
+    public int nextID = 0;
+
+    private void Awake()
+    {
         // Singleton
-       if (Instance && Instance != this)
-       {
-           Destroy(this);
-       }
-       else
-       {
-           Instance = this;
-       }
-       UpdateDemandText();
-   }
+        if (Instance && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
 
-   public void AddProduce(float value)
-   {
-       Debug.Log("Added produce of "+ value);
-       currentProduction += value;
-       CheckIfDemandIsMet();
-       UpdateDemandText();
-   }
-   
-   public void ReduceProduce(float value)
-   {
-       currentProduction = Mathf.Max(0, currentProduction - value);
-       CheckIfDemandIsMet();
-       UpdateDemandText();
-   }
-   
-   public void IncreaseDemand(float value)
-   {
-       currentDemand += value;
-       UpdateDemandText();
-   }
-   
-   public void DecreaseDemand(float value)
-   {
-       currentDemand = Mathf.Max(0f, currentDemand - value);
-       CheckIfDemandIsMet();
-       UpdateDemandText();
-   }
+        UIManager.Instance.UpdateCurrentProductionText();
+    }
 
-   public bool GetDemandMet()
-   {
-       return demandMet;
-   }
+    public void AddProduce(float value)
+    {
+        Debug.Log("Added produce of " + value);
+        currentProduction += value;
+        CheckIfDemandIsMet();
+        UIManager.Instance.UpdateCurrentProductionText();
+    }
 
-   private void CheckIfDemandIsMet()
-   {
-       demandMet = currentProduction >= currentDemand;
-   }
+    public void ReduceProduce(float value)
+    {
+        currentProduction = Mathf.Max(0, currentProduction - value);
+        CheckIfDemandIsMet();
+        UIManager.Instance.UpdateCurrentProductionText();
+    }
 
-   private void UpdateDemandText()
-   {
-       //demandText.text = $"{currentProduction}/{currentDemand} MW";
-   }
+    public void AddDemand(float value)
+    {
+        currentDemand += value;
+        UIManager.Instance.UpdateCurrentProductionText();
+    }
+
+    public void DecreaseDemand(float value)
+    {
+        currentDemand = Mathf.Max(0f, currentDemand - value);
+        CheckIfDemandIsMet();
+        UIManager.Instance.UpdateCurrentProductionText();
+    }
+
+    public void AddEnvironmentalImpact(float impact)
+    {
+        currentEnvironmentalImpact += impact;
+    }
+
+    public void ReduceEnvironmentalImpact(float impact)
+    {
+        currentEnvironmentalImpact += impact;
+    }
+
+    public float GetCurrentDemand()
+    {
+        return currentDemand;
+    }
+
+    public float GetCurrentProduction()
+    {
+        return currentProduction;
+    }
+    public bool GetDemandMet()
+    {
+        return demandMet;
+    }
+
+    private void CheckIfDemandIsMet()
+    {
+        demandMet = currentProduction >= currentDemand;
+    }
 }
+
+  

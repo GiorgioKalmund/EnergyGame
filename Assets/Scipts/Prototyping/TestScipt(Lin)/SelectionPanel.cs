@@ -14,32 +14,62 @@ public class SelectionPanel : MonoBehaviour
     [SerializeField] private TMP_Text infoTextElement;
     [SerializeField] private TMP_Text statTextElement;
     [SerializeField] private TMP_Text costTextElement;
+    [SerializeField] private GameObject sellButton;
     [Header("Building")] 
-    [SerializeField] private ISelectableEntity currentEntity;
+    public ISelectableEntity currentEntity;
     
     public void SetPanel(ISelectableEntity entity)
     {
+        ShowSellButton(false);
        imageElement.sprite = entity.GetSprite();
        displayNameElement.text = entity.GetName();
        infoTextElement.text = "Some random info text might appear here.";
-       if (entity as ProducerDescriptor)
+       currentEntity = entity;
+       if (currentEntity as ProducerDescriptor)
        {
-           ProducerDescriptor producer = (ProducerDescriptor) entity;
-           statTextElement.text = $"Production {producer.GetProduction()} MW";
-           costTextElement.text = $"ID: {producer.GetID()}";
-       } else if (entity as ConsumerDescriptor)
+           ProducerDescriptor currentProducer = (ProducerDescriptor) entity;
+           statTextElement.text = $"Max: {currentProducer.GetMaxProduction()} MW\n" +
+                                  $"Current: {currentProducer.GetCurrentProduction()} MW";
+           costTextElement.text = $"ID: {currentProducer.GetID()}";
+           ShowSellButton(true);
+       } else if (currentEntity as ConsumerDescriptor)
        {
            ConsumerDescriptor consumer = (ConsumerDescriptor) entity;
            statTextElement.text = $"{consumer.GetConsumed()} / {consumer.GetDemand()} MW";
            costTextElement.text = $"ID: {consumer.GetID()}";
-           
        }
-       currentEntity = entity;
     }
 
     public void Close()
     {
        SelectionManager.Instance.ClearSelection(); 
+       currentEntity = null;
+    }
+
+    public bool IsOpen()
+    {
+        return currentEntity != null;
+    }
+
+    public void ShowSellButton(bool boolean)
+    {
+        sellButton.SetActive(boolean);
+        if (currentEntity as ProducerDescriptor)
+        {
+            ProducerDescriptor currentProducer = (ProducerDescriptor) currentEntity;
+            TMP_Text text = sellButton.GetComponentInChildren<TMP_Text>();
+            text.text = $"Sell {BudgetManager.Instance.GetSellingValueOf(currentProducer.GetCost())}";
+        }
+    }
+
+    public void Sell()
+    {
+        if (currentEntity as ProducerDescriptor)
+        {
+            ProducerDescriptor currentProducer = (ProducerDescriptor)currentEntity;
+            currentProducer.Sell();
+        }
+        Close();
     }
 
     public ISelectableEntity GetEntity()

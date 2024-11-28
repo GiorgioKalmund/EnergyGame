@@ -4,6 +4,7 @@ using UnityEngine.Serialization;
 using Scipts.Prototyping.TestScipt_Lin_;
 using Unity.XR.OpenVR;
 using UnityEditor;
+using UnityEngine.WSA;
 
 [RequireComponent(typeof(BoxCollider))]
 public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
@@ -12,15 +13,17 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
     public String buildingName;
     [SerializeField] private PlacementType placement;
     [SerializeField] private float cost;
-    [SerializeField] private float production; 
-    [SerializeField] private bool placed = false;
-    [SerializeField] private bool selected = false;
+    public float maxProduction;
+    [SerializeField] private float currentProduction;
+    public float environmentalImpact;
+    public bool placed = false;
+    public bool selected = false;
     public int id;
     
-    private BoxCollider _collider;
     [SerializeField] private GameObject selectionIndicator = null;
     [SerializeField] private Sprite imageSprite;
     public bool isOnLeftHalfOfScreen;
+    public TileData tileOn;
     
     public void Start()
     {
@@ -35,14 +38,6 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
             buildingName = gameObject.name;
         }
 
-        _collider = GetComponent<BoxCollider>();
-        //why false?
-        _collider.enabled = false;
-        
-        if(buildingName == "Commercial"||buildingName == "Residential")
-        {
-            _collider.enabled = true;
-        }
         isOnLeftHalfOfScreen = IsOnLeftHalfOfTheScreen();
     }
 
@@ -51,27 +46,43 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
         return placed == true;
     }
 
-    public void Place()
+    public bool Place(TileData tile)
     {
+        // if we do not have enough budget, cancel placement
+        if (!BudgetManager.Instance.UseBudget(cost))
+        {
+            return false;
+        }
         placed = true;
-        _collider.enabled = true;
+        SetTile(tile);
+        LevelController.Instance.AddEnvironmentalImpact(environmentalImpact);
         isOnLeftHalfOfScreen = IsOnLeftHalfOfTheScreen();
+        return true;
     }
     public void Sell()
     {
-        
+       BudgetManager.Instance.Sell(cost);
+       tileOn.Reset();
+       LevelController.Instance.ReduceProduce(currentProduction);
+       Destroy(this.gameObject);
+       PlacementSystem.Instance.HideCable();
+    }
+
+    public void SetTile(TileData tile)
+    {
+        this.tileOn = tile;
     }
 
     public void Select()
     {
-            Debug.Log("Selected "+ this.buildingName);
-            selectionIndicator.SetActive(true);
-            selected = true;
+        //Debug.Log("Selected "+ this.buildingName);
+        selectionIndicator.SetActive(true);
+        selected = true;
     }
 
     public void Deselect()
     {
-        Debug.Log("Deselected "+ this.buildingName);
+        //Debug.Log("Deselected "+ this.buildingName);
         selectionIndicator.SetActive(false);
         selected = false;
     }
@@ -81,14 +92,19 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
         return selected;
     }
 
-    public float GetProduction()
+    public float GetMaxProduction()
     {
-        return this.production;
+        return this.maxProduction;
+    }
+    
+    public float GetCurrentProduction()
+    {
+        return this.currentProduction;
     }
 
     public void SetProduction(float newProductionValue)
     {
-        this.production = newProductionValue;
+        this.currentProduction = newProductionValue;
     }
     public float GetCost()
     {

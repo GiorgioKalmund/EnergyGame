@@ -29,6 +29,16 @@ public class SelectionManager : MonoBehaviour
        selectionPanelObjectGameObject.SetActive(false);
     }
 
+    public void TriggerSellAction()
+    {
+        _selectionPanel.Sell();
+    }
+
+    public bool PanelIsOpen()
+    {
+        return _selectionPanel.IsOpen();
+    }
+
     public void Select(ISelectableEntity newSelection)
     {
         if (_currentlySelected != null)

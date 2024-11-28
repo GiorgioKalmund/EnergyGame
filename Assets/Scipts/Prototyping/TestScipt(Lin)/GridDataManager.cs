@@ -15,6 +15,7 @@ public class GridDataManager : MonoBehaviour
     [SerializeField] [CanBeNull] private Texture2D sunTexture;
     [SerializeField] [CanBeNull] private Texture2D windTexture;
     [SerializeField] [CanBeNull] private Texture2D waterTexture;
+    [SerializeField] [CanBeNull] private Texture2D coalTexture;
     [SerializeField] [CanBeNull] private Texture2D displayTexture;
     [SerializeField] private GameObject mapOverlay;
 
@@ -98,6 +99,7 @@ public class GridDataManager : MonoBehaviour
         float sunlight = 0;
         float waterSpeed = 0; 
         float windSpeed = 0;
+        float coalAmount= 0;
         for (int x = 0; x < textureWidth; x++)
         {
             for (int y = 0; y < textureHeight; y++)
@@ -125,11 +127,15 @@ public class GridDataManager : MonoBehaviour
                     {
                         waterSpeed = waterTexture.GetPixel(x, y).a;
                     }
+                    if (coalTexture)
+                    {
+                        coalAmount = coalTexture.GetPixel(x, y).a;
+                    }
 
                     //map each block with placementType
                     placementMappings.TryGetValue(pixelColor, out PlacementType placementType);
                     
-                    TileData tileData = new TileData(sunlight, windSpeed, waterSpeed, placementType, new Vector2(x, y), null);
+                    TileData tileData = new TileData(sunlight, windSpeed, waterSpeed, coalAmount, placementType, new Vector2(x, y), null);
 
                     
                     if (instance.GetComponent<ProducerDescriptor>())
@@ -157,15 +163,17 @@ public class TileData
     float sunlightHours;
     public float windSpeed;
     public float waterSpeed;
+    public float coalAmount;
     public PlacementType placementType;
     [CanBeNull] public ISelectableEntity currentBuilding;
     public Vector2 coords;
 
-    public TileData(float sunlight, float wind, float water, PlacementType type, Vector2 coords, ProducerDescriptor currentBuilding)
+    public TileData(float sunlight, float wind, float water,float coal, PlacementType type, Vector2 coords, ProducerDescriptor currentBuilding)
     {
         sunlightHours = sunlight;
         windSpeed = wind;
         waterSpeed = water;
+        coalAmount = coal;
         placementType = type;
         this.coords = coords;
         this.currentBuilding = currentBuilding;

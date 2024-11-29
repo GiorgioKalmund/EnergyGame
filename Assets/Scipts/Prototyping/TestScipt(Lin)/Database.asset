@@ -12,20 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4a9d340c7666ec46848b68f9f8f9bd3, type: 3}
   m_Name: Database
   m_EditorClassIdentifier: 
-  objectsData:
-  - <Name>k__BackingField: Coal Factory
-    <ID>k__BackingField: 0
-    <Size>k__BackingField: {x: 0, y: 0}
-    <Prefab>k__BackingField: {fileID: 4698825477065934905, guid: 15aef9d353e622d478b27af6c1254224, type: 3}
-  - <Name>k__BackingField: Windmill
-    <ID>k__BackingField: 1
-    <Size>k__BackingField: {x: 0, y: 0}
-    <Prefab>k__BackingField: {fileID: 2698100121599932702, guid: d0972884f8d7cd042b8a8a14b8d24443, type: 3}
-  - <Name>k__BackingField: Waterplant
-    <ID>k__BackingField: 2
-    <Size>k__BackingField: {x: 0, y: 0}
-    <Prefab>k__BackingField: {fileID: 7185595045433911012, guid: 0b3f9324124ed1043a510b343067be47, type: 3}
-  - <Name>k__BackingField: Photvoltaik
-    <ID>k__BackingField: 3
-    <Size>k__BackingField: {x: 0, y: 0}
-    <Prefab>k__BackingField: {fileID: 7083639843144445973, guid: 889c23d73df3d5d4fa7de407382e3e23, type: 3}
+  objectsData: []

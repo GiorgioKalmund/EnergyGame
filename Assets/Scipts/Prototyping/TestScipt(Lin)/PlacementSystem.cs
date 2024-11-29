@@ -1,3 +1,4 @@
+using System;
 using JetBrains.Annotations;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
@@ -87,11 +88,20 @@ public class PlacementSystem : MonoBehaviour
 
     public void StartPlacement(int ID)
     {
+        if (currentGameObject)
+        {
+            StopPlacement();
+            return;
+        }
         StopPlacement();
         //placement which is linked with Inventory
         placingObjectIndex = database.objectsData.FindIndex(data => data.ID == ID);
 
         currentGameObject = Instantiate(database.objectsData[placingObjectIndex].Prefab);
+        if (!currentGameObject)
+        {
+            throw new Exception("GameObject could not be instantiated!");
+        }
         SelectionManager.Instance.ClearSelection();
         if (currentGameObject.GetComponent<ProducerDescriptor>())
         {
@@ -99,17 +109,17 @@ public class PlacementSystem : MonoBehaviour
             cellIndicator.SetActive(true);
             currentGameObject.layer = 2;
             ProducerDescriptor producerDescriptor = currentGameObject.GetComponent<ProducerDescriptor>();
-            BudgetManager.Instance.CanHandleCost(producerDescriptor.GetCost());
+            if (!BudgetManager.Instance.CanHandleCost(producerDescriptor.GetCost()))
+            {
+                StopPlacement();
+                Debug.LogError("Insufficient budget!");
+                producerDescriptor.Destroy();
+                return;
+            }
             InputManager.Instance.OnClicked += PlaceStructure;
             InputManager.Instance.OnExit += ResetCurrentGameObject;
             InputManager.Instance.OnExit += StopPlacement;
         } 
-        else
-        {
-            StopPlacement();
-            Debug.LogError("Not enough budget!");
-            Destroy(currentGameObject); 
-        }
     }
 
 

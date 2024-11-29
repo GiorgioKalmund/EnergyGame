@@ -64,8 +64,13 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
        BudgetManager.Instance.Sell(cost);
        tileOn.Reset();
        LevelController.Instance.ReduceProduce(currentProduction);
-       Destroy(this.gameObject);
+       Destroy();
        PlacementSystem.Instance.HideCable();
+    }
+
+    public void Destroy()
+    {
+        Destroy(this.gameObject);
     }
 
     public void SetTile(TileData tile)

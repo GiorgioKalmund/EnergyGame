@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class StarSystem : MonoBehaviour
@@ -46,6 +47,16 @@ public class StarSystem : MonoBehaviour
         if (score >= 50) return 2;
         if (score > 0) return 1;
         return 0;
+    }
+
+
+    public void RestartGame()
+    {
+        // Get the active scene's name
+        string currentSceneName = SceneManager.GetActiveScene().name;
+
+        // Reload the current scene
+        SceneManager.LoadScene(currentSceneName);
     }
 
 }

@@ -2207,6 +2207,8 @@ MonoBehaviour:
   cellIndicator: {fileID: 306706746}
   grid: {fileID: 2124310285}
   database: {fileID: 11400000, guid: 0c6f349871d57a840890f745515a7c91, type: 2}
+  lineVertexCount: 10
+  lineFunctionDivisor: 64
   mainCamera: {fileID: 963194227}
   gridOffset: 0.5
   defaultLayer:
@@ -2222,6 +2224,8 @@ MonoBehaviour:
   spriteColorWarning: {r: 1, g: 0.06132078, b: 0.06132078, a: 1}
   spriteColorConnecting: {r: 0, g: 1, b: 0.7803633, a: 1}
   blocked: 0
+  connectingModeIndicatorImage: {fileID: 0}
+  cellIndicatorPlacementY: 1.51
 --- !u!120 &449543569
 LineRenderer:
   serializedVersion: 2
@@ -5261,7 +5265,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.14199083, y: -0.85796756, z: 0.34450474, w: 0.35361952}
+  m_LocalRotation: {x: 0.14199078, y: -0.8579677, z: 0.34450468, w: 0.35361946}
   m_LocalPosition: {x: 28.4, y: 20.3, z: 28.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6527,6 +6531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectionPanelObjectGameObject: {fileID: 1814493835}
+  mainCamera: {fileID: 0}
 --- !u!4 &1303788665
 Transform:
   m_ObjectHideFlags: 0
@@ -7967,9 +7972,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentDemand: 5000
   currentProduction: 0
+  currentEnvironmentalImpact: 0
   demandMet: 0
-  demandText: {fileID: 1682791168}
-  budgetText: {fileID: 0}
   nextID: 0
 --- !u!4 &1589694868 stripped
 Transform:
@@ -9623,9 +9627,9 @@ MonoBehaviour:
   imageElement: {fileID: 232028087}
   displayNameElement: {fileID: 1050788359}
   infoTextElement: {fileID: 2038642509}
-  productionTextElement: {fileID: 1434375728}
+  statTextElement: {fileID: 0}
   costTextElement: {fileID: 267193396}
-  currentBuilding: {fileID: 0}
+  sellButton: {fileID: 0}
 --- !u!1001 &1815454488
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10569,6 +10573,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 963194227}
+  zoomSpeed: 5
+  minZoom: 5
+  maxZoom: 50
   defaultLayer:
     serializedVersion: 2
     m_Bits: 1

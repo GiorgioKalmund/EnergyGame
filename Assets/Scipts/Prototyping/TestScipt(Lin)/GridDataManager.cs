@@ -116,6 +116,7 @@ public class GridDataManager : MonoBehaviour
                     if (sunTexture)
                     {
                         sunlight = sunTexture.GetPixel(x, y).a;
+                        
                     }
                     if (windTexture)
                     {
@@ -128,6 +129,7 @@ public class GridDataManager : MonoBehaviour
                     if (coalTexture)
                     {
                         coalAmount = coalTexture.GetPixel(x, y).a;
+                        
                     }
 
                     //map each block with placementType
@@ -198,4 +200,5 @@ public class TileData
         currentBuilding = null;
         currentPlacementType = placementType;
     }
+
 }

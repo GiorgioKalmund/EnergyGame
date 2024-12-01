@@ -199,7 +199,11 @@ public class PlacementSystem : MonoBehaviour
                     //Debug.Log("Applied a debuff of "+lastHoveredTileData.waterSpeed + " to "+producerDescriptor.buildingName);
                     productionValue *= lastHoveredTileData.waterSpeed;
                 }
-                productionValue -= distance;
+                else if (producerDescriptor.buildingName == "Cole")
+                {
+                    productionValue *= lastHoveredTileData.coalAmount;
+                }
+                    productionValue -= distance;
                 productionValue = Mathf.Max(0, productionValue);
                 producerDescriptor.SetProduction(productionValue);
                 LevelController.Instance.AddProduce(productionValue);

@@ -12,6 +12,7 @@ public class StarSystem : MonoBehaviour
     public Button startGameButton; // Reference to the Start Game Button
     public Image[] stars; // Array of star images
     private int score = 50; // Temporary fixed score for testing
+    
 
 
 

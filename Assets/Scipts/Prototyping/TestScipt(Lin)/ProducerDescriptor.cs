@@ -64,6 +64,7 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
        BudgetManager.Instance.Sell(cost);
        tileOn.Reset();
        LevelController.Instance.ReduceProduce(currentProduction);
+       LevelController.Instance.ReduceEnvironmentalImpact(environmentalImpact);
        Destroy();
        PlacementSystem.Instance.HideCable();
     }

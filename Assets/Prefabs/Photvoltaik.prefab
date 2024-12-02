@@ -663,10 +663,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingName: Solar Molar
   placement: 0
-  cost: 90
+  cost: 100
   maxProduction: 20
   currentProduction: 0
-  environmentalImpact: 0
+  environmentalImpact: 1
   placed: 0
   selected: 0
   id: 0
@@ -677,7 +677,7 @@ MonoBehaviour:
     windSpeed: 0
     waterSpeed: 0
     coalAmount: 0
-    placementType: 0
+    currentPlacementType: 0
     coords: {x: 0, y: 0}
 --- !u!1001 &2240669983801082977
 PrefabInstance:

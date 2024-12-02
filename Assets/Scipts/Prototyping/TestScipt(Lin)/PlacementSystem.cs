@@ -193,9 +193,14 @@ public class PlacementSystem : MonoBehaviour
                 // TODO: THIS IS NOT THE WAY TO DO IT, maybe an Enum for BuildingType?
                 if (producerDescriptor.buildingName == "Epic Windmill")
                 {
+                    //TODO kommt später weg
+                    //lastHoveredTileData.windSpeed += 0.1f;
                     productionValue *= lastHoveredTileData.windSpeed;
-                } else if (producerDescriptor.buildingName == "Water Boy")
+
+                } 
+                else if (producerDescriptor.buildingName == "Water Boy")
                 {
+                    //lastHoveredTileData.waterSpeed += 0.1f;
                     //Debug.Log("Applied a debuff of "+lastHoveredTileData.waterSpeed + " to "+producerDescriptor.buildingName);
                     productionValue *= lastHoveredTileData.waterSpeed;
                 }
@@ -203,7 +208,10 @@ public class PlacementSystem : MonoBehaviour
                 {
                     productionValue *= lastHoveredTileData.coalAmount;
                 }
-                    productionValue -= distance;
+                
+                //Debug.Log($"alpha = {lastHoveredTileData.waterSpeed}");
+                distance *= 0.01f; 
+                productionValue -= distance;
                 productionValue = Mathf.Max(0, productionValue);
                 producerDescriptor.SetProduction(productionValue);
                 LevelController.Instance.AddProduce(productionValue);

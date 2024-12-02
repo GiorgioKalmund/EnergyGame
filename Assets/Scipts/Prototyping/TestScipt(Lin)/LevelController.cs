@@ -14,6 +14,7 @@ public class LevelController : MonoBehaviour
     [SerializeField] private float currentDemand;
     public float currentProduction;
     public float currentEnvironmentalImpact;
+    [SerializeField] private float maxEnvironmentalImpact;
     [SerializeField] private bool demandMet = false;
     public static LevelController Instance { get; private set; }
 
@@ -32,6 +33,7 @@ public class LevelController : MonoBehaviour
         }
 
         UIManager.Instance.UpdateCurrentProductionText();
+        UIManager.Instance.UpdateCurrentEnvironmentalImpact();
     }
 
     public void AddProduce(float value)
@@ -65,11 +67,13 @@ public class LevelController : MonoBehaviour
     public void AddEnvironmentalImpact(float impact)
     {
         currentEnvironmentalImpact += impact;
+        UIManager.Instance.UpdateCurrentEnvironmentalImpact();
     }
 
     public void ReduceEnvironmentalImpact(float impact)
     {
-        currentEnvironmentalImpact += impact;
+        currentEnvironmentalImpact -= impact;
+        UIManager.Instance.UpdateCurrentEnvironmentalImpact();
     }
 
     public float GetCurrentDemand()
@@ -86,10 +90,21 @@ public class LevelController : MonoBehaviour
         return demandMet;
     }
 
+    public float GetMaxEnvironmentalImpact()
+    {
+        return maxEnvironmentalImpact;
+    }
+
+    public float GetCurrentEnvironmentalImpact()
+    {
+        return currentEnvironmentalImpact;
+    }
+
     private void CheckIfDemandIsMet()
     {
         demandMet = currentProduction >= currentDemand;
     }
+    
 }
 
   

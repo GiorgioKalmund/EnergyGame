@@ -22,6 +22,10 @@ public class UIManager : MonoBehaviour
     
     [Header("Budget")]
     [SerializeField] private TMP_Text budgetText;
+
+    [Header("Enviroment")]
+    [SerializeField] private TMP_Text Max_Enviroment;
+    [SerializeField] private TMP_Text Current_Enviroment;
     private void Awake()
     {
         if (Instance && Instance != this)
@@ -37,6 +41,7 @@ public class UIManager : MonoBehaviour
     {
         SetCursorTextureDefault();
         UpdateDemandText();
+        UpdateMaxEnvironmentalImpact();
     }
 
     void Update()
@@ -87,4 +92,26 @@ public class UIManager : MonoBehaviour
             currentProductionText.text = $"Current Production: {LevelController.Instance.GetCurrentProduction():F2} MW"; 
         }
     }
+
+
+
+
+    public void UpdateMaxEnvironmentalImpact()
+    { 
+        if (Max_Enviroment) 
+        {
+            Max_Enviroment.text = $"MaxEnviroment: {LevelController.Instance.GetMaxEnvironmentalImpact():F2} CO2"; 
+        }
+    }
+
+    
+    public void UpdateCurrentEnvironmentalImpact()
+    {
+        if (Current_Enviroment)
+        {
+            Current_Enviroment.text = $"Enviroment: {LevelController.Instance.GetCurrentEnvironmentalImpact():F2} CO2";
+        }
+    }
+
+
 }

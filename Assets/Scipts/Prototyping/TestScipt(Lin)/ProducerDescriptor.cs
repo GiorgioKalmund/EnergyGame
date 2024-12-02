@@ -15,10 +15,14 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
     [SerializeField] private float cost;
     public float maxProduction;
     [SerializeField] private float currentProduction;
-    public float environmentalImpact;
+    [SerializeField] public float environmentalImpact;
     public bool placed = false;
     public bool selected = false;
+    [Header("IDs")]
+    [Tooltip("Global ID, unique across all instances of this type.")]
     public int id;
+    [Tooltip("ID it is associated with inside the database")]
+    public int instanceId;
     
     [SerializeField] private GameObject selectionIndicator = null;
     [SerializeField] private Sprite imageSprite;
@@ -67,6 +71,7 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
        LevelController.Instance.ReduceEnvironmentalImpact(environmentalImpact);
        Destroy();
        PlacementSystem.Instance.HideCable();
+       InventoryManager.Instance.UpdateInventorySlots(); 
     }
 
     public void Destroy()
@@ -125,6 +130,21 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
     public int GetID()
     {
         return id;
+    }
+
+    public int GetDBInstanceID()
+    {
+        return instanceId;
+    }
+
+    public float GetEnvironmentalImpact()
+    {
+        return environmentalImpact;
+    }
+
+    public void SetDBInstanceID(int dbInstanceId)
+    {
+        this.instanceId = dbInstanceId;
     }
 
     public bool IsOnLeftHalfOfTheScreen()

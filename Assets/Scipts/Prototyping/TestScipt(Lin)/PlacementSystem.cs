@@ -88,6 +88,7 @@ public class PlacementSystem : MonoBehaviour
 
     public void StartPlacement(int ID)
     {
+        
         if (currentGameObject)
         {
             StopPlacement();
@@ -144,6 +145,7 @@ public class PlacementSystem : MonoBehaviour
                 // Prepare for citySelection
                 citySelectionActive = true;
                 Debug.Log("Building placed. Please select a city.");
+                InventoryManager.Instance.UpdateInventorySlots(); 
                 cellSprite.color = spriteColorConnecting;
                 connectingModeIndicatorImage.SetActive(true);
                 ShowCable();
@@ -193,7 +195,7 @@ public class PlacementSystem : MonoBehaviour
                 // TODO: THIS IS NOT THE WAY TO DO IT, maybe an Enum for BuildingType?
                 if (producerDescriptor.buildingName == "Epic Windmill")
                 {
-                    //TODO kommt sp‰ter weg
+                    //TODO kommt sp√§ter weg
                     //lastHoveredTileData.windSpeed += 0.1f;
                     productionValue *= lastHoveredTileData.windSpeed;
 

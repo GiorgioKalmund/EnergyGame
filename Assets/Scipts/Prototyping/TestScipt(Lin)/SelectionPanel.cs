@@ -29,7 +29,8 @@ public class SelectionPanel : MonoBehaviour
        {
            ProducerDescriptor currentProducer = (ProducerDescriptor) entity;
            statTextElement.text = $"Max: {currentProducer.GetMaxProduction()} MW\n" +
-                                  $"Current: {currentProducer.GetCurrentProduction()} MW";
+                                  $"Current: {currentProducer.GetCurrentProduction()} MW\n" +
+                                  $"Env : {currentProducer.GetEnvironmentalImpact()} CO2";
            costTextElement.text = $"ID: {currentProducer.GetID()}";
            ShowSellButton(true);
        } else if (currentEntity as ConsumerDescriptor)

@@ -347,3 +347,5 @@ MonoBehaviour:
   spriteImage: {fileID: 2792483609137906924}
   costText: {fileID: 7971058767323805623}
   instanceID: 0
+  isEnabled: 0
+  button: {fileID: 0}

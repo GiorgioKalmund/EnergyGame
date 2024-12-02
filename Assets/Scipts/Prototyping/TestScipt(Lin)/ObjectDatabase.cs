@@ -34,24 +34,17 @@ public class ObjectsDatabase : ScriptableObject
 [Serializable]
 public class ObjectData
 {
-    public ObjectData(string name, int id, Vector2 size, GameObject prefab)
-    {
-        Name = name;
-        ID = id;
-        Size = size;
-        Prefab = prefab;
-    }
 
     public ObjectData(ProducerDescriptor producerDescriptor, int id, GameObject prefab)
     {
-        Name = producerDescriptor.GetName(); 
+        Entity = producerDescriptor; 
         ID = id;
         Size = Vector2Int.one;
         Prefab = prefab;
     }
     
     [field: SerializeField]
-    public string Name { get; private set; }
+    public ISelectableEntity Entity{ get; private set; }
     [field: SerializeField]
     public int ID { get; private set; }
     [field: SerializeField]

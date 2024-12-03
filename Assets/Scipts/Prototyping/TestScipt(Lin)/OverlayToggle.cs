@@ -8,49 +8,38 @@ public class OverlayToggle : MonoBehaviour
     [Header("Sprites")]
     [SerializeField] private Sprite toggleOffSprite;
     [SerializeField] private Sprite toggleOnSprite;
-    [FormerlySerializedAs("overlayImage")]
     [Header("Overlay")]
-    [SerializeField] private Sprite overlaySprite;
-    [SerializeField] private OverlayManager manager;
+    [SerializeField] private GameObject overlayGameObject;
 
     private Image _imageComponent;
 
     private void Start()
     {
         _imageComponent = GetComponent<Image>();
+        overlayGameObject.SetActive(false);
 
         // The manager could also be retrieved via getting the Parent, however this limits hierarchial flexibility.
         // Although then no manual setting of it for every toggle is needed.
         // manager = GetComponentInParent<OverlayManager>();
     }
 
-    // Called by the Button Component on the UI Element
     public void Toggle()
     {
-        isOn = !isOn;
-        _imageComponent.sprite = isOn ? toggleOnSprite : toggleOffSprite;
-
-        if (isOn)
-        {
-            manager.SetOverlay(overlaySprite, this);
-        }
-        else
-        {
-            manager.ClearOverlay();
-        }
+        OverlayManager.Instance.DetermineNewActiveToggle(this);
     }
 
     public void ToggleOff()
     {
         this.isOn = false;
         _imageComponent.sprite = isOn ? toggleOnSprite : toggleOffSprite;
-
+        overlayGameObject.SetActive(false);
     }
 
     public void ToggleOn()
     {
         this.isOn =  true;
         _imageComponent.sprite = isOn ? toggleOnSprite : toggleOffSprite;
+        overlayGameObject.SetActive(true);
     }
 
     public bool IsOn()

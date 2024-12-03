@@ -94,13 +94,11 @@ public class UIManager : MonoBehaviour
     }
 
 
-
-
     public void UpdateMaxEnvironmentalImpact()
     { 
         if (Max_Enviroment) 
         {
-            Max_Enviroment.text = $"MaxEnviroment: {LevelController.Instance.GetMaxEnvironmentalImpact():F2} CO2"; 
+            Max_Enviroment.text = $"Max: {LevelController.Instance.GetMaxEnvironmentalImpact():F2} CO2";
         }
     }
 
@@ -109,7 +107,7 @@ public class UIManager : MonoBehaviour
     {
         if (Current_Enviroment)
         {
-            Current_Enviroment.text = $"Enviroment: {LevelController.Instance.GetCurrentEnvironmentalImpact():F2} CO2";
+            Current_Enviroment.text = $"Current: {LevelController.Instance.GetCurrentEnvironmentalImpact():F2} CO2";
         }
     }
 

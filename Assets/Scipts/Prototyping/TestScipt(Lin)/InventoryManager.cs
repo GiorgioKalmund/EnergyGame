@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -58,16 +59,10 @@ public class InventoryManager : MonoBehaviour
             slots.Add(newSlot);
             activeSlots.Add(newSlot);
             
-            // Space out evenly
-            float inventoryWidth = inventory.GetComponent<RectTransform>().rect.width; 
-            float slotWidth = inventorySlotObject.GetComponent<RectTransform>().rect.width;
-            float spacing = (inventoryWidth - slotWidth * prefabs.Count) / (prefabs.Count + 1); 
-
-            float newXPosition = (index + 1) * spacing + index * slotWidth;
-            inventorySlotObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(newXPosition, 0);
+            CalculateSlotSpacings();
         }
     }
-
+    
     public void DisableSlot(int instanceId)
     {
        slots[instanceId].Disable();
@@ -79,14 +74,13 @@ public class InventoryManager : MonoBehaviour
     }
     
     public void EnableSlot(int instanceId)
-    {
-        if (slots[instanceId].isEnabled)
+    { 
+        if (!slots[instanceId].isEnabled)
         {
-            return;
+           slots[instanceId].Enable(); 
+           activeSlots.Add(slots[instanceId]);
+           CalculateSlotSpacings();
         }
-       slots[instanceId].Enable(); 
-       activeSlots.Add(slots[instanceId]);
-       CalculateSlotSpacings();
     }
 
     public void ToggleSlot(int instanceId)
@@ -107,12 +101,23 @@ public class InventoryManager : MonoBehaviour
         for (int index = 0;  index < activeSlots.Count;  index++)
         {
             GameObject inventorySlotObject = activeSlots[index].gameObject;
-            float inventoryWidth = inventory.GetComponent<RectTransform>().rect.width; 
             float slotWidth = inventorySlotObject.GetComponent<RectTransform>().rect.width;
-            float spacing = (inventoryWidth - slotWidth * activeSlots.Count) / (activeSlots.Count + 1); 
+            float spacing = 75f; 
 
-            float newXPosition = (index + 1) * spacing + index * slotWidth;
-            inventorySlotObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(newXPosition, 0);
+            int tempIndex = index;
+            tempIndex -= activeSlots.Count / 2;
+            
+            float newXPosition = (slotWidth + spacing) * tempIndex; 
+            if (tempIndex < 0)
+            {
+               newXPosition *= 1; 
+            }
+            if (activeSlots.Count % 2 == 0)
+            {
+                newXPosition += (slotWidth + spacing) / 2;
+            }
+            
+            inventorySlotObject.GetComponent<RectTransform>().DOAnchorPos(new Vector3(newXPosition, 0, 0), 0.5f);
         } 
     }
     

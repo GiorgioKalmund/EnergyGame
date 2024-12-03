@@ -1,27 +1,45 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class OverlayManager : MonoBehaviour
 {
-    [SerializeField] private GameObject overlay;
-
     public OverlayToggle currentActiveToggle;
+    
+    public static OverlayManager Instance { get; private set; }
 
-    public void SetOverlay(Sprite overlaySprite, OverlayToggle callerToggle)
+    private void Awake()
     {
-        overlay.SetActive(true);
+        if (Instance && Instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+    
+    public void DetermineNewActiveToggle(OverlayToggle callerToggle)
+    {
         if (currentActiveToggle)
         {
-            currentActiveToggle.ToggleOff(); // toggles currently active toggle off
+            currentActiveToggle.ToggleOff();
         }
-        // If we need more complex display types than sprites, we should consider simply using Gameobjects & Prefabs and simply disable / enable them.
-        overlay.GetComponent<Image>().sprite = overlaySprite; // updates the overlay sprite
-        currentActiveToggle = callerToggle; // sets new currently active toggle
+        if (currentActiveToggle != callerToggle)
+        {
+            currentActiveToggle = callerToggle;
+            currentActiveToggle.ToggleOn();
+        }
+        else
+        {
+            currentActiveToggle = null;
+        }
     }
+
 
     public void ClearOverlay()
     {
-        overlay.SetActive(false);
         currentActiveToggle = null;
     }
 }

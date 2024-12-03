@@ -210,9 +210,13 @@ public class PlacementSystem : MonoBehaviour
                 {
                     productionValue *= lastHoveredTileData.coalAmount;
                 }
-                
+
                 //Debug.Log($"alpha = {lastHoveredTileData.waterSpeed}");
-                distance *= 0.01f; 
+
+                //cost for cable
+                BudgetManager.Instance.UseBudget(distance);
+
+                distance *= 0.04f; 
                 productionValue -= distance;
                 productionValue = Mathf.Max(0, productionValue);
                 producerDescriptor.SetProduction(productionValue);

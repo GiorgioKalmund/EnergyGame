@@ -17,6 +17,7 @@ public class InventoryManager : MonoBehaviour
     public List<InventorySlot> slots;
     public List<InventorySlot> activeSlots;
     [SerializeField] private GameObject slotTemplate;
+    public float spacing = 75f; 
 
     
     public static InventoryManager Instance { get; private set; }
@@ -59,8 +60,8 @@ public class InventoryManager : MonoBehaviour
             slots.Add(newSlot);
             activeSlots.Add(newSlot);
             
-            CalculateSlotSpacings();
         }
+        CalculateSlotSpacings();
     }
     
     public void DisableSlot(int instanceId)
@@ -70,7 +71,6 @@ public class InventoryManager : MonoBehaviour
        {
            Debug.LogWarning("Cannot remove slot!");
        };
-       CalculateSlotSpacings();
     }
     
     public void EnableSlot(int instanceId)
@@ -79,7 +79,6 @@ public class InventoryManager : MonoBehaviour
         {
            slots[instanceId].Enable(); 
            activeSlots.Add(slots[instanceId]);
-           CalculateSlotSpacings();
         }
     }
 
@@ -102,7 +101,6 @@ public class InventoryManager : MonoBehaviour
         {
             GameObject inventorySlotObject = activeSlots[index].gameObject;
             float slotWidth = inventorySlotObject.GetComponent<RectTransform>().rect.width;
-            float spacing = 75f; 
 
             int tempIndex = index;
             tempIndex -= activeSlots.Count / 2;
@@ -118,11 +116,18 @@ public class InventoryManager : MonoBehaviour
             }
             
             inventorySlotObject.GetComponent<RectTransform>().DOAnchorPos(new Vector3(newXPosition, 0, 0), 0.5f);
-        } 
+        }
+        float targetWidth = (slotTemplate.GetComponent<RectTransform>().rect.width + spacing) * activeSlots.Count;
+        targetWidth -= spacing / 2; // clean up edges
+        Debug.Log("Target inventory width: "+targetWidth);
+        RectTransform newRect = inventory.GetComponent<RectTransform>();
+        inventory.GetComponent<RectTransform>().DOSizeDelta(new Vector2(targetWidth, newRect.rect.height), 0.5f);
+
     }
     
     public void UpdateInventorySlots()
     {
+        Debug.LogWarning("Updated Inventory Slots");
         for (int i = 0; i < database.Count(); i++)
         {
             ProducerDescriptor producerDescriptor = (ProducerDescriptor) database.Get(i).Entity;
@@ -135,5 +140,6 @@ public class InventoryManager : MonoBehaviour
                 EnableSlot(i); 
             }
         }
+        CalculateSlotSpacings();
     }
 }

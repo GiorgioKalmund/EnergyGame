@@ -17,8 +17,9 @@ public class InventoryManager : MonoBehaviour
     public List<InventorySlot> slots;
     public List<InventorySlot> activeSlots;
     [SerializeField] private GameObject slotTemplate;
-     public float innerSpacing = 75f; 
-     [FormerlySerializedAs("outerSpacing")] public float margin = 10f; 
+    public float innerSpacing = 75f; 
+    public float margin = 10f; 
+    public float scalingFactor = 0.01f; 
 
     
     public static InventoryManager Instance { get; private set; }
@@ -115,7 +116,8 @@ public class InventoryManager : MonoBehaviour
             {
                 newXPosition += (slotWidth + innerSpacing) / 2;
             }
-            
+
+            newXPosition *= scalingFactor; 
             inventorySlotObject.GetComponent<RectTransform>().DOAnchorPos(new Vector3(newXPosition, 0, 0), 0.5f);
         }
         float targetWidth = (slotTemplate.GetComponent<RectTransform>().rect.width + innerSpacing) * activeSlots.Count;
@@ -125,7 +127,7 @@ public class InventoryManager : MonoBehaviour
         targetHeight += margin * 2;
         Debug.Log("Target inventory width: "+targetWidth);
         RectTransform newRect = inventory.GetComponent<RectTransform>();
-        newRect.DOSizeDelta(new Vector2(targetWidth, targetHeight), 0.5f);
+        newRect.DOSizeDelta(new Vector2(targetWidth * scalingFactor, targetHeight * scalingFactor), 0.5f);
 
     }
     

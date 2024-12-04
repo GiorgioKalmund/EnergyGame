@@ -42,6 +42,7 @@ public class UIManager : MonoBehaviour
         SetCursorTextureDefault();
         UpdateDemandText();
         UpdateMaxEnvironmentalImpact();
+        Debug.LogWarning("Quality level:"+QualitySettings.GetQualityLevel());
     }
 
     void Update()
@@ -109,6 +110,11 @@ public class UIManager : MonoBehaviour
         {
             Current_Enviroment.text = $"{LevelController.Instance.GetCurrentEnvironmentalImpact():F2} CO2";
         }
+    }
+
+    public void SetQualityLevel(int level)
+    {
+        QualitySettings.SetQualityLevel(level);
     }
 
 

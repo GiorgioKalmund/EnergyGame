@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Serialization;
+using UnityEngine.WSA;
 
 public class InventorySlot : MonoBehaviour
     {
@@ -11,6 +12,7 @@ public class InventorySlot : MonoBehaviour
         public int instanceID;
         public bool isEnabled;
         public Button button;
+        
         public void SetSprite(Sprite sprite)
         {
             spriteImage.sprite = sprite;
@@ -45,7 +47,7 @@ public class InventorySlot : MonoBehaviour
         {
             isEnabled = false;
             spriteImage.enabled = isEnabled;
-            button.image.enabled = isEnabled;
+            //button.image.enabled = isEnabled;
             button.enabled = isEnabled;
             costText.enabled = isEnabled;
         }
@@ -55,7 +57,7 @@ public class InventorySlot : MonoBehaviour
             isEnabled = true;
             spriteImage.enabled = isEnabled;
             button.image.enabled = isEnabled;
-            button.enabled = isEnabled;
+            //button.enabled = isEnabled;
             costText.enabled = isEnabled;
         }
     } 

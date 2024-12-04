@@ -17,7 +17,8 @@ public class InventoryManager : MonoBehaviour
     public List<InventorySlot> slots;
     public List<InventorySlot> activeSlots;
     [SerializeField] private GameObject slotTemplate;
-    public float spacing = 75f; 
+     public float innerSpacing = 75f; 
+     [FormerlySerializedAs("outerSpacing")] public float margin = 10f; 
 
     
     public static InventoryManager Instance { get; private set; }
@@ -105,23 +106,26 @@ public class InventoryManager : MonoBehaviour
             int tempIndex = index;
             tempIndex -= activeSlots.Count / 2;
             
-            float newXPosition = (slotWidth + spacing) * tempIndex; 
+            float newXPosition = (slotWidth + innerSpacing) * tempIndex; 
             if (tempIndex < 0)
             {
                newXPosition *= 1; 
             }
             if (activeSlots.Count % 2 == 0)
             {
-                newXPosition += (slotWidth + spacing) / 2;
+                newXPosition += (slotWidth + innerSpacing) / 2;
             }
             
             inventorySlotObject.GetComponent<RectTransform>().DOAnchorPos(new Vector3(newXPosition, 0, 0), 0.5f);
         }
-        float targetWidth = (slotTemplate.GetComponent<RectTransform>().rect.width + spacing) * activeSlots.Count;
-        targetWidth -= spacing / 2; // clean up edges
+        float targetWidth = (slotTemplate.GetComponent<RectTransform>().rect.width + innerSpacing) * activeSlots.Count;
+        targetWidth -= innerSpacing;
+        targetWidth += margin * 2;
+        float targetHeight = (slotTemplate.GetComponent<RectTransform>().rect.height);
+        targetHeight += margin * 2;
         Debug.Log("Target inventory width: "+targetWidth);
         RectTransform newRect = inventory.GetComponent<RectTransform>();
-        inventory.GetComponent<RectTransform>().DOSizeDelta(new Vector2(targetWidth, newRect.rect.height), 0.5f);
+        newRect.DOSizeDelta(new Vector2(targetWidth, targetHeight), 0.5f);
 
     }
     

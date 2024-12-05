@@ -56,7 +56,7 @@ public class InputManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
             OnClicked?.Invoke();
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetMouseButtonDown(1))
             OnExit?.Invoke();
         //we dont need this movement shit
         //HandleMapMovement();

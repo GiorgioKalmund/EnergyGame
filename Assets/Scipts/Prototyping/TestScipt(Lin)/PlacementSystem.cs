@@ -143,6 +143,7 @@ public class PlacementSystem : MonoBehaviour
                 citySelectionActive = true;
                 Debug.Log("Building placed. Please select a city.");
                 InventoryManager.Instance.UpdateInventorySlots(); 
+                InventoryManager.Instance.HideInventory(); 
                 cellSprite.color = spriteColorConnecting;
                 connectingModeIndicatorImage.SetActive(true);
                 
@@ -177,7 +178,6 @@ public class PlacementSystem : MonoBehaviour
         ProducerDescriptor producerDescriptor = lastPlacedBuilding.GetComponent<ProducerDescriptor>();
         RaycastHit hit;
 
-        
         if (Physics.Raycast(cellIndicator.transform.position + Vector3.up * 0.2f, Vector3.down, out hit, 10f))
         {
             Transform hitTransform = hit.transform;
@@ -228,6 +228,7 @@ public class PlacementSystem : MonoBehaviour
                 LevelController.Instance.AddProduce(productionValue);
 
                 Debug.Log($"City selected. Distance to building: {distance} units.");
+                InventoryManager.Instance.ShowInventory();
 
                 //reset CellIndicator
                 cellSprite.color = spriteColorRegular;

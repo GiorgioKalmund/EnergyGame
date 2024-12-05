@@ -55,8 +55,8 @@ public class InventorySlot : MonoBehaviour
         {
             isEnabled = true;
             spriteImage.enabled = isEnabled;
-            button.image.enabled = isEnabled;
-            //button.enabled = isEnabled;
+            // button.image.enabled = isEnabled;
+            button.enabled = isEnabled;
             costText.enabled = isEnabled;
         }
     } 

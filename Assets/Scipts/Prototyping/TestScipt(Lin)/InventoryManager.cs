@@ -96,6 +96,22 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    public void HideInventory()
+    {
+        Debug.LogWarning("Hiding Inventory");
+        Vector3 currentPos = inventory.transform.position;
+        currentPos.y -= 220f;
+        inventory.transform.DOMoveY(currentPos.y, 0.75f);
+    }
+
+    public void ShowInventory()
+    {
+        Debug.LogWarning("Showing Inventory");
+        Vector3 currentPos = inventory.transform.position;
+        currentPos.y += 220f;
+        inventory.transform.DOMoveY(currentPos.y, 0.75f);
+    }
+
     private void CalculateSlotSpacings()
     {
         activeSlots.Sort((a,b) => a.instanceID.CompareTo(b.instanceID));

@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Serialization;
-using UnityEngine.WSA;
 
 public class InventorySlot : MonoBehaviour
     {

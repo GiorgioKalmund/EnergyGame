@@ -241,7 +241,7 @@ PrefabInstance:
     - target: {fileID: 7014985562028792311, guid: 2557bfe7d432f3a40b013a8ecd5be65a, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 2013690793, guid: e0e99a70dc5611f4091c6101c4390d99, type: 3}
+      objectReference: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1119,7 +1119,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.9622642, g: 0.94864726, b: 0.94864726, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -1839,11 +1839,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapTexture: {fileID: 2800000, guid: 98953df51ae96b845b00afb04b2983a1, type: 3}
-  sunTexture: {fileID: 2800000, guid: 3eaefd07ddbfa6143858cf0c16257b0b, type: 3}
-  windTexture: {fileID: 2800000, guid: 334760ac33820d248a0b3a39f1fd4e0b, type: 3}
-  waterTexture: {fileID: 2800000, guid: a756f4fc83ecb6d44b4137ad003697d7, type: 3}
-  coalTexture: {fileID: 2800000, guid: 853214f55591e0a4e9289c17de1c742f, type: 3}
-  displayTexture: {fileID: 2800000, guid: 98953df51ae96b845b00afb04b2983a1, type: 3}
+  sunTexture: {fileID: 2800000, guid: 6458849452493dd42a492e0181260cb4, type: 3}
+  windTexture: {fileID: 2800000, guid: 3c731b85bc0a8b9489198ee9df74cc6f, type: 3}
+  waterTexture: {fileID: 2800000, guid: 4693f08ebdddf7d4bb987989d6d008ca, type: 3}
+  coalTexture: {fileID: 2800000, guid: f5a4fd2360c4f5e4da6d4c97b34e0a4a, type: 3}
+  displayTexture: {fileID: 0}
   mapOverlay: {fileID: 255880581}
   color1: {r: 0.8980392, g: 0.6666667, b: 0.47843137, a: 1}
   prefab1: {fileID: 2643937061277584625, guid: 8a67ebfa17f48a041b260e8ef0abdd6c, type: 3}
@@ -1979,7 +1979,6 @@ RectTransform:
   - {fileID: 460749929}
   - {fileID: 2125543150}
   - {fileID: 289283145}
-  - {fileID: 2108338767}
   - {fileID: 250838765}
   - {fileID: 501930147}
   - {fileID: 91001750}
@@ -1990,6 +1989,7 @@ RectTransform:
   - {fileID: 149341431}
   - {fileID: 205595631}
   - {fileID: 1242017724}
+  - {fileID: 2108338767}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2074,7 +2074,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -679607779, guid: caec293a593f2f54aa4c91f1676b0b00, type: 3}
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2111,6 +2111,7 @@ MonoBehaviour:
   - {fileID: 7083639843144445973, guid: 889c23d73df3d5d4fa7de407382e3e23, type: 3}
   - {fileID: 2698100121599932702, guid: d0972884f8d7cd042b8a8a14b8d24443, type: 3}
   - {fileID: 7185595045433911012, guid: 0b3f9324124ed1043a510b343067be47, type: 3}
+  - {fileID: 7083639843144445973, guid: 889c23d73df3d5d4fa7de407382e3e23, type: 3}
   slots: []
   activeSlots: []
   slotTemplate: {fileID: 8300402592470559584, guid: 197eba7d2850316488fd02dd24ed8e69, type: 3}
@@ -3072,7 +3073,7 @@ PrefabInstance:
     - target: {fileID: 7014985562028792311, guid: 2557bfe7d432f3a40b013a8ecd5be65a, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 2013690793, guid: e0e99a70dc5611f4091c6101c4390d99, type: 3}
+      objectReference: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4099,7 +4100,7 @@ PrefabInstance:
     - target: {fileID: 7014985562028792311, guid: 2557bfe7d432f3a40b013a8ecd5be65a, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 2013690793, guid: e0e99a70dc5611f4091c6101c4390d99, type: 3}
+      objectReference: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5266,7 +5267,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1242017724
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6411,7 +6412,7 @@ PrefabInstance:
     - target: {fileID: 7014985562028792311, guid: 2557bfe7d432f3a40b013a8ecd5be65a, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 2013690793, guid: e0e99a70dc5611f4091c6101c4390d99, type: 3}
+      objectReference: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6873,12 +6874,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 169273920}
   - {fileID: 1869620917}
   - {fileID: 1893714203}
   - {fileID: 1294308756}
   - {fileID: 604424646}
   - {fileID: 1161511283}
-  - {fileID: 169273920}
   - {fileID: 253160851}
   m_Father: {fileID: 456523648}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

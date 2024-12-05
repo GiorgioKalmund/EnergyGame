@@ -1260,7 +1260,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 164406844}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.2294989, y: 0.3759541, z: -0.09666812, w: 0.89254916}
+  m_LocalRotation: {x: 0.22949901, y: 0.37595412, z: -0.09666817, w: 0.8925492}
   m_LocalPosition: {x: -30.2, y: 29.4, z: -29.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2053,6 +2053,51 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4cbd0d6b63bd74ff5839aafdd534a04f, type: 3}
+--- !u!1 &372141343
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 372141344}
+  - component: {fileID: 372141345}
+  m_Layer: 0
+  m_Name: PowerCableManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &372141344
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372141343}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1866570507}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &372141345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372141343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa916067c9d24ad9b12b3b7740363bf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cableList: []
 --- !u!1 &449172138
 GameObject:
   m_ObjectHideFlags: 0
@@ -3556,8 +3601,6 @@ MonoBehaviour:
   cellIndicator: {fileID: 2034362886}
   grid: {fileID: 936100650}
   database: {fileID: 11400000, guid: 0c6f349871d57a840890f745515a7c91, type: 2}
-  lineVertexCount: 100
-  lineFunctionDivisor: 64
   mainCamera: {fileID: 164406846}
   gridOffset: 0
   defaultLayer:
@@ -3569,6 +3612,8 @@ MonoBehaviour:
   blockedLayer:
     serializedVersion: 2
     m_Bits: 64
+  cablePrefab: {fileID: 9142062873766252308, guid: 21db73efe622f44959ba877f70eb0fab, type: 3}
+  lastPlacedCable: {fileID: 0}
   spriteColorRegular: {r: 1, g: 0.9764151, b: 0.9764151, a: 1}
   spriteColorWarning: {r: 1, g: 0.40569016, b: 0.05098039, a: 1}
   spriteColorConnecting: {r: 0.13725491, g: 0.87139124, b: 0.8784314, a: 1}
@@ -6300,7 +6345,7 @@ Transform:
   m_GameObject: {fileID: 1457948852}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 89.838806, y: -102.589966, z: -61.01418}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6595,6 +6640,7 @@ Transform:
   - {fileID: 686173049}
   - {fileID: 1997138290}
   - {fileID: 936100651}
+  - {fileID: 372141344}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1869620914

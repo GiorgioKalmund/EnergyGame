@@ -69,9 +69,9 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
        tileOn.Reset();
        LevelController.Instance.ReduceProduce(currentProduction);
        LevelController.Instance.ReduceEnvironmentalImpact(environmentalImpact);
+       InventoryManager.Instance.UpdateInventorySlots();
+       PowerCableManager.Instance.RemoveCable(gameObject.transform.position);
        Destroy();
-       PlacementSystem.Instance.HideCable();
-       InventoryManager.Instance.UpdateInventorySlots(); 
     }
 
     public void Destroy()

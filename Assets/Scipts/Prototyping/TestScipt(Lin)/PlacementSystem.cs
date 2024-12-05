@@ -20,12 +20,6 @@ public class PlacementSystem : MonoBehaviour
     private ObjectsDatabase database;
     private int placingObjectIndex = -1;
     
-    // TODO: Possibly outsource?
-    [Header("Cables")]
-    private LineRenderer _lineRenderer;
-    [SerializeField] private int lineVertexCount = 10;
-    [SerializeField] private float lineFunctionDivisor = 64;
-
     [Header("Camera")]
     [SerializeField] private Camera mainCamera;
     [SerializeField] private float gridOffset;
@@ -35,6 +29,11 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField] private LayerMask defaultLayer; 
     [SerializeField]private LayerMask waterLayer; 
     [SerializeField] private LayerMask blockedLayer;
+
+    [Header("Cable")] 
+    [SerializeField] private GameObject cablePrefab;
+
+    public PowerCable lastPlacedCable;
 
     // Cell Indicator
     [Header("Cell Indicator")]
@@ -64,8 +63,6 @@ public class PlacementSystem : MonoBehaviour
 
     private void Awake()
     {
-        _lineRenderer = GetComponent<LineRenderer>();
-        _lineRenderer.positionCount = lineVertexCount;
          if (Instance && Instance != this)
          {
              Destroy(this);
@@ -148,7 +145,11 @@ public class PlacementSystem : MonoBehaviour
                 InventoryManager.Instance.UpdateInventorySlots(); 
                 cellSprite.color = spriteColorConnecting;
                 connectingModeIndicatorImage.SetActive(true);
-                ShowCable();
+                
+                // Instantiate new cable
+                GameObject cable = Instantiate(cablePrefab, lastPlacedBuilding.transform.position, Quaternion.identity);
+                lastPlacedCable = cable.GetComponent<PowerCable>();
+                
                 InputManager.Instance.OnClicked += SelectCity;
             }
             else
@@ -214,8 +215,12 @@ public class PlacementSystem : MonoBehaviour
                 //Debug.Log($"alpha = {lastHoveredTileData.waterSpeed}");
 
                 //cost for cable
-                BudgetManager.Instance.UseBudget(distance);
+                // TODO: This is not being returned when sold
+                // BudgetManager.Instance.UseBudget(distance);
 
+                lastPlacedCable.Place();
+                
+                // TODO: Parameterize distance falloff
                 distance *= 0.04f; 
                 productionValue -= distance;
                 productionValue = Mathf.Max(0, productionValue);
@@ -314,48 +319,14 @@ public class PlacementSystem : MonoBehaviour
             SelectionManager.Instance.CheckForSelection();
         }
     }
+
+    public Transform GetCellIndicatorTransform()
+    {
+        return cellIndicator.transform;
+    }
     
-    void LateUpdate() {
-        DrawCable();
-    }
+   
 
-
-    void DrawCable()
-    {
-        if (!citySelectionActive)
-        {
-            return;
-        }
-        Vector3 startPos = lastPlacedBuilding.transform.position + (Vector3.up * 0.3f);
-        Vector3 endPos = cellIndicator.transform.position + (Vector3.up * 0.3f);
-        Vector3 direction = endPos - startPos;
-        _lineRenderer.SetPosition(0, startPos);
-        _lineRenderer.SetPosition(lineVertexCount - 1 , endPos);
-        int half = lineVertexCount / 2;
-        for (int index = 1; index < lineVertexCount - 1; index++)
-        {
-            Vector3 pointToDraw = startPos + (index * direction / lineVertexCount);
-            pointToDraw.y += MathIsMathin((index - half) / lineFunctionDivisor) - MathIsMathin((half) / lineFunctionDivisor);
-            _lineRenderer.SetPosition(index, pointToDraw);
-        }
-    }
-
-    public void HideCable()
-    {
-        _lineRenderer.enabled = false;
-    }
-
-    void ShowCable()
-    {
-        _lineRenderer.enabled = true;
-    }
-
-
-    float MathIsMathin(float x)
-    {
-        return Mathf.Sqrt(Mathf.Pow(x, 2f) + 1);
-        //return Mathf.Sin(x);
-    }
     
     IEnumerator FlickerIndicator(Color flickerColor)
     {

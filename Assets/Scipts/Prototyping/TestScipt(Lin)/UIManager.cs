@@ -56,7 +56,7 @@ public class UIManager : MonoBehaviour
 
     public void RenderBudget()
     {
-        budgetText.text = $"{BudgetManager.Instance.GetBudget()}€";
+        budgetText.text = $"{BudgetManager.Instance.GetBudget():F2}€";
     }
     private void ChangeCursor()
     {

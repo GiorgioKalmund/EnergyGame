@@ -33,7 +33,7 @@ public class PlacementSystem : MonoBehaviour
     [Header("Cable")] 
     [SerializeField] private GameObject cablePrefab;
 
-    public PowerCable lastPlacedCable;
+    private PowerCable lastPlacedCable;
 
     // Cell Indicator
     [Header("Cell Indicator")]
@@ -150,6 +150,7 @@ public class PlacementSystem : MonoBehaviour
                 // Instantiate new cable
                 GameObject cable = Instantiate(cablePrefab, lastPlacedBuilding.transform.position, Quaternion.identity);
                 lastPlacedCable = cable.GetComponent<PowerCable>();
+                producerDescriptor.AddCable(lastPlacedCable);
                 
                 InputManager.Instance.OnClicked += SelectCity;
             }

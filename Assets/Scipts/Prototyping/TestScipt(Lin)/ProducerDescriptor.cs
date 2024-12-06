@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 using UnityEngine.Serialization;
 using Scipts.Prototyping.TestScipt_Lin_;
 using Unity.XR.OpenVR;
@@ -24,16 +25,18 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
     [Tooltip("ID it is associated with inside the database")]
     public int instanceId;
     
+    [Header("UI & UX")]
     [SerializeField] private GameObject selectionIndicator = null;
     [SerializeField] private Sprite imageSprite;
     public bool isOnLeftHalfOfScreen;
-    public TileData tileOn;
     
-    public void Start()
-    {
-        id = LevelController.Instance.nextID;
-        LevelController.Instance.nextID += 1;
-    }
+    [Header("Tile")]
+    public TileData tileOn;
+
+    public List<PowerCable> connectedCables;
+    
+    
+    
 
     public void Awake()
     {
@@ -43,6 +46,13 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
         }
 
         isOnLeftHalfOfScreen = IsOnLeftHalfOfTheScreen();
+    }
+    
+    public void Start()
+    {
+        id = LevelController.Instance.nextID;
+        LevelController.Instance.nextID += 1;
+        connectedCables = new List<PowerCable>();
     }
 
     public bool isPlaced()
@@ -70,7 +80,10 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
        LevelController.Instance.ReduceProduce(currentProduction);
        LevelController.Instance.ReduceEnvironmentalImpact(environmentalImpact);
        InventoryManager.Instance.UpdateInventorySlots();
-       PowerCableManager.Instance.RemoveCable(gameObject.transform.position);
+       foreach (PowerCable cable in connectedCables)
+       {
+           cable.Sell();
+       }
        Destroy();
     }
 
@@ -162,6 +175,11 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
     public string GetName()
     {
         return buildingName;
+    }
+
+    public void AddCable(PowerCable newCable)
+    {
+        connectedCables.Add(newCable);
     }
 
 }

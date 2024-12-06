@@ -22,19 +22,9 @@ public class PowerCableManager : MonoBehaviour
 
     public List<PowerCable> cableList;
 
-    public void RemoveCable(Vector3 startPosition)
+    public void RemoveCable(PowerCable cable)
     {
-        PowerCable cableToBeRemoved = cableList.Find((c) => c.IsEqualTo(startPosition));
-        if (cableToBeRemoved)
-        {
-            Debug.Log("Sucessfully found cable to be starting at "+startPosition);
-        }
-        else
-        {
-            Debug.LogError("Error deleting at "+startPosition);
-        }
-        cableList.RemoveAll((c) => c.IsEqualTo(startPosition));
-        Destroy(cableToBeRemoved.gameObject);
+        cable.Sell();
     }
 
     public void AddCable(PowerCable cable)

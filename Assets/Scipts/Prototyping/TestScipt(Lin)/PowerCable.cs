@@ -10,10 +10,12 @@ public class PowerCable : MonoBehaviour
    [SerializeField] private int lineVertexCount = 10;
    [SerializeField] private float lineFunctionDivisor = 6;
 
-   public Vector3 startPos;
-   public Vector3 endPos;
-
    public bool placed = false;
+   
+   private Vector3 startPos;
+   private Vector3 endPos;
+
+   // reference for endpoint?
 
    private void Awake()
    {
@@ -82,6 +84,11 @@ public class PowerCable : MonoBehaviour
        float precision = 0.01f;
        
        return xDelta <= precision && zDelta <= precision;
+   }
+
+   public void Sell()
+   {
+       Destroy(gameObject);
    }
 
    

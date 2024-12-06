@@ -21,7 +21,7 @@ public class PowerCable : MonoBehaviour
    {
        startPos = gameObject.transform.position;
        startPos.y += 0.3f;
-       endPos = PlacementSystem.Instance.GetCellIndicatorTransform().position;
+       endPos = PlacementManager.Instance.GetCellIndicatorTransform().position;
        endPos.y += 0.3f;
    }
 
@@ -49,7 +49,7 @@ public class PowerCable : MonoBehaviour
    {
        if (!placed)
        {
-           endPos = PlacementSystem.Instance.GetCellIndicatorTransform().position;
+           endPos = PlacementManager.Instance.GetCellIndicatorTransform().position;
            endPos.y += 0.3f;
        }
        

@@ -1,5 +1,4 @@
-﻿using Scipts.Prototyping.TestScipt_Lin_;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Serialization;
@@ -33,7 +32,7 @@ public class InventorySlot : MonoBehaviour
                 if (button != null)
                 {
                     // Adding the click listener if not set through the inspector
-                    button.onClick.AddListener(delegate { PlacementSystem.Instance.StartPlacement(instanceID);});
+                    button.onClick.AddListener(delegate { PlacementManager.Instance.StartPlacement(instanceID);});
                 }
                 else
                 {

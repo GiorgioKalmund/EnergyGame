@@ -42,7 +42,7 @@ public class UIManager : MonoBehaviour
         SetCursorTextureDefault();
         UpdateDemandText();
         UpdateMaxEnvironmentalImpact();
-        Debug.LogWarning("Quality level:"+QualitySettings.GetQualityLevel());
+        // Debug.LogWarning("Quality level:"+QualitySettings.GetQualityLevel());
     }
 
     void Update()
@@ -83,14 +83,14 @@ public class UIManager : MonoBehaviour
     { 
         if (demandText) 
         { 
-            demandText.text = $"Demand: {LevelController.Instance.GetCurrentDemand():F2} MW"; 
+            demandText.text = $"Demand: {LevelManager.Instance.GetCurrentDemand():F2} MW"; 
         }
     }
     public void UpdateCurrentProductionText()
     { 
         if (currentProductionText) 
         { 
-            currentProductionText.text = $"Current Production: {LevelController.Instance.GetCurrentProduction():F2} MW"; 
+            currentProductionText.text = $"Current Production: {LevelManager.Instance.GetCurrentProduction():F2} MW"; 
         }
     }
 
@@ -99,7 +99,7 @@ public class UIManager : MonoBehaviour
     { 
         if (Max_Enviroment) 
         {
-            Max_Enviroment.text = $"{LevelController.Instance.GetMaxEnvironmentalImpact():F2} CO2";
+            Max_Enviroment.text = $"{LevelManager.Instance.GetMaxEnvironmentalImpact():F2} CO2";
         }
     }
 
@@ -108,7 +108,7 @@ public class UIManager : MonoBehaviour
     {
         if (Current_Enviroment)
         {
-            Current_Enviroment.text = $"{LevelController.Instance.GetCurrentEnvironmentalImpact():F2} CO2";
+            Current_Enviroment.text = $"{LevelManager.Instance.GetCurrentEnvironmentalImpact():F2} CO2";
         }
     }
 

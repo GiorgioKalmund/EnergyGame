@@ -2,7 +2,6 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 using UnityEngine.Serialization;
-using Scipts.Prototyping.TestScipt_Lin_;
 using Unity.XR.OpenVR;
 using UnityEditor;
 //using UnityEngine.WSA;
@@ -50,8 +49,8 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
     
     public void Start()
     {
-        id = LevelController.Instance.nextID;
-        LevelController.Instance.nextID += 1;
+        id = LevelManager.Instance.nextID;
+        LevelManager.Instance.nextID += 1;
         connectedCables = new List<PowerCable>();
     }
 
@@ -69,7 +68,7 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
         }
         placed = true;
         SetTile(tile);
-        LevelController.Instance.AddEnvironmentalImpact(environmentalImpact);
+        LevelManager.Instance.AddEnvironmentalImpact(environmentalImpact);
         isOnLeftHalfOfScreen = IsOnLeftHalfOfTheScreen();
         return true;
     }
@@ -77,8 +76,8 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
     {
        BudgetManager.Instance.Sell(cost);
        tileOn.Reset();
-       LevelController.Instance.ReduceProduce(currentProduction);
-       LevelController.Instance.ReduceEnvironmentalImpact(environmentalImpact);
+       LevelManager.Instance.ReduceProduce(currentProduction);
+       LevelManager.Instance.ReduceEnvironmentalImpact(environmentalImpact);
        InventoryManager.Instance.UpdateInventorySlots();
        foreach (PowerCable cable in connectedCables)
        {

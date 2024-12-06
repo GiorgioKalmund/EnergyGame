@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using Debug = UnityEngine.Debug;
 
-public class LevelController : MonoBehaviour
+public class LevelManager : MonoBehaviour
 {
     [Header("Stats")] 
     [SerializeField] private float currentDemand;
@@ -16,7 +16,7 @@ public class LevelController : MonoBehaviour
     public float currentEnvironmentalImpact;
     [SerializeField] private float maxEnvironmentalImpact;
     [SerializeField] private bool demandMet = false;
-    public static LevelController Instance { get; private set; }
+    public static LevelManager Instance { get; private set; }
 
     public int nextID = 0;
 

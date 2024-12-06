@@ -34,14 +34,12 @@ public class SettingsManager : MonoBehaviour
 
    public void ReloadEntireScene()
    {
-        string currentSceneName = SceneManager.GetActiveScene().name;
-
-        SceneManager.LoadScene(currentSceneName);
+      GameManager.ReloadEntireScene();
    }
 
-   public void LoadSceneAsync(int sceneIndex)
+   public void LoadSceneByIdAsync(int sceneIndex)
    {
-      SceneManager.LoadSceneAsync(sceneIndex);
+      GameManager.LoadSceneByIdAsync(sceneIndex); 
    }
 
 }

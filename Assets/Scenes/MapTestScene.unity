@@ -3629,7 +3629,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   cablePrefab: {fileID: 9142062873766252308, guid: 21db73efe622f44959ba877f70eb0fab, type: 3}
-  lastPlacedCable: {fileID: 0}
   spriteColorRegular: {r: 1, g: 0.9764151, b: 0.9764151, a: 1}
   spriteColorWarning: {r: 1, g: 0.40569016, b: 0.05098039, a: 1}
   spriteColorConnecting: {r: 0.13725491, g: 0.87139124, b: 0.8784314, a: 1}
@@ -4087,7 +4086,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 130610581}
         m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
-        m_MethodName: LoadSceneAsync
+        m_MethodName: LoadSceneByIdAsync
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -3,13 +3,12 @@ using JetBrains.Annotations;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 using System.Collections;
-using Scipts.Prototyping.TestScipt_Lin_;
 using Unity.VisualScripting;
 using System.IO.Pipes;
 using UnityEngine.Serialization;
 
 
-public class PlacementSystem : MonoBehaviour
+public class PlacementManager : MonoBehaviour
 {
     [SerializeField]
     GameObject mouseIndicator, cellIndicator;
@@ -48,7 +47,7 @@ public class PlacementSystem : MonoBehaviour
     // TODO: UI Should be handled via some type of UI Manager
     [Header("Visuals")]
     [SerializeField] private GameObject connectingModeIndicatorImage;
-    [FormerlySerializedAs("buildingPlacementY")] public float cellIndicatorPlacementY = 1.51f;
+     public float cellIndicatorPlacementY = 1.51f;
     
     private GameObject lastPlacedBuilding;
     private TileData lastHoveredTileData;
@@ -57,7 +56,7 @@ public class PlacementSystem : MonoBehaviour
 
     private bool validNewPlacement = false;
     
-    public static PlacementSystem Instance { get; private set; }
+    public static PlacementManager Instance { get; private set; }
 
     
 
@@ -226,7 +225,7 @@ public class PlacementSystem : MonoBehaviour
                 productionValue -= distance;
                 productionValue = Mathf.Max(0, productionValue);
                 producerDescriptor.SetProduction(productionValue);
-                LevelController.Instance.AddProduce(productionValue);
+                LevelManager.Instance.AddProduce(productionValue);
 
                 Debug.Log($"City selected. Distance to building: {distance} units.");
                 InventoryManager.Instance.ShowInventory();

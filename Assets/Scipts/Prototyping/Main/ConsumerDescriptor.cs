@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using Scipts.Prototyping.TestScipt_Lin_;
 
 public class ConsumerDescriptor : MonoBehaviour, ISelectableEntity
 {
@@ -23,8 +22,8 @@ public class ConsumerDescriptor : MonoBehaviour, ISelectableEntity
    
    public void Start()
    {
-       id = LevelController.Instance.nextID;
-       LevelController.Instance.nextID += 1;
+       id = LevelManager.Instance.nextID;
+       LevelManager.Instance.nextID += 1;
        
        // TODO: Probably not the best way, but suffices for prototyping
        RaycastHit hit;

@@ -52,7 +52,7 @@ public class InventoryManager : MonoBehaviour
             GameObject inventorySlotObject = Instantiate(slotTemplate, inventory.transform.position, Quaternion.identity);
             inventorySlotObject.transform.SetParent(inventory.transform);
 
-            Debug.Log("Instantiated " + inventorySlotObject.name);
+            // Debug.Log("Instantiated " + inventorySlotObject.name);
             InventorySlot newSlot = inventorySlotObject.GetComponent<InventorySlot>();
     
             newSlot.SetSprite(producerDescriptor.GetSprite());
@@ -98,7 +98,7 @@ public class InventoryManager : MonoBehaviour
 
     public void HideInventory()
     {
-        Debug.LogWarning("Hiding Inventory");
+        // Debug.LogWarning("Hiding Inventory");
         Vector3 currentPos = inventory.transform.position;
         currentPos.y -= 220f;
         inventory.transform.DOMoveY(currentPos.y, 0.75f);
@@ -106,7 +106,7 @@ public class InventoryManager : MonoBehaviour
 
     public void ShowInventory()
     {
-        Debug.LogWarning("Showing Inventory");
+        // Debug.LogWarning("Showing Inventory");
         Vector3 currentPos = inventory.transform.position;
         currentPos.y += 220f;
         inventory.transform.DOMoveY(currentPos.y, 0.75f);
@@ -141,7 +141,7 @@ public class InventoryManager : MonoBehaviour
         targetWidth += margin * 2;
         float targetHeight = (slotTemplate.GetComponent<RectTransform>().rect.height);
         targetHeight += margin * 2;
-        Debug.Log("Target inventory width: "+targetWidth);
+        // Debug.Log("Target inventory width: "+targetWidth);
         RectTransform newRect = inventory.GetComponent<RectTransform>();
         newRect.DOSizeDelta(new Vector2(targetWidth * scalingFactor, targetHeight * scalingFactor), 0.5f);
 
@@ -149,7 +149,7 @@ public class InventoryManager : MonoBehaviour
     
     public void UpdateInventorySlots()
     {
-        Debug.LogWarning("Updated Inventory Slots");
+        // Debug.LogWarning("Updated Inventory Slots");
         for (int i = 0; i < database.Count(); i++)
         {
             ProducerDescriptor producerDescriptor = (ProducerDescriptor) database.Get(i).Entity;

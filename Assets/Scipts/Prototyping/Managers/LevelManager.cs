@@ -104,7 +104,13 @@ public class LevelManager : MonoBehaviour
     {
         demandMet = currentProduction >= currentDemand;
     }
-    
+
+    public void SetMaxEnvironmentalImpact(float increase)
+    {
+        maxEnvironmentalImpact += increase;
+    }
+
+
 }
 
   

@@ -58,7 +58,11 @@ public class PlacementManager : MonoBehaviour
     
     public static PlacementManager Instance { get; private set; }
 
-    
+
+    private int coalCounter = 0;
+    [SerializeField] private GameObject notification;
+
+
 
     private void Awake()
     {
@@ -130,6 +134,18 @@ public class PlacementManager : MonoBehaviour
             ProducerDescriptor producerDescriptor = currentGameObject.GetComponent<ProducerDescriptor>();
             if (producerDescriptor.Place(lastHoveredTileData)) // second check, however, might not be needed as this is check in StartPlacmement
             {
+                //after first coal is placed we decrease enviroment impact and give a notification
+                
+                if (producerDescriptor.GetName() == "Cole")
+                {
+                    coalCounter +=  1;
+                    if(coalCounter == 1)
+                    {
+                        notification.SetActive(true);
+                        LevelManager.Instance.SetMaxEnvironmentalImpact(-100);
+                        UIManager.Instance.UpdateMaxEnvironmentalImpact();
+                    }
+                }
                 /* Handle Building */
                 lastPlacedBuilding = currentGameObject;
                 
@@ -294,6 +310,8 @@ public class PlacementManager : MonoBehaviour
             ProducerDescriptor ProducerDescriptor = currentGameObject.GetComponent<ProducerDescriptor>();
             //currentBuilding for placing 
             if (!ProducerDescriptor)
+
+
             {
                 throw new MissingComponentException($"{currentGameObject.name} requires ProducerDescriptor!");
             }

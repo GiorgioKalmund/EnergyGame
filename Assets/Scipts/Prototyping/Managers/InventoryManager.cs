@@ -19,7 +19,8 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private GameObject slotTemplate;
     public float innerSpacing = 75f; 
     public float margin = 10f; 
-    public float scalingFactor = 0.01f; 
+    public float scalingFactor = 0.01f;
+    private bool inventoryHidden;
 
     
     public static InventoryManager Instance { get; private set; }
@@ -37,6 +38,7 @@ public class InventoryManager : MonoBehaviour
         database.Clear();
         slots = new List<InventorySlot>();
         activeSlots = new List<InventorySlot>();
+        inventoryHidden = false;
     }
 
     private void Start()
@@ -99,6 +101,7 @@ public class InventoryManager : MonoBehaviour
     public void HideInventory()
     {
         // Debug.LogWarning("Hiding Inventory");
+        inventoryHidden = true;
         Vector3 currentPos = inventory.transform.position;
         currentPos.y -= 220f;
         inventory.transform.DOMoveY(currentPos.y, 0.75f);
@@ -107,6 +110,7 @@ public class InventoryManager : MonoBehaviour
     public void ShowInventory()
     {
         // Debug.LogWarning("Showing Inventory");
+        inventoryHidden = false;
         Vector3 currentPos = inventory.transform.position;
         currentPos.y += 220f;
         inventory.transform.DOMoveY(currentPos.y, 0.75f);
@@ -114,6 +118,14 @@ public class InventoryManager : MonoBehaviour
 
     private void CalculateSlotSpacings()
     {
+        if (activeSlots.Count == 0)
+        {
+            HideInventory();
+        } else if (inventoryHidden)
+        {
+            ShowInventory();
+        }
+        
         activeSlots.Sort((a,b) => a.instanceID.CompareTo(b.instanceID));
         for (int index = 0;  index < activeSlots.Count;  index++)
         {
@@ -140,16 +152,15 @@ public class InventoryManager : MonoBehaviour
         targetWidth -= innerSpacing;
         targetWidth += margin * 2;
         float targetHeight = (slotTemplate.GetComponent<RectTransform>().rect.height);
-        targetHeight += margin * 2;
-        // Debug.Log("Target inventory width: "+targetWidth);
         RectTransform newRect = inventory.GetComponent<RectTransform>();
         newRect.DOSizeDelta(new Vector2(targetWidth * scalingFactor, targetHeight * scalingFactor), 0.5f);
 
     }
-    
+     
+    // Called in ProducerDescriptor when we sell and add money to our budget
+    // Called in PlacementManager when we place and remove money from our budget
     public void UpdateInventorySlots()
     {
-        // Debug.LogWarning("Updated Inventory Slots");
         for (int i = 0; i < database.Count(); i++)
         {
             ProducerDescriptor producerDescriptor = (ProducerDescriptor) database.Get(i).Entity;

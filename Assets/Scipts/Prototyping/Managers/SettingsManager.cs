@@ -42,4 +42,9 @@ public class SettingsManager : MonoBehaviour
       GameManager.LoadSceneByIdAsync(sceneIndex); 
    }
 
+   public void Quit()
+   {
+      GameManager.Quit();
+   }
+
 }

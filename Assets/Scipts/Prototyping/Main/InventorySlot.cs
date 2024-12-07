@@ -1,9 +1,12 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
+using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 
-public class InventorySlot : MonoBehaviour
+public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         public Image spriteImage;
         public TMP_Text costText;
@@ -57,5 +60,17 @@ public class InventorySlot : MonoBehaviour
             // button.image.enabled = isEnabled;
             button.enabled = isEnabled;
             costText.enabled = isEnabled;
+        }
+
+        public void OnPointerEnter(PointerEventData data)
+        {
+            Debug.Log("The pointer is over: "+name);
+            gameObject.transform.DOScale(11f/10f, 0.2f).SetEase(Ease.InOutElastic);
+        }
+        
+        public void OnPointerExit(PointerEventData data)
+        {
+            Debug.Log("The pointer exited: "+name);
+            gameObject.transform.DOScale(10f/11f, 0.2f).SetEase(Ease.InOutElastic);
         }
     } 

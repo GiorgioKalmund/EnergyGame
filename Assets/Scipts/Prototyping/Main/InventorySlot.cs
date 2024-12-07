@@ -64,13 +64,11 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         public void OnPointerEnter(PointerEventData data)
         {
-            Debug.Log("The pointer is over: "+name);
             gameObject.transform.DOScale(11f/10f, 0.2f).SetEase(Ease.InOutElastic);
         }
         
         public void OnPointerExit(PointerEventData data)
         {
-            Debug.Log("The pointer exited: "+name);
             gameObject.transform.DOScale(10f/11f, 0.2f).SetEase(Ease.InOutElastic);
         }
     } 

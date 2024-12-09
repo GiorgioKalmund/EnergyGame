@@ -6361,7 +6361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d1ac90a8c0bbc34bb329575cca85bb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  budget: 1190
+  budget: 1200
   sellingFactor: 1
 --- !u!4 &1457948854
 Transform:

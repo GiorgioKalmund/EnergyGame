@@ -296,7 +296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ab2b108b4397094694f5d8f282caa0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingName: Factorio
+  buildingName: Commercial Area
   consumed: 0
   demand: 2000
   completed: 0

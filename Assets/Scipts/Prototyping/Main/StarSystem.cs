@@ -4,30 +4,44 @@ using UnityEngine.UI;
 
 public class StarSystem : MonoBehaviour
 {
-    public GameObject starPanel; 
-    public Button startGameButton; 
+    public GameObject endScreen;
+
     public Image[] stars;
     private int score = 50;
-    
+    private float MaxDemand;
+    private float currentProduction;
     void Start()
     {
-        if (!starPanel)
+        if (!endScreen)
         {
             Debug.LogWarning("No star panel found in star sytem, aborting creation of it.");
             return;
         }
+        MaxDemand = LevelManager.Instance.GetCurrentDemand();
+        endScreen.SetActive(false);
         
-        starPanel.SetActive(false);
-        startGameButton.onClick.AddListener(ShowStarPanel);
 
+    }
+    private void Update()
+    {
+        if (!endScreen)
+        {
+            return;
+        }
+        currentProduction = LevelManager.Instance.GetCurrentProduction();
+        if(currentProduction >= MaxDemand)
+        {
+            endScreen.SetActive(true);
+        }
+        
     }
     void ShowStarPanel()
     {
-        if (!starPanel)
+        if (!endScreen)
         {
             return;
         } 
-        starPanel.SetActive(true);
+        endScreen.SetActive(true);
 
         int starsToShow = CalculateStars(score);
 

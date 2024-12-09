@@ -239,8 +239,10 @@ public class PlacementManager : MonoBehaviour
                 lastPlacedCable.Place();
                 
                 // TODO: Parameterize distance falloff
-                float effectiveLoss = Mathf.Pow((1 - cableEffLossPerUnit), distance); 
-                productionValue -= effectiveLoss;
+                
+                float effectiveLoss = Mathf.Pow((1 - cableEffLossPerUnit), distance);
+                distance *= effectiveLoss;
+                productionValue -= distance;
                 productionValue = Mathf.Max(0, productionValue);
                 producerDescriptor.SetProduction(productionValue);
                 LevelManager.Instance.AddProduce(productionValue);

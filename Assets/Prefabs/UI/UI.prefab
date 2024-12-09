@@ -6646,7 +6646,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: -163.04918, y: -19.2}
-  m_SizeDelta: {x: 275, y: 200}
+  m_SizeDelta: {x: 275, y: 184.74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6886878130473513510
 CanvasRenderer:
@@ -8098,7 +8098,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1231765386945449097, guid: 2557bfe7d432f3a40b013a8ecd5be65a, type: 3}
       propertyPath: m_Name
-      value: OverlayToggle (2)
+      value: COAL
       objectReference: {fileID: 0}
     - target: {fileID: 2237367354012724004, guid: 2557bfe7d432f3a40b013a8ecd5be65a, type: 3}
       propertyPath: m_Pivot.x
@@ -8252,7 +8252,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1231765386945449097, guid: 2557bfe7d432f3a40b013a8ecd5be65a, type: 3}
       propertyPath: m_Name
-      value: OverlayToggle
+      value: SUN
       objectReference: {fileID: 0}
     - target: {fileID: 2237367354012724004, guid: 2557bfe7d432f3a40b013a8ecd5be65a, type: 3}
       propertyPath: m_Pivot.x
@@ -8406,7 +8406,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1231765386945449097, guid: 2557bfe7d432f3a40b013a8ecd5be65a, type: 3}
       propertyPath: m_Name
-      value: OverlayToggle (3)
+      value: WATER
       objectReference: {fileID: 0}
     - target: {fileID: 2237367354012724004, guid: 2557bfe7d432f3a40b013a8ecd5be65a, type: 3}
       propertyPath: m_Pivot.x
@@ -8560,7 +8560,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1231765386945449097, guid: 2557bfe7d432f3a40b013a8ecd5be65a, type: 3}
       propertyPath: m_Name
-      value: OverlayToggle (1)
+      value: WIND
       objectReference: {fileID: 0}
     - target: {fileID: 2237367354012724004, guid: 2557bfe7d432f3a40b013a8ecd5be65a, type: 3}
       propertyPath: m_Pivot.x

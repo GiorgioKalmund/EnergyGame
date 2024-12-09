@@ -159,7 +159,7 @@ public class GridDataManager : MonoBehaviour
 [System.Serializable]
 public class TileData
 {
-    float sunlightHours;
+    public float sunlightHours;
     public float windSpeed;
     public float waterSpeed;
     public float coalAmount;

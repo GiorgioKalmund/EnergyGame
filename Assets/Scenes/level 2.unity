@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0276e54eb1ca7804c9dbf593ac7413bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endScreen: {fileID: 0}
+  endScreen: {fileID: 809515139}
   stars: []
 --- !u!81 &17014427
 AudioListener:
@@ -1488,10 +1488,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 2397612598930238260, guid: 4ba92d772523ca1419cbce25f2fa8a7f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 809515140}
+    - target: {fileID: 2397612598930238260, guid: 4ba92d772523ca1419cbce25f2fa8a7f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadSceneByIdAsync
+      objectReference: {fileID: 0}
     - target: {fileID: 2630338247685024037, guid: 4ba92d772523ca1419cbce25f2fa8a7f, type: 3}
       propertyPath: overlayGameObject
       value: 
       objectReference: {fileID: 680550144}
+    - target: {fileID: 3375515587345462217, guid: 4ba92d772523ca1419cbce25f2fa8a7f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3938033019068297938, guid: 4ba92d772523ca1419cbce25f2fa8a7f, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1552,10 +1564,34 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -58.384613
       objectReference: {fileID: 0}
+    - target: {fileID: 5890174938443602730, guid: 4ba92d772523ca1419cbce25f2fa8a7f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 809515140}
+    - target: {fileID: 5890174938443602730, guid: 4ba92d772523ca1419cbce25f2fa8a7f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Quit
+      objectReference: {fileID: 0}
+    - target: {fileID: 6013041232189992631, guid: 4ba92d772523ca1419cbce25f2fa8a7f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 809515140}
+    - target: {fileID: 6013041232189992631, guid: 4ba92d772523ca1419cbce25f2fa8a7f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ReloadEntireScene
+      objectReference: {fileID: 0}
     - target: {fileID: 6111265524286920731, guid: 4ba92d772523ca1419cbce25f2fa8a7f, type: 3}
       propertyPath: overlayGameObject
       value: 
       objectReference: {fileID: 540688992}
+    - target: {fileID: 6544196238466830473, guid: 4ba92d772523ca1419cbce25f2fa8a7f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 809515140}
+    - target: {fileID: 6544196238466830473, guid: 4ba92d772523ca1419cbce25f2fa8a7f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadSceneByIdAsync
+      objectReference: {fileID: 0}
     - target: {fileID: 6854208240141625949, guid: 4ba92d772523ca1419cbce25f2fa8a7f, type: 3}
       propertyPath: mainCamera
       value: 
@@ -1718,6 +1754,22 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ba92d772523ca1419cbce25f2fa8a7f, type: 3}
+--- !u!1 &809515139 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8293817522100573810, guid: 4ba92d772523ca1419cbce25f2fa8a7f, type: 3}
+  m_PrefabInstance: {fileID: 809515138}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &809515140 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3936381237010001569, guid: 4ba92d772523ca1419cbce25f2fa8a7f, type: 3}
+  m_PrefabInstance: {fileID: 809515138}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de69f2959c834b33b3e9001a0e1a1476, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &843959124
 GameObject:
   m_ObjectHideFlags: 0

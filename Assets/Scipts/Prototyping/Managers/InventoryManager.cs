@@ -100,7 +100,7 @@ public class InventoryManager : MonoBehaviour
 
     public void HideInventory()
     {
-        // Debug.LogWarning("Hiding Inventory");
+        //Debug.LogWarning("Hiding Inventory");
         inventoryHidden = true;
         Vector3 currentPos = inventory.transform.position;
         currentPos.y -= 220f;
@@ -109,7 +109,7 @@ public class InventoryManager : MonoBehaviour
 
     public void ShowInventory()
     {
-        // Debug.LogWarning("Showing Inventory");
+        //Debug.LogWarning("Showing Inventory");
         inventoryHidden = false;
         Vector3 currentPos = inventory.transform.position;
         currentPos.y += 220f;
@@ -118,12 +118,11 @@ public class InventoryManager : MonoBehaviour
 
     private void CalculateSlotSpacings()
     {
-        if (activeSlots.Count == 0)
+        Debug.Log("Inventory has items: "+activeSlots.Count);
+
+        if (IsEmpty())
         {
             HideInventory();
-        } else if (inventoryHidden)
-        {
-            ShowInventory();
         }
         
         activeSlots.Sort((a,b) => a.instanceID.CompareTo(b.instanceID));
@@ -174,5 +173,15 @@ public class InventoryManager : MonoBehaviour
             }
         }
         CalculateSlotSpacings();
+    }
+
+    public bool IsEmpty()
+    {
+        return activeSlots.Count == 0;
+    }
+
+    public bool InventoryHidden()
+    {
+        return inventoryHidden;
     }
 }

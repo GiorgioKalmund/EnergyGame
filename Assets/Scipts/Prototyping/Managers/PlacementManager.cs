@@ -158,7 +158,7 @@ public class PlacementManager : MonoBehaviour
 
                 // Prepare for citySelection
                 citySelectionActive = true;
-                Debug.Log("Building placed. Please select a city.");
+                //Debug.Log("Building placed. Please select a city.");
                 InventoryManager.Instance.UpdateInventorySlots(); 
                 InventoryManager.Instance.HideInventory(); 
                 cellSprite.color = spriteColorConnecting;
@@ -212,22 +212,25 @@ public class PlacementManager : MonoBehaviour
                 float productionValue = producerDescriptor.GetMaxProduction();
                 
                 // TODO: THIS IS NOT THE WAY TO DO IT, maybe an Enum for BuildingType?
-                if (producerDescriptor.buildingName == "Epic Windmill")
+                if (producerDescriptor.buildingName == "Windmill")
                 {
                     //TODO kommt später weg
                     //lastHoveredTileData.windSpeed += 0.1f;
                     productionValue *= lastHoveredTileData.windSpeed;
 
                 } 
-                else if (producerDescriptor.buildingName == "Water Boy")
+                else if (producerDescriptor.buildingName == "Hydropower")
                 {
                     //lastHoveredTileData.waterSpeed += 0.1f;
                     //Debug.Log("Applied a debuff of "+lastHoveredTileData.waterSpeed + " to "+producerDescriptor.buildingName);
                     productionValue *= lastHoveredTileData.waterSpeed;
                 }
-                else if (producerDescriptor.buildingName == "Cole")
+                else if (producerDescriptor.buildingName == "Coal Plant")
                 {
                     productionValue *= lastHoveredTileData.coalAmount;
+                } else if (producerDescriptor.buildingName == "Solar Panels")
+                {
+                    productionValue *= lastHoveredTileData.sunlightHours;
                 }
 
                 //Debug.Log($"alpha = {lastHoveredTileData.waterSpeed}");
@@ -247,8 +250,11 @@ public class PlacementManager : MonoBehaviour
                 producerDescriptor.SetProduction(productionValue);
                 LevelManager.Instance.AddProduce(productionValue);
 
-                Debug.Log($"City selected. Distance to building: {distance} units.");
-                InventoryManager.Instance.ShowInventory();
+                //Debug.Log($"City selected. Distance to building: {distance} units.");
+                if (!InventoryManager.Instance.IsEmpty())
+                {
+                    InventoryManager.Instance.ShowInventory();
+                }
 
                 //reset CellIndicator
                 cellSprite.color = spriteColorRegular;

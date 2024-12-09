@@ -32,11 +32,13 @@ public class SelectionPanel : MonoBehaviour
                                   $"Current: {currentProducer.GetCurrentProduction()} MW\n" +
                                   $"Env : {currentProducer.GetEnvironmentalImpact()} CO2";
            costTextElement.text = $"ID: {currentProducer.GetID()}";
+           costTextElement.text = "";
            ShowSellButton(true);
        } else if (currentEntity as ConsumerDescriptor)
        {
            ConsumerDescriptor consumer = (ConsumerDescriptor) entity;
-           statTextElement.text = $"{consumer.GetConsumed()} / {consumer.GetDemand()} MW";
+           //statTextElement.text = $"{consumer.GetConsumed()} / {consumer.GetDemand()} MW";
+           statTextElement.text = "";
            costTextElement.text = $"ID: {consumer.GetID()}";
        }
     }

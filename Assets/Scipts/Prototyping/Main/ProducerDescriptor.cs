@@ -78,6 +78,10 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
        tileOn.Reset();
        LevelManager.Instance.ReduceProduce(currentProduction);
        LevelManager.Instance.ReduceEnvironmentalImpact(environmentalImpact);
+       if (InventoryManager.Instance.IsEmpty() && InventoryManager.Instance.InventoryHidden())
+       {
+           InventoryManager.Instance.ShowInventory();
+       }
        InventoryManager.Instance.UpdateInventorySlots();
        foreach (PowerCable cable in connectedCables)
        {

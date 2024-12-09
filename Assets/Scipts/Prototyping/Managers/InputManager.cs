@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
 using Unity.VisualScripting;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
@@ -20,8 +21,6 @@ public class InputManager : MonoBehaviour
     [SerializeField] private float minZoom = 5f;   
     [SerializeField] private float maxZoom = 50f;
     
-    
-
 
     [Header("Layers")]
     [SerializeField] private LayerMask defaultLayer;
@@ -61,6 +60,11 @@ public class InputManager : MonoBehaviour
         //we dont need this movement shit
         //HandleMapMovement();
         zoom();
+        
+        if (Input.GetKeyDown(KeyCode.Escape) && SettingsManager.Instance.settingsOpen)
+        {
+            SettingsManager.Instance.ToggleSettingsPanel(false);
+        }
         
     }
     //private void HandleMapMovement()

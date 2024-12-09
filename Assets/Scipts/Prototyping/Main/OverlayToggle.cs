@@ -33,7 +33,7 @@ public class OverlayToggle : MonoBehaviour
         this.isOn = false;
         _imageComponent.sprite = isOn ? toggleOnSprite : toggleOffSprite;
         overlayGameObject.SetActive(false);
-        CameraManager.Instance.ResetCameraTransform();
+        //CameraManager.Instance.ResetCameraTransform();
     }
 
     public void ToggleOn()
@@ -41,7 +41,7 @@ public class OverlayToggle : MonoBehaviour
         this.isOn =  true;
         _imageComponent.sprite = isOn ? toggleOnSprite : toggleOffSprite;
         overlayGameObject.SetActive(true);
-        CameraManager.Instance.MoveCameraToTargetTransform();
+        //CameraManager.Instance.MoveCameraToTargetTransform();
     }
 
     public bool IsOn()

@@ -83,14 +83,14 @@ public class UIManager : MonoBehaviour
     { 
         if (demandText) 
         { 
-            demandText.text = $"Demand: {LevelManager.Instance.GetCurrentDemand():F2} MW"; 
+            demandText.text = $"{LevelManager.Instance.GetCurrentDemand():F2} MW"; 
         }
     }
     public void UpdateCurrentProductionText()
     { 
         if (currentProductionText) 
         { 
-            currentProductionText.text = $"Current Production: {LevelManager.Instance.GetCurrentProduction():F2} MW"; 
+            currentProductionText.text = $"{LevelManager.Instance.GetCurrentProduction():F2} MW"; 
         }
     }
 
@@ -99,7 +99,7 @@ public class UIManager : MonoBehaviour
     { 
         if (Max_Enviroment) 
         {
-            Max_Enviroment.text = $"{LevelManager.Instance.GetMaxEnvironmentalImpact():F2} CO2";
+            Max_Enviroment.text = $"{LevelManager.Instance.GetMaxEnvironmentalImpact():F2} CO2t";
         }
     }
 
@@ -108,7 +108,7 @@ public class UIManager : MonoBehaviour
     {
         if (Current_Enviroment)
         {
-            Current_Enviroment.text = $"{LevelManager.Instance.GetCurrentEnvironmentalImpact():F2} CO2";
+            Current_Enviroment.text = $"{LevelManager.Instance.GetCurrentEnvironmentalImpact():F2} CO2t";
         }
     }
 

@@ -11,6 +11,8 @@ public class SettingsManager : MonoBehaviour
    [Header("GameObjects")] 
    [SerializeField] private GameObject settingsPanel;
 
+   public bool settingsOpen;
+
    private void Awake()
    {
       if (Instance && Instance != this)
@@ -23,6 +25,7 @@ public class SettingsManager : MonoBehaviour
       }
       
       settingsPanel.SetActive(false);
+      settingsOpen = false;
    }
 
 
@@ -30,6 +33,7 @@ public class SettingsManager : MonoBehaviour
    {
       settingsPanel.SetActive(!settingsPanel.activeSelf);
       Time.timeScale = Time.timeScale.Equals(1f) && freezeTime ? 0f : 1f;
+      settingsOpen = !settingsOpen;
    }
 
    public void ReloadEntireScene()

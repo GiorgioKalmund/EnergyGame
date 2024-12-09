@@ -32,6 +32,8 @@ public class PlacementManager : MonoBehaviour
     [Header("Cable")] 
     [SerializeField] private GameObject cablePrefab;
 
+    [SerializeField] private float cableEffLossPerUnit = 0.04f;
+
     private PowerCable lastPlacedCable;
 
     // Cell Indicator
@@ -59,9 +61,8 @@ public class PlacementManager : MonoBehaviour
     public static PlacementManager Instance { get; private set; }
 
 
-    private int coalCounter = 0;
-    [SerializeField] private GameObject notification;
-
+    //private int coalCounter = 0;
+    //[SerializeField] private GameObject notification;
 
 
     private void Awake()
@@ -135,7 +136,7 @@ public class PlacementManager : MonoBehaviour
             if (producerDescriptor.Place(lastHoveredTileData)) // second check, however, might not be needed as this is check in StartPlacmement
             {
                 //after first coal is placed we decrease enviroment impact and give a notification
-                
+                /*
                 if (producerDescriptor.GetName() == "Cole")
                 {
                     coalCounter +=  1;
@@ -146,6 +147,7 @@ public class PlacementManager : MonoBehaviour
                         UIManager.Instance.UpdateMaxEnvironmentalImpact();
                     }
                 }
+                */
                 /* Handle Building */
                 lastPlacedBuilding = currentGameObject;
                 
@@ -237,8 +239,8 @@ public class PlacementManager : MonoBehaviour
                 lastPlacedCable.Place();
                 
                 // TODO: Parameterize distance falloff
-                distance *= 0.04f; 
-                productionValue -= distance;
+                float effectiveLoss = Mathf.Pow((1 - cableEffLossPerUnit), distance); 
+                productionValue -= effectiveLoss;
                 productionValue = Mathf.Max(0, productionValue);
                 producerDescriptor.SetProduction(productionValue);
                 LevelManager.Instance.AddProduce(productionValue);

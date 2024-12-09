@@ -42,6 +42,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                     Debug.LogError("Button component not found!");
                 }
                 isEnabled = true;
+                gameObject.transform.DOScale(10f/10f, 0.2f).SetEase(Ease.InOutElastic);
         }
 
         public void Disable()

@@ -2280,7 +2280,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   budget: 300
-  sellingFactor: 1
+  sellingFactor: 0.8
 --- !u!4 &1457948854
 Transform:
   m_ObjectHideFlags: 0

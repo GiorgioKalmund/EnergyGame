@@ -61,9 +61,12 @@ public class InputManager : MonoBehaviour
         //HandleMapMovement();
         zoom();
         
-        if (Input.GetKeyDown(KeyCode.Escape) && SettingsManager.Instance.settingsOpen)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SettingsManager.Instance.ToggleSettingsPanel(false);
+            if (SettingsManager.Instance)
+            {
+                SettingsManager.Instance.ToggleSettingsPanel(false);
+            }
         }
         
     }

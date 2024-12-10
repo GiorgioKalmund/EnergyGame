@@ -3,9 +3,6 @@ using JetBrains.Annotations;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 using System.Collections;
-using Unity.VisualScripting;
-using System.IO.Pipes;
-using UnityEngine.Serialization;
 
 
 public class PlacementManager : MonoBehaviour
@@ -240,8 +237,6 @@ public class PlacementManager : MonoBehaviour
                 // BudgetManager.Instance.UseBudget(distance);
 
                 lastPlacedCable.Place();
-                
-                // TODO: Parameterize distance falloff
                 
                 float effectiveLoss = Mathf.Pow((1 - cableEffLossPerUnit), distance);
                 distance *= effectiveLoss;

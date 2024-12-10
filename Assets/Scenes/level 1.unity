@@ -1472,6 +1472,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 953348490449765195, guid: 4ba92d772523ca1419cbce25f2fa8a7f, type: 3}
+      propertyPath: m_ScreenMatchMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1344091142306434831, guid: 4ba92d772523ca1419cbce25f2fa8a7f, type: 3}
       propertyPath: m_RenderMode
       value: 0

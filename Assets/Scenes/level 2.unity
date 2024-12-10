@@ -1472,6 +1472,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 953348490449765195, guid: 4ba92d772523ca1419cbce25f2fa8a7f, type: 3}
+      propertyPath: m_ScreenMatchMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1365041402296012498, guid: 4ba92d772523ca1419cbce25f2fa8a7f, type: 3}
       propertyPath: overlayGameObject
       value: 
@@ -2275,8 +2279,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d1ac90a8c0bbc34bb329575cca85bb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  budget: 1200
-  sellingFactor: 0.8
+  budget: 300
+  sellingFactor: 1
 --- !u!4 &1457948854
 Transform:
   m_ObjectHideFlags: 0

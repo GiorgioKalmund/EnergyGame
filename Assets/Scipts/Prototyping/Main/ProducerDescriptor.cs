@@ -1,10 +1,6 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
-using UnityEngine.Serialization;
-using Unity.XR.OpenVR;
-using UnityEditor;
-//using UnityEngine.WSA;
 
 [RequireComponent(typeof(BoxCollider))]
 public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
@@ -78,10 +74,7 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
        tileOn.Reset();
        LevelManager.Instance.ReduceProduce(currentProduction);
        LevelManager.Instance.ReduceEnvironmentalImpact(environmentalImpact);
-       if (InventoryManager.Instance.IsEmpty() && InventoryManager.Instance.InventoryHidden())
-       {
-           InventoryManager.Instance.ShowInventory();
-       }
+       Debug.Log("1: New Budet: "+BudgetManager.Instance.GetBudget());
        InventoryManager.Instance.UpdateInventorySlots();
        foreach (PowerCable cable in connectedCables)
        {

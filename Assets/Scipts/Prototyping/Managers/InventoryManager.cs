@@ -1,13 +1,6 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Data.Common;
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
-using Unity.VisualScripting;
-using UnityEngine.Serialization;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -20,7 +13,7 @@ public class InventoryManager : MonoBehaviour
     public float innerSpacing = 75f; 
     public float margin = 10f; 
     public float scalingFactor = 0.01f;
-    private bool inventoryHidden;
+    public bool inventoryHidden;
 
     
     public static InventoryManager Instance { get; private set; }
@@ -71,7 +64,7 @@ public class InventoryManager : MonoBehaviour
     public void DisableSlot(int instanceId)
     {
        slots[instanceId].Disable();
-       if (!activeSlots.Remove(slots[instanceId]))
+       if (activeSlots.RemoveAll((slot) => slot.instanceID == instanceId) == 0)
        {
            Debug.LogWarning("Cannot remove slot!");
        };
@@ -109,20 +102,23 @@ public class InventoryManager : MonoBehaviour
 
     public void ShowInventory()
     {
-        //Debug.LogWarning("Showing Inventory");
+        // Debug.LogWarning("Showing Inventory");
         inventoryHidden = false;
         Vector3 currentPos = inventory.transform.position;
+        Debug.Log("Current: "+currentPos);
         currentPos.y += 220f;
+        Debug.Log("Target: "+currentPos);
         inventory.transform.DOMoveY(currentPos.y, 0.75f);
     }
 
     private void CalculateSlotSpacings()
     {
-        Debug.Log("Inventory has items: "+activeSlots.Count);
-
-        if (IsEmpty())
+        if (IsEmpty() && !inventoryHidden)
         {
             HideInventory();
+        } else if (!IsEmpty() && inventoryHidden)
+        {
+            ShowInventory();
         }
         
         activeSlots.Sort((a,b) => a.instanceID.CompareTo(b.instanceID));

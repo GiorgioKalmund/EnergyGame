@@ -1484,6 +1484,14 @@ PrefabInstance:
       propertyPath: overlayGameObject
       value: 
       objectReference: {fileID: 765861181}
+    - target: {fileID: 1510095003178103111, guid: 4ba92d772523ca1419cbce25f2fa8a7f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 103.200195
+      objectReference: {fileID: 0}
+    - target: {fileID: 1510095003178103111, guid: 4ba92d772523ca1419cbce25f2fa8a7f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -26.799805
+      objectReference: {fileID: 0}
     - target: {fileID: 1737737104038720418, guid: 4ba92d772523ca1419cbce25f2fa8a7f, type: 3}
       propertyPath: m_Name
       value: UI
@@ -2243,7 +2251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   budget: 1025
-  sellingFactor: 0.8
+  sellingFactor: 1
 --- !u!4 &1457948854
 Transform:
   m_ObjectHideFlags: 0

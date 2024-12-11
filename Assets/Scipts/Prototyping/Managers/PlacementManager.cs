@@ -86,7 +86,6 @@ public class PlacementManager : MonoBehaviour
 
     public void StartPlacement(int ID)
     {
-        
         if (currentGameObject)
         {
             StopPlacement();
@@ -125,7 +124,10 @@ public class PlacementManager : MonoBehaviour
 
     private void PlaceStructure()
     {
-
+        if (InputManager.IsPointOverUI())
+        {
+            return;
+        }
         // After a building is placed, we want to select a city to connect
         if (currentGameObject && !blocked)
         {

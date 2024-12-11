@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 948469811167706014}
   - component: {fileID: 3553020051848779369}
   - component: {fileID: 6233768449051198437}
+  - component: {fileID: 7366864745515702177}
   m_Layer: 5
   m_Name: PathMarker
   m_TagString: Untagged
@@ -75,3 +76,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7366864745515702177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3959553496423863317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b1b2451a5b64709b22959899b74feb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unlocked: 0
+  lockedImage: {fileID: 21300000, guid: f6fc14c69ca814552b7516641da2d050, type: 3}
+  unlockedImage: {fileID: 21300000, guid: 966a406d0ab23411996c58f643e33d1c, type: 3}

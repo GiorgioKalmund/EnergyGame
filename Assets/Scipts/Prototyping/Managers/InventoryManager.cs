@@ -15,6 +15,9 @@ public class InventoryManager : MonoBehaviour
     public float scalingFactor = 0.01f;
     public bool inventoryHidden;
 
+    public float hidingYOffset = 220f;
+    public Vector3 startPosition;
+    public Vector3 hiddenPosition;
     
     public static InventoryManager Instance { get; private set; }
     private void Awake()
@@ -32,6 +35,9 @@ public class InventoryManager : MonoBehaviour
         slots = new List<InventorySlot>();
         activeSlots = new List<InventorySlot>();
         inventoryHidden = false;
+        startPosition = gameObject.transform.position;
+        hiddenPosition = startPosition;
+        hiddenPosition.y -= hidingYOffset;
     }
 
     private void Start()
@@ -93,22 +99,26 @@ public class InventoryManager : MonoBehaviour
 
     public void HideInventory()
     {
+        if (inventoryHidden)
+        {
+            return;
+        }
         //Debug.LogWarning("Hiding Inventory");
         inventoryHidden = true;
-        Vector3 currentPos = inventory.transform.position;
-        currentPos.y -= 220f;
-        inventory.transform.DOMoveY(currentPos.y, 0.75f);
+        inventory.transform.DOMoveY(hiddenPosition.y, 0.75f);
     }
 
     public void ShowInventory()
     {
+        if (!inventoryHidden)
+        {
+            return;
+        }
         // Debug.LogWarning("Showing Inventory");
         inventoryHidden = false;
         Vector3 currentPos = inventory.transform.position;
-        Debug.Log("Current: "+currentPos);
         currentPos.y += 220f;
-        Debug.Log("Target: "+currentPos);
-        inventory.transform.DOMoveY(currentPos.y, 0.75f);
+        inventory.transform.DOMoveY(startPosition.y, 0.75f);
     }
 
     private void CalculateSlotSpacings()

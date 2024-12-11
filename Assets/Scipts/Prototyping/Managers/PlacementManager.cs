@@ -106,6 +106,7 @@ public class PlacementManager : MonoBehaviour
             validNewPlacement = true;
             cellIndicator.SetActive(true);
             currentGameObject.layer = 2;
+            InventoryManager.Instance.HideInventory(); 
             ProducerDescriptor producerDescriptor = currentGameObject.GetComponent<ProducerDescriptor>();
             if (!BudgetManager.Instance.CanHandleCost(producerDescriptor.GetCost()))
             {
@@ -159,7 +160,6 @@ public class PlacementManager : MonoBehaviour
                 citySelectionActive = true;
                 //Debug.Log("Building placed. Please select a city.");
                 InventoryManager.Instance.UpdateInventorySlots(); 
-                InventoryManager.Instance.HideInventory(); 
                 cellSprite.color = spriteColorConnecting;
                 connectingModeIndicatorImage.SetActive(true);
                 
@@ -278,6 +278,10 @@ public class PlacementManager : MonoBehaviour
     {
         Destroy(currentGameObject);
         currentGameObject = null;
+        if (!InventoryManager.Instance.IsEmpty())
+        {
+            InventoryManager.Instance.ShowInventory();
+        }
     }
 
     private void StopPlacement()
@@ -288,7 +292,12 @@ public class PlacementManager : MonoBehaviour
             return;
         }
 
-        
+        if (citySelectionActive)
+        {
+            Debug.Log("Cannot cancel while in selection mode!");
+            return;
+        }
+
         placingObjectIndex = -1;
         cellIndicator.SetActive(false);
         InputManager.Instance.OnClicked -= PlaceStructure;

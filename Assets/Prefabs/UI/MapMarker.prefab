@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5480977521322174934}
   - component: {fileID: 2233998371400825070}
   - component: {fileID: 138637200774915951}
+  - component: {fileID: 3642316311416885715}
   m_Layer: 5
   m_Name: MapMarker
   m_TagString: Untagged
@@ -120,3 +121,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3642316311416885715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8043455232930199327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7711a67beac47828b6a94a855f0b3a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prev: {fileID: 0}
+  next: {fileID: 0}
+  lockedImage: {fileID: 21300000, guid: cfdea49c4f8a1426ab19b352e7641f61, type: 3}
+  unlockedImage: {fileID: 21300000, guid: 8608396d757ff4db38cfcbe4bf7b7ed2, type: 3}

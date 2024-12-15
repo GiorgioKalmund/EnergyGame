@@ -13,7 +13,9 @@ public class Wandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        graphManager = FindObjectOfType<GraphManager>();
+        InstanceID = graphManager.numOfWandler;
+        graphManager.InsertNew(this);
     }
 
     // Update is called once per frame

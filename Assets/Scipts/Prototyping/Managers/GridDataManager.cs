@@ -163,7 +163,7 @@ public class TileData
     public float windSpeed;
     public float waterSpeed;
     public float coalAmount;
-    private PlacementType placementType;
+    private PlacementType defaultPlacementType;
     public PlacementType currentPlacementType;
     [CanBeNull] public ISelectableEntity currentBuilding;
     public Vector2 coords;
@@ -174,7 +174,7 @@ public class TileData
         windSpeed = wind;
         waterSpeed = water;
         coalAmount = coal;
-        placementType = type;
+        defaultPlacementType = type;
         currentPlacementType = type;
         this.coords = coords;
         this.currentBuilding = currentBuilding;
@@ -197,7 +197,7 @@ public class TileData
     public void Reset()
     {
         currentBuilding = null;
-        currentPlacementType = placementType;
+        currentPlacementType = defaultPlacementType;
     }
 
 }

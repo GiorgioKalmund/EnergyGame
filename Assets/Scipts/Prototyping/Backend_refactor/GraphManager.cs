@@ -13,4 +13,8 @@ public class GraphManager : MonoBehaviour
 
 
     }
+
+    public void ConnectWandler(Wandler from, Wandler to){
+        Matrix[from.InstanceID, to.InstanceID] = 1;
+    }
 }

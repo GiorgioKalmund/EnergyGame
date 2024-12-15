@@ -6,8 +6,11 @@ public class Wandler : MonoBehaviour
 {
     private GraphManager graphManager;
     public int InstanceID;
+    [SerializeField]
     private EnergyChunk input;
+    [SerializeField]
     public EnergyChunk output;
+    [SerializeField]
     private float efficiency;
     
     // Start is called before the first frame update

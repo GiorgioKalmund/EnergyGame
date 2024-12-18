@@ -12,15 +12,21 @@ public class Wandler : MonoBehaviour
     public EnergyChunk output;
     [SerializeField]
     private float efficiency;
+
+    public Wandler onStartConnectTo;
     
     // Start is called before the first frame update
     void Start()
     {
-        graphManager = FindObjectOfType<GraphManager>();
+        graphManager = GraphManager.Instance;
         InstanceID = graphManager.numOfWandler;
         graphManager.InsertNew(this);
 
         graphManager.printMatrix();
+
+        if(onStartConnectTo != null){
+            addInputWandler(onStartConnectTo);
+        }
     }
 
     // Update is called once per frame
@@ -29,11 +35,11 @@ public class Wandler : MonoBehaviour
         
     }
 
-    void addInputWandler(Wandler wandler){
+    public void addInputWandler(Wandler wandler){
         graphManager.ConnectWandler(wandler, this);
     }
 
-    void addOutputWandler(Wandler wandler){
+    public void addOutputWandler(Wandler wandler){
         graphManager.ConnectWandler(this, wandler);
     }
 }

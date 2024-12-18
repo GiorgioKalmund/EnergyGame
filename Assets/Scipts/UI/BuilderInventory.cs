@@ -22,8 +22,11 @@ public class BuilderInventory : MonoBehaviour
     [SerializeField] private GameObject inventorySlots;
     [SerializeField] private GameObject builderInventorySlotGameObject;
 
+    private List<BuilderInventorySlot> builderSlots;
+    
     [Header("Values")] 
     [SerializeField] private float inventoryAnimTime = 0.5f;
+    [SerializeField] private float inventoryYMovement = 150f;
     private void Expand()
     {
         expanded = true;
@@ -53,10 +56,10 @@ public class BuilderInventory : MonoBehaviour
         // Setup initial positions and state 
         expanded = false;
         collapsedPosition = inventory.GetComponent<RectTransform>().anchoredPosition; 
-        Debug.Log(collapsedPosition);
-        expandedPosition = collapsedPosition + new Vector3(0f, 100f, 0f);
-        Debug.Log(expandedPosition);
+        expandedPosition = collapsedPosition + new Vector3(0f, inventoryYMovement, 0f);
         database.Clear();
+
+        builderSlots = new List<BuilderInventorySlot>();
 
         if (!inventorySlots || !inventoryToggle || !builderInventorySlotGameObject || !inventory)
         {
@@ -80,8 +83,23 @@ public class BuilderInventory : MonoBehaviour
             ProducerDescriptor descriptor = prefabs[index].GetComponent<ProducerDescriptor>();
             slot.Setup(descriptor, index);
             
+            // Update internal List
+            builderSlots.Add(slot);
+            if (index % 2 == 0)
+                slot.Deactivate();
+            
             // Update database
             database.Put(new ObjectData(descriptor, index, prefabs[index]));
         }
+    }
+
+    public void AddSlotCapacity(int capacity, int slotId)
+    {
+        builderSlots[slotId].capacity += capacity;
+    }
+    
+    public void SetSlotCapacity(int capacity, int slotId)
+    {
+        builderSlots[slotId].capacity += capacity;
     }
 }

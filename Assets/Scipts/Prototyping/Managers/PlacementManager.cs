@@ -172,9 +172,9 @@ public class PlacementManager : MonoBehaviour
 
                  if(cable.GetComponent<Wandler>() != null){
                     Wandler cwandler = cable.GetComponent<Wandler>();
-                    Debug.Log("Got cable Wandler!");
+                    //Debug.Log("Got cable Wandler!");
                     cwandler.onStartConnectTo = lastPlacedBuilding.GetComponent<Wandler>();
-                    Debug.Log("Connected Cable to plant!");
+                    //Debug.Log("Connected Cable to plant!");
                 }
 
             }

@@ -22,11 +22,10 @@ public class Wandler : MonoBehaviour
         InstanceID = graphManager.numOfWandler;
         graphManager.InsertNew(this);
 
-        graphManager.printMatrix();
-
         if(onStartConnectTo != null){
             addInputWandler(onStartConnectTo);
         }
+        graphManager.printMatrix();
     }
 
     // Update is called once per frame

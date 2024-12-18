@@ -169,6 +169,12 @@ public class PlacementManager : MonoBehaviour
                 producerDescriptor.AddCable(lastPlacedCable);
                 
                 InputManager.Instance.OnClicked += SelectCity;
+
+                 if(cable.GetComponent<Wandler>() != null){
+                    Wandler cwandler = cable.GetComponent<Wandler>();
+                    cwandler.graphManager.ConnectWandler(cwandler.graphManager.wandlerArray[cwandler.InstanceID-1], cwandler);
+                }
+                
             }
             else
             {

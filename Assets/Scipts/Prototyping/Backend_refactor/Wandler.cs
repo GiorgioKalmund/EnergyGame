@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Wandler : MonoBehaviour
 {
-    private GraphManager graphManager;
+    public GraphManager graphManager;
     public int InstanceID;
     [SerializeField]
     private EnergyChunk input;
@@ -19,11 +19,21 @@ public class Wandler : MonoBehaviour
         graphManager = FindObjectOfType<GraphManager>();
         InstanceID = graphManager.numOfWandler;
         graphManager.InsertNew(this);
+
+        graphManager.printMatrix();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    void addInputWandler(Wandler wandler){
+        graphManager.ConnectWandler(wandler, this);
+    }
+
+    void addOutputWandler(Wandler wandler){
+        graphManager.ConnectWandler(this, wandler);
     }
 }

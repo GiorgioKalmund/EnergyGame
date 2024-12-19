@@ -1,9 +1,11 @@
 using System;
 using System.Data.Common;
+using System.Diagnostics;
 using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Animations;
+using Debug = UnityEngine.Debug;
 
 public class CameraManager : MonoBehaviour
 {
@@ -15,6 +17,9 @@ public class CameraManager : MonoBehaviour
    [Header("Targets")]
    public Transform targetTransform;
    private GameObject originalCameraPosition;
+
+   
+
    private void Awake()
    {
       if (Instance && Instance != this)
@@ -31,7 +36,9 @@ public class CameraManager : MonoBehaviour
       originalCameraPosition.transform.rotation = currentCamera.transform.rotation;
    }
 
-   public void MoveCameraToTargetTransform()
+   
+
+    public void MoveCameraToTargetTransform()
    {
       currentCamera.transform.DOMove(targetTransform.position, 1f);
       currentCamera.transform.DORotateQuaternion(targetTransform.rotation, 1f);

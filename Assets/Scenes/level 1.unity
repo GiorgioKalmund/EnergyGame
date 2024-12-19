@@ -699,6 +699,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4cbd0d6b63bd74ff5839aafdd534a04f, type: 3}
+--- !u!1 &318222863
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 318222864}
+  m_Layer: 0
+  m_Name: Center
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &318222864
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 318222863}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8, y: 0, z: 19.01}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &349312033 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2029917860486981916, guid: 4ba92d772523ca1419cbce25f2fa8a7f, type: 3}
@@ -805,6 +836,7 @@ MonoBehaviour:
   prefab9: {fileID: 2643937061277584625, guid: 3f037ca6dec2e418b96937e8dc729f8d, type: 3}
   grid: {fileID: 936100650}
   tilesCenter: {fileID: 1879477452}
+  center: {fileID: 318222863}
 --- !u!4 &449172140
 Transform:
   m_ObjectHideFlags: 0
@@ -2571,9 +2603,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 17014428}
-  zoomSpeed: 5
+  zoomSpeed: 10
   minZoom: 5
   maxZoom: 50
+  rotationSpeed: 150
+  center: {fileID: 318222863}
+  minVerticalAngle: 10
+  maxVerticalAngle: 80
   defaultLayer:
     serializedVersion: 2
     m_Bits: 0
@@ -2703,6 +2739,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 17014429}
+  - {fileID: 318222864}
   - {fileID: 683184404}
   - {fileID: 1760287655}
   - {fileID: 449172140}

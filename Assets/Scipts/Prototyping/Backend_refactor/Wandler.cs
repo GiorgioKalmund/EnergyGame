@@ -41,4 +41,27 @@ public class Wandler : MonoBehaviour
     public void addOutputWandler(Wandler wandler){
         graphManager.ConnectWandler(this, wandler);
     }
+
+    public void ComputeInput(){
+        float inputAmt = 0f;
+        for(int i = 0; i<graphManager.Matrix.Length;i++){
+            if(graphManager.Matrix[i,InstanceID] == 1){
+                inputAmt += graphManager.wandlerArray[i].getOutput();
+            }
+
+
+        }
+        input.Amount = inputAmt;
+
+    }
+    public float getOutput(){
+        ComputeInput();
+        int numOfChildren = 0;
+        for(int i = 0; i<graphManager.Matrix.Length;i++){
+            if(graphManager.Matrix[InstanceID,i] == 1){
+                numOfChildren++;
+            }
+        }
+        return input.Amount * efficiency / numOfChildren;
+    }
 }

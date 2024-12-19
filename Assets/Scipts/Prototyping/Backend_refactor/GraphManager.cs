@@ -8,6 +8,7 @@ public class GraphManager : MonoBehaviour
     public static GraphManager Instance { get; private set;}
     public int[,] Matrix { get; } = new int[100, 100];
     public Wandler[] wandlerArray = new Wandler[100];
+    public Wandler[] Endpoints;
     public int numOfWandler = 0;
 
     public void Awake(){

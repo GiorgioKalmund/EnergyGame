@@ -17,14 +17,22 @@ public class InputManager : MonoBehaviour
     [Header("Camera")]
     [SerializeField]
     private Camera mainCamera;
-    private Transform initialCameraPosition;
-    [SerializeField] private float zoomSpeed = 10f;
+    [SerializeField] public GameObject center;
+
+    [Header("Zoom")]
+    [SerializeField] private float zoomSpeed = 30f;
     [SerializeField] private float minZoom = 5f;
     [SerializeField] private float maxZoom = 50f;
+
+    [Header("Rotation and Movement")]
     [SerializeField] private float rotationSpeed = 150f;
-    [SerializeField] public GameObject center;
-    public float minVerticalAngle = 10.0f; // Minimum vertical rotation angle
-    public float maxVerticalAngle = 80.0f; // Maximum vertical rotation angle
+    public float dragSpeed = 2;
+
+    private Vector3 dragOrigin;
+    private bool isDragging;
+    
+
+
 
     [Header("Layers")]
     [SerializeField] private LayerMask defaultLayer;
@@ -79,7 +87,7 @@ public class InputManager : MonoBehaviour
         }
 
         //rest camera
-        //just hard coded change later
+        //just hard coded 
         if (Input.GetKeyDown(KeyCode.Space))
         {
             mainCamera.transform.position = new Vector3(-30.2f,29.4f, -29.3f);
@@ -90,7 +98,35 @@ public class InputManager : MonoBehaviour
     }
 
     private void move()
-    {   
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            dragOrigin = Input.mousePosition;
+            isDragging = true;
+        }
+
+        // Stop dragging
+        if (Input.GetMouseButtonUp(0))
+        {
+            isDragging = false;
+        }
+
+        // Dragging
+        if (isDragging)
+        {
+            Vector3 currentMousePosition = Input.mousePosition;
+
+            // Origin point
+            Vector3 originWorldPoint = mainCamera.ScreenToWorldPoint(new Vector3(dragOrigin.x, dragOrigin.y, mainCamera.nearClipPlane));
+            // Point after move
+            Vector3 currentWorldPoint = mainCamera.ScreenToWorldPoint(new Vector3(currentMousePosition.x, currentMousePosition.y, mainCamera.nearClipPlane));
+
+            Vector3 movement = (originWorldPoint - currentWorldPoint)*dragSpeed;
+
+            // Apply the movement to the camera
+            mainCamera.transform.position += new Vector3(movement.x, 0, movement.z);   
+
+        }
         // Rotation
         if (Input.GetMouseButton(1)) // Right mouse button for rotation
         {
@@ -102,14 +138,14 @@ public class InputManager : MonoBehaviour
 
 
             // Make sure the camera is not going under the plane
-            Vector3 cameraPosition = mainCamera.transform.position;
-            if (cameraPosition.y < center.transform.position.y)
-            {
-                cameraPosition.y = 0f;
-                mainCamera.transform.position = cameraPosition;
+            //Vector3 cameraPosition = mainCamera.transform.position;
+            //if (cameraPosition.y < center.transform.position.y)
+            //{
+            //    cameraPosition.y = 0f;
+            //    mainCamera.transform.position = cameraPosition;
 
-                mainCamera.transform.LookAt(center.transform.position);
-            }
+            //    mainCamera.transform.LookAt(center.transform.position);
+            //}
             
         }
     }

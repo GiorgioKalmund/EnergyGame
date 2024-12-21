@@ -2739,6 +2739,10 @@ MonoBehaviour:
   minZoom: 5
   maxZoom: 50
   dragSpeed: 2
+  minX: -16
+  maxX: 16
+  minZ: -16
+  maxZ: 16
   rotationSpeed: 150
   verticalMinLimit: -10
   verticalMaxLimit: 10

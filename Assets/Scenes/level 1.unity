@@ -2734,13 +2734,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 17014428}
-  zoomSpeed: 10
+  center: {fileID: 318222863}
+  zoomSpeed: 30
   minZoom: 5
   maxZoom: 50
+  dragSpeed: 2
   rotationSpeed: 150
-  center: {fileID: 318222863}
-  minVerticalAngle: 10
-  maxVerticalAngle: 80
+  verticalMinLimit: -10
+  verticalMaxLimit: 10
   defaultLayer:
     serializedVersion: 2
     m_Bits: 0

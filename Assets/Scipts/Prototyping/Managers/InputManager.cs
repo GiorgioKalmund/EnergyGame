@@ -25,13 +25,20 @@ public class InputManager : MonoBehaviour
     [SerializeField] private float maxZoom = 50f;
 
     [Header("Rotation and Movement")]
-    [SerializeField] private float rotationSpeed = 150f;
+    //Movement
     public float dragSpeed = 2;
+
+    //Rotation
+    //pls manuelly set the rang to -10 and 10
+    [SerializeField] private float rotationSpeed = 150f;
+    public float verticalMinLimit = 30f;   
+    public float verticalMaxLimit = 70f; 
+    private float currentVerticalAngle = 0f;
 
     private Vector3 dragOrigin;
     private bool isDragging;
-    
 
+    
 
 
     [Header("Layers")]
@@ -105,17 +112,14 @@ public class InputManager : MonoBehaviour
             isDragging = true;
         }
 
-        // Stop dragging
         if (Input.GetMouseButtonUp(0))
         {
             isDragging = false;
         }
 
-        // Dragging
         if (isDragging)
         {
             Vector3 currentMousePosition = Input.mousePosition;
-
             // Origin point
             Vector3 originWorldPoint = mainCamera.ScreenToWorldPoint(new Vector3(dragOrigin.x, dragOrigin.y, mainCamera.nearClipPlane));
             // Point after move
@@ -133,20 +137,18 @@ public class InputManager : MonoBehaviour
             float horizontalRotation = Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime;
             float verticalRotation = -Input.GetAxis("Mouse Y") * rotationSpeed * Time.deltaTime;
 
+            float newVerticalAngle = currentVerticalAngle + verticalRotation;
+
+            // Rotation limitation in Y direction
+            newVerticalAngle = Mathf.Clamp(newVerticalAngle, verticalMinLimit, verticalMaxLimit);
+
+            //X
             mainCamera.transform.RotateAround(center.transform.position, Vector3.up, horizontalRotation);
-            mainCamera.transform.RotateAround(center.transform.position, mainCamera.transform.right, verticalRotation);
-
-
-            // Make sure the camera is not going under the plane
-            //Vector3 cameraPosition = mainCamera.transform.position;
-            //if (cameraPosition.y < center.transform.position.y)
-            //{
-            //    cameraPosition.y = 0f;
-            //    mainCamera.transform.position = cameraPosition;
-
-            //    mainCamera.transform.LookAt(center.transform.position);
-            //}
+            //Y
+            mainCamera.transform.RotateAround(center.transform.position, mainCamera.transform.right, newVerticalAngle - currentVerticalAngle);
             
+            currentVerticalAngle = newVerticalAngle;
+
         }
     }
 

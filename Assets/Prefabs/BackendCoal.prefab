@@ -616,8 +616,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4146630e1e80d04e909d6d29fef0c7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  graphManager: {fileID: 0}
   InstanceID: 0
-  efficiency: 0
+  generating: 100
+  efficiency: 1
+  onStartConnectTo: {fileID: 0}
 --- !u!1 &4860439438263813055
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,6 +3,7 @@ using JetBrains.Annotations;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 using System.Collections;
+using Unity.VisualScripting;
 
 
 public class PlacementManager : MonoBehaviour
@@ -246,6 +247,17 @@ public class PlacementManager : MonoBehaviour
                 // TODO: This is not being returned when sold
                 // BudgetManager.Instance.UseBudget(distance);
 
+                if(hitTransform.GetComponentInChildren<Wandler>() != null){
+                    //Debug.Log(hitTransform.GetComponentInChildren<Wandler>());
+                    Wandler endWandler = hitTransform.GetComponentInChildren<Wandler>();
+                    //TODO REMOVE Endpoint addition
+                    GraphManager.Instance.Endpoints[GraphManager.Instance.numOfEndpoints++] = endWandler;
+                    //--------------------------------------
+                    lastPlacedCable.GetComponent<Wandler>().addOutputWandler(endWandler);
+                }
+                else{
+                    Debug.Log(hit.transform.name + " does not have the Wandler Component");
+                }
                 lastPlacedCable.Place();
                 
                 float effectiveLoss = Mathf.Pow((1 - cableEffLossPerUnit), distance);

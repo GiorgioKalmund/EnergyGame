@@ -7,8 +7,9 @@ public class GraphManager : MonoBehaviour
 {
     public static GraphManager Instance { get; private set;}
     public int[,] Matrix { get; } = new int[100, 100];
-    public Wandler[] wandlerArray = new Wandler[100];
-    public Wandler[] Endpoints;
+    public Wandler[] wandlerArray = new Wandler[255];
+    public Wandler[] Endpoints = new Wandler[100];
+    public int numOfEndpoints = 0;
     public int numOfWandler = 0;
 
     public void Awake(){
@@ -38,6 +39,7 @@ public class GraphManager : MonoBehaviour
         }
     }
 
+    [ContextMenu("Print Adjacency Matrix")]
     public void printMatrix(){
         string temp = "";
         for(int i = 0; i < numOfWandler;i++){
@@ -48,5 +50,13 @@ public class GraphManager : MonoBehaviour
             temp = "";
         }
         return;
+    }
+
+    [ContextMenu("Calculate Energy Grid")]
+    public void calculateAll(){
+        for(int i  = 0; i < numOfEndpoints; i++){
+            Endpoints[i].ComputeInput();
+            Debug.Log(Endpoints[i] + " - " + i + " : " + Endpoints[i].getOutput());
+        }
     }
 }

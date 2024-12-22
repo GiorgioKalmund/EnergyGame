@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 
 public class Wandler : MonoBehaviour
 {
     public GraphManager graphManager;
     public int InstanceID;
+    [SerializeField]
+    private int generating;
     [SerializeField]
     private EnergyChunk input;
     [SerializeField]
@@ -22,10 +25,13 @@ public class Wandler : MonoBehaviour
         InstanceID = graphManager.numOfWandler;
         graphManager.InsertNew(this);
 
+        input = new EnergyChunk();
+        output = new EnergyChunk();
+
         if(onStartConnectTo != null){
             addInputWandler(onStartConnectTo);
         }
-        graphManager.printMatrix();
+        //graphManager.printMatrix();
     }
 
     // Update is called once per frame
@@ -43,8 +49,9 @@ public class Wandler : MonoBehaviour
     }
 
     public void ComputeInput(){
-        float inputAmt = 0f;
-        for(int i = 0; i<graphManager.Matrix.Length;i++){
+        float inputAmt = generating;
+        //Debug.Log("Now calculating Input for: "+InstanceID);
+        for(int i = 0; i<graphManager.Matrix.GetLength(0);i++){
             if(graphManager.Matrix[i,InstanceID] == 1){
                 inputAmt += graphManager.wandlerArray[i].getOutput();
             }
@@ -52,16 +59,20 @@ public class Wandler : MonoBehaviour
 
         }
         input.Amount = inputAmt;
-
+        //Debug.Log(InstanceID + " has an Input of: " + input.Amount);
+        return;
     }
     public float getOutput(){
         ComputeInput();
+        //Debug.Log("Now Calculating Output for: "+ InstanceID);
         int numOfChildren = 0;
-        for(int i = 0; i<graphManager.Matrix.Length;i++){
+        for(int i = 0; i<graphManager.Matrix.GetLength(0);i++){
             if(graphManager.Matrix[InstanceID,i] == 1){
                 numOfChildren++;
             }
         }
-        return input.Amount * efficiency / numOfChildren;
+        output.Amount = input.Amount * efficiency;
+        //Debug.Log(InstanceID + " has an Output of:" + output.Amount);
+        return input.Amount * efficiency / (numOfChildren == 0 ? 1 : numOfChildren);
     }
 }

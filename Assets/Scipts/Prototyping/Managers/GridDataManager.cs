@@ -48,6 +48,8 @@ public class GridDataManager : MonoBehaviour
     private int textureWidth;
     private int textureHeight;
 
+    [SerializeField] public GameObject center;
+
     private TileData[,] gridData;
 
     private void Awake()
@@ -84,7 +86,8 @@ public class GridDataManager : MonoBehaviour
 
         tilesCenter.transform.position = new Vector3((int)textureHeight / 2f, 1f, (int)textureWidth / 2f);
         GenerateMap();
-        
+        center.transform.position = tilesCenter.position;
+
         //SetUp for Grid default (1x1)
         grid.cellSize = new Vector3(1, 1, 1);
         grid.transform.position = new Vector3((int)textureHeight , 1f, (int)textureWidth );

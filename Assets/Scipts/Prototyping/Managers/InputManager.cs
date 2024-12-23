@@ -13,18 +13,36 @@ using Debug = UnityEngine.Debug;
 public class InputManager : MonoBehaviour
 {
     public static InputManager Instance { get; private set; }
-    
+
     [Header("Camera")]
     [SerializeField]
     private Camera mainCamera;
-    private Transform initialCameraPosition;
-    [SerializeField] private float zoomSpeed = 10f;
+    [SerializeField] public GameObject center;
+
+    [Header("Zoom")]
+    [SerializeField] private float zoomSpeed = 30f;
     [SerializeField] private float minZoom = 5f;
     [SerializeField] private float maxZoom = 50f;
+
+    [Header("Rotation and Movement")]
+    //Movement dont put dragSpeed to fast sonst vibriert es
+    private float dragSpeed = 0.85f;
+    private Vector3 cameraStartPosition;
+    //private float min = -35;
+    //private float max = 25;
+
+    //Rotation
+    //pls manuelly set the rang to -10 and 10
     [SerializeField] private float rotationSpeed = 150f;
-    [SerializeField] public GameObject center;
-    public float minVerticalAngle = 10.0f; // Minimum vertical rotation angle
-    public float maxVerticalAngle = 80.0f; // Maximum vertical rotation angle
+    public float verticalMinLimit = -10f;
+    public float verticalMaxLimit = 10f;
+    private float currentVerticalAngle = 0f;
+
+    private Vector3 dragOrigin;
+    private bool isDragging;
+
+
+
 
     [Header("Layers")]
     [SerializeField] private LayerMask defaultLayer;
@@ -34,7 +52,7 @@ public class InputManager : MonoBehaviour
 
     private Vector3 lastPosition;
 
-    
+
 
     public event Action OnClicked;
     public event Action OnExit;
@@ -42,20 +60,20 @@ public class InputManager : MonoBehaviour
     private void Awake()
     {
         // Singleton
-       if (Instance && Instance != this)
-       {
-           Destroy(this);
-       }
-       else
-       {
-           Instance = this;
-       }
-       
+        if (Instance && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+
     }
 
     private void Start()
     {
-        
+
     }
 
     private void Update() //into Building System
@@ -64,8 +82,7 @@ public class InputManager : MonoBehaviour
             OnClicked?.Invoke();
         if (Input.GetMouseButtonDown(1))
             OnExit?.Invoke();
-        //we dont need this movement shit
-      
+
         zoom();
         move();
 
@@ -79,10 +96,10 @@ public class InputManager : MonoBehaviour
         }
 
         //rest camera
-        //just hard coded change later
+        //just hard coded 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            mainCamera.transform.position = new Vector3(-30.2f,29.4f, -29.3f);
+            mainCamera.transform.position = new Vector3(-30.2f, 29.4f, -29.3f);
             mainCamera.fieldOfView = 12.6f;
             mainCamera.transform.LookAt(center.transform.position);
         }
@@ -90,27 +107,58 @@ public class InputManager : MonoBehaviour
     }
 
     private void move()
-    {   
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            dragOrigin = GetMousePositionInWorldSpace();
+            cameraStartPosition = mainCamera.transform.position;
+            isDragging = true;
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            isDragging = false;
+        }
+
+        if (isDragging)
+        {
+            // movement
+            Vector3 mouseDelta = (GetMousePositionInWorldSpace() - dragOrigin) * dragSpeed;
+
+            // Change camera based on movement
+            Vector3 newCameraPosition = new Vector3(
+                cameraStartPosition.x - mouseDelta.x,
+                cameraStartPosition.y,
+                cameraStartPosition.z - mouseDelta.z
+            );
+
+            //newCameraPosition.x = Mathf.Clamp(newCameraPosition.x, min, max);
+            //newCameraPosition.z = Mathf.Clamp(newCameraPosition.z, min, max);
+
+            mainCamera.transform.position = newCameraPosition;
+
+        }
+
+
+
         // Rotation
         if (Input.GetMouseButton(1)) // Right mouse button for rotation
         {
             float horizontalRotation = Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime;
             float verticalRotation = -Input.GetAxis("Mouse Y") * rotationSpeed * Time.deltaTime;
 
+            float newVerticalAngle = currentVerticalAngle + verticalRotation;
+
+            // Rotation limitation in Y direction
+            newVerticalAngle = Mathf.Clamp(newVerticalAngle, verticalMinLimit, verticalMaxLimit);
+
+            //X
             mainCamera.transform.RotateAround(center.transform.position, Vector3.up, horizontalRotation);
-            mainCamera.transform.RotateAround(center.transform.position, mainCamera.transform.right, verticalRotation);
+            //Y
+            mainCamera.transform.RotateAround(center.transform.position, mainCamera.transform.right, newVerticalAngle - currentVerticalAngle);
 
+            currentVerticalAngle = newVerticalAngle;
 
-            // Make sure the camera is not going under the plane
-            Vector3 cameraPosition = mainCamera.transform.position;
-            if (cameraPosition.y < center.transform.position.y)
-            {
-                cameraPosition.y = 0f;
-                mainCamera.transform.position = cameraPosition;
-
-                mainCamera.transform.LookAt(center.transform.position);
-            }
-            
         }
     }
 
@@ -155,19 +203,19 @@ public class InputManager : MonoBehaviour
     public Vector3 GetMousePositionInWorldSpace()
     {
         Vector3 mousePos = Input.mousePosition;
-        
+
         mousePos.z = mainCamera.nearClipPlane;
 
         Ray ray = mainCamera.ScreenPointToRay(mousePos);
         //Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red);
         RaycastHit hit;
 
-        if(Physics.Raycast(ray,out hit))
+        if (Physics.Raycast(ray, out hit))
         {
             lastPosition = hit.point;
         }
-        
+
         return lastPosition;
     }
-    
+
 }

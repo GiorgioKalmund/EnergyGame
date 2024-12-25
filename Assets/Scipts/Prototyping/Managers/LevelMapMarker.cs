@@ -1,12 +1,11 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using TMPro;
-using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using DG.Tweening;
-public class LevelMapMarker : MonoBehaviour
+using UnityEngine.EventSystems;
+public class LevelMapMarker : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public bool unlocked { get; private set; }
     public int markerID;
@@ -62,6 +61,9 @@ public class LevelMapMarker : MonoBehaviour
         popupButton = popup.GetComponentInChildren<Button>();
         popupButton.onClick.AddListener(delegate{GameManager.LoadSceneByIdAsync(markerID+1);});
         displayText.text = $"{(markerID + 1)}";
+        
+        // Set scale, so hover animations work properly afterwards
+        gameObject.transform.DOScale(1f, 0.1f);
     }
 
     private void OpenPopup(){
@@ -181,5 +183,19 @@ public class LevelMapMarker : MonoBehaviour
     public void SetPrev(LevelMapMarker prev)
     {
         this.prev = prev;
+    }
+    
+    public void OnPointerEnter(PointerEventData data)
+    {
+        if (!unlocked)
+        {
+            return;
+        }
+        gameObject.transform.DOScale(1.1f, 0.2f).SetEase(Ease.InOutElastic);
+    }
+    
+    public void OnPointerExit(PointerEventData data)
+    {
+        gameObject.transform.DOScale(1f, 0.2f).SetEase(Ease.InOutElastic);
     }
 }

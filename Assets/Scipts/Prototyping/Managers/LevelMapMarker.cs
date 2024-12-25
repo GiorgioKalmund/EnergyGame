@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
-
+using DG.Tweening;
 public class LevelMapMarker : MonoBehaviour
 {
     public bool unlocked { get; private set; }
@@ -22,15 +22,19 @@ public class LevelMapMarker : MonoBehaviour
     [SerializeField] private TMP_Text displayText;
 
     private Image _spriteImage;
-    private Button _button;
+    private Button toggleButton;
     private float stepLength;
 
+    [Header("Popup")]
+    [SerializeField] private GameObject popup;
+    private Button popupButton;
+    private bool popupOpen;
     private void Start()
     {
         LevelMapManager.Instance.AddMarker(this);
         _spriteImage = GetComponent<Image>();
-        _button = GetComponent<Button>();
-        if (!_button)
+        toggleButton = GetComponent<Button>();
+        if (!toggleButton)
         {
             gameObject.AddComponent<Button>();
             Debug.LogWarning(name +" didn't have a button component, added one.");
@@ -39,14 +43,53 @@ public class LevelMapMarker : MonoBehaviour
         unlocked = false;
         _spriteImage.sprite = lockedImage;
         stepLength = 1f / (LevelMapManager.Instance.GetPathSteps() + 1);
-        _button.onClick.AddListener(delegate{GameManager.LoadSceneByIdAsync(markerID+1);});
-        _button.interactable = false; 
+
+
+        // Apply the function to the toggle button
+        ClosePopup();
+        popup.transform.localScale = Vector3.zero;
+        toggleButton.onClick.AddListener(TogglePopup);
+        toggleButton.interactable = false; 
+
+
+        // Apply function to the popup button 
+        popupButton = popup.GetComponentInChildren<Button>();
+        popupButton.onClick.AddListener(delegate{GameManager.LoadSceneByIdAsync(markerID+1);});
         displayText.text = $"{(markerID + 1)}";
     }
 
+    private void OpenPopup(){
+        if (popupOpen)
+            return;
+        popupOpen = true;
+        popup.transform.DOScale(1f, 0.5f);
+        float yPos = popup.transform.localPosition.y;
+        popup.transform.DOLocalMoveY(yPos + 100, 0.5f);
+        transform.SetAsLastSibling();
+    }
+    private void ClosePopup(){
+        if (!popupOpen)
+            return;
+        popupOpen = false;
+        popup.transform.DOScale(0.1f, 0.5f);
+        float yPos = popup.transform.localPosition.y;
+        popup.transform.DOLocalMoveY(yPos - 100, 0.5f);
+    }
+
+    private void TogglePopup()
+    {
+        if (popupOpen)
+        {
+            ClosePopup();
+            return;
+        }
+        OpenPopup();
+    }
+
+
     public void Unlock()
     {
-        _button.interactable = true; 
+        toggleButton.interactable = true; 
         if (prev)
         {
             prev.Unlock();
@@ -63,7 +106,7 @@ public class LevelMapMarker : MonoBehaviour
 
     public void Lock()
     {
-        _button.interactable = false; 
+        toggleButton.interactable = false; 
         if (next)
         {
             next.Lock();
@@ -74,7 +117,7 @@ public class LevelMapMarker : MonoBehaviour
         }
         unlocked = false;
         _spriteImage.sprite = lockedImage;
-        _button.onClick.RemoveAllListeners();
+        popupButton.onClick.RemoveAllListeners();
     }
 
     public void ToggleLock()

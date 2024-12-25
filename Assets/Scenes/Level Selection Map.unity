@@ -170,7 +170,7 @@ PrefabInstance:
     - target: {fileID: 2233998371400825070, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 8608396d757ff4db38cfcbe4bf7b7ed2, type: 3}
+      objectReference: {fileID: 21300000, guid: cfdea49c4f8a1426ab19b352e7641f61, type: 3}
     - target: {fileID: 2410359187824446668, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -330,7 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09360e98d9b14bfda42a1c4dc88cb6ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlockUntilLevel: 2
+  unlockUntilLevel: 3
   markers: []
   maxMarkerCount: 5
   pathGameObject: {fileID: 3959553496423863317, guid: c34a5133bd35b472587937cfcf419bd3, type: 3}

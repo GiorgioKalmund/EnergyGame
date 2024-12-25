@@ -23,12 +23,18 @@ public class LevelMapMarker : MonoBehaviour
 
     private Image _spriteImage;
     private Button toggleButton;
-    private float stepLength;
 
     [Header("Popup")]
     [SerializeField] private GameObject popup;
+
+    [SerializeField] private float popupTime = 0.33f;
+    [SerializeField] private float popupYOffset = 100;
+    [SerializeField] private float shakeTime = 0.5f;
+    [SerializeField] private float shakeStrength = 5f;
+    public Ease popupEase = Ease.InOutCubic;
     private Button popupButton;
     private bool popupOpen;
+    
     private void Start()
     {
         LevelMapManager.Instance.AddMarker(this);
@@ -42,7 +48,6 @@ public class LevelMapMarker : MonoBehaviour
 
         unlocked = false;
         _spriteImage.sprite = lockedImage;
-        stepLength = 1f / (LevelMapManager.Instance.GetPathSteps() + 1);
 
 
         // Apply the function to the toggle button
@@ -53,6 +58,7 @@ public class LevelMapMarker : MonoBehaviour
 
 
         // Apply function to the popup button 
+        popup.SetActive(true);
         popupButton = popup.GetComponentInChildren<Button>();
         popupButton.onClick.AddListener(delegate{GameManager.LoadSceneByIdAsync(markerID+1);});
         displayText.text = $"{(markerID + 1)}";
@@ -61,19 +67,26 @@ public class LevelMapMarker : MonoBehaviour
     private void OpenPopup(){
         if (popupOpen)
             return;
+        if (LevelMapManager.Instance.CurrentlySelectedMarker)
+        {
+            LevelMapManager.Instance.CurrentlySelectedMarker.ClosePopup();
+        }
         popupOpen = true;
-        popup.transform.DOScale(1f, 0.5f);
+        popup.transform.DOScale(1f, popupTime);
         float yPos = popup.transform.localPosition.y;
-        popup.transform.DOLocalMoveY(yPos + 100, 0.5f);
+        popup.transform.DOLocalMoveY(yPos + popupYOffset, popupTime).SetEase(popupEase);
+        popup.transform.DOShakeRotation(shakeTime, shakeStrength);
+        //Move to the top of the hierarchy, avoiding overshadowing
         transform.SetAsLastSibling();
+        LevelMapManager.Instance.CurrentlySelectedMarker = this;
     }
     private void ClosePopup(){
         if (!popupOpen)
             return;
         popupOpen = false;
-        popup.transform.DOScale(0.1f, 0.5f);
+        popup.transform.DOScale(0.0f, popupTime);
         float yPos = popup.transform.localPosition.y;
-        popup.transform.DOLocalMoveY(yPos - 100, 0.5f);
+        popup.transform.DOLocalMoveY(yPos - popupYOffset,popupTime).SetEase(popupEase);
     }
 
     private void TogglePopup()
@@ -137,17 +150,25 @@ public class LevelMapMarker : MonoBehaviour
         return next;
     }
     
+    /**
+     *  Connect current marker to next
+     *
+     *  Calculate "bread crumb" (LevelPathMarker) distance and count, then place them accordingly 
+     */
     public void SetNext(LevelMapMarker next)
     {
         this.next = next;
-        for (int index = 0; index < LevelMapManager.Instance.GetPathSteps(); index++)
+        Vector3 distance = next.gameObject.transform.position - gameObject.transform.position;
+        int steps = Mathf.CeilToInt(distance.magnitude / 100f);
+        float stepLength = 1f / (steps + 1);
+        
+        for (int index = 0; index < steps; index++)
         {
             GameObject pathStep = Instantiate(LevelMapManager.Instance.GetPathObject(), next.gameObject.transform.position, Quaternion.identity);
             pathStep.gameObject.transform.SetParent(LevelMapManager.Instance.GetPathParent().transform);
             pathStep.transform.localScale = new Vector3(1f, 1f, 1f);
             next.prevPathSteps.Add(pathStep.GetComponent<LevelPathMarker>());
         
-            Vector3 distance = next.gameObject.transform.position - gameObject.transform.position;
             pathStep.transform.position -= distance * stepLength * (index + 1);
         }
     }

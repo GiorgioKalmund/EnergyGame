@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6218633379775672143
 RectTransform:
   m_ObjectHideFlags: 0
@@ -447,7 +447,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.6981132, g: 0.6981132, b: 0.6981132, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.5471698, g: 0.5471698, b: 0.5471698, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
@@ -489,6 +489,11 @@ MonoBehaviour:
   unlockedImage: {fileID: 21300000, guid: 8608396d757ff4db38cfcbe4bf7b7ed2, type: 3}
   displayText: {fileID: 5152125581618322633}
   popup: {fileID: 1618581583223464615}
+  popupTime: 0.33
+  popupYOffset: 100
+  shakeTime: 0.5
+  shakeStrength: 5
+  popupEase: 10
 --- !u!1 &8384435503114248322
 GameObject:
   m_ObjectHideFlags: 0

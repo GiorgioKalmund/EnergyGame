@@ -65,11 +65,11 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         public void OnPointerEnter(PointerEventData data)
         {
-            gameObject.transform.DOScale(11f/10f, 0.2f).SetEase(Ease.InOutElastic);
+            gameObject.transform.DOScale(1.1f, 0.2f).SetEase(Ease.InOutElastic);
         }
         
         public void OnPointerExit(PointerEventData data)
         {
-            gameObject.transform.DOScale(10f/11f, 0.2f).SetEase(Ease.InOutElastic);
+            gameObject.transform.DOScale(1f, 0.2f).SetEase(Ease.InOutElastic);
         }
     } 

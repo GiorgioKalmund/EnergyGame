@@ -7,14 +7,18 @@ public class LevelMapManager : MonoBehaviour
 {
     public static  LevelMapManager Instance { get; private set; }
 
-    [SerializeField] private int unlockUntilLevel = 2;
+    [SerializeField] private int unlockUntilLevel = 1;
     
     public List<LevelMapMarker> markers;
+    /**
+     *  IMPORTANT: This needs to be identical to the real amount of markers present
+     *  If not set correctly, the behaviour might not be as expected!
+     */
     public int maxMarkerCount;
+    public LevelMapMarker CurrentlySelectedMarker { get; set; }
 
     [Header("Path")]
     [SerializeField] private GameObject pathGameObject;
-    [SerializeField] private int pathStepCount = 2;
     [SerializeField] private GameObject pathParent;
 
     private void Awake()
@@ -77,11 +81,6 @@ public class LevelMapManager : MonoBehaviour
     public GameObject GetPathObject()
     {
         return pathGameObject;
-    }
-
-    public int GetPathSteps()
-    {
-        return pathStepCount;
     }
 
     public GameObject GetPathParent()

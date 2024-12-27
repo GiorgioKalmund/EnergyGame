@@ -76,10 +76,10 @@ public class InputManager : MonoBehaviour
 
     private void Start()
     {
-        minX = -35f; 
-        maxX = -15f;  
-        minZ = -35f; 
-        maxZ = -15f;  
+        minX = -35f;
+        maxX = -15f;
+        minZ = -35f;
+        maxZ = -15f;
     }
 
     private void Update() //into Building System
@@ -105,7 +105,7 @@ public class InputManager : MonoBehaviour
         //just hard coded 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            mainCamera.transform.position = new Vector3(-30.2f, 29.4f, -29.3f);
+            mainCamera.transform.position = new Vector3(-30.2f, 29.4f, -30.2f);
             mainCamera.fieldOfView = 12.6f;
             mainCamera.transform.LookAt(center.transform.position);
         }
@@ -139,8 +139,8 @@ public class InputManager : MonoBehaviour
             );
 
 
-            newCameraPosition.x = Mathf.Clamp(newCameraPosition.x, minX, maxX);
-            newCameraPosition.z = Mathf.Clamp(newCameraPosition.z, minZ, maxZ);
+            //newCameraPosition.x = Mathf.Clamp(newCameraPosition.x, minX, maxX);
+            //newCameraPosition.z = Mathf.Clamp(newCameraPosition.z, minZ, maxZ);
 
 
             mainCamera.transform.position = newCameraPosition;
@@ -208,6 +208,14 @@ public class InputManager : MonoBehaviour
             // Offset the camera on the mouse position
             Vector3 cameraOffset = mouseWorldPositionBeforeZoom - mouseWorldPositionAfterZoom;
             mainCamera.transform.position += cameraOffset;
+
+            //grenze test
+            //mainCamera.transform.position = new Vector3(
+            //Mathf.Clamp(mainCamera.transform.position.x, minX, maxX),
+            //Mathf.Clamp(mainCamera.transform.position.y, 17f, 33f),
+            //Mathf.Clamp(mainCamera.transform.position.z, minZ, maxZ)
+            //);
+
         }
     }
 
@@ -235,6 +243,6 @@ public class InputManager : MonoBehaviour
     }
 
 
-    
+
 
 }

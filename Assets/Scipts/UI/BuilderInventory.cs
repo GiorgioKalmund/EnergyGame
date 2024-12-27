@@ -27,30 +27,7 @@ public class BuilderInventory : MonoBehaviour
     [Header("Values")] 
     [SerializeField] private float inventoryAnimTime = 0.5f;
     [SerializeField] private float inventoryYMovement = 150f;
-    private void Expand()
-    {
-        expanded = true;
-        inventory.GetComponent<RectTransform>().DOLocalMoveY(expandedPosition.y, inventoryAnimTime);
-    }
-    
-    private void Collapse()
-    {
-        expanded = false;
-        inventory.GetComponent<RectTransform>().DOLocalMoveY(collapsedPosition.y, inventoryAnimTime);
-    }
-
-    private void ToggleInventory()
-    {
-        if (expanded)
-        {
-           Collapse(); 
-        }
-        else
-        {
-            Expand();
-        }
-    }
-
+ 
     private void Awake()
     {
         // Setup initial positions and state 
@@ -81,7 +58,7 @@ public class BuilderInventory : MonoBehaviour
             // Assign the proper values so the slot knows which image, cost and prefab to use
             BuilderInventorySlot slot = slotGameObject.GetComponent<BuilderInventorySlot>();
             ProducerDescriptor descriptor = prefabs[index].GetComponent<ProducerDescriptor>();
-            slot.Setup(descriptor, index);
+            slot.Setup(descriptor, index, 3);
             
             // Update internal List
             builderSlots.Add(slot);
@@ -95,11 +72,39 @@ public class BuilderInventory : MonoBehaviour
 
     public void AddSlotCapacity(int capacity, int slotId)
     {
-        builderSlots[slotId].capacity += capacity;
+        builderSlots[slotId].AddCapacity(capacity);
+    }
+
+    public void RemoveSlotCapacity(int capacity, int slotId)
+    {
+        builderSlots[slotId].RemoveCapacity(capacity);
     }
     
     public void SetSlotCapacity(int capacity, int slotId)
     {
-        builderSlots[slotId].capacity += capacity;
+        builderSlots[slotId].SetCapacity(capacity);
+    }
+   private void Expand()
+    {
+        expanded = true;
+        inventory.GetComponent<RectTransform>().DOLocalMoveY(expandedPosition.y, inventoryAnimTime);
+    }
+    
+    private void Collapse()
+    {
+        expanded = false;
+        inventory.GetComponent<RectTransform>().DOLocalMoveY(collapsedPosition.y, inventoryAnimTime);
+    }
+
+    private void ToggleInventory()
+    {
+        if (expanded)
+        {
+           Collapse(); 
+        }
+        else
+        {
+            Expand();
+        }
     }
 }

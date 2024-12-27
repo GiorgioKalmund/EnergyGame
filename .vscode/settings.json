@@ -51,5 +51,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "EnergyGame.sln"
+    "dotnet.defaultSolution": "EnergyGame.sln",
+    "dotnet.preferCSharpExtension": true
 }

@@ -48,10 +48,12 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         ChangeCursor();
-        if ((Input.GetKeyDown(KeyCode.Backspace) || Input.GetKeyDown(KeyCode.Backspace)) && SelectionManager.Instance.PanelIsOpen())
+        //TODO: Look at new selling hotkey
+        /*if ((Input.GetKeyDown(KeyCode.Backspace) || Input.GetKeyDown(KeyCode.Backspace)) && SelectionManager.Instance.PanelIsOpen())
         {
             SelectionManager.Instance.TriggerSellAction();
         }
+        */
     }
 
     public void RenderBudget()

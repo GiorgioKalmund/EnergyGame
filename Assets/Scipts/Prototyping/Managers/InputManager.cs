@@ -28,8 +28,11 @@ public class InputManager : MonoBehaviour
     //Movement dont put dragSpeed to fast sonst vibriert es
     private float dragSpeed = 0.85f;
     private Vector3 cameraStartPosition;
-    //private float min = -35;
-    //private float max = 25;
+
+    private float minX;
+    private float maxX;
+    private float minZ;
+    private float maxZ;
 
     //Rotation
     //pls manuelly set the rang to -10 and 10
@@ -73,7 +76,10 @@ public class InputManager : MonoBehaviour
 
     private void Start()
     {
-
+        minX = -35f; 
+        maxX = -15f;  
+        minZ = -35f; 
+        maxZ = -15f;  
     }
 
     private void Update() //into Building System
@@ -132,8 +138,10 @@ public class InputManager : MonoBehaviour
                 cameraStartPosition.z - mouseDelta.z
             );
 
-            //newCameraPosition.x = Mathf.Clamp(newCameraPosition.x, min, max);
-            //newCameraPosition.z = Mathf.Clamp(newCameraPosition.z, min, max);
+
+            newCameraPosition.x = Mathf.Clamp(newCameraPosition.x, minX, maxX);
+            newCameraPosition.z = Mathf.Clamp(newCameraPosition.z, minZ, maxZ);
+
 
             mainCamera.transform.position = newCameraPosition;
 
@@ -192,6 +200,8 @@ public class InputManager : MonoBehaviour
             // Calculate the offset and move the camera to compensate
             Vector3 cameraOffset = mouseWorldPositionBeforeZoom - mouseWorldPositionAfterZoom;
             mainCamera.transform.position += cameraOffset;
+
+
         }
     }
 
@@ -217,5 +227,8 @@ public class InputManager : MonoBehaviour
 
         return lastPosition;
     }
+
+
+    
 
 }

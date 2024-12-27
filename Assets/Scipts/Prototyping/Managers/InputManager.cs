@@ -173,35 +173,41 @@ public class InputManager : MonoBehaviour
     private void zoom()
     {
         float scrollDelta = Input.GetAxis("Mouse ScrollWheel");
-        //ignore small changes
+        // Ignore small changes
         if (Mathf.Abs(scrollDelta) > Mathf.Epsilon)
         {
             Vector3 mouseScreenPosition = Input.mousePosition;
             Vector3 mouseWorldPositionBeforeZoom = mainCamera.ScreenToWorldPoint(new Vector3(
                 mouseScreenPosition.x,
                 mouseScreenPosition.y,
-                Mathf.Abs(mainCamera.transform.position.y) //topdown view
+                Mathf.Abs(mainCamera.transform.position.y) // Top-down view
             ));
 
-            // Adjust the field of view or orthographic size based on the zoom
-            mainCamera.fieldOfView = Mathf.Clamp(
-                mainCamera.fieldOfView - scrollDelta * zoomSpeed,
-                minZoom,
-                maxZoom
+            // instead using fov move camera position toward it 
+            Vector3 direction = (mouseWorldPositionBeforeZoom - mainCamera.transform.position).normalized;
+            float zoomAmount = scrollDelta * zoomSpeed;
+
+            mainCamera.transform.position += direction * zoomAmount;
+
+            // Clamp the camera position to ensure it stays within the zoom bounds
+            float distanceToGround = Mathf.Abs(mainCamera.transform.position.y);
+            distanceToGround = Mathf.Clamp(distanceToGround, minZoom, maxZoom);
+            mainCamera.transform.position = new Vector3(
+                mainCamera.transform.position.x,
+                -distanceToGround, // Keep top-down view with correct height
+                mainCamera.transform.position.z
             );
 
-            // Convert the mouse position to world space again after zooming
+            // Recalculate the mouse position in world space after the camera moves
             Vector3 mouseWorldPositionAfterZoom = mainCamera.ScreenToWorldPoint(new Vector3(
                 mouseScreenPosition.x,
                 mouseScreenPosition.y,
                 Mathf.Abs(mainCamera.transform.position.y)
             ));
 
-            // Calculate the offset and move the camera to compensate
+            // Offset the camera on the mouse position
             Vector3 cameraOffset = mouseWorldPositionBeforeZoom - mouseWorldPositionAfterZoom;
             mainCamera.transform.position += cameraOffset;
-
-
         }
     }
 

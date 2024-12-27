@@ -50,15 +50,21 @@ public class LevelMapManager : MonoBehaviour
 
     private void LinkMarkers()
     {
+        if (markers.Count != maxMarkerCount)
+        {
+            Debug.LogWarning("Actual marker count does not correspond to the value entered. Please modify 'maxMarkerCount' to be the amount of markers visible on the field");
+        }
         Debug.Log("Linking "+markers.Count + " markers.");
         markers.Sort((marker0, marker1) => marker0.markerID.CompareTo(marker1.markerID));
         for (int index = 0; index < markers.Count; index++)
         {
+            // Calculate backward, meaning that the first marker doesn't have a prev 
             if (index != 0)
             {
                 markers[index].SetPrev(markers[index-1]);
             }
-
+            
+            // Calculate forward, meaning that the last marker doesn't have a next
             if (index != markers.Count - 1)
             {
                 markers[index].SetNext(markers[index+1]);
@@ -68,14 +74,14 @@ public class LevelMapManager : MonoBehaviour
     /*
      *  IMPORTANT: This method uses 1-based indexing for consistency with level names
      */
-    public void UnlockUntilLevel(int level)
+    public void UnlockUntilMarkerId(int markerId)
     {
-        if (level < 1)
+        if (markerId < 0)
         {
-            Debug.LogWarning(level+" is not a valid level Index");
+            Debug.LogWarning(markerId+" is not a valid level Index");
             return;
         }
-        markers[level-1].Unlock();
+        markers[markerId].Unlock();
     }
 
     public GameObject GetPathObject()
@@ -93,7 +99,7 @@ public class LevelMapManager : MonoBehaviour
         yield return new WaitUntil(() => markers.Count >= maxMarkerCount);
 
         LinkMarkers();
-        UnlockUntilLevel(unlockUntilLevel);
+        UnlockUntilMarkerId(unlockUntilLevel - 1);
     } 
     
 }

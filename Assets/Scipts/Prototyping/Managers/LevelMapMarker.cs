@@ -13,7 +13,7 @@ public class LevelMapMarker : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     [Header("Neighbours")] 
     [SerializeField] private LevelMapMarker prev;
     [SerializeField] private LevelMapMarker next;
-    [FormerlySerializedAs("prevPath")] public List<LevelPathMarker> prevPathSteps;
+    public List<LevelPathMarker> prevPathSteps;
     
     [Header("Visual")] 
     [SerializeField] private Sprite lockedImage;
@@ -161,7 +161,7 @@ public class LevelMapMarker : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     {
         this.next = next;
         Vector3 distance = next.gameObject.transform.position - gameObject.transform.position;
-        int steps = Mathf.CeilToInt(distance.magnitude / 100f);
+        int steps = Mathf.CeilToInt(distance.magnitude / 200f);
         float stepLength = 1f / (steps + 1);
         
         for (int index = 0; index < steps; index++)
@@ -185,9 +185,9 @@ public class LevelMapMarker : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         this.prev = prev;
     }
     
-    public void OnPointerEnter(PointerEventData data)
+   public void OnPointerEnter(PointerEventData data)
     {
-        if (!unlocked)
+        if (!unlocked || popupOpen)
         {
             return;
         }

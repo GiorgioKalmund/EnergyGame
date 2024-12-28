@@ -37,7 +37,6 @@ public class LevelManager : MonoBehaviour
 
     public void AddProduce(float value)
     {
-        Debug.Log("Added produce of " + value);
         currentProduction += value;
         CheckIfDemandIsMet();
     }

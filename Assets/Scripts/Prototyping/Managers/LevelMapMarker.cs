@@ -64,6 +64,7 @@ public class LevelMapMarker : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         // Apply function to the popup button 
         popup.SetActive(true);
         popupDescriptionText.text = linkedSceneName;
+        popupButton = popup.GetComponentInChildren<Button>();
         popupButton.onClick.AddListener(delegate{SceneManager.LoadScene(linkedSceneName);});
         displayText.text = $"{(markerID + 1)}";
         

@@ -5,7 +5,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
-
+using DG.Tweening;
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
@@ -99,7 +99,7 @@ public class UIManager : MonoBehaviour
     {
         if (enable != null)
         {
-            connectionActiveIndicatorImage.enabled = enable.Value;
+            connectionActiveIndicatorImage.DOFade(enable == true ? 1f : 0f, 0.5f);
             return;
         }
         connectionActiveIndicatorImage.enabled = !connectionActiveIndicatorImage.enabled;

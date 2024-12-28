@@ -43,8 +43,6 @@ public class InputManager : MonoBehaviour
 
     private Vector3 lastPosition;
 
-
-
     public event Action OnClicked;
     public event Action OnExit;
 
@@ -76,15 +74,6 @@ public class InputManager : MonoBehaviour
 
         zoom();
         move();
-
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (SettingsManager.Instance)
-            {
-                SettingsManager.Instance.ToggleSettingsPanel(false);
-            }
-        }
 
         //rest camera
         //just hard coded 

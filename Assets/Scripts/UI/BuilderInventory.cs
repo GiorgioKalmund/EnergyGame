@@ -69,12 +69,12 @@ public class BuilderInventory : MonoBehaviour
             // Assign the proper values so the slot knows which image, cost and prefab to use
             BuilderInventorySlot slot = slotGameObject.GetComponent<BuilderInventorySlot>();
             ProducerDescriptor descriptor = prefabs[index].GetComponent<ProducerDescriptor>();
+            
+            // TODO: Determine Starting Capacity dynamically
             slot.Setup(descriptor, index, 3);
             
             // Update internal List
             builderSlots.Add(slot);
-            if (index % 2 == 0)
-                slot.Deactivate();
             
             // Update database
             database.Put(new ObjectData(descriptor, index, prefabs[index]));
@@ -88,7 +88,10 @@ public class BuilderInventory : MonoBehaviour
 
     public void RemoveSlotCapacity(int capacity, int slotId)
     {
-        builderSlots[slotId].RemoveCapacity(capacity);
+        if (!builderSlots[slotId].RemoveCapacity(capacity))
+        {
+            // TODO: Trigger action if we go negative
+        }
     }
     
     public void SetSlotCapacity(int capacity, int slotId)

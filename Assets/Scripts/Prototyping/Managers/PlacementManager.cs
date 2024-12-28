@@ -274,6 +274,8 @@ public class PlacementManager : MonoBehaviour
                 cellIndicator.SetActive(false);
                 UIManager.Instance.ToggleConnectionModeIndicator(false);
                 InputManager.Instance.OnClicked -= SelectCity;
+                
+                BuilderInventory.Instance.RemoveSlotCapacity(1, placingObjectIndex);
             }
             else
             {

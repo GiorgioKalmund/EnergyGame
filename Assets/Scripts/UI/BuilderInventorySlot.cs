@@ -58,13 +58,14 @@ public class BuilderInventorySlot : MonoBehaviour
     }
     public bool RemoveCapacity(int value)
     {
-        int difference = capacity - value;
-        if (difference < 0)
+        capacity -= value;
+        slotCapacityText.text = $"{capacity}";
+
+        if (capacity < 0)
         {
             return false;
         }
-        capacity = difference;
-        slotCapacityText.text = $"{capacity}";
+
         return true;
     }
 

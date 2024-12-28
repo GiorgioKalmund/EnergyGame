@@ -92,6 +92,7 @@ public class LevelMapManager : MonoBehaviour
             Debug.LogWarning(markerId+" is not a valid level Index");
             return;
         }
+        //markers[0].Lock();
         markers[markerId].Unlock();
     }
 

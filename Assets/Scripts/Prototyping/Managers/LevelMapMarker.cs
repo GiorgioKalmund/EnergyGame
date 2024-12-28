@@ -6,10 +6,13 @@ using TMPro;
 using UnityEngine.Serialization;
 using DG.Tweening;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
+
 public class LevelMapMarker : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public bool unlocked { get; private set; }
     public int markerID;
+    public string linkedSceneName = "";
 
     [Header("Neighbours")] 
     [SerializeField] private LevelMapMarker prev;
@@ -33,6 +36,7 @@ public class LevelMapMarker : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     [SerializeField] private float shakeStrength = 5f;
     public Ease popupEase = Ease.InOutCubic;
     private Button popupButton;
+    [SerializeField] private TMP_Text popupDescriptionText;
     private bool popupOpen;
     
     private void Start()
@@ -59,8 +63,8 @@ public class LevelMapMarker : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
         // Apply function to the popup button 
         popup.SetActive(true);
-        popupButton = popup.GetComponentInChildren<Button>();
-        popupButton.onClick.AddListener(delegate{GameManager.LoadSceneByIdAsync(markerID+1);});
+        popupDescriptionText.text = linkedSceneName;
+        popupButton.onClick.AddListener(delegate{SceneManager.LoadScene(linkedSceneName);});
         displayText.text = $"{(markerID + 1)}";
         
         // Set scale, so hover animations work properly afterwards

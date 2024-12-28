@@ -7,10 +7,9 @@ public class BuilderInventorySlot : MonoBehaviour
 {
     private Button button;
     public int objectInstanceId;
-    [FormerlySerializedAs("buildingImage")]
     [Header("Visual")]
     [SerializeField] private Image slotImage;
-     [SerializeField] private TMP_Text slotCostText;
+    [SerializeField] private TMP_Text slotCostText;
     [SerializeField] private TMP_Text slotCapacityText;
     private int capacity { get; set; } = 1;
 

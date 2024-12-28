@@ -174,7 +174,7 @@ public class LevelMapMarker : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     {
         this.next = next;
         Vector3 distance = next.gameObject.transform.position - gameObject.transform.position;
-        int steps = Mathf.CeilToInt(distance.magnitude / 200f);
+        int steps = Mathf.CeilToInt(distance.magnitude / (Screen.width / 9.6f));
         float stepLength = 1f / (steps + 1);
         
         for (int index = 0; index < steps; index++)

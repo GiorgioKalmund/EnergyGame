@@ -8,7 +8,7 @@ public class Wandler : MonoBehaviour
     public GraphManager graphManager;
     public int InstanceID;
     [SerializeField]
-    private int generating;
+    public float generating;
     [SerializeField]
     private EnergyChunk input;
     [SerializeField]

@@ -217,7 +217,7 @@ public class PlacementManager : MonoBehaviour
                 float distance = Vector3.Distance(buildingPosition, cityPosition);
 
                 //lastPlacedBuilding is the powerPlant
-                float productionValue = producerDescriptor.GetMaxProduction();
+                float productionValue = lastPlacedBuilding.GetComponentInChildren<Wandler>().generating;
                 
                 // TODO: THIS IS NOT THE WAY TO DO IT, maybe an Enum for BuildingType?
                 if (producerDescriptor.buildingName == "Windmill")
@@ -241,6 +241,8 @@ public class PlacementManager : MonoBehaviour
                     productionValue *= lastHoveredTileData.sunlightHours;
                 }
 
+                lastPlacedBuilding.GetComponentInChildren<Wandler>().generating = productionValue;
+
                 //Debug.Log($"alpha = {lastHoveredTileData.waterSpeed}");
 
                 //cost for cable
@@ -261,11 +263,14 @@ public class PlacementManager : MonoBehaviour
                 
                 float effectiveLoss = Mathf.Pow((1 - cableEffLossPerUnit), distance);
                 lastPlacedCable.GetComponentInChildren<Wandler>().efficiency = effectiveLoss;
+
+                //von Wandler ersetzt
                 distance *= effectiveLoss;
                 productionValue -= distance;
                 productionValue = Mathf.Max(0, productionValue);
                 producerDescriptor.SetProduction(productionValue);
                 LevelManager.Instance.AddProduce(productionValue);
+
 
                 lastPlacedCable.Place();
 

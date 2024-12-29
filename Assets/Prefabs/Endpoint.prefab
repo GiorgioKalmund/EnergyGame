@@ -136,6 +136,7 @@ MonoBehaviour:
   InstanceID: 0
   generating: 0
   efficiency: 1
+  Endpoint: 1
   onStartConnectTo: {fileID: 0}
 --- !u!1 &7869472802071045594
 GameObject:

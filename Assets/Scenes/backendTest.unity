@@ -1489,7 +1489,7 @@ MonoBehaviour:
   blockedLayer:
     serializedVersion: 2
     m_Bits: 64
-  cablePrefab: {fileID: 9142062873766252308, guid: 9c02ffc1cc4100648a7afa0a11d33c48, type: 3}
+  cablePrefab: {fileID: 9142062873766252308, guid: 21db73efe622f44959ba877f70eb0fab, type: 3}
   cableEffLossPerUnit: 0.04
   spriteColorRegular: {r: 1, g: 0.9764151, b: 0.9764151, a: 1}
   spriteColorWarning: {r: 1, g: 0.40569016, b: 0.05098039, a: 1}
@@ -1792,6 +1792,7 @@ MonoBehaviour:
   currentEnvironmentalImpact: 0
   maxEnvironmentalImpact: 200
   demandMet: 0
+  textCurrentProduction: {fileID: 1434744970}
   nextID: 0
 --- !u!4 &843959126
 Transform:
@@ -2234,6 +2235,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1434744970 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2989509242615976801, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+  m_PrefabInstance: {fileID: 1578678438}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1457948852
 GameObject:
   m_ObjectHideFlags: 0

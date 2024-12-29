@@ -251,21 +251,23 @@ public class PlacementManager : MonoBehaviour
                     //Debug.Log(hitTransform.GetComponentInChildren<Wandler>());
                     Wandler endWandler = hitTransform.GetComponentInChildren<Wandler>();
                     //TODO REMOVE Endpoint addition
-                    GraphManager.Instance.Endpoints[GraphManager.Instance.numOfEndpoints++] = endWandler;
+                    //GraphManager.Instance.Endpoints[GraphManager.Instance.numOfEndpoints++] = endWandler;
                     //--------------------------------------
                     lastPlacedCable.GetComponent<Wandler>().addOutputWandler(endWandler);
                 }
                 else{
                     Debug.Log(hit.transform.name + " does not have the Wandler Component");
                 }
-                lastPlacedCable.Place();
                 
                 float effectiveLoss = Mathf.Pow((1 - cableEffLossPerUnit), distance);
+                lastPlacedCable.GetComponentInChildren<Wandler>().efficiency = effectiveLoss;
                 distance *= effectiveLoss;
                 productionValue -= distance;
                 productionValue = Mathf.Max(0, productionValue);
                 producerDescriptor.SetProduction(productionValue);
                 LevelManager.Instance.AddProduce(productionValue);
+
+                lastPlacedCable.Place();
 
                 //Debug.Log($"City selected. Distance to building: {distance} units.");
 

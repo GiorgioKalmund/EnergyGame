@@ -509,6 +509,7 @@ GameObject:
   - component: {fileID: 521560530849244358}
   - component: {fileID: -5050048849474577431}
   - component: {fileID: 4471740698071347746}
+  - component: {fileID: -785000986984027326}
   m_Layer: 6
   m_Name: Coal Plant
   m_TagString: Untagged
@@ -582,6 +583,7 @@ MonoBehaviour:
     currentPlacementType: 0
     coords: {x: 0, y: 0}
   connectedCables: []
+  tagTree: {fileID: 0}
 --- !u!65 &4471740698071347746
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -603,6 +605,54 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.02, y: 0.02, z: 0.001}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-785000986984027326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4698825477065934905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4146630e1e80d04e909d6d29fef0c7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  graphManager: {fileID: 0}
+  InstanceID: 0
+  generating: 100
+  efficiency: 1
+  onStartConnectTo: {fileID: 0}
+--- !u!1 &4841697175453476164
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 4698825477065934905, guid: 8a118032b572b46d8b5b9aeab0fb2808, type: 3}
+  m_PrefabInstance: {fileID: 145448953712258429}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 376131415619307963}
+  m_Layer: 0
+  m_Name: 'Coal Plant Outline (Missing Prefab with guid: 8a118032b572b46d8b5b9aeab0fb2808)'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &376131415619307963
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 521560530849244358, guid: 8a118032b572b46d8b5b9aeab0fb2808, type: 3}
+  m_PrefabInstance: {fileID: 145448953712258429}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4841697175453476164}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 521560530849244358}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4860439438263813055
 GameObject:
   m_ObjectHideFlags: 0
@@ -1592,13 +1642,3 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a118032b572b46d8b5b9aeab0fb2808, type: 3}
---- !u!4 &376131415619307963 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 521560530849244358, guid: 8a118032b572b46d8b5b9aeab0fb2808, type: 3}
-  m_PrefabInstance: {fileID: 145448953712258429}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &4841697175453476164 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4698825477065934905, guid: 8a118032b572b46d8b5b9aeab0fb2808, type: 3}
-  m_PrefabInstance: {fileID: 145448953712258429}
-  m_PrefabAsset: {fileID: 0}

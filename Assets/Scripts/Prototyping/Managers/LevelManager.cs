@@ -18,6 +18,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private bool demandMet = false;
     public static LevelManager Instance { get; private set; }
 
+    [Header("UI Interaction")]
+    public TMP_Text textCurrentProduction;
+
     public int nextID = 0;
 
     private void Awake()

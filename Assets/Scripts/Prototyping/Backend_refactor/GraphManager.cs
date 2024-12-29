@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Schema;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -28,6 +29,7 @@ public class GraphManager : MonoBehaviour
     public void ConnectWandler(Wandler from, Wandler to){
         Debug.Log("Connecting "+from.InstanceID+ " with "+to.InstanceID);
         Matrix[from.InstanceID, to.InstanceID] = 1;
+        calculateAll();
         return;
     }
 
@@ -37,6 +39,7 @@ public class GraphManager : MonoBehaviour
             Matrix[wandler.InstanceID, i] = 0;
             Matrix[i, wandler.InstanceID] = 0;
         }
+        calculateAll();
     }
 
     [ContextMenu("Print Adjacency Matrix")]
@@ -54,9 +57,12 @@ public class GraphManager : MonoBehaviour
 
     [ContextMenu("Calculate Energy Grid")]
     public void calculateAll(){
+        float total = 0;
         for(int i  = 0; i < numOfEndpoints; i++){
             Endpoints[i].ComputeInput();
             Debug.Log(Endpoints[i] + " - " + i + " : " + Endpoints[i].getOutput());
+            total += Endpoints[i].getOutput();
         }
+        LevelManager.Instance.textCurrentProduction.text = ((int)total).ToString() + " MW";
     }
 }

@@ -284,6 +284,7 @@ GameObject:
   - component: {fileID: 3020603047093061210}
   - component: {fileID: 3864889695037877949}
   - component: {fileID: 7922940028491775095}
+  - component: {fileID: 4395601256411512883}
   m_Layer: 2
   m_Name: Windmill
   m_TagString: Untagged
@@ -369,6 +370,24 @@ MonoBehaviour:
     currentPlacementType: 0
     coords: {x: 0, y: 0}
   connectedCables: []
+  tagTree: {fileID: 0}
+--- !u!114 &4395601256411512883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2698100121599932702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4146630e1e80d04e909d6d29fef0c7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  graphManager: {fileID: 0}
+  InstanceID: 0
+  generating: 100
+  efficiency: 1
+  onStartConnectTo: {fileID: 0}
 --- !u!1 &4481338823864832879
 GameObject:
   m_ObjectHideFlags: 0
@@ -702,6 +721,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &7028333975531036538
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 2698100121599932702, guid: d13d0d5548d1d428d8de2419b83852bc, type: 3}
+  m_PrefabInstance: {fileID: 4969787337588401764}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7859745857938202686}
+  m_Layer: 0
+  m_Name: 'Windmill Outline (Missing Prefab with guid: d13d0d5548d1d428d8de2419b83852bc)'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7859745857938202686
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 3020603047093061210, guid: d13d0d5548d1d428d8de2419b83852bc, type: 3}
+  m_PrefabInstance: {fileID: 4969787337588401764}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7028333975531036538}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3020603047093061210}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8156352432599700323
 GameObject:
   m_ObjectHideFlags: 0
@@ -858,13 +908,3 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d13d0d5548d1d428d8de2419b83852bc, type: 3}
---- !u!1 &7028333975531036538 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2698100121599932702, guid: d13d0d5548d1d428d8de2419b83852bc, type: 3}
-  m_PrefabInstance: {fileID: 4969787337588401764}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &7859745857938202686 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3020603047093061210, guid: d13d0d5548d1d428d8de2419b83852bc, type: 3}
-  m_PrefabInstance: {fileID: 4969787337588401764}
-  m_PrefabAsset: {fileID: 0}

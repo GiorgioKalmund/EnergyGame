@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5315629371896758650}
   - component: {fileID: 1323786358182838941}
   - component: {fileID: 4292900259209094611}
+  - component: {fileID: -1297475203458106493}
   m_Layer: 0
   m_Name: PowerCable
   m_TagString: Untagged
@@ -47,8 +48,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineVertexCount: 20
   lineFunctionDivisor: 0
-  startPos: {x: 0, y: 0, z: 0}
-  endPos: {x: 0, y: 0, z: 0}
   placed: 0
 --- !u!120 &4292900259209094611
 LineRenderer:
@@ -154,3 +153,20 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &-1297475203458106493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9142062873766252308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4146630e1e80d04e909d6d29fef0c7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  graphManager: {fileID: 0}
+  InstanceID: 0
+  generating: 0
+  efficiency: 1
+  onStartConnectTo: {fileID: 0}

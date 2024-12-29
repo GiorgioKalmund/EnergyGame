@@ -14,7 +14,10 @@ public class Wandler : MonoBehaviour
     [SerializeField]
     public EnergyChunk output;
     [SerializeField]
-    private float efficiency;
+    public float efficiency;
+
+    [SerializeField]
+    private bool Endpoint;
 
     public Wandler onStartConnectTo;
     
@@ -24,6 +27,9 @@ public class Wandler : MonoBehaviour
         graphManager = GraphManager.Instance;
         InstanceID = graphManager.numOfWandler;
         graphManager.InsertNew(this);
+        if(Endpoint){
+            graphManager.Endpoints[graphManager.numOfEndpoints++] = this;
+        }
 
         input = new EnergyChunk();
         output = new EnergyChunk();

@@ -43,6 +43,7 @@ public class PowerCable : MonoBehaviour
    public void Place()
    {
        placed = true;
+       GraphManager.Instance.calculateAll();
    }
 
    void DrawCable()

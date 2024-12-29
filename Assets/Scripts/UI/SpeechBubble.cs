@@ -12,12 +12,12 @@ public class SpeechBubble : MonoBehaviour
     public static string INVALID_DIALOGUE = "NULL";
     public static float SPEECHBUBBLE_DURATION = 10f;
     [SerializeField] private TMP_Text textbox;
-    [SerializeField] private DialogueContainer dialogueContainer;
-    [SerializeField] private DialogueObjectSetting dialogueSetting;
+    [SerializeField] public DialogueContainer DialogueContainer;
+    [SerializeField] public DialogueObjectSetting dialogueSetting;
     private bool isOpen = false;
 
 
-    void OpenSpeechbubble()
+    public void OpenSpeechbubble()
     {
         string nextText = GetSpeechBubbleText();
         if (nextText.Equals(INVALID_DIALOGUE))
@@ -32,7 +32,7 @@ public class SpeechBubble : MonoBehaviour
         StartCoroutine(CloseSpeechbubbleAfterTimeout(SPEECHBUBBLE_DURATION));
     }
 
-    void CloseSpeechbubble()
+    public void CloseSpeechbubble()
     {
         if (!isOpen)
         {
@@ -71,11 +71,11 @@ public class SpeechBubble : MonoBehaviour
         switch (dialogueSetting)
         {
             case DialogueObjectSetting.LINEAR:
-                return dialogueContainer.GetNextLineOfDialogue();
+                return DialogueContainer.GetNextLineOfDialogue();
             case DialogueObjectSetting.FIRSTONLY:
-                return dialogueContainer.GetFirstLine();
+                return DialogueContainer.GetFirstLine();
             case DialogueObjectSetting.RANDOM:
-                return dialogueContainer.GetRandom();
+                return DialogueContainer.GetRandom();
 
         }
         return INVALID_DIALOGUE;
@@ -83,7 +83,7 @@ public class SpeechBubble : MonoBehaviour
 
 
 }
-enum DialogueObjectSetting
+public enum DialogueObjectSetting
 {
     LINEAR,
     FIRSTONLY,

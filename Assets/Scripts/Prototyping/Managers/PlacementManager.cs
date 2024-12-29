@@ -330,7 +330,9 @@ public class PlacementManager : MonoBehaviour
         Vector3 mousePosition = InputManager.Instance.GetMousePositionInWorldSpace();
         //Debug.Log($"{mousePosition}");
         mouseIndicator.transform.position = mousePosition;
-        Vector3Int gridPosition = grid.WorldToCell(mousePosition);
+        RaycastHit hit;
+        Physics.Raycast(mainCamera.transform.position, mousePosition - mainCamera.transform.position, out hit, Mathf.Infinity, 1);
+        Vector3Int gridPosition = grid.WorldToCell(hit.transform.gameObject.transform.position);
         Vector3 targetPostion = grid.CellToWorld(gridPosition); 
         cellIndicator.transform.position = new Vector3(targetPostion.x + gridOffset, cellIndicatorPlacementY, targetPostion.z + gridOffset);
         
@@ -343,14 +345,12 @@ public class PlacementManager : MonoBehaviour
             ProducerDescriptor ProducerDescriptor = currentGameObject.GetComponent<ProducerDescriptor>();
             //currentBuilding for placing 
             if (!ProducerDescriptor)
-
-
             {
                 throw new MissingComponentException($"{currentGameObject.name} requires ProducerDescriptor!");
             }
             
             PlacementType currentPlacementType = ProducerDescriptor.GetPlacementType(); 
-            RaycastHit hit;
+            //RaycastHit hit;
             if (Physics.Raycast( cellIndicator.transform.position + Vector3.up * 0.2f, Vector3.down, out hit, 10f))
             {
                 ground = hit.transform.gameObject;

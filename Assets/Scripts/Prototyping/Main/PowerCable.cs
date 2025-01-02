@@ -30,7 +30,7 @@ public class PowerCable : MonoBehaviour
        _lineRenderer = GetComponent<LineRenderer>();
        _lineRenderer.positionCount = lineVertexCount;
        lineFunctionDivisor = 0.64f * lineVertexCount;
-       PowerCableManager.Instance.AddCable(this);
+       
    }
 
    void Update() {

@@ -30,6 +30,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Button pauseButton;
     [SerializeField] private Button nextLevelButton;
     [SerializeField] private Sprite nextLevelButtonSprite;
+    public Color insufficientBudgetColor;
     
     [Header("Visual")]
     [SerializeField] private Image connectionActiveIndicatorImage;
@@ -81,6 +82,7 @@ public class UIManager : MonoBehaviour
 
     public void RenderBudget()
     {
+        UpdateBudgetColor();
         budgetText.text = $"{BudgetManager.Instance.GetBudget():F2}€";
     }
     private void ChangeCursor()
@@ -144,6 +146,7 @@ public class UIManager : MonoBehaviour
 
     public void DeactivateConnectingMode()
     {
+        Debug.LogWarning("Deactivating Connection Mode!");
         if (Mode == UIState.CONNECTING)
         {
             ToggleConnectionModeIndicator(false);
@@ -171,6 +174,18 @@ public class UIManager : MonoBehaviour
     {
         nextLevelButton.interactable = true;
         nextLevelButton.image.sprite = nextLevelButtonSprite;
+    }
+
+    public void UpdateBudgetColor()
+    {
+        if (BudgetManager.Instance.GetBudget() < 0)
+        {
+            budgetText.color = insufficientBudgetColor;
+        }
+        else
+        {
+            budgetText.color = Color.white;
+        }
     }
 
 

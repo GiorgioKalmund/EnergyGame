@@ -77,11 +77,8 @@ public class InputManager : MonoBehaviour
             // Exit out of connection mode if connecting
             if (UIManager.Instance && UIManager.Instance.Mode == UIState.CONNECTING)
                 UIManager.Instance.DeactivateConnectingMode();
-            else
-            {
-                // Do whatever the rest of the default logic should do 
-                OnExit?.Invoke();
-            }
+            
+            OnExit?.Invoke();
         }
     
         zoom();

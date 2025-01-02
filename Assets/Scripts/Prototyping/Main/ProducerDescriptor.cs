@@ -1,8 +1,8 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 
-[RequireComponent(typeof(BoxCollider))]
 public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
 {
     [Header("Info")] 
@@ -22,9 +22,7 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
     public int instanceId;
     
     [Header("UI & UX")]
-    [SerializeField] private GameObject selectionIndicator = null;
     [SerializeField] private Sprite imageSprite;
-    public bool isOnLeftHalfOfScreen;
     
     [Header("Tile")]
     public TileData tileOn;
@@ -34,9 +32,6 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
     [Header("Tag")] 
     [SerializeField] private TagSelectionTree tagTree;
     
-    
-    
-
     public void Awake()
     {
         if (buildingName == "")
@@ -44,7 +39,6 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
             buildingName = gameObject.name;
         }
 
-        isOnLeftHalfOfScreen = IsOnLeftHalfOfTheScreen();
     }
     
     public void Start()
@@ -61,18 +55,13 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
         return placed == true;
     }
 
-    public bool Place(TileData tile)
+    public void Place(TileData tile)
     {
         // if we do not have enough budget, cancel placement
-        if (!BudgetManager.Instance.UseBudget(cost))
-        {
-            return false;
-        }
+        BudgetManager.Instance.UseBudget(cost);
         placed = true;
         SetTile(tile);
         LevelManager.Instance.AddEnvironmentalImpact(environmentalImpact);
-        isOnLeftHalfOfScreen = IsOnLeftHalfOfTheScreen();
-        return true;
     }
     public void Sell()
     {
@@ -98,17 +87,37 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
         this.tileOn = tile;
     }
 
+    public void ToggleSelection()
+    {
+        if (selected)
+        {
+            Deselect();
+        }
+        else
+        {
+            Select();
+        }
+    }
+
     public void Select()
     {
-        //Debug.Log("Selected "+ this.buildingName);
-        selectionIndicator.SetActive(true);
+        if (!placed)
+            return;
+        
+        Debug.Log("Selected: " + id);
+        
+        UpdateProductionTag();
+        tagTree.ExpandTree(new List<TreeTagType>() { TreeTagType.POWER , TreeTagType.CO2, TreeTagType.FINANCE});
         selected = true;
     }
 
     public void Deselect()
     {
-        //Debug.Log("Deselected "+ this.buildingName);
-        selectionIndicator.SetActive(false);
+        if (!selected)
+            return;
+        
+        Debug.Log("Deselected: " + id);
+        tagTree.CollapseTree();
         selected = false;
     }
 
@@ -129,7 +138,8 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
 
     public void SetProduction(float newProductionValue)
     {
-        this.currentProduction = newProductionValue;
+        currentProduction = newProductionValue;
+        UpdateProductionTag();
     }
     public float GetCost()
     {
@@ -182,9 +192,9 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
     {
         connectedCables.Add(newCable);
     }
-    public void OpenTag(int combination)
+   public void ToggleTag(int combination)
     {
-        tagTree.ExpandTree(new List<TreeTagType>() { TreeTagType.POWER , TreeTagType.CO2, TreeTagType.FINANCE});
+        tagTree.ToggleTreeCombination(combination);
     }
 
     public void CloseTag()
@@ -192,6 +202,12 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
         tagTree.CollapseTree();
     }
 
+    public void UpdateProductionTag()
+    {
+        tagTree.SetProductionText(currentProduction);
+    }
+
+  
 }
 
 

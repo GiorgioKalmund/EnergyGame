@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 public interface ISelectableEntity
 {
+    public void ToggleSelection();
     public void Select();
     public void Deselect();
 
@@ -15,7 +16,7 @@ public interface ISelectableEntity
 
     public string GetName();
 
-    public void OpenTag(int combination);
+    public void ToggleTag(int combination);
     public void CloseTag();
 
 }

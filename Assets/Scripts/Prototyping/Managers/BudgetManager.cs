@@ -44,12 +44,7 @@ public class BudgetManager : MonoBehaviour
 
     public bool UseBudget(float amount)
     {
-        float moneyLeft = budget - amount;
-        if (moneyLeft < 0)
-        {
-            return false;
-        }
-        budget = moneyLeft;
+        budget -= amount;
         UIManager.Instance.RenderBudget();
         return true;
     }

@@ -108,14 +108,6 @@ public class PlacementManager : MonoBehaviour
             
             BuilderInventory.Instance.HideInventory();
             
-            ProducerDescriptor producerDescriptor = currentGameObject.GetComponent<ProducerDescriptor>();
-            if (!BudgetManager.Instance.CanHandleCost(producerDescriptor.GetCost()))
-            {
-                StopPlacement();
-                Debug.LogError("Insufficient budget!");
-                producerDescriptor.Destroy();
-                return;
-            }
             InputManager.Instance.OnClicked += PlaceStructure;
             InputManager.Instance.OnExit += ResetCurrentGameObject;
             InputManager.Instance.OnExit += StopPlacement;
@@ -134,53 +126,31 @@ public class PlacementManager : MonoBehaviour
         if (currentGameObject && !blocked)
         {
             ProducerDescriptor producerDescriptor = currentGameObject.GetComponent<ProducerDescriptor>();
-            if (producerDescriptor.Place(lastHoveredTileData)) // second check, however, might not be needed as this is check in StartPlacmement
-            {
-                //after first coal is placed we decrease enviroment impact and give a notification
-                /*
-                if (producerDescriptor.GetName() == "Cole")
-                {
-                    coalCounter +=  1;
-                    if(coalCounter == 1)
-                    {
-                        notification.SetActive(true);
-                        LevelManager.Instance.SetMaxEnvironmentalImpact(-100);
-                        UIManager.Instance.UpdateMaxEnvironmentalImpact();
-                    }
-                }
-                */
-                /* Handle Building */
-                lastPlacedBuilding = currentGameObject;
-                
-                /* Handle Tile */
-                lastHoveredTileData.setPlacementType(PlacementType.Blocked);
-                lastHoveredTileData.SetCurrentBuilding(producerDescriptor);
-                currentGameObject = null;
+            producerDescriptor.Place(lastHoveredTileData); 
+            /* Handle Building */
+            lastPlacedBuilding = currentGameObject;
+            
+            /* Handle Tile */
+            lastHoveredTileData.setPlacementType(PlacementType.Blocked);
+            lastHoveredTileData.SetCurrentBuilding(producerDescriptor);
+            currentGameObject = null;
+            // Prepare for citySelection
+            citySelectionActive = true;
+            //Debug.Log("Building placed. Please select a city.");
+            cellSprite.color = spriteColorConnecting;
+            UIManager.Instance.ToggleConnectionModeIndicator(true);
+            
+            // Instantiate new cable
+            GameObject cable = Instantiate(cablePrefab, lastPlacedBuilding.transform.position, Quaternion.identity);
+            lastPlacedCable = cable.GetComponent<PowerCable>();
+            producerDescriptor.AddCable(lastPlacedCable);
 
-                // Prepare for citySelection
-                citySelectionActive = true;
-                //Debug.Log("Building placed. Please select a city.");
-                cellSprite.color = spriteColorConnecting;
-                UIManager.Instance.ToggleConnectionModeIndicator(true);
-                
-                // Instantiate new cable
-                GameObject cable = Instantiate(cablePrefab, lastPlacedBuilding.transform.position, Quaternion.identity);
-                lastPlacedCable = cable.GetComponent<PowerCable>();
-                producerDescriptor.AddCable(lastPlacedCable);
-                
-                InputManager.Instance.OnClicked += SelectCity;
-
-                 if(cable.GetComponent<Wandler>() != null){
-                    Wandler cwandler = cable.GetComponent<Wandler>();
-                    //Debug.Log("Got cable Wandler!");
-                    cwandler.onStartConnectTo = lastPlacedBuilding.GetComponent<Wandler>();
-                    //Debug.Log("Connected Cable to plant!");
-                }
-
-            }
-            else
-            {
-                Debug.LogError("Object somehow managed to pass invalid money check!");
+            InputManager.Instance.OnClicked += SelectCity;
+            if(cable.GetComponent<Wandler>() != null){
+                Wandler cwandler = cable.GetComponent<Wandler>();
+                //Debug.Log("Got cable Wandler!");
+                cwandler.onStartConnectTo = lastPlacedBuilding.GetComponent<Wandler>();
+                //Debug.Log("Connected Cable to plant!");
             }
         }
 
@@ -298,8 +268,13 @@ public class PlacementManager : MonoBehaviour
 
     private void ResetCurrentGameObject()
     {
+        if (!currentGameObject)
+        {
+            return;
+        }
         Destroy(currentGameObject);
         currentGameObject = null;
+        Debug.Log("Ressetting game object!");
         BuilderInventory.Instance.ShowInventory();
     }
 
@@ -369,8 +344,8 @@ public class PlacementManager : MonoBehaviour
         }
         else if (!citySelectionActive) // If we are strolling & selecting
         {
-            // TODO
-            SelectionManager.Instance.CheckForSelection();
+            // NOTE: This has been moved to the Update loop of the UI Manager. If any specific behaviour is necessary it should be handled there
+            //SelectionManager.Instance.CheckForSelection();
         }
     }
 
@@ -398,6 +373,4 @@ public enum PowerPlantType{
     WINDMILL,
     HYDROPOWER,
     SOLARPANEL
-
-
 }

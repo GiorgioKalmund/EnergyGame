@@ -1556,6 +1556,7 @@ MonoBehaviour:
   pauseButton: {fileID: 5930491475192472360}
   nextLevelButton: {fileID: 5131940545413126525}
   nextLevelButtonSprite: {fileID: 21300000, guid: 525505bea458f2b49bb4c89a87b0c187, type: 3}
+  insufficientBudgetColor: {r: 0.93333334, g: 0.25882354, b: 0.03137255, a: 1}
   connectionActiveIndicatorImage: {fileID: 2750047359540170431}
 --- !u!114 &6747998863823799526
 MonoBehaviour:

@@ -119,6 +119,7 @@ public class TagSelectionTree : MonoBehaviour
     {
       return;
     }
+    
     for (int index = 0; index < activeTagTree.Count; index++)
     {
       float targetY = GetTargetYPosForTreeElement(index, true);
@@ -146,7 +147,7 @@ public class TagSelectionTree : MonoBehaviour
     tagsOpen = activeTagTree.Count; 
     
     CalculateTagsToShow(types);
-
+    
     for (int index = tagsOpen; index < activeTagTree.Count; index++)
     {
       activeTagTree[index].transform.DOScale(1f, 0.5f + 0.2f * index).SetEase(animationEase);
@@ -196,6 +197,11 @@ public class TagSelectionTree : MonoBehaviour
       targetY = collapsing ? targetY : targetY * -1;
 
       return yPos + targetY;
+  }
+
+  public void SetProductionText(float value)
+  {
+    currentProductionText.text = $"{value:F2}MW";
   }
 }
 

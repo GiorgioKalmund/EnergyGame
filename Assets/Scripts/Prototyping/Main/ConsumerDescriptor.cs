@@ -51,7 +51,17 @@ public class ConsumerDescriptor : MonoBehaviour, ISelectableEntity
           Debug.LogError("Consumer Descriptor Initialization Raycast missed!");
        }
    }
-
+  public void ToggleSelection()
+  {
+        if (selected)
+        {
+            Deselect();
+        }
+        else
+        {
+            Select();
+        }
+  }
    public void Select()
    {
          Debug.Log("Selected "+ this.buildingName);
@@ -110,9 +120,9 @@ public class ConsumerDescriptor : MonoBehaviour, ISelectableEntity
    }
 
 
-   public void OpenTag(int combination)
+   public void ToggleTag(int combination)
    {
-      tagTree.ExpandTree(new List<TreeTagType>() { TreeTagType.POWER , TreeTagType.CO2, TreeTagType.FINANCE});
+      tagTree.ToggleTreeCombination(combination);
    }
 
    public void CloseTag()

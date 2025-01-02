@@ -61,7 +61,7 @@ public class SelectionPanel : MonoBehaviour
         {
             ProducerDescriptor currentProducer = (ProducerDescriptor) currentEntity;
             TMP_Text text = sellButton.GetComponentInChildren<TMP_Text>();
-            text.text = $"Sell {BudgetManager.Instance.GetSellingValueOf(currentProducer.GetCost())}";
+            text.text = $"Sell {currentProducer.GetCost()}";
         }
     }
 

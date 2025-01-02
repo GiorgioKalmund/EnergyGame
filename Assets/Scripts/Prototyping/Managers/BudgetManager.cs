@@ -7,7 +7,7 @@ using UnityEngine;
 public class BudgetManager : MonoBehaviour
 {
     public float budget;
-    public float sellingFactor;
+    
 
     public static BudgetManager Instance { get; private set; }
 
@@ -31,8 +31,8 @@ public class BudgetManager : MonoBehaviour
 
     public void Sell(float originalAmount)
     {
-        Debug.Log("Sold for "+ originalAmount * sellingFactor);
-        AddBudget(originalAmount * sellingFactor);
+        Debug.Log("Sold for "+ originalAmount);
+        AddBudget(originalAmount);
     }
     
 
@@ -59,15 +59,9 @@ public class BudgetManager : MonoBehaviour
         return budget - amount >= 0;
     }
 
-    public float GetSellingFactor()
-    {
-        return sellingFactor;
-    }
     
-    public float GetSellingValueOf(float originalAmount)
-    {
-        return originalAmount * sellingFactor;
-    }
+    
+    
     
     public void SetBudget(float amount)
     {

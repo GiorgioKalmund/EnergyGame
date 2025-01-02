@@ -7,7 +7,7 @@ using UnityEngine.Serialization;
 public class SelectionManager : MonoBehaviour
 {
     private ISelectableEntity _currentlySelected = null;
-    [SerializeField]
+    
     private Camera mainCamera;
     
     public static SelectionManager Instance { get; private set; }
@@ -23,6 +23,11 @@ public class SelectionManager : MonoBehaviour
        {
            Instance = this;
        }
+    }
+
+    private void Start()
+    {
+        mainCamera = UIManager.Instance.sceneCamera;
     }
 
     public void Select(ISelectableEntity newSelection)

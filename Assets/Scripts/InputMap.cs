@@ -71,6 +71,15 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Show Finance"",
+                    ""type"": ""Button"",
+                    ""id"": ""023c30ed-e745-4349-8275-744753b2056d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -183,6 +192,17 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""action"": ""Collapse All Tags"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b6834ab2-58b8-4ee6-b14a-25dc20a55d7a"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Show Finance"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -196,6 +216,7 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         m_main_ShowCO2 = m_main.FindAction("Show CO2", throwIfNotFound: true);
         m_main_CollapseAllTags = m_main.FindAction("Collapse All Tags", throwIfNotFound: true);
         m_main_Move = m_main.FindAction("Move", throwIfNotFound: true);
+        m_main_ShowFinance = m_main.FindAction("Show Finance", throwIfNotFound: true);
     }
 
     ~@InputMap()
@@ -267,6 +288,7 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_main_ShowCO2;
     private readonly InputAction m_main_CollapseAllTags;
     private readonly InputAction m_main_Move;
+    private readonly InputAction m_main_ShowFinance;
     public struct MainActions
     {
         private @InputMap m_Wrapper;
@@ -276,6 +298,7 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         public InputAction @ShowCO2 => m_Wrapper.m_main_ShowCO2;
         public InputAction @CollapseAllTags => m_Wrapper.m_main_CollapseAllTags;
         public InputAction @Move => m_Wrapper.m_main_Move;
+        public InputAction @ShowFinance => m_Wrapper.m_main_ShowFinance;
         public InputActionMap Get() { return m_Wrapper.m_main; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -300,6 +323,9 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
+            @ShowFinance.started += instance.OnShowFinance;
+            @ShowFinance.performed += instance.OnShowFinance;
+            @ShowFinance.canceled += instance.OnShowFinance;
         }
 
         private void UnregisterCallbacks(IMainActions instance)
@@ -319,6 +345,9 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
+            @ShowFinance.started -= instance.OnShowFinance;
+            @ShowFinance.performed -= instance.OnShowFinance;
+            @ShowFinance.canceled -= instance.OnShowFinance;
         }
 
         public void RemoveCallbacks(IMainActions instance)
@@ -343,5 +372,6 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         void OnShowCO2(InputAction.CallbackContext context);
         void OnCollapseAllTags(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
+        void OnShowFinance(InputAction.CallbackContext context);
     }
 }

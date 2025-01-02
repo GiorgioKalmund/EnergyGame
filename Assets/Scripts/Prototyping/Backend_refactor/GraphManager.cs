@@ -63,6 +63,9 @@ public class GraphManager : MonoBehaviour
             Debug.Log(Endpoints[i] + " - " + i + " : " + Endpoints[i].getOutput());
             total += Endpoints[i].getOutput();
         }
-        LevelManager.Instance.textCurrentProduction.text = ((int)total).ToString() + " MW";
+        
+        // TODO: Split up into different endpoints and assign each of them their correct (new) value
+        
+        // TODO: 
     }
 }

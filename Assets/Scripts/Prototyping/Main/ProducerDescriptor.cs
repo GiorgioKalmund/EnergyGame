@@ -51,6 +51,8 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
         id = LevelManager.Instance.nextID;
         LevelManager.Instance.nextID += 1;
         connectedCables = new List<PowerCable>();
+         
+        tagTree.Setup(this);
     }
 
     public bool isPlaced()
@@ -181,7 +183,7 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
     }
     public void OpenTag(int combination)
     {
-        tagTree.ExpandTree(new List<TreeTagType>() { TreeTagType.POWER , TreeTagType.CO2, TreeTagType.SELL});
+        tagTree.ExpandTree(new List<TreeTagType>() { TreeTagType.POWER , TreeTagType.CO2, TreeTagType.FINANCE});
     }
 
     public void CloseTag()

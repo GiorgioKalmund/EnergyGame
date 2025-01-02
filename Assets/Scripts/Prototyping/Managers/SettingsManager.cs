@@ -60,8 +60,8 @@ public class SettingsManager : MonoBehaviour
       controlsButton.GetButton().onClick.AddListener(ToggleControlsScreen);
       
       // High score button
-      var highscoreButton = optionButtons[3];
-      highscoreButton.GetButton().onClick.AddListener(ToggleHighscoreScreen);
+      var highScoreButton = optionButtons[3];
+      highScoreButton.GetButton().onClick.AddListener(ToggleHighscoreScreen);
    }
 
 

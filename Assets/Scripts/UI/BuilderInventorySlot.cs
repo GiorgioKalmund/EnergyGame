@@ -1,17 +1,23 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 
-public class BuilderInventorySlot : MonoBehaviour
+public class BuilderInventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     private Button button;
     public int objectInstanceId;
     [Header("Visual")]
     [SerializeField] private Image slotImage;
-    [SerializeField] private TMP_Text slotCostText;
     [SerializeField] private TMP_Text slotCapacityText;
+    [SerializeField] private Color positiveSlotColor;
+    [SerializeField] private Color neutralSlotColor;
+    [SerializeField] private Color negativeSlotColor;
+    
     private int capacity { get; set; } = 1;
+    private ProducerDescriptor entity;
 
     public bool active { get; private set; } 
 
@@ -26,10 +32,10 @@ public class BuilderInventorySlot : MonoBehaviour
     }
     
     // Assigns image, cost text and id inside the database to the slot
-    public void Setup(ProducerDescriptor entity, int objId, int startingCapacity)
+    public void Setup(ProducerDescriptor descriptor, int objId, int startingCapacity)
     {
+        entity = descriptor;
         slotImage.sprite = entity.GetSprite();
-        slotCostText.text = $"{entity.GetCost()}€";
         objectInstanceId = objId;
         SetCapacity(startingCapacity);
     }
@@ -52,14 +58,12 @@ public class BuilderInventorySlot : MonoBehaviour
 
     public void AddCapacity(int value)
     {
-        capacity += value;
-        slotCapacityText.text = $"{capacity}";
+        SetCapacity(capacity + value);
     }
     public bool RemoveCapacity(int value)
     {
-        capacity -= value;
-        slotCapacityText.text = $"{capacity}";
-
+        SetCapacity(capacity - value);
+        
         if (capacity < 0)
         {
             return false;
@@ -72,5 +76,31 @@ public class BuilderInventorySlot : MonoBehaviour
     {
         capacity = value;
         slotCapacityText.text = $"{capacity}";
+        slotCapacityText.color = GetSlotTextColor();
+    }
+
+    private Color GetSlotTextColor()
+    {
+        if (capacity > 0)
+            return positiveSlotColor;
+        if (capacity == 0)
+            return neutralSlotColor;
+        return negativeSlotColor;
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (BuilderInventory.Instance)
+            BuilderInventory.Instance.OpenSpeechBubble(entity);
+        else
+            Debug.LogError("No Builder Inventory found!");
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (BuilderInventory.Instance)
+            BuilderInventory.Instance.CloseSpeechBubble();
+        else
+            Debug.LogError("No Builder Inventory found!");
     }
 } 

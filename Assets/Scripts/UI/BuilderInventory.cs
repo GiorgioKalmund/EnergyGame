@@ -4,6 +4,7 @@ using System.Data.Common;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using TMPro;
 using UnityEngine.Serialization;
 
 public class BuilderInventory : MonoBehaviour
@@ -13,6 +14,16 @@ public class BuilderInventory : MonoBehaviour
     private bool expanded;
     
     public static BuilderInventory Instance { get; private set; }
+
+  
+    
+    [Header("Speech Bubble")] 
+    [SerializeField] private GameObject speechBubble;
+    [SerializeField] private TMP_Text speechBubbleName;
+    [SerializeField] private TMP_Text speechBubbleOutput;
+    [SerializeField] private TMP_Text speechBubbleCO2;
+    [SerializeField] private TMP_Text speechBubbleCost;
+    public bool speechBubbleOpen;
     
     [Header("Data")] 
     [SerializeField] private ObjectsDatabase database;
@@ -58,9 +69,11 @@ public class BuilderInventory : MonoBehaviour
             Instance = this;
         }
     }
-
     private void Start()
     {
+        // Initially hide the bubble with no animation
+        speechBubble.transform.localScale = Vector3.zero;
+        
         for (int index = 0; index < prefabs.Count; index++)
         {
             // Create a new slot for the element from the list
@@ -79,6 +92,7 @@ public class BuilderInventory : MonoBehaviour
             // Update database
             database.Put(new ObjectData(descriptor, index, prefabs[index]));
         }
+        
     }
 
     public void AddSlotCapacity(int capacity, int slotId)
@@ -94,31 +108,55 @@ public class BuilderInventory : MonoBehaviour
         }
     }
     
-    public void SetSlotCapacity(int capacity, int slotId)
-    {
-        builderSlots[slotId].SetCapacity(capacity);
-    }
-   public void Expand()
+   public void ShowInventory()
    {
         expanded = true;
         inventory.GetComponent<RectTransform>().DOLocalMoveY(expandedPosition.y, inventoryAnimTime);
    }
     
-    public void Collapse()
+    public void HideInventory()
     {
         expanded = false;
         inventory.GetComponent<RectTransform>().DOLocalMoveY(collapsedPosition.y, inventoryAnimTime);
     }
 
-    private void ToggleInventory()
+    public void ToggleInventory()
     {
+        if (UIManager.Instance && UIManager.Instance.Mode == UIState.CONNECTING)
+        {
+            Debug.LogWarning("BuilderInventory: Cannot open as we are currently connecting!");
+            return;
+        }
+        
         if (expanded)
         {
-           Collapse(); 
+           HideInventory(); 
         }
         else
         {
-            Expand();
+            ShowInventory();
         }
+    }
+
+    public void OpenSpeechBubble(ProducerDescriptor descriptor)
+    {
+        if (speechBubbleOpen)
+            return;
+
+        speechBubble.transform.DOScale(1f, 0.7f).SetEase(Ease.InOutQuad).SetRecyclable();
+
+        speechBubbleName.text = $"{descriptor.GetName()}";
+        speechBubbleOutput.text = $"{descriptor.GetMaxProduction()} MW";
+        speechBubbleCO2.text = $"{descriptor.GetEnvironmentalImpact()} CO2t";
+        speechBubbleCost.text = $"{descriptor.GetCost()}€";
+    }
+
+    public void CloseSpeechBubble()
+    {
+        
+        if (!speechBubble)
+            return;
+        
+        speechBubble.transform.DOScale(0f, 0.7f).SetEase(Ease.InOutQuad).SetRecyclable();
     }
 }

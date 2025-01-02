@@ -112,7 +112,7 @@ public class ConsumerDescriptor : MonoBehaviour, ISelectableEntity
 
    public void OpenTag(int combination)
    {
-      tagTree.ExpandTree(new List<TreeTagType>() { TreeTagType.POWER , TreeTagType.CO2, TreeTagType.SELL});
+      tagTree.ExpandTree(new List<TreeTagType>() { TreeTagType.POWER , TreeTagType.CO2, TreeTagType.FINANCE});
    }
 
    public void CloseTag()

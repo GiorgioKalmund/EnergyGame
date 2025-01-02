@@ -81,7 +81,6 @@ public class PlacementManager : MonoBehaviour
         {
             cellSprite = cellIndicator.GetComponentInChildren<SpriteRenderer>();
         }
-        UIManager.Instance.ToggleConnectionModeIndicator(false);
     }
 
     public void StartPlacement(int ID)
@@ -107,7 +106,7 @@ public class PlacementManager : MonoBehaviour
             cellIndicator.SetActive(true);
             currentGameObject.layer = 2;
             
-            BuilderInventory.Instance.Collapse();
+            BuilderInventory.Instance.HideInventory();
             
             ProducerDescriptor producerDescriptor = currentGameObject.GetComponent<ProducerDescriptor>();
             if (!BudgetManager.Instance.CanHandleCost(producerDescriptor.GetCost()))
@@ -303,7 +302,7 @@ public class PlacementManager : MonoBehaviour
     {
         Destroy(currentGameObject);
         currentGameObject = null;
-        BuilderInventory.Instance.Expand();
+        BuilderInventory.Instance.ShowInventory();
     }
 
     private void StopPlacement()

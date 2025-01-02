@@ -14,9 +14,6 @@ public class InputManager : MonoBehaviour
 {
     public static InputManager Instance { get; private set; }
 
-    [Header("Camera")]
-    [SerializeField]
-    private Camera mainCamera;
     [SerializeField] public GameObject center;
 
     [Header("Zoom")]
@@ -43,6 +40,8 @@ public class InputManager : MonoBehaviour
 
     private Vector3 lastPosition;
 
+    private Camera mainCamera;
+
     public event Action OnClicked;
     public event Action OnExit;
 
@@ -62,16 +61,29 @@ public class InputManager : MonoBehaviour
 
     private void Start()
     {
-
+        mainCamera = UIManager.Instance.sceneCamera;
     }
 
     private void Update() //into Building System
     {
+        
+        
         if (Input.GetMouseButtonDown(0))
             OnClicked?.Invoke();
         if (Input.GetMouseButtonDown(1))
-            OnExit?.Invoke();
-
+        {
+            
+            // TODO: Differentiate between reset if already started connecting, or simply canceling all-together
+            // Exit out of connection mode if connecting
+            if (UIManager.Instance && UIManager.Instance.Mode == UIState.CONNECTING)
+                UIManager.Instance.DeactivateConnectingMode();
+            else
+            {
+                // Do whatever the rest of the default logic should do 
+                OnExit?.Invoke();
+            }
+        }
+    
         zoom();
         move();
 
@@ -88,6 +100,10 @@ public class InputManager : MonoBehaviour
 
     private void move()
     {
+        
+        if (IsPointOverUI())
+            return;
+        
         if (Input.GetMouseButtonDown(0))
         {
             dragOrigin = GetMousePositionInWorldSpace();
@@ -144,6 +160,9 @@ public class InputManager : MonoBehaviour
 
     private void zoom()
     {
+        if (IsPointOverUI())
+            return;
+        
         float scrollDelta = Input.GetAxis("Mouse ScrollWheel");
         //ignore small changes
         if (Mathf.Abs(scrollDelta) > Mathf.Epsilon)

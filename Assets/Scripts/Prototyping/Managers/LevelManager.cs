@@ -16,10 +16,9 @@ public class LevelManager : MonoBehaviour
     public float currentEnvironmentalImpact;
     [SerializeField] private float maxEnvironmentalImpact;
     [SerializeField] private bool demandMet = false;
+    public int endpointsCompleted= 0;
+    public int endpointsCount = 0;
     public static LevelManager Instance { get; private set; }
-
-    [Header("UI Interaction")]
-    public TMP_Text textCurrentProduction;
 
     public int nextID = 0;
 

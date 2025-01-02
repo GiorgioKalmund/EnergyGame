@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using JetBrains.Annotations;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Debug = UnityEngine.Debug;
@@ -79,9 +80,13 @@ public class GridDataManager : MonoBehaviour
             { color6, PlacementType.Shore },   // Shore
             { color7, PlacementType.Blocked }, // Street
             { color8, PlacementType.Water },   // Water
-            { color9, PlacementType.Endpoint}  // Enpoints 
+            { color9, PlacementType.Endpoint}  // Endpoints 
         };
 
+    }
+
+    private void Start()
+    {
         tilesCenter.transform.position = new Vector3((int)textureHeight / 2f, 1f, (int)textureWidth / 2f);
         GenerateMap();
 
@@ -91,6 +96,7 @@ public class GridDataManager : MonoBehaviour
 
         Debug.Log($"Grid setup complete. Center position : {tilesCenter.position}, Grid position: {grid.transform.position}");
     }
+
     private void GenerateMap()
     {
         float sunlight = 0;
@@ -133,9 +139,16 @@ public class GridDataManager : MonoBehaviour
 
                     //map each block with placementType
                     placementMappings.TryGetValue(pixelColor, out PlacementType placementType);
+
+                    if (placementType == PlacementType.Endpoint)
+                    {
+                        if (LevelManager.Instance)
+                            LevelManager.Instance.endpointsCount++;
+                        else
+                            Debug.LogError("GridDataManager: No LevelManager found!");
+                    }
                     
                     TileData tileData = new TileData(sunlight, windSpeed, waterSpeed, coalAmount, placementType, new Vector2(x, y), null);
-
                     
                     if (instance.GetComponent<ProducerDescriptor>())
                     {
@@ -152,6 +165,11 @@ public class GridDataManager : MonoBehaviour
                     Debug.Log("Could not find appropriate map entry for "+pixelColor);
                 }
             }
+        }
+
+        if (UIManager.Instance)
+        {
+            UIManager.Instance.SetEndpointsCompleted(0);
         }
     }
 }

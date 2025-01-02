@@ -13,9 +13,22 @@ public class TileDataWrapper : MonoBehaviour
     {
          if (InputManager.IsPointOverUI())
             return;
-         
-         if (SelectionManager.Instance && tileData.currentBuilding != null)
-             SelectionManager.Instance.Select(tileData.currentBuilding);
+
+         if (UIManager.Instance.Mode == UIState.DEFAULT)
+         {
+             if (SelectionManager.Instance && tileData.currentBuilding != null)
+                 SelectionManager.Instance.Select(tileData.currentBuilding);
+         } else if (UIManager.Instance.Mode == UIState.DESTROYING)
+         {
+             ISelectableEntity descriptor = tileData.currentBuilding;
+             if (descriptor as ProducerDescriptor)
+             { 
+                 ProducerDescriptor producer = (ProducerDescriptor)descriptor;
+                 
+                 if (producer)
+                    producer.Sell();
+             }
+         }
     }
 
     private void OnMouseUp()

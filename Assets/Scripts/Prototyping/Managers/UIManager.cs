@@ -8,6 +8,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine.Assertions;
+using UnityEngine.InputSystem.Layouts;
 
 public class UIManager : MonoBehaviour
 {
@@ -22,6 +23,11 @@ public class UIManager : MonoBehaviour
     [Header("Cursor")]
     [SerializeField] private Texture2D cursorDefaultTexture;
     [SerializeField] private Texture2D cursorDownTexture;
+    [SerializeField] private Texture2D cursorExplosiveTexture;
+    [SerializeField] private Texture2D cursorExplosiveDownTexture;
+    
+    private Texture2D currentCursorTexture;
+    private Texture2D currentCursorDownTexture;
     
     [Header("Top Panel")]
     [SerializeField] private TMP_Text budgetText;
@@ -34,6 +40,7 @@ public class UIManager : MonoBehaviour
     
     [Header("Visual")]
     [SerializeField] private Image connectionActiveIndicatorImage;
+    [SerializeField] private Image destructionActiveIndicatorImage;
 
     private InputMap inputMap;
     private void Awake()
@@ -57,7 +64,7 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        SetCursorTextureDefault();
+        SetDefaultCursorTextures(); 
         
         // Set Quality Level to Ultra
         SetQualityLevel(5);
@@ -93,19 +100,33 @@ public class UIManager : MonoBehaviour
         }
         else if (Input.GetMouseButtonUp(0))
         {
-            SetCursorTextureDefault();
+            SetCursorTexture();
         }
     }
 
-    private void SetCursorTextureDefault()
+    private void SetCursorTexture()
     {
-        Cursor.SetCursor(cursorDefaultTexture, Vector2.zero, CursorMode.Auto);
+        Cursor.SetCursor(currentCursorTexture, Vector2.zero, CursorMode.Auto);
     }
     
     private void SetCursorTextureDown()
     {
-        Cursor.SetCursor(cursorDownTexture, Vector2.zero, CursorMode.Auto);
+        Cursor.SetCursor(currentCursorDownTexture, Vector2.zero, CursorMode.Auto);
+    }
+
+    private void SetDefaultCursorTextures()
+    {
+        currentCursorTexture = cursorDefaultTexture;
+        currentCursorDownTexture = cursorDownTexture;
+        Cursor.SetCursor(currentCursorTexture, Vector2.zero, CursorMode.Auto);
     } 
+    
+    private void SetDestructionCursorTextures()
+    {
+        currentCursorTexture = cursorExplosiveTexture;
+        currentCursorDownTexture = cursorExplosiveDownTexture;
+        Cursor.SetCursor(currentCursorTexture, Vector2.zero, CursorMode.Auto);
+    }
 
     public void UpdateCurrentEnvironmentalImpact()
     {
@@ -122,7 +143,6 @@ public class UIManager : MonoBehaviour
         if (enable != null)
         {
             connectionActiveIndicatorImage.DOFade(enable == true ? 1f : 0f, 0.5f);
-            Mode = enable == true ? UIState.CONNECTING : UIState.DEFAULT; 
             return;
         }
         connectionActiveIndicatorImage.enabled = !connectionActiveIndicatorImage.enabled;
@@ -130,8 +150,10 @@ public class UIManager : MonoBehaviour
 
     public void ActiveConnectingMode()
     {
+        ResetMode(); 
         if (Mode != UIState.CONNECTING)
         {
+            Mode = UIState.CONNECTING;
             ToggleConnectionModeIndicator(true);
             if (BuilderInventory.Instance)
                 BuilderInventory.Instance.HideInventory();
@@ -149,6 +171,7 @@ public class UIManager : MonoBehaviour
         Debug.LogWarning("Deactivating Connection Mode!");
         if (Mode == UIState.CONNECTING)
         {
+            Mode = UIState.DEFAULT;
             ToggleConnectionModeIndicator(false);
             if (BuilderInventory.Instance)
                 BuilderInventory.Instance.ShowInventory();
@@ -160,6 +183,51 @@ public class UIManager : MonoBehaviour
             Debug.LogError("UIManager: Deactivation of Connecting called even though the state never was connecting in the first place!");
         }
         
+    }
+
+    public void ActivateDestructionMode()
+    {
+        Mode = UIState.DESTROYING;
+    }
+
+    public void ToggleDestructionMode()
+    {
+        // If the current mode is Destroying, we go back to default, otherwise switch to destroying
+        Mode = Mode == UIState.DESTROYING ? UIState.DEFAULT : UIState.DESTROYING;
+        bool enable = Mode == UIState.DESTROYING;
+        destructionActiveIndicatorImage.DOFade(enable ? 1f : 0f, 0.5f);
+        if (BuilderInventory.Instance)
+        {
+            if (BuilderInventory.Instance.Expanded())
+            {
+                BuilderInventory.Instance.HideInventory();
+                SetDestructionCursorTextures();
+            }
+            else
+            {
+                BuilderInventory.Instance.ShowInventory();
+                SetDefaultCursorTextures();
+            }
+        }
+    }
+
+    public void ActivateDefaultMode()
+    {
+        
+        Mode = UIState.DEFAULT;
+    }
+
+    public void ResetMode()
+    {
+        if (Mode == UIState.CONNECTING)
+        {
+            DeactivateConnectingMode();
+        } else if (Mode == UIState.DESTROYING)
+        {
+            ToggleDestructionMode();
+        }
+        ActivateDefaultMode();
+        SetDefaultCursorTextures();
     }
 
     public void SetEndpointsCompleted(int newValue)

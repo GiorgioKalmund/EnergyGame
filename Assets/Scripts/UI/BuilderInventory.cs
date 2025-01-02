@@ -159,4 +159,10 @@ public class BuilderInventory : MonoBehaviour
         
         speechBubble.transform.DOScale(0f, 0.7f).SetEase(Ease.InOutQuad).SetRecyclable();
     }
+
+
+    public bool Expanded()
+    {
+        return expanded;
+    }
 }

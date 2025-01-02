@@ -23,25 +23,45 @@ public class TagSelectionTree : MonoBehaviour
   [SerializeField] private TMP_Text environmentalImpactText;
   [SerializeField] private TMP_Text financeText;
 
-
+  private Action<InputAction.CallbackContext> showPowerAction;
+  private Action<InputAction.CallbackContext> showCO2Action;
+  private Action<InputAction.CallbackContext> showFinanceAction;
+  private Action<InputAction.CallbackContext> collapseAllTagsAction; 
   private void OnEnable()
   {
-    // TODO: Move to central script
+    
+    // Create a new map and subscribe every combo to it
     inputMap = new InputMap();
     inputMap.main.Enable();
 
-    inputMap.main.ShowPower.performed += ctx => {ToggleTreeCombination(1);};
-    inputMap.main.ShowCO2.performed += ctx => {ToggleTreeCombination(2);};
-    inputMap.main.ShowFinance.performed += ctx => {ToggleTreeCombination(4);};
-    inputMap.main.CollapseAllTags.performed += ctx => {CollapseTree();};
+    showPowerAction = ctx => { ToggleTreeCombination(1); };
+    showCO2Action = ctx => { ToggleTreeCombination(2); };
+    showFinanceAction = ctx => { ToggleTreeCombination(4); };
+    collapseAllTagsAction = ctx => { CollapseTree(); };
+
+    inputMap.main.ShowPower.performed += showPowerAction;
+    inputMap.main.ShowCO2.performed += showCO2Action;
+    inputMap.main.ShowFinance.performed += showFinanceAction;
+    inputMap.main.CollapseAllTags.performed += collapseAllTagsAction;
   }
-  
+
+  private void OnDisable()
+  {
+    // Unsubscribe and disable input for this specific instance 
+    inputMap.main.ShowPower.performed -= showPowerAction;
+    inputMap.main.ShowCO2.performed -= showCO2Action;
+    inputMap.main.ShowFinance.performed -= showFinanceAction;
+    inputMap.main.CollapseAllTags.performed -= collapseAllTagsAction;
+
+    inputMap.main.Disable();
+  }
+
   private void Start()
   {
     // Hide every tag at first
-    foreach (var tag in tagTree)
+    foreach (var t in tagTree)
     {
-      tag.transform.localScale = Vector3.zero;
+      t.transform.localScale = Vector3.zero;
     }
     
     transform.parent.GetComponent<Canvas>().worldCamera = UIManager.Instance.sceneCamera;

@@ -74,9 +74,9 @@ public class InputManager : MonoBehaviour
         {
             
             // TODO: Differentiate between reset if already started connecting, or simply canceling all-together
-            // Exit out of connection mode if connecting
-            if (UIManager.Instance && UIManager.Instance.Mode == UIState.CONNECTING)
-                UIManager.Instance.DeactivateConnectingMode();
+            // Exit out of current mode if connecting
+            if (UIManager.Instance)
+                UIManager.Instance.ResetMode();
             
             OnExit?.Invoke();
         }

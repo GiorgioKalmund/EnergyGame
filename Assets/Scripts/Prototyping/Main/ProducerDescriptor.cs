@@ -69,11 +69,13 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
        tileOn.Reset();
        LevelManager.Instance.ReduceProduce(currentProduction);
        LevelManager.Instance.ReduceEnvironmentalImpact(environmentalImpact);
-       InventoryManager.Instance.UpdateInventorySlots();
        foreach (PowerCable cable in connectedCables)
        {
            cable.Sell();
        }
+       
+       UIManager.Instance.ToggleDestructionMode();
+       
        Destroy();
     }
 
@@ -104,10 +106,12 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
         if (!placed)
             return;
         
-        Debug.Log("Selected: " + id);
         
         UpdateProductionTag();
-        tagTree.ExpandTree(new List<TreeTagType>() { TreeTagType.POWER , TreeTagType.CO2, TreeTagType.FINANCE});
+        if (tagTree)
+        {
+            tagTree.ExpandTree(new List<TreeTagType>() { TreeTagType.POWER , TreeTagType.CO2, TreeTagType.FINANCE});
+        }
         selected = true;
     }
 
@@ -116,8 +120,10 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
         if (!selected)
             return;
         
-        Debug.Log("Deselected: " + id);
-        tagTree.CollapseTree();
+        if (tagTree)
+        {
+            tagTree.CollapseTree();
+        }
         selected = false;
     }
 

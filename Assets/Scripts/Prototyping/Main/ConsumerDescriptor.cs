@@ -64,14 +64,12 @@ public class ConsumerDescriptor : MonoBehaviour, ISelectableEntity
   }
    public void Select()
    {
-         Debug.Log("Selected "+ this.buildingName);
          selectionIndicator.SetActive(true);
          selected = true;
    }
 
    public void Deselect()
    {
-        Debug.Log("Deselected "+ this.buildingName);
         selectionIndicator.SetActive(false);
         selected = false;
    }

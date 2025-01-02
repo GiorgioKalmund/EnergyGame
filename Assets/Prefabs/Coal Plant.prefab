@@ -665,6 +665,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingName: Coal Plant
+  powerPlantType: 1
   placement: 0
   cost: 400
   maxProduction: 153

@@ -350,6 +350,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingName: Windmill
+  powerPlantType: 2
   placement: 0
   cost: 105
   maxProduction: 25
@@ -387,6 +388,7 @@ MonoBehaviour:
   InstanceID: 0
   generating: 100
   efficiency: 1
+  Endpoint: 0
   onStartConnectTo: {fileID: 0}
 --- !u!1 &4481338823864832879
 GameObject:

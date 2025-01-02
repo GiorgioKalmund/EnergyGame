@@ -6,7 +6,8 @@ using System.Collections.Generic;
 public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
 {
     [Header("Info")] 
-    public String buildingName;
+    public string buildingName;
+    public PowerPlantType powerPlantType;
     [SerializeField] private PlacementType placement;
     [SerializeField] private float cost;
     public float maxProduction;

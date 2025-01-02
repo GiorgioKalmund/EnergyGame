@@ -663,6 +663,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingName: Solar Panels
+  powerPlantType: 4
   placement: 0
   cost: 100
   maxProduction: 20
@@ -700,6 +701,7 @@ MonoBehaviour:
   InstanceID: 0
   generating: 100
   efficiency: 1
+  Endpoint: 0
   onStartConnectTo: {fileID: 0}
 --- !u!1 &9031495792865948788
 GameObject:

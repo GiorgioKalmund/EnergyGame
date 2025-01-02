@@ -474,6 +474,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingName: Hydropower
+  powerPlantType: 3
   placement: 1
   cost: 160
   maxProduction: 51
@@ -511,6 +512,7 @@ MonoBehaviour:
   InstanceID: 0
   generating: 100
   efficiency: 1
+  Endpoint: 0
   onStartConnectTo: {fileID: 0}
 --- !u!1 &8465016442759146058
 GameObject:

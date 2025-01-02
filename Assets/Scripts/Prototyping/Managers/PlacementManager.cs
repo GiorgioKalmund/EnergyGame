@@ -218,28 +218,26 @@ public class PlacementManager : MonoBehaviour
                 //lastPlacedBuilding is the powerPlant
                 float productionValue = lastPlacedBuilding.GetComponentInChildren<Wandler>().generating;
                 
-                // TODO: THIS IS NOT THE WAY TO DO IT, maybe an Enum for BuildingType?
-                if (producerDescriptor.buildingName == "Windmill")
-                {
-                    //TODO kommt später weg
-                    //lastHoveredTileData.windSpeed += 0.1f;
-                    productionValue *= lastHoveredTileData.windSpeed;
-
-                } 
-                else if (producerDescriptor.buildingName == "Hydropower")
-                {
-                    //lastHoveredTileData.waterSpeed += 0.1f;
-                    //Debug.Log("Applied a debuff of "+lastHoveredTileData.waterSpeed + " to "+producerDescriptor.buildingName);
-                    productionValue *= lastHoveredTileData.waterSpeed;
+                
+                //Replacement of old modification using name
+                //Enum is found on the bottom of this script
+                switch(producerDescriptor.powerPlantType){
+                    case PowerPlantType.COALPLANT:
+                        productionValue *= lastHoveredTileData.coalAmount;
+                        break;
+                    case PowerPlantType.WINDMILL:
+                        productionValue *= lastHoveredTileData.windSpeed;
+                        break;
+                    case PowerPlantType.HYDROPOWER:
+                        productionValue *= lastHoveredTileData.waterSpeed;
+                        break;
+                    case PowerPlantType.SOLARPANEL:
+                        productionValue *= lastHoveredTileData.sunlightHours;
+                        break;
+                    default:
+                        Debug.LogWarning("powerPlantType enum not set in powerplant.");
+                        break;
                 }
-                else if (producerDescriptor.buildingName == "Coal Plant")
-                {
-                    productionValue *= lastHoveredTileData.coalAmount;
-                } else if (producerDescriptor.buildingName == "Solar Panels")
-                {
-                    productionValue *= lastHoveredTileData.sunlightHours;
-                }
-
                 lastPlacedBuilding.GetComponentInChildren<Wandler>().generating = productionValue;
 
                 //Debug.Log($"alpha = {lastHoveredTileData.waterSpeed}");
@@ -394,4 +392,12 @@ public class PlacementManager : MonoBehaviour
         _flickering = false;
     }
 }
+public enum PowerPlantType{
+    NOTSELECTED,
+    COALPLANT,
+    WINDMILL,
+    HYDROPOWER,
+    SOLARPANEL
 
+
+}

@@ -189,6 +189,9 @@ public class OverlaysDropdown : MonoBehaviour
    {
        allTags.Remove(tagToBeRemoved);
    }
-   
-   
+
+   private void OnDestroy()
+   {
+       DOTween.KillAll();
+   }
 }

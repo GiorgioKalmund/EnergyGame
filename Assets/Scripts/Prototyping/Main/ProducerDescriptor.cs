@@ -1,8 +1,5 @@
 using UnityEngine;
-using System;
 using System.Collections.Generic;
-using UnityEditor.SceneManagement;
-using UnityEngine.EventSystems;
 
 public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
 {

@@ -1,14 +1,9 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Diagnostics;
-using Unity.VisualScripting;
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
-using Debug = UnityEngine.Debug;
+using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
@@ -213,5 +208,4 @@ public class InputManager : MonoBehaviour
 
         return lastPosition;
     }
-
 }

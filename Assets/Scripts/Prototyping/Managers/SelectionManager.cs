@@ -33,11 +33,18 @@ public class SelectionManager : MonoBehaviour
 
     public void Select(ISelectableEntity newSelection)
     {
+        if (newSelection.IsSelected())
+        {
+            newSelection.Deselect();
+            return;
+        }
+        
         if (_currentlySelected != null)
         {
             _currentlySelected.Deselect();
             if (newSelection.GetID() == _currentlySelected.GetID()) 
             {
+                Debug.Log("Identical!");
                 ClearSelection();
                 return;
             }

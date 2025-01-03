@@ -107,7 +107,6 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
         if (!placed)
             return;
         
-        
         UpdateProductionTag();
         if (tagTree)
         {

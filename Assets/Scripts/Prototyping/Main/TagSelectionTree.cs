@@ -13,9 +13,9 @@ public class TagSelectionTree : MonoBehaviour
   public List<GameObject> activeTagTree;
   public List<TreeTagType> treeTypes;
   private int lastPressedCombination;
-  private int tagsOpen;
+  public int tagsOpen;
   public Ease animationEase = Ease.InOutCubic;
-  private bool expanded;
+  public bool expanded;
   private InputMap inputMap;
   
   [Header("Values")]
@@ -78,6 +78,10 @@ public class TagSelectionTree : MonoBehaviour
     currentProductionText.text = $"{descriptor.GetMaxProduction()} MW";
     environmentalImpactText.text = $"{descriptor.GetEnvironmentalImpact()} CO2t";
     financeText.text = $"{descriptor.GetCost()}€";
+    
+    // Add itself to the global list contained in the OverlaysDropdown
+    if (OverlaysDropdown.Instance)
+      OverlaysDropdown.Instance.AddTag(this);
   }
 
   public void ToggleTree()
@@ -114,6 +118,13 @@ public class TagSelectionTree : MonoBehaviour
     }
     else
     {
+      ExpandTreeCombination(combination);
+    }
+    
+  }
+
+  public void ExpandTreeCombination(int combination)
+  {
       List<TreeTagType> types = new List<TreeTagType>();
       lastPressedCombination = combination;
       if ((combination & 1) == 1)
@@ -129,12 +140,11 @@ public class TagSelectionTree : MonoBehaviour
         types.Add(TreeTagType.FINANCE);
       }
       ExpandTree(types);
-    }
-    
   }
 
   public void CollapseTree()
   {
+    Debug.Log("Collapse Called!");
     if (!expanded)
     {
       return;
@@ -182,6 +192,9 @@ public class TagSelectionTree : MonoBehaviour
 
     RotateTowardsCamera(); 
     expanded = true;
+    
+    // Change state, as a click should now close the tag again
+    gameObject.transform.parent.GetComponentInParent<ProducerDescriptor>().selected = true;
   }
   
   private void CalculateTagsToShow(List<TreeTagType> types)
@@ -222,6 +235,17 @@ public class TagSelectionTree : MonoBehaviour
   public void SetProductionText(float value)
   {
     currentProductionText.text = $"{value:F2}MW";
+  }
+
+  public bool IsExpanded()
+  {
+    return expanded;
+  }
+
+  private void OnDestroy()
+  {
+    if (OverlaysDropdown.Instance)
+      OverlaysDropdown.Instance.RemoveTag(this);
   }
 }
 

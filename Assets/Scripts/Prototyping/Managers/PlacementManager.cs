@@ -61,6 +61,30 @@ public class PlacementManager : MonoBehaviour
     //private int coalCounter = 0;
     //[SerializeField] private GameObject notification;
 
+    public bool Placing()
+    {
+        return currentGameObject != null || lastPlacedBuilding != null && citySelectionActive;
+    }
+
+    public void Abort()
+    {
+        if (Placing())
+        {
+            if (currentGameObject != null)
+            {
+               ResetCurrentGameObject(); 
+            }
+            else
+            {
+                lastPlacedBuilding.GetComponent<ProducerDescriptor>().Sell();
+                
+                cellSprite.color = spriteColorRegular;
+                cellIndicator.SetActive(false);
+                UIManager.Instance.ToggleConnectionModeIndicator(false);
+                InputManager.Instance.OnClicked -= SelectCity;
+            }
+        }
+    }
 
     private void Awake()
     {

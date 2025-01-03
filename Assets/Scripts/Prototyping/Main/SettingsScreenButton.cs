@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -38,5 +39,10 @@ public class SettingsScreenButton : MonoBehaviour, IPointerEnterHandler, IPointe
            button = GetComponent<Button>();
        }
        return button;
+   }
+
+   private void OnDestroy()
+   {
+       DOTween.KillAll();
    }
 }

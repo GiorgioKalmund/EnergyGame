@@ -15,8 +15,6 @@ public class BuilderInventory : MonoBehaviour
     
     public static BuilderInventory Instance { get; private set; }
 
-  
-    
     [Header("Speech Bubble")] 
     [SerializeField] private GameObject speechBubble;
     [SerializeField] private TMP_Text speechBubbleName;
@@ -24,6 +22,7 @@ public class BuilderInventory : MonoBehaviour
     [SerializeField] private TMP_Text speechBubbleCO2;
     [SerializeField] private TMP_Text speechBubbleCost;
     public bool speechBubbleOpen;
+    [SerializeField] private float speechBubbleScaleDuration = 0.5f;
     
     [Header("Data")] 
     [SerializeField] private ObjectsDatabase database;
@@ -122,12 +121,6 @@ public class BuilderInventory : MonoBehaviour
 
     public void ToggleInventory()
     {
-        if (UIManager.Instance && UIManager.Instance.Mode == UIState.CONNECTING)
-        {
-            Debug.LogWarning("BuilderInventory: Cannot open as we are currently connecting!");
-            return;
-        }
-        
         if (expanded)
         {
            HideInventory(); 
@@ -143,7 +136,7 @@ public class BuilderInventory : MonoBehaviour
         if (speechBubbleOpen)
             return;
 
-        speechBubble.transform.DOScale(1f, 0.7f).SetEase(Ease.InOutQuad).SetRecyclable();
+        speechBubble.transform.DOScale(1f, speechBubbleScaleDuration).SetEase(Ease.InOutQuad).SetRecyclable();
 
         speechBubbleName.text = $"{descriptor.GetName()}";
         speechBubbleOutput.text = $"{descriptor.GetMaxProduction()} MW";
@@ -157,7 +150,7 @@ public class BuilderInventory : MonoBehaviour
         if (!speechBubble)
             return;
         
-        speechBubble.transform.DOScale(0f, 0.7f).SetEase(Ease.InOutQuad).SetRecyclable();
+        speechBubble.transform.DOScale(0f, speechBubbleScaleDuration).SetEase(Ease.InOutQuad).SetRecyclable();
     }
 
 

@@ -26,7 +26,7 @@ public class BuilderInventorySlot : MonoBehaviour, IPointerEnterHandler, IPointe
         button = GetComponent<Button>();
         if (button)
         {
-            button.onClick.AddListener(delegate { PlacementManager.Instance.StartPlacement(objectInstanceId);});
+            button.onClick.AddListener(StartPlacement);
         }
         active = false;
     }
@@ -102,5 +102,21 @@ public class BuilderInventorySlot : MonoBehaviour, IPointerEnterHandler, IPointe
             BuilderInventory.Instance.CloseSpeechBubble();
         else
             Debug.LogError("No Builder Inventory found!");
+    }
+
+    private void StartPlacement()
+    {
+        if (UIManager.Instance)
+            UIManager.Instance.ResetMode();
+
+
+
+        if (PlacementManager.Instance)
+        {
+            if (PlacementManager.Instance.Placing())
+                PlacementManager.Instance.Abort();
+            PlacementManager.Instance.StartPlacement(objectInstanceId);
+        }
+
     }
 } 

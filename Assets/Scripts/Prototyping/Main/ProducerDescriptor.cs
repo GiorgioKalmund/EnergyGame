@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine.EventSystems;
 
 public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
@@ -74,8 +75,8 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
            cable.Sell();
        }
        
-       UIManager.Instance.ToggleDestructionMode();
-       
+       if (UIManager.Instance.Mode == UIState.DESTROYING) 
+           UIManager.Instance.ToggleDestructionMode();
        Destroy();
     }
 

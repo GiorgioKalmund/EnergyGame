@@ -78,7 +78,7 @@ public class UIManager : MonoBehaviour
         pauseButton.onClick.AddListener(delegate { SettingsManager.Instance.ToggleSettingsPanel(true); });
         
         // TODO: Assign next level button functionality & determine if we need to already unlock it (i.e. the level has already been completed at least once)
-        nextLevelButton.onClick.AddListener(null);
+        nextLevelButton.onClick.AddListener(GoToNextLevel);
         if (false)
         {
             UnlockNextLevelButton();
@@ -133,7 +133,8 @@ public class UIManager : MonoBehaviour
 
     public void UpdateCurrentEnvironmentalImpact()
     {
-        currentEnvironmentText.text = $"{LevelManager.Instance.GetCurrentEnvironmentalImpact():F2} / {LevelManager.Instance.GetMaxEnvironmentalImpact()} CO2t";
+        if (LevelManager.Instance && currentEnvironmentText)
+            currentEnvironmentText.text = $"{LevelManager.Instance.GetCurrentEnvironmentalImpact():F2} / {LevelManager.Instance.GetMaxEnvironmentalImpact():F2} CO2t";
     }
 
     public void SetQualityLevel(int level)
@@ -256,6 +257,11 @@ public class UIManager : MonoBehaviour
         {
             budgetText.color = Color.white;
         }
+    }
+
+    public void GoToNextLevel()
+    {
+        
     }
 
 

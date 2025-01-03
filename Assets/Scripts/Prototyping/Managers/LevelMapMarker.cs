@@ -70,28 +70,38 @@ public class LevelMapMarker : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         
         // Set scale, so hover animations work properly afterwards
         gameObject.transform.DOScale(1f, 0.1f);
+
+        DOTween.KillAll();
+        DOTween.defaultRecyclable = true;
     }
 
     private void OpenPopup(){
         if (popupOpen)
             return;
+        
         if (LevelMapManager.Instance.CurrentlySelectedMarker)
-        {
             LevelMapManager.Instance.CurrentlySelectedMarker.ClosePopup();
-        }
+        
         popupOpen = true;
         
         // Scale back to regular size once popup is open
         gameObject.transform.DOScale(1f, 0.2f).SetEase(Ease.InOutElastic);
         
-        popup.transform.DOScale(1f, popupTime);
-        float yPos = popup.transform.localPosition.y;
-        popup.transform.DOLocalMoveY(yPos + popupYOffset, popupTime).SetEase(popupEase);
-        popup.transform.DOShakeRotation(shakeTime, shakeStrength);
+        if (!popup.transform)
+            Debug.LogError(name + ": No Transform found for Popup");
         
+        popupButton.interactable = false;
+        popup.transform.DOScale(1f, popupTime).SetRecyclable();
+        
+        float yPos = popup.transform.localPosition.y;
+        popup.transform.DOLocalMoveY(yPos + popupYOffset, popupTime).SetEase(popupEase).SetRecyclable();
+        popup.transform.DOShakeRotation(shakeTime, shakeStrength).SetRecyclable();
+
         //Move to the top of the hierarchy, avoiding overshadowing
         transform.SetAsLastSibling();
         LevelMapManager.Instance.CurrentlySelectedMarker = this;
+        
+        popupButton.interactable = true;
     }
     public void ClosePopup(){
         if (!popupOpen)
@@ -99,9 +109,13 @@ public class LevelMapMarker : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         
         popupOpen = false;
         
-        popup.transform.DOScale(0.0f, popupTime);
+        if (popup.transform)
+            popup.transform.DOScale(0.0f, popupTime).SetRecyclable();
+         
         float yPos = popup.transform.localPosition.y;
-        popup.transform.DOLocalMoveY(yPos - popupYOffset,popupTime).SetEase(popupEase);
+        
+        if (popup.transform)
+            popup.transform.DOLocalMoveY(yPos - popupYOffset,popupTime).SetEase(popupEase).SetRecyclable();
     }
 
     private void TogglePopup()
@@ -204,12 +218,19 @@ public class LevelMapMarker : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         {
             return;
         }
-        gameObject.transform.DOScale(1.1f, 0.2f).SetEase(Ease.InOutElastic);
+        
+        if (gameObject.transform != null)
+            gameObject.transform.DOScale(1.1f, 0.2f).SetEase(Ease.InOutElastic);
     }
     
     public void OnPointerExit(PointerEventData data)
     {
-        gameObject.transform.DOScale(1f, 0.2f).SetEase(Ease.InOutElastic);
+        if (gameObject.transform != null)
+            gameObject.transform.DOScale(1f, 0.2f).SetEase(Ease.InOutElastic);
     }
 
+    private void OnDestroy()
+    {
+        DOTween.KillAll();
+    }
 }

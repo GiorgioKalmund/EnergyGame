@@ -23,12 +23,14 @@ public class SettingsScreenButton : MonoBehaviour, IPointerEnterHandler, IPointe
    
    public void OnPointerEnter(PointerEventData eventData)
    {
-        gameObject.transform.DOScale(1.1f, 0.2f).SetEase(Ease.InOutElastic);
+       if (gameObject.transform != null) 
+           gameObject.transform.DOScale(1.1f, 0.2f).SetEase(Ease.InOutElastic).SetRecyclable();
    }
 
    public void OnPointerExit(PointerEventData eventData)
    {
-        gameObject.transform.DOScale(1f, 0.2f).SetEase(Ease.InOutElastic);
+       if (gameObject.transform != null) 
+           gameObject.transform.DOScale(1f, 0.2f).SetEase(Ease.InOutElastic).SetRecyclable();
    }
 
    public Button GetButton()
@@ -38,5 +40,10 @@ public class SettingsScreenButton : MonoBehaviour, IPointerEnterHandler, IPointe
            button = GetComponent<Button>();
        }
        return button;
+   }
+
+   private void OnDestroy()
+   {
+       DOTween.Kill(gameObject.transform);
    }
 }

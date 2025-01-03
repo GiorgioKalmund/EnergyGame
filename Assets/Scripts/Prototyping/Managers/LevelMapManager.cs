@@ -65,7 +65,7 @@ public class LevelMapManager : MonoBehaviour
         {
             Debug.LogWarning("Actual marker count does not correspond to the value entered. Please modify 'maxMarkerCount' to be the amount of markers visible on the field");
         }
-        Debug.Log("Linking "+markers.Count + " markers.");
+        //Debug.Log("Linking "+markers.Count + " markers.");
         markers.Sort((marker0, marker1) => marker0.markerID.CompareTo(marker1.markerID));
         for (int index = 0; index < markers.Count; index++)
         {

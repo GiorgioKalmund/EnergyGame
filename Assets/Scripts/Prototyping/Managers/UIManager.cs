@@ -54,6 +54,9 @@ public class UIManager : MonoBehaviour
         }
         
         Assert.IsNotNull(sceneCamera, "UIManager: sceneCamera not found! Aborting.");
+        
+        DOTween.SetTweensCapacity(200, 50); 
+        DOTween.defaultAutoKill = true;
     }
 
     private void OnEnable()
@@ -168,7 +171,6 @@ public class UIManager : MonoBehaviour
 
     public void DeactivateConnectingMode()
     {
-        Debug.LogWarning("Deactivating Connection Mode!");
         if (Mode == UIState.CONNECTING)
         {
             Mode = UIState.DEFAULT;

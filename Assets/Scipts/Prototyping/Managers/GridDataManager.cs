@@ -84,7 +84,7 @@ public class GridDataManager : MonoBehaviour
             { color9, PlacementType.Endpoint}  // Enpoints 
         };
 
-        tilesCenter.transform.position = new Vector3((int)textureHeight / 2f, 1f, (int)textureWidth / 2f);
+        tilesCenter.transform.position = new Vector3((int)textureHeight / 2f, 0f, (int)textureWidth / 2f);
         GenerateMap();
         center.transform.position = tilesCenter.position;
 

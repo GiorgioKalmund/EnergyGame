@@ -17,16 +17,16 @@ public class InputManager : MonoBehaviour
     [Header("Camera")]
     [SerializeField]
     private Camera mainCamera;
-    [SerializeField] public GameObject center;
+    [SerializeField] public GameObject pivot;
 
     [Header("Zoom")]
-    [SerializeField] private float zoomSpeed = 30f;
-    [SerializeField] private float minZoom = 5f;
-    [SerializeField] private float maxZoom = 50f;
+    [SerializeField] private float zoomSpeed = 50f;
+    [SerializeField] private float minZoom = 10f;
+    [SerializeField] private float maxZoom = 80f;
 
     [Header("Rotation and Movement")]
     //Movement dont put dragSpeed to fast sonst vibriert es
-    private float dragSpeed = 0.85f;
+    private float dragSpeed = 0.6f;
     private Vector3 cameraStartPosition;
 
     private float minX;
@@ -74,13 +74,6 @@ public class InputManager : MonoBehaviour
 
     }
 
-    private void Start()
-    {
-        minX = -35f;
-        maxX = -15f;
-        minZ = -35f;
-        maxZ = -15f;
-    }
 
     private void Update() //into Building System
     {
@@ -106,51 +99,59 @@ public class InputManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             mainCamera.transform.position = new Vector3(-30.2f, 29.4f, -30.2f);
-            mainCamera.fieldOfView = 12.6f;
-            mainCamera.transform.LookAt(center.transform.position);
+            pivot.transform.position = new Vector3(8f, 0f, 8f);
+            mainCamera.transform.LookAt(pivot.transform.position);
         }
 
+    }
+    private bool IsWithinValidGameField(Vector3 position)
+    {
+        //check if pivot is collide with any gamefield objects
+        Collider[] hitColliders = Physics.OverlapSphere(position, 0.5f); 
+        foreach (Collider collider in hitColliders)
+        {
+            if (collider.GetComponent<TileDataWrapper>())
+            {
+                return true; 
+            }
+        }
+        return false; 
     }
 
     private void move()
     {
-        if (Input.GetMouseButtonDown(0))
+        //WASD as input
+        float moveX = Input.GetAxis("Horizontal") * dragSpeed; 
+        float moveZ = Input.GetAxis("Vertical") * dragSpeed;   
+
+        //relative movement 
+        Vector3 forward = mainCamera.transform.forward; 
+        Vector3 right = mainCamera.transform.right;     
+        forward.y = 0f;
+        right.y = 0f;
+
+        forward.Normalize();
+        right.Normalize();
+
+        // apply movement
+        Vector3 moveDirection = forward * moveZ + right * moveX;
+
+
+        Vector3 newPosition = pivot.transform.position + moveDirection;
+
+        // check if new position is still in field
+        if (IsWithinValidGameField(newPosition))
         {
-            dragOrigin = GetMousePositionInWorldSpace();
-            cameraStartPosition = mainCamera.transform.position;
-            isDragging = true;
-        }
-
-        if (Input.GetMouseButtonUp(0))
-        {
-            isDragging = false;
-        }
-
-        if (isDragging)
-        {
-            // movement
-            Vector3 mouseDelta = (GetMousePositionInWorldSpace() - dragOrigin) * dragSpeed;
-
-            // Change camera based on movement
-            Vector3 newCameraPosition = new Vector3(
-                cameraStartPosition.x - mouseDelta.x,
-                cameraStartPosition.y,
-                cameraStartPosition.z - mouseDelta.z
-            );
-
-
-            //newCameraPosition.x = Mathf.Clamp(newCameraPosition.x, minX, maxX);
-            //newCameraPosition.z = Mathf.Clamp(newCameraPosition.z, minZ, maxZ);
-
-
-            mainCamera.transform.position = newCameraPosition;
-
+            Vector3 cameraOffset = mainCamera.transform.position - pivot.transform.position;
+            pivot.transform.position = newPosition;
+            //update cam
+            mainCamera.transform.position = pivot.transform.position + cameraOffset;
         }
 
 
 
-        // Rotation
-        if (Input.GetMouseButton(1)) // Right mouse button for rotation
+        // Rotation around pivot
+        if (Input.GetMouseButton(0)) // left mouse button for rotation
         {
             float horizontalRotation = Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime;
             float verticalRotation = -Input.GetAxis("Mouse Y") * rotationSpeed * Time.deltaTime;
@@ -161,9 +162,9 @@ public class InputManager : MonoBehaviour
             newVerticalAngle = Mathf.Clamp(newVerticalAngle, verticalMinLimit, verticalMaxLimit);
 
             //X
-            mainCamera.transform.RotateAround(center.transform.position, Vector3.up, horizontalRotation);
+            mainCamera.transform.RotateAround(pivot.transform.position, Vector3.up, horizontalRotation);
             //Y
-            mainCamera.transform.RotateAround(center.transform.position, mainCamera.transform.right, newVerticalAngle - currentVerticalAngle);
+            mainCamera.transform.RotateAround(pivot.transform.position, mainCamera.transform.right, newVerticalAngle - currentVerticalAngle);
 
             currentVerticalAngle = newVerticalAngle;
 
@@ -176,45 +177,54 @@ public class InputManager : MonoBehaviour
         // Ignore small changes
         if (Mathf.Abs(scrollDelta) > Mathf.Epsilon)
         {
-            Vector3 mouseScreenPosition = Input.mousePosition;
-            Vector3 mouseWorldPositionBeforeZoom = mainCamera.ScreenToWorldPoint(new Vector3(
-                mouseScreenPosition.x,
-                mouseScreenPosition.y,
-                Mathf.Abs(mainCamera.transform.position.y) // Top-down view
-            ));
+            Vector3 directionToPivot = (pivot.transform.position - mainCamera.transform.position).normalized;
+            float zoomAmount = scrollDelta * zoomSpeed * Time.deltaTime;
+
+            Vector3 newCameraPosition = mainCamera.transform.position + directionToPivot * zoomAmount * 100;
+
+            // Abstand zwischen Kamera und Pivot berechnen
+            float distanceToPivot = Vector3.Distance(newCameraPosition, pivot.transform.position);
+
+            distanceToPivot = Mathf.Clamp(distanceToPivot, minZoom, maxZoom);
+            // Aktualisiere die Kameraposition basierend auf dem geclampeden Abstand
+            mainCamera.transform.position = pivot.transform.position - directionToPivot * distanceToPivot;
+
+
+
+            //code belong is for the version where u zoom into the current mouse position
+            //Vector3 mouseScreenPosition = Input.mousePosition;
+            //Vector3 mouseWorldPositionBeforeZoom = mainCamera.ScreenToWorldPoint(new Vector3(
+            //    mouseScreenPosition.x,
+            //    mouseScreenPosition.y,
+            //    Mathf.Abs(mainCamera.transform.position.y) // Top-down view
+            //));
 
             // instead using fov move camera position toward it 
-            Vector3 direction = (mouseWorldPositionBeforeZoom - mainCamera.transform.position).normalized;
-            float zoomAmount = scrollDelta * zoomSpeed;
+            //Vector3 direction = (mouseWorldPositionBeforeZoom - mainCamera.transform.position).normalized;
+            //float zoomAmount = scrollDelta * zoomSpeed;
 
-            mainCamera.transform.position += direction * zoomAmount;
+            //mainCamera.transform.position += direction * zoomAmount;
 
             // Clamp the camera position to ensure it stays within the zoom bounds
-            float distanceToGround = Mathf.Abs(mainCamera.transform.position.y);
-            distanceToGround = Mathf.Clamp(distanceToGround, minZoom, maxZoom);
-            mainCamera.transform.position = new Vector3(
-                mainCamera.transform.position.x,
-                -distanceToGround, // Keep top-down view with correct height
-                mainCamera.transform.position.z
-            );
+            //float distanceToGround = Mathf.Abs(mainCamera.transform.position.y);
+            //distanceToGround = Mathf.Clamp(distanceToGround, minZoom, maxZoom);
+            //mainCamera.transform.position = new Vector3(
+            //    mainCamera.transform.position.x,
+            //    -distanceToGround, // Keep top-down view with correct height
+            //    mainCamera.transform.position.z
+            //);
 
             // Recalculate the mouse position in world space after the camera moves
-            Vector3 mouseWorldPositionAfterZoom = mainCamera.ScreenToWorldPoint(new Vector3(
-                mouseScreenPosition.x,
-                mouseScreenPosition.y,
-                Mathf.Abs(mainCamera.transform.position.y)
-            ));
+            //Vector3 mouseWorldPositionAfterZoom = mainCamera.ScreenToWorldPoint(new Vector3(
+            //    mouseScreenPosition.x,
+            //    mouseScreenPosition.y,
+            //    Mathf.Abs(mainCamera.transform.position.y)
+            //));
 
             // Offset the camera on the mouse position
-            Vector3 cameraOffset = mouseWorldPositionBeforeZoom - mouseWorldPositionAfterZoom;
-            mainCamera.transform.position += cameraOffset;
+            //Vector3 cameraOffset = mouseWorldPositionBeforeZoom - mouseWorldPositionAfterZoom;
+            //mainCamera.transform.position += cameraOffset;
 
-            //grenze test
-            //mainCamera.transform.position = new Vector3(
-            //Mathf.Clamp(mainCamera.transform.position.x, minX, maxX),
-            //Mathf.Clamp(mainCamera.transform.position.y, 17f, 33f),
-            //Mathf.Clamp(mainCamera.transform.position.z, minZ, maxZ)
-            //);
 
         }
     }

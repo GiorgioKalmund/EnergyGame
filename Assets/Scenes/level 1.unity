@@ -3218,10 +3218,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 17014428}
-  center: {fileID: 318222863}
-  zoomSpeed: 30
-  minZoom: 5
-  maxZoom: 50
+  pivot: {fileID: 318222863}
+  zoomSpeed: 50
+  minZoom: 10
+  maxZoom: 80
   rotationSpeed: 150
   verticalMinLimit: -10
   verticalMaxLimit: 10

@@ -119,6 +119,7 @@ public class UIManager : MonoBehaviour
 
     private void SetDefaultCursorTextures()
     {
+        Debug.Log("Set default cursor!");
         currentCursorTexture = cursorDefaultTexture;
         currentCursorDownTexture = cursorDownTexture;
         Cursor.SetCursor(currentCursorTexture, Vector2.zero, CursorMode.Auto);
@@ -195,6 +196,9 @@ public class UIManager : MonoBehaviour
 
     public void ToggleDestructionMode()
     {
+        if (Mode == UIState.CONNECTING)
+            ResetMode();
+        
         // If the current mode is Destroying, we go back to default, otherwise switch to destroying
         Mode = Mode == UIState.DESTROYING ? UIState.DEFAULT : UIState.DESTROYING;
         bool enable = Mode == UIState.DESTROYING;
@@ -204,14 +208,18 @@ public class UIManager : MonoBehaviour
             if (BuilderInventory.Instance.Expanded())
             {
                 BuilderInventory.Instance.HideInventory();
-                SetDestructionCursorTextures();
             }
             else
             {
                 BuilderInventory.Instance.ShowInventory();
-                SetDefaultCursorTextures();
             }
         }
+
+        if (enable)
+            SetDestructionCursorTextures();
+        else
+            SetDefaultCursorTextures();
+            
     }
 
     public void ActivateDefaultMode()

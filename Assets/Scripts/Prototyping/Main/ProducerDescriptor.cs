@@ -74,6 +74,9 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
        
        if (UIManager.Instance.Mode == UIState.DESTROYING) 
            UIManager.Instance.ToggleDestructionMode();
+       
+       if (BuilderInventory.Instance)
+           BuilderInventory.Instance.AddSlotCapacity(1, instanceId);
        Destroy();
     }
 

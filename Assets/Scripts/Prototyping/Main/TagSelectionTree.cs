@@ -144,7 +144,6 @@ public class TagSelectionTree : MonoBehaviour
 
   public void CollapseTree()
   {
-    Debug.Log("Collapse Called!");
     if (!expanded)
     {
       return;

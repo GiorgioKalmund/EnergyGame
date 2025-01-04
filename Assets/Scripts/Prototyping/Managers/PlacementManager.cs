@@ -77,7 +77,9 @@ public class PlacementManager : MonoBehaviour
             else
             {
                 lastPlacedBuilding.GetComponent<ProducerDescriptor>().Sell();
-                
+                lastPlacedBuilding = null;
+                currentGameObject = null;
+                placingObjectIndex = -1;
                 cellSprite.color = spriteColorRegular;
                 cellIndicator.SetActive(false);
                 UIManager.Instance.ToggleConnectionModeIndicator(false);
@@ -136,6 +138,7 @@ public class PlacementManager : MonoBehaviour
             InputManager.Instance.OnExit += ResetCurrentGameObject;
             InputManager.Instance.OnExit += StopPlacement;
         } 
+        BuilderInventory.Instance.RemoveSlotCapacity(1, placingObjectIndex);
     }
 
 
@@ -162,7 +165,7 @@ public class PlacementManager : MonoBehaviour
             citySelectionActive = true;
             //Debug.Log("Building placed. Please select a city.");
             cellSprite.color = spriteColorConnecting;
-            UIManager.Instance.ToggleConnectionModeIndicator(true);
+            UIManager.Instance.ActiveConnectingMode();
             
             // Instantiate new cable
             GameObject cable = Instantiate(cablePrefab, lastPlacedBuilding.transform.position, Quaternion.identity);
@@ -270,10 +273,9 @@ public class PlacementManager : MonoBehaviour
                 //reset CellIndicator
                 cellSprite.color = spriteColorRegular;
                 cellIndicator.SetActive(false);
-                UIManager.Instance.ToggleConnectionModeIndicator(false);
+                UIManager.Instance.DeactivateConnectingMode();
                 InputManager.Instance.OnClicked -= SelectCity;
                 
-                BuilderInventory.Instance.RemoveSlotCapacity(1, placingObjectIndex);
             }
             else
             {
@@ -296,10 +298,16 @@ public class PlacementManager : MonoBehaviour
         {
             return;
         }
+        
+        int instanceId = currentGameObject.GetComponent<ProducerDescriptor>().instanceId;
+        Debug.Log("Resetting Instance: " + instanceId + " OBJ: " + currentGameObject.GetComponent<ProducerDescriptor>().buildingName);
         Destroy(currentGameObject);
-        currentGameObject = null;
-        Debug.Log("Ressetting game object!");
+        currentGameObject = null; 
+        placingObjectIndex = -1;
+        cellIndicator.SetActive(false);
+        validNewPlacement = false; 
         BuilderInventory.Instance.ShowInventory();
+        BuilderInventory.Instance.AddSlotCapacity(1, instanceId);
     }
 
     private void StopPlacement()

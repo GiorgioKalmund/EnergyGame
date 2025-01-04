@@ -81,6 +81,7 @@ public class BuilderInventory : MonoBehaviour
             // Assign the proper values so the slot knows which image, cost and prefab to use
             BuilderInventorySlot slot = slotGameObject.GetComponent<BuilderInventorySlot>();
             ProducerDescriptor descriptor = prefabs[index].GetComponent<ProducerDescriptor>();
+            descriptor.instanceId = index;
             
             // TODO: Determine Starting Capacity dynamically
             slot.Setup(descriptor, index, 3);

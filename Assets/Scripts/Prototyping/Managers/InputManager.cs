@@ -70,10 +70,10 @@ public class InputManager : MonoBehaviour
             
             // TODO: Differentiate between reset if already started connecting, or simply canceling all-together
             // Exit out of current mode if connecting
+            if (PlacementManager.Instance)
+                PlacementManager.Instance.Abort();
             if (UIManager.Instance)
                 UIManager.Instance.ResetMode();
-            
-            OnExit?.Invoke();
         }
     
         zoom();

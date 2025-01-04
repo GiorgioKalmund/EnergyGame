@@ -44,13 +44,13 @@ public class OverlaysDropdown : MonoBehaviour
        // TODO: Properly distinguish between: valid combinations, overlays
        
        Button powerTags = elements[0].AddComponent<Button>();
-       powerTags.onClick.AddListener(delegate{ExpandAllTagsWithCombination(1);});
+       powerTags.onClick.AddListener(delegate{ToggleAllTagsWithType(TreeTagType.POWER);});
        
        Button co2Tags = elements[1].AddComponent<Button>();
-       co2Tags.onClick.AddListener(delegate{ExpandAllTagsWithCombination(2);});
+       co2Tags.onClick.AddListener(delegate{ToggleAllTagsWithType(TreeTagType.CO2);});
        
        Button financeTags = elements[2].AddComponent<Button>();
-       financeTags.onClick.AddListener(delegate{ExpandAllTagsWithCombination(4);});
+       financeTags.onClick.AddListener(delegate{ToggleAllTagsWithType(TreeTagType.FINANCE);});
        
        
    }
@@ -104,12 +104,28 @@ public class OverlaysDropdown : MonoBehaviour
    
          return yPos + targetY;
    }
-   
-   public void ExpandAllTagsWithCombination(int combination)
+
+   public void ToggleAllTagsWithType(TreeTagType type)
    {
        foreach (var tagTree in allTags)
        {
-          tagTree.ToggleTreeCombination(combination);
+           tagTree.ToggleTag(type);
+       }
+   }
+   
+   public void ExpandAllTagsWithType(TreeTagType type)
+   {
+       foreach (var tagTree in allTags)
+       {
+           tagTree.OpenTag(type);
+       }
+   }
+   
+   public void CollapseAllTagsWithType(TreeTagType type)
+   {
+       foreach (var tagTree in allTags)
+       {
+           tagTree.CloseTag(type);
        }
    }
    
@@ -117,7 +133,7 @@ public class OverlaysDropdown : MonoBehaviour
    {
        foreach (var tagTree in allTags)
        {
-          tagTree.ExpandTree(new List<TreeTagType>() { TreeTagType.POWER , TreeTagType.CO2, TreeTagType.FINANCE});
+          tagTree.ExpandTree();
        }
    }
 
@@ -146,14 +162,14 @@ public class OverlaysDropdown : MonoBehaviour
        }
    }
    
-    public void ToggleTagsCombination(int combination)
+    public void ToggleTagsCombination(TreeTagType type)
     {
           AmountTagsClosed();
 
           if (AllTagsOpen())
               CollapseAllTags();
           else
-              ExpandAllTagsWithCombination(combination);
+              ExpandAllTagsWithType(type);
     }
 
    private bool AllTagsClosed()

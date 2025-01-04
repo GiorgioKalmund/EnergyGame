@@ -117,12 +117,6 @@ public class ConsumerDescriptor : MonoBehaviour, ISelectableEntity
       return (screenPosition.x >= screenWidth / 2);
    }
 
-
-   public void ToggleTag(int combination)
-   {
-      tagTree.ToggleTreeCombination(combination);
-   }
-
    public void CloseTag()
    {
       tagTree.CollapseTree();

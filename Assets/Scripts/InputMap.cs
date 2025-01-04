@@ -185,7 +185,7 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""7a1b72c6-83fe-4177-b713-686cccd1ae12"",
-                    ""path"": ""<Keyboard>/0"",
+                    ""path"": ""<Keyboard>/4"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

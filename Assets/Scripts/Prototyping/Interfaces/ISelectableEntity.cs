@@ -16,7 +16,6 @@ public interface ISelectableEntity
 
     public string GetName();
 
-    public void ToggleTag(int combination);
     public void CloseTag();
 
 }

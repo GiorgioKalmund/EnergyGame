@@ -110,7 +110,7 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
         UpdateProductionTag();
         if (tagTree)
         {
-            tagTree.ExpandTree(new List<TreeTagType>() { TreeTagType.POWER , TreeTagType.CO2, TreeTagType.FINANCE});
+            tagTree.ExpandTree();
         }
         selected = true;
     }
@@ -197,10 +197,6 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
     public void AddCable(PowerCable newCable)
     {
         connectedCables.Add(newCable);
-    }
-   public void ToggleTag(int combination)
-    {
-        tagTree.ToggleTreeCombination(combination);
     }
 
     public void CloseTag()

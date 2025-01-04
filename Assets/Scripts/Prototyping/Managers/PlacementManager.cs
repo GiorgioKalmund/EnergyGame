@@ -85,6 +85,7 @@ public class PlacementManager : MonoBehaviour
                 UIManager.Instance.ToggleConnectionModeIndicator(false);
                 InputManager.Instance.OnClicked -= SelectCity;
             }
+            BuilderInventory.Instance.ShowInventory();
         }
     }
 
@@ -113,6 +114,7 @@ public class PlacementManager : MonoBehaviour
     {
         if (currentGameObject)
         {
+            BuilderInventory.Instance.HideInventory(); 
             StopPlacement();
             return;
         }
@@ -132,6 +134,7 @@ public class PlacementManager : MonoBehaviour
             cellIndicator.SetActive(true);
             currentGameObject.layer = 2;
             
+            Debug.LogWarning("Hiding in placement!");
             BuilderInventory.Instance.HideInventory();
             
             InputManager.Instance.OnClicked += PlaceStructure;
@@ -306,7 +309,6 @@ public class PlacementManager : MonoBehaviour
         placingObjectIndex = -1;
         cellIndicator.SetActive(false);
         validNewPlacement = false; 
-        BuilderInventory.Instance.ShowInventory();
         BuilderInventory.Instance.AddSlotCapacity(1, instanceId);
     }
 

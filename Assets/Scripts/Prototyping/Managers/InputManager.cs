@@ -67,6 +67,8 @@ public class InputManager : MonoBehaviour
             OnClicked?.Invoke();
         if (Input.GetMouseButtonDown(1))
         {
+            if (!PlacementManager.Instance.Placing() && UIManager.Instance.Mode == UIState.DEFAULT)
+                return;
             
             // TODO: Differentiate between reset if already started connecting, or simply canceling all-together
             // Exit out of current mode if connecting

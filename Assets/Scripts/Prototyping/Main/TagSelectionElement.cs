@@ -49,6 +49,7 @@ public class TagSelectionElement : MonoBehaviour
 
   private void OnDestroy()
   {
-    DOTween.KillAll();
+    DOTween.Kill(transform);
+    DOTween.Kill(GetComponent<Image>());
   }
 }

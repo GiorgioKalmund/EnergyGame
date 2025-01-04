@@ -34,6 +34,10 @@ public class LevelManager : MonoBehaviour
             Instance = this;
         }
 
+    }
+
+    private void Start()
+    {
         UIManager.Instance.UpdateCurrentEnvironmentalImpact();
     }
 

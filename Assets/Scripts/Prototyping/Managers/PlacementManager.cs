@@ -342,10 +342,13 @@ public class PlacementManager : MonoBehaviour
         //Debug.Log($"{mousePosition}");
         mouseIndicator.transform.position = mousePosition;
         RaycastHit hit;
-        Physics.Raycast(mainCamera.transform.position, mousePosition - mainCamera.transform.position, out hit, Mathf.Infinity, 1);
-        Vector3Int gridPosition = grid.WorldToCell(hit.transform.gameObject.transform.position);
-        Vector3 targetPostion = grid.CellToWorld(gridPosition); 
-        cellIndicator.transform.position = new Vector3(targetPostion.x + gridOffset, cellIndicatorPlacementY, targetPostion.z + gridOffset);
+        
+        if(Physics.Raycast(mainCamera.transform.position, mousePosition - mainCamera.transform.position, out hit, Mathf.Infinity, 1)){
+            Vector3Int gridPosition = grid.WorldToCell(hit.transform.gameObject.transform.position);
+            Vector3 targetPostion = grid.CellToWorld(gridPosition); 
+            cellIndicator.transform.position = new Vector3(targetPostion.x + gridOffset, cellIndicatorPlacementY, targetPostion.z + gridOffset);
+        }  
+        
         
         // If we are placing 
         if (currentGameObject && validNewPlacement)

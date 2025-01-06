@@ -38,7 +38,6 @@ public class InputManager : MonoBehaviour
     private Camera mainCamera;
 
     public event Action OnClicked;
-    public event Action OnExit;
 
     private void Awake()
     {

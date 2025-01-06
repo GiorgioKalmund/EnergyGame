@@ -138,8 +138,6 @@ public class PlacementManager : MonoBehaviour
             BuilderInventory.Instance.HideInventory();
             
             InputManager.Instance.OnClicked += PlaceStructure;
-            InputManager.Instance.OnExit += ResetCurrentGameObject;
-            InputManager.Instance.OnExit += StopPlacement;
         } 
         BuilderInventory.Instance.RemoveSlotCapacity(1, placingObjectIndex);
     }
@@ -329,8 +327,6 @@ public class PlacementManager : MonoBehaviour
         placingObjectIndex = -1;
         cellIndicator.SetActive(false);
         InputManager.Instance.OnClicked -= PlaceStructure;
-        InputManager.Instance.OnExit -= ResetCurrentGameObject;
-        InputManager.Instance.OnExit -= StopPlacement;
         currentGameObject = null;
         validNewPlacement = false; 
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
@@ -5,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
+
 
 public class ConnectCableMode : MonoBehaviour
 {
@@ -16,50 +18,69 @@ public class ConnectCableMode : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0)){
-            test();
-        }
+        
     }
+
     /// <summary>
-    /// Sets the startpoint variable to the powerplant at the position of the cursor.
+    /// Sets the start and end points of the cable depending on the <c>isStartpoint</c> parameter, but does not place the cable itself.
     /// </summary>
-    private void SetStartpoint()
+    /// <param name="isStartpoint">Sets the startpoint if set to true, else the endpoint</param>
+    private void SetConnectionPoints(bool isStartpoint)
     {
-
+        Grid grid = PlacementManager.Instance.Grid;
         Vector3 mousePos = InputManager.Instance.GetMousePositionInWorldSpace();
-        RaycastHit hit;
-        if (Physics.Raycast(Camera.main.transform.position,mousePos,out hit))
-        {
+        Vector3Int gridPosition = grid.WorldToCell(mousePos + new Vector3(0.5f, 0, 0.5f));
+        Vector3Int arrPosition = GridDataManager.ConvertGridPosToArrayPos(gridPosition);
 
-            Wandler wandler = hit.transform.gameObject.GetComponentInParent<Wandler>();
-            if (!wandler)
+        if (GridDataManager.GetGridDataAtPos(arrPosition).GetComponent<TileDataWrapper>().tileData.currentPlacementType == PlacementType.Blocked)
+        {
+            return;
+        }
+
+        GameObject candidate = GridDataManager.GetGridDataAtPos(new Vector3Int(arrPosition.x, arrPosition.y, 1));
+        if (candidate != null) //powerplant is present
+        {
+            if (isStartpoint)
             {
-                Grid grid = PlacementManager.Instance.Grid;
-                Vector3Int gridPosition = grid.WorldToCell(hit.transform.gameObject.transform.position);
-                Vector3 targetPostion = grid.CellToWorld(gridPosition);
-                targetPostion.x += PlacementManager.Instance.GridOffset;
-                targetPostion.z += PlacementManager.Instance.GridOffset;
-                targetPostion.y += PlacementManager.Instance.cellIndicatorPlacementY;
-                startpoint = Instantiate(powerTowerPrefab, targetPostion, Quaternion.identity);
+                startpoint = candidate;
             }
             else
             {
-                startpoint = hit.transform.gameObject;
+                endpoint = candidate;
             }
         }
+        else //powerplant is not present
+        {
+            GameObject powerTower = Instantiate(powerTowerPrefab, gridPosition, Quaternion.identity);
+            if (isStartpoint)
+            {
+                startpoint = powerTower;
+            }
+            else
+            {
+                endpoint = powerTower;
+            }
+
+            GameObject tileBelow = GridDataManager.GetGridDataAtPos(arrPosition);
+            tileBelow.GetComponent<TileDataWrapper>().tileData.currentPlacementType = PlacementType.Blocked;
+
+        }
+
     }
 
-    private void test(){
+    [Obsolete("Prints the position the mouse is at in the gridData array")]
+    private void Test()
+    {
         Grid grid = PlacementManager.Instance.Grid;
         Vector3 mousePos = InputManager.Instance.GetMousePositionInWorldSpace();
-        Vector3Int gridPosition = grid.WorldToCell(mousePos+new Vector3(0.5f,0,0.5f));
-        Debug.Log($"Grid Pos: ${GridDataManager.ConvertGridPostoArrayPos(gridPosition)} + ");
+        Vector3Int gridPosition = grid.WorldToCell(mousePos + new Vector3(0.5f, 0, 0.5f));
+        Debug.Log($"Grid Pos: ${GridDataManager.ConvertGridPosToArrayPos(gridPosition)} + ");
         /* RaycastHit hit;
         Camera mainCamera = Camera.main;
         Vector3 mousePosition = InputManager.Instance.GetMousePositionInWorldSpace();

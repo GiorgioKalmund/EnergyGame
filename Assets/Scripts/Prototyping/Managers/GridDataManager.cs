@@ -186,7 +186,7 @@ public class GridDataManager : MonoBehaviour
             UIManager.Instance.SetEndpointsCompleted(0);
         }
     }
-    public static Vector3Int ConvertGridPostoArrayPos(Vector3Int pos){
+    public static Vector3Int ConvertGridPosToArrayPos(Vector3Int pos){
         int tmp = pos.y;
 
         pos.y = pos.z;
@@ -200,7 +200,22 @@ public class GridDataManager : MonoBehaviour
         
         return pos;
     }
-
+    /// <summary>
+    /// Inserts gameobject into GridData array
+    /// </summary>
+    /// <param name="pos">Position in Array</param>
+    /// <param name="gameObject">Object to put into array</param>
+    public static void SetGridDataAtPos(Vector3Int pos, GameObject gameObject){
+        GridData[pos.x,pos.y,pos.z] = gameObject;
+    }
+    /// <summary>
+    ///  Gets the gameobject at the position specified by pos
+    /// </summary>
+    /// <param name="pos">Position in Array</param>
+    /// <returns>The gameobject at Position or null</returns>
+    public static GameObject GetGridDataAtPos(Vector3Int pos){
+        return GridData[pos.x,pos.y,pos.z];
+    }
     public bool OverlayTexturesAllExistent()
     {
         return windTexture && sunTexture && coalTexture && waterTexture;

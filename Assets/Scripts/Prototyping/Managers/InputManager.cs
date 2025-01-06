@@ -27,9 +27,6 @@ public class InputManager : MonoBehaviour
     public float verticalMaxLimit = 10f;
     private float currentVerticalAngle = 0f;
 
-    private Vector3 dragOrigin;
-    private bool isDragging;
-
     private Vector3 lastPosition;
 
     private Camera mainCamera;
@@ -82,9 +79,10 @@ public class InputManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             mainCamera.transform.position = new Vector3(-30.2f, 29.4f, -29.3f);
-            mainCamera.fieldOfView = 12.6f;
-            mainCamera.transform.LookAt(pivot.transform.position);
+            
             currentVerticalAngle = 0f;
+            pivot.transform.position = new Vector3(8f, 0f, 8f);
+            mainCamera.transform.LookAt(pivot.transform.position);
         }
 
     }

@@ -12,10 +12,10 @@ public class GridDataManager : MonoBehaviour
 {
     [Header("Textures")]
     [SerializeField] public Texture2D mapTexture;
-    [SerializeField] [CanBeNull] private Texture2D sunTexture;
-    [SerializeField] [CanBeNull] private Texture2D windTexture;
-    [SerializeField] [CanBeNull] private Texture2D waterTexture;
-    [SerializeField] [CanBeNull] private Texture2D coalTexture;
+    [SerializeField] [CanBeNull] public Texture2D sunTexture;
+    [SerializeField] [CanBeNull] public Texture2D windTexture;
+    [SerializeField] [CanBeNull] public Texture2D waterTexture;
+    [SerializeField] [CanBeNull] public Texture2D coalTexture;
     [SerializeField] [CanBeNull] private Texture2D displayTexture;
     [SerializeField] private GameObject mapOverlay;
 
@@ -51,6 +51,8 @@ public class GridDataManager : MonoBehaviour
 
     private TileData[,] gridData;
 
+    public static GridDataManager Instance;
+
     private void Awake()
     {
         textureWidth = mapTexture.width;
@@ -83,6 +85,10 @@ public class GridDataManager : MonoBehaviour
             { color9, PlacementType.Endpoint}  // Endpoints 
         };
 
+        if (Instance && Instance != this)
+            Destroy(gameObject);
+        else
+            Instance = this;
     }
 
     private void Start()
@@ -171,6 +177,11 @@ public class GridDataManager : MonoBehaviour
         {
             UIManager.Instance.SetEndpointsCompleted(0);
         }
+    }
+
+    public bool OverlayTexturesAllExistent()
+    {
+        return windTexture && sunTexture && coalTexture && waterTexture;
     }
 }
 

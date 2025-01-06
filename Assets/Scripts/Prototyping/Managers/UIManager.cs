@@ -42,7 +42,12 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image connectionActiveIndicatorImage;
     [SerializeField] private Image destructionActiveIndicatorImage;
 
-    private InputMap inputMap;
+    [Header("Overlays")] 
+    [SerializeField] private Material overlayMaterial;
+
+    public bool overlayOpen;
+    public OverlayType overlayOpenType;
+
     private void Awake()
     {
         if (Instance && Instance != this)
@@ -61,8 +66,7 @@ public class UIManager : MonoBehaviour
 
     private void OnEnable()
     {
-        // TODO: Assign new Hotkeys if needed
-        inputMap = new InputMap();
+        // TODO: Assign new Hotkeys if needed with InputMap
     }
 
     void Start()
@@ -72,7 +76,7 @@ public class UIManager : MonoBehaviour
         // Set Quality Level to Ultra
         SetQualityLevel(5);
         
-        // GridDataManager updates the completed endpoints text at the start to prevent race condition
+        // GridDataManager updates the completed endpoints text on Start 
         
         // Assign pause button functionality
         pauseButton.onClick.AddListener(delegate { SettingsManager.Instance.ToggleSettingsPanel(true); });
@@ -83,6 +87,13 @@ public class UIManager : MonoBehaviour
         {
             UnlockNextLevelButton();
         }
+        
+        // Check if overlay material / object is present
+        if (!overlayMaterial)
+            throw new Exception("UIManager: No Overlay Material detected!");
+        else
+            HideOverlay();
+
     }
 
     void Update()
@@ -272,10 +283,54 @@ public class UIManager : MonoBehaviour
         
     }
 
+    public void ShowOverlay(OverlayType type)
+    {
+        if (!GridDataManager.Instance || !GridDataManager.Instance.OverlayTexturesAllExistent())
+            Debug.LogError("UIManager: Needs GridDataManger Instance and overlay textures to show overlay!");
+        
+        overlayMaterial.color = Color.white;
+        switch (type)
+        {
+            case OverlayType.WIND:
+                overlayMaterial.mainTexture = GridDataManager.Instance.windTexture;
+                break;
+            case OverlayType.WATER:
+                overlayMaterial.mainTexture = GridDataManager.Instance.waterTexture;
+                break;
+            case OverlayType.SUN:
+                overlayMaterial.mainTexture = GridDataManager.Instance.sunTexture;
+                break;
+            case OverlayType.COAL:
+                overlayMaterial.mainTexture = GridDataManager.Instance.coalTexture;
+                break;
+        }
+       overlayOpen = true;
+       overlayOpenType = type;
+    }
+
+    public void HideOverlay()
+    {
+       overlayMaterial.color = Color.clear;
+       overlayOpen = false;
+    }
+
+    public void ToggleOverlay(OverlayType type)
+    {
+       if (overlayOpen && overlayOpenType == type)
+           HideOverlay();
+       else
+           ShowOverlay(type);
+    }
+
 
 }
 
 public enum UIState 
 {
     DEFAULT, CONNECTING, DESTROYING
+}
+
+public enum OverlayType
+{
+    WIND, WATER, SUN, COAL
 }

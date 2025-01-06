@@ -15,9 +15,11 @@ public class OverlaysDropdown : MonoBehaviour
    public Ease animationEase = Ease.InOutCubic;
 
    public bool expanded;
-   [FormerlySerializedAs("tagsOpen")] public int tagsClosed;
+   public int tagsClosed;
    
    public static OverlaysDropdown Instance { get; private set; }
+
+   private float resetYPosition;
 
    private void Awake()
    {
@@ -51,8 +53,22 @@ public class OverlaysDropdown : MonoBehaviour
        
        Button financeTags = elements[2].AddComponent<Button>();
        financeTags.onClick.AddListener(delegate{ToggleAllTagsWithType(TreeTagType.FINANCE);});
+        
+       // Skip one index for the "divider"
        
+       Button sunOverlay = elements[4].AddComponent<Button>();
+       sunOverlay.onClick.AddListener(delegate{UIManager.Instance.ToggleOverlay(OverlayType.SUN);});
        
+       Button windOverlay = elements[5].AddComponent<Button>();
+       windOverlay.onClick.AddListener(delegate{UIManager.Instance.ToggleOverlay(OverlayType.WIND);});
+
+       Button waterOverlay = elements[6].AddComponent<Button>();
+       waterOverlay.onClick.AddListener(delegate{UIManager.Instance.ToggleOverlay(OverlayType.WATER);});
+       
+       Button coalOverlay = elements[7].AddComponent<Button>();
+       coalOverlay.onClick.AddListener(delegate{UIManager.Instance.ToggleOverlay(OverlayType.COAL);});
+       
+       resetYPosition = elements[0].transform.localPosition.y;
    }
 
    public void Expand()
@@ -64,7 +80,7 @@ public class OverlaysDropdown : MonoBehaviour
            elements[index].GetComponent<Image>().DOFade(1f, 0.5f).SetEase(animationEase);
            elements[index].transform.DOScale(1f, 0.5f + 0.1f * index).SetEase(animationEase);
            float targetY = GetTargetYPosForTreeElement(index, false);
-           elements[index].transform.DOMoveY(targetY , 0.3f).SetEase(animationEase);
+           elements[index].transform.DOLocalMoveY(targetY , 0.3f).SetEase(animationEase);
        }
        expanded = true;
    }
@@ -79,7 +95,7 @@ public class OverlaysDropdown : MonoBehaviour
            elements[index].GetComponent<Image>().DOFade(0f, 0.5f).SetEase(animationEase);
            elements[index].transform.DOScale(0f, 0.5f + 0.1f * index).SetEase(animationEase);
            float targetY = GetTargetYPosForTreeElement(index, true);
-           elements[index].transform.DOMoveY(targetY , 0.3f).SetEase(animationEase);
+           elements[index].transform.DOLocalMoveY(targetY , 0.3f).SetEase(animationEase);
        }
        expanded = false;
    }
@@ -95,14 +111,14 @@ public class OverlaysDropdown : MonoBehaviour
    
    private float GetTargetYPosForTreeElement(int index, bool collapsing)
    {
-         float yPos = elements[index].transform.position.y;
-         float height = elements[index].GetComponent<RectTransform>().rect.height;
-         float screenHeightFactor = Screen.height / 1080f;
-         float parentScale = transform.lossyScale.x;
-         float targetY = (height * parentScale * screenHeightFactor * 2.5f * index);
-         targetY = collapsing ? targetY : targetY * -1;
-   
-         return yPos + targetY;
+       if (collapsing)
+           return resetYPosition;
+       
+       float yPos = elements[index].transform.localPosition.y;
+       float height = elements[index].GetComponent<RectTransform>().rect.height;
+       float targetY = (height *  1.5f * index);
+       
+       return yPos - targetY;
    }
 
    public void ToggleAllTagsWithType(TreeTagType type)

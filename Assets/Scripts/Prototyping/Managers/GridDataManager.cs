@@ -49,7 +49,13 @@ public class GridDataManager : MonoBehaviour
     private int textureWidth;
     private int textureHeight;
 
-    private TileData[,] gridData;
+    /// <summary>
+    /// 
+    /// First index: x 
+    /// Second index: y
+    /// Third index: 0 for tile, 1 for building
+    /// </summary>
+    public static GameObject[,,] GridData = new GameObject[255,255,2];
 
     private void Awake()
     {
@@ -159,6 +165,8 @@ public class GridDataManager : MonoBehaviour
                     TileDataWrapper wrapper = instance.AddComponent<TileDataWrapper>();
                     wrapper.tileData = tileData;
 
+                    
+                    GridData[x,y,0] = instance;
                 }
                 else
                 {
@@ -171,6 +179,20 @@ public class GridDataManager : MonoBehaviour
         {
             UIManager.Instance.SetEndpointsCompleted(0);
         }
+    }
+    public static Vector3Int ConvertGridPostoArrayPos(Vector3Int pos){
+        int tmp = pos.y;
+
+        pos.y = pos.z;
+        pos.z = tmp;
+
+        pos.x *= -1;
+        pos.y *= -1;
+
+        pos.x -= 1;
+        pos.y -= 1;
+        
+        return pos;
     }
 }
 

@@ -10,16 +10,16 @@ public class PlacementManager : MonoBehaviour
 {
     [SerializeField]
     GameObject mouseIndicator, cellIndicator;
-    [SerializeField]
-    private Grid grid;
-
+    
+    [SerializeField] public Grid Grid;
+    [SerializeField] public float GridOffset;
     [SerializeField]
     private ObjectsDatabase database;
     private int placingObjectIndex = -1;
     
     [Header("Camera")]
     [SerializeField] private Camera mainCamera;
-    [SerializeField] private float gridOffset;
+    
 
     // TODO: Check using these instead of numbers, however currently numbers to do match :/
     [Header("Layers")] 
@@ -46,7 +46,7 @@ public class PlacementManager : MonoBehaviour
     [SerializeField] private bool blocked;
     // TODO: UI Should be handled via some type of UI Manager
     [Header("Visuals")]
-     public float cellIndicatorPlacementY = 1.51f;
+    public float cellIndicatorPlacementY = 1.51f;
     
     private GameObject lastPlacedBuilding;
     private TileData lastHoveredTileData;
@@ -344,9 +344,9 @@ public class PlacementManager : MonoBehaviour
         RaycastHit hit;
         
         if(Physics.Raycast(mainCamera.transform.position, mousePosition - mainCamera.transform.position, out hit, Mathf.Infinity, 1)){
-            Vector3Int gridPosition = grid.WorldToCell(hit.transform.gameObject.transform.position);
-            Vector3 targetPostion = grid.CellToWorld(gridPosition); 
-            cellIndicator.transform.position = new Vector3(targetPostion.x + gridOffset, cellIndicatorPlacementY, targetPostion.z + gridOffset);
+            Vector3Int gridPosition = Grid.WorldToCell(hit.transform.gameObject.transform.position);
+            Vector3 targetPostion = Grid.CellToWorld(gridPosition); 
+            cellIndicator.transform.position = new Vector3(targetPostion.x + GridOffset, cellIndicatorPlacementY, targetPostion.z + GridOffset);
         }  
         
         

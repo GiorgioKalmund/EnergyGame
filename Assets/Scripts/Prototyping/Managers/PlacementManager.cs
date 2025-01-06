@@ -154,7 +154,17 @@ public class PlacementManager : MonoBehaviour
         if (currentGameObject && !blocked)
         {
             ProducerDescriptor producerDescriptor = currentGameObject.GetComponent<ProducerDescriptor>();
-            producerDescriptor.Place(lastHoveredTileData); 
+            producerDescriptor.Place(lastHoveredTileData);
+
+            //insert into gridData array
+            Vector3 powerplantPos = producerDescriptor.gameObject.transform.position;
+            Vector3Int cellPos =Grid.WorldToCell(powerplantPos);
+            cellPos = GridDataManager.ConvertGridPosToArrayPos(cellPos);
+            cellPos.z = 1;
+            GridDataManager.GridData[cellPos.x,cellPos.y,cellPos.z] = producerDescriptor.gameObject; 
+            
+            Debug.Log($"Inserted ${producerDescriptor.powerPlantType} onto ${cellPos}");
+
             /* Handle Building */
             lastPlacedBuilding = currentGameObject;
             
@@ -163,23 +173,23 @@ public class PlacementManager : MonoBehaviour
             lastHoveredTileData.SetCurrentBuilding(producerDescriptor);
             currentGameObject = null;
             // Prepare for citySelection
-            citySelectionActive = true;
+            //citySelectionActive = true;
             //Debug.Log("Building placed. Please select a city.");
-            cellSprite.color = spriteColorConnecting;
-            UIManager.Instance.ActiveConnectingMode();
+            //cellSprite.color = spriteColorConnecting;
+            //UIManager.Instance.ActiveConnectingMode();
             
             // Instantiate new cable
-            GameObject cable = Instantiate(cablePrefab, lastPlacedBuilding.transform.position, Quaternion.identity);
+            /* GameObject cable = Instantiate(cablePrefab, lastPlacedBuilding.transform.position, Quaternion.identity);
             lastPlacedCable = cable.GetComponent<PowerCable>();
-            producerDescriptor.AddCable(lastPlacedCable);
+            producerDescriptor.AddCable(lastPlacedCable); */
 
             InputManager.Instance.OnClicked += SelectCity;
-            if(cable.GetComponent<Wandler>() != null){
+            /* if(cable.GetComponent<Wandler>() != null){
                 Wandler cwandler = cable.GetComponent<Wandler>();
                 //Debug.Log("Got cable Wandler!");
                 cwandler.onStartConnectTo = lastPlacedBuilding.GetComponent<Wandler>();
                 //Debug.Log("Connected Cable to plant!");
-            }
+            } */
         }
 
     }
@@ -244,7 +254,7 @@ public class PlacementManager : MonoBehaviour
                 // TODO: This is not being returned when sold
                 // BudgetManager.Instance.UseBudget(distance);
 
-                if(hitTransform.GetComponentInChildren<Wandler>() != null){
+                /* if(hitTransform.GetComponentInChildren<Wandler>() != null){
                     //Debug.Log(hitTransform.GetComponentInChildren<Wandler>());
                     Wandler endWandler = hitTransform.GetComponentInChildren<Wandler>();
                     //TODO REMOVE Endpoint addition
@@ -267,7 +277,7 @@ public class PlacementManager : MonoBehaviour
                 LevelManager.Instance.AddProduce(productionValue);
 
 
-                lastPlacedCable.Place();
+                lastPlacedCable.Place(); */
 
                 //Debug.Log($"City selected. Distance to building: {distance} units.");
 

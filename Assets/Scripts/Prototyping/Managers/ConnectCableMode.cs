@@ -73,6 +73,9 @@ public class ConnectCableMode : MonoBehaviour
         }
 
     }
+    private void PlaceCable(){
+        //TODO 06.01: Cable Logic for Placing the cable goes here
+    }
 
     [Obsolete("Prints the position the mouse is at in the gridData array")]
     private void Test()

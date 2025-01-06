@@ -1183,6 +1183,7 @@ GameObject:
   - component: {fileID: 686173049}
   - component: {fileID: 686173048}
   - component: {fileID: 686173050}
+  - component: {fileID: 686173051}
   m_Layer: 0
   m_Name: PlacementSystem
   m_TagString: Untagged
@@ -1204,10 +1205,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseIndicator: {fileID: 1970139634}
   cellIndicator: {fileID: 2034362886}
-  grid: {fileID: 936100650}
+  Grid: {fileID: 936100650}
+  GridOffset: 0.5
   database: {fileID: 11400000, guid: 0c6f349871d57a840890f745515a7c91, type: 2}
   mainCamera: {fileID: 17014428}
-  gridOffset: 0
   defaultLayer:
     serializedVersion: 2
     m_Bits: 1
@@ -1343,6 +1344,20 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &686173051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 686173047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ac88adc0dbf3f740b85a83eb294aef4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerTowerPrefab: {fileID: 0}
+  cablePrefab: {fileID: 0}
 --- !u!1 &698906027
 GameObject:
   m_ObjectHideFlags: 0
@@ -2568,7 +2583,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   budget: 1025
-  sellingFactor: 1
 --- !u!4 &1457948854
 Transform:
   m_ObjectHideFlags: 0
@@ -2614,7 +2628,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6514593421504746893, guid: 588e86ae9a01a4a3a8bd47894d5272f4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.601349
+      value: -12.5
       objectReference: {fileID: 0}
     - target: {fileID: 6514593421504746893, guid: 588e86ae9a01a4a3a8bd47894d5272f4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2622,7 +2636,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6514593421504746893, guid: 588e86ae9a01a4a3a8bd47894d5272f4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10.500456
+      value: -10.5
       objectReference: {fileID: 0}
     - target: {fileID: 6514593421504746893, guid: 588e86ae9a01a4a3a8bd47894d5272f4, type: 3}
       propertyPath: m_LocalRotation.w

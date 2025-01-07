@@ -29,13 +29,13 @@ public class ConnectCableMode : MonoBehaviour
             Instance = this;
         }
     }
-    // Start is called before the first frame update
+    
     void Start()
     {
         cachedCable = Instantiate(cablePrefab, new Vector3(0,-1000,0), Quaternion.identity);
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         if(Input.GetMouseButtonDown(0) && UIManager.Instance.Mode == UIState.CONNECTING){
@@ -45,7 +45,7 @@ public class ConnectCableMode : MonoBehaviour
     }
 
     /// <summary>
-    /// Sets the start and end points of the cable depending on the <c>isStartpoint</c> parameter, but does not place the cable itself.
+    /// Sets the start and end points of the cable depending on the <c>isStartpoint</c> parameter, and connects the cable between them if both are set.
     /// </summary>
     /// <param name="isStartpoint">Sets the startpoint if set to true, else the endpoint</param>
     public void SetConnectionPoints()
@@ -111,15 +111,21 @@ public class ConnectCableMode : MonoBehaviour
         if(isStartpoint){
             isStartpoint = false;
         } else{
-            PlaceCable();
             UIManager.Instance.DeactivateConnectingMode();
             isStartpoint = true;
+            if(startpoint == endpoint){
+                Debug.Log("Connect cable to same object, no operation. ");
+
+                return;
+            } else{
+            PlaceCable();
+            }
             
         }
     }
     private void PlaceCable(){
-        //TODO 06.01: Cable Logic for Placing the cable goes here
-        Debug.Log("Hallo ich bin ein Kabel");
+        
+        
         GameObject cable = cachedCable;
         PowerCable cableScript = cable.GetComponent<PowerCable>();
         cableScript.startPos = new Vector3(startpoint.transform.position.x,PlacementManager.Instance.cellIndicatorPlacementY+cableYOffset,startpoint.transform.position.z);

@@ -18,7 +18,7 @@ public class ConnectCableMode : MonoBehaviour
 
     private bool isStartpoint = true;
     public static ConnectCableMode Instance;
-    private float cableY = 1.5f;
+    private float cableYOffset = 0.5f;
     private GameObject cachedCable;
     void Awake(){
         if (Instance && Instance != this)
@@ -78,7 +78,7 @@ public class ConnectCableMode : MonoBehaviour
         {
             if (isStartpoint)
             {
-                startpoint = candidate;
+                startpoint = candidate; 
             }
             else
             {
@@ -88,7 +88,10 @@ public class ConnectCableMode : MonoBehaviour
         else //powerplant is not present
         {
             GameObject tileBelow = GridDataManager.GetGridDataAtPos(arrPosition);
-            GameObject powerTower = Instantiate(powerTowerPrefab, tileBelow.transform.position+Vector3.up, Quaternion.identity);
+            Vector3 powerTowerPos = tileBelow.transform.position;
+            powerTowerPos.y = PlacementManager.Instance.cellIndicatorPlacementY;
+            //tileBelow.transform.position+Vector3.up*1.5f
+            GameObject powerTower = Instantiate(powerTowerPrefab,powerTowerPos , Quaternion.identity);
             Debug.Log("powerTower");
             if (isStartpoint)
             {
@@ -119,9 +122,9 @@ public class ConnectCableMode : MonoBehaviour
         Debug.Log("Hallo ich bin ein Kabel");
         GameObject cable = cachedCable;
         PowerCable cableScript = cable.GetComponent<PowerCable>();
-        cableScript.startPos = startpoint.transform.position+Vector3.up*cableY;
-        cableScript.endPos = endpoint.transform.position+Vector3.up*cableY;
-
+        cableScript.startPos = new Vector3(startpoint.transform.position.x,PlacementManager.Instance.cellIndicatorPlacementY+cableYOffset,startpoint.transform.position.z);
+        cableScript.endPos = new Vector3(endpoint.transform.position.x,PlacementManager.Instance.cellIndicatorPlacementY+cableYOffset,endpoint.transform.position.z);
+        
         Wandler cableWandler = cable.GetComponent<Wandler>();
         
         float distance = Vector3.Distance(startpoint.transform.position, endpoint.transform.position);
@@ -132,9 +135,9 @@ public class ConnectCableMode : MonoBehaviour
 
         GraphManager.Instance.ConnectWandler(startpoint.GetComponentInChildren<Wandler>(),cableWandler);
         GraphManager.Instance.ConnectWandler(cableWandler,endpoint.GetComponentInChildren<Wandler>());
-
-        cableScript.DrawCable(); 
         cableScript.Place();
+        cableScript.DrawCable(); 
+        
         cachedCable = Instantiate(cablePrefab, new Vector3(0,-1000,0), Quaternion.identity);
 
     }

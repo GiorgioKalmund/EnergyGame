@@ -9,6 +9,7 @@ using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine.Assertions;
 using UnityEngine.InputSystem.Layouts;
+using UnityEngine.Rendering;
 
 public class UIManager : MonoBehaviour
 {
@@ -164,7 +165,7 @@ public class UIManager : MonoBehaviour
         connectionActiveIndicatorImage.enabled = !connectionActiveIndicatorImage.enabled;
     }
 
-    public void ActiveConnectingMode()
+    public void ActivateConnectingMode()
     {
         ResetMode(); 
         if (Mode != UIState.CONNECTING)
@@ -181,7 +182,13 @@ public class UIManager : MonoBehaviour
             Debug.LogError("UIManager: Already Connecting, should not be able to press this button!");
         }
     }
-
+    public void ToggleConnectingMode(){
+        if(Mode == UIState.CONNECTING){
+            DeactivateConnectingMode();
+        } else{
+            ActivateConnectingMode();
+        }
+    }
     public void DeactivateConnectingMode()
     {
         if (Mode == UIState.CONNECTING)

@@ -1,6 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,12 +21,24 @@ public class LevelMapManager : MonoBehaviour
     public int maxMarkerCount;
     public LevelMapMarker CurrentlySelectedMarker { get; set; }
 
+    public LevelMapType currentMap = LevelMapType.BAUSTELLE;
+
     [Header("Path")]
     [SerializeField] private GameObject pathGameObject;
     [SerializeField] private GameObject pathParent;
 
     [Header("Backdrop")] 
-    [SerializeField] private Button backdropResetButton;
+    [SerializeField] private Button backdropResetButtonBayern;
+    [SerializeField] private Button backdropResetButtonBaustelle;
+
+    [Header("Movement")] 
+    [SerializeField] private GameObject movingElement;
+    [SerializeField] private Image blackoutImage;
+    [SerializeField] private GameObject arrowLeft;
+    [SerializeField] private GameObject arrowRight;
+
+    public float moveAnimationTime;
+    public Ease animationEase = Ease.InOutCubic;
 
     private void Awake()
     {
@@ -41,7 +56,7 @@ public class LevelMapManager : MonoBehaviour
             Debug.LogError("No parent for path elements in Map Manager");
         }
 
-        if (!backdropResetButton)
+        if (!backdropResetButtonBayern || !backdropResetButtonBaustelle)
         {
             Debug.LogWarning("Backdrop Reset Button not set in LevelMapManager, this could cause unwanted behaviour!");
         }
@@ -51,7 +66,43 @@ public class LevelMapManager : MonoBehaviour
     {
         StartCoroutine(WaitForAllMarkers());
         // Backdrop should act as a 'click away to close' area
-        backdropResetButton.onClick.AddListener(CloseCurrentlySelectedMarker);
+        backdropResetButtonBayern.onClick.AddListener(CloseCurrentlySelectedMarker);
+        backdropResetButtonBaustelle.onClick.AddListener(CloseCurrentlySelectedMarker);
+        
+        arrowLeft.GetComponent<Button>().onClick.AddListener(ShowBaustelle);
+        arrowRight.GetComponent<Button>().onClick.AddListener(ShowBayern);
+        
+        // Set animation time 0 so the initial transition (if needed) is instant
+        float animTime = moveAnimationTime;
+        moveAnimationTime = 0f;
+        
+        // Default to Bayern, as this is what is reflected in the scene 
+        currentMap = LevelMapType.BAYERN;
+        arrowRight.SetActive(false);
+        
+        // Reset animation time back to original value
+        moveAnimationTime = animTime;
+    }
+
+    private void OnEnable()
+    {
+        
+     
+        // TODO: Load current map
+        LoadCurrentMap();
+        Debug.Log("LevelMapManager enabled! " + currentMap.ToSafeString());
+        
+        if (currentMap == LevelMapType.BAUSTELLE)
+            ShowBaustelle();
+        else
+            ShowBayern();
+    }
+
+    // TODO: Dynamically load from storage / player prefs
+    private void LoadCurrentMap()
+    {
+        LevelMapType loadedMap = LevelMapType.BAUSTELLE;
+        currentMap = loadedMap; 
     }
 
     public void AddMarker(LevelMapMarker marker)
@@ -64,6 +115,7 @@ public class LevelMapManager : MonoBehaviour
         if (markers.Count != maxMarkerCount)
         {
             Debug.LogWarning("Actual marker count does not correspond to the value entered. Please modify 'maxMarkerCount' to be the amount of markers visible on the field");
+            return;
         }
         //Debug.Log("Linking "+markers.Count + " markers.");
         markers.Sort((marker0, marker1) => marker0.markerID.CompareTo(marker1.markerID));
@@ -91,6 +143,11 @@ public class LevelMapManager : MonoBehaviour
         {
             Debug.LogWarning(markerId+" is not a valid level Index");
             return;
+        }
+        
+        if (markerId > maxMarkerCount)
+        {
+            markerId = maxMarkerCount;
         }
         //markers[0].Lock();
         markers[markerId].Unlock();
@@ -121,4 +178,53 @@ public class LevelMapManager : MonoBehaviour
             CurrentlySelectedMarker.ClosePopup();
         }
     }
+
+    public async void ShowBayern()
+    {
+            Debug.Log("SHOWING BAY");
+            arrowRight.SetActive(false);
+
+            float localXPos = movingElement.transform.localPosition.x;
+            
+            if (moveAnimationTime >= 0.05f)
+                await blackoutImage.DOFade(1f, moveAnimationTime / 2).AsyncWaitForCompletion();
+            
+            Debug.Log(movingElement.transform.localPosition.x);
+            if (movingElement.transform.localPosition.x >= 959)
+                await movingElement.transform.DOLocalMoveX(localXPos - 1920, 0.1f).SetEase(animationEase).SetRecyclable().AsyncWaitForCompletion();
+            await blackoutImage.DOFade(0f, moveAnimationTime / 2).AsyncWaitForCompletion();
+
+            arrowLeft.SetActive(true);
+
+            currentMap = LevelMapType.BAYERN;
+    }
+
+    public async void ShowBaustelle()
+    {
+            Debug.Log("SHOWING BAU");
+            arrowLeft.SetActive(false);
+
+            float localXPos = movingElement.transform.localPosition.x;
+            
+            if (moveAnimationTime >= 0.05f)
+                await blackoutImage.DOFade(1f, moveAnimationTime / 2).SetEase(animationEase).SetRecyclable().AsyncWaitForCompletion();
+            if (movingElement.transform.localPosition.x <= -959)
+                await movingElement.transform.DOLocalMoveX(localXPos + 1920, 0.0f).SetEase(animationEase).SetRecyclable().AsyncWaitForCompletion();
+            await blackoutImage.DOFade(0f, moveAnimationTime / 2).SetEase(animationEase).SetRecyclable().AsyncWaitForCompletion();
+
+            arrowRight.SetActive(true);
+
+            currentMap = LevelMapType.BAUSTELLE;
+    }
+
+    private void OnDestroy()
+    {
+        DOTween.Kill(movingElement.transform);
+        DOTween.Kill(blackoutImage);
+    }
+}
+
+public enum LevelMapType
+{
+    BAUSTELLE, BAYERN
 }

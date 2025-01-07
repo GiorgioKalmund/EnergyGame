@@ -61,9 +61,6 @@ public class UIManager : MonoBehaviour
         }
         
         Assert.IsNotNull(sceneCamera, "UIManager: sceneCamera not found! Aborting.");
-        
-        DOTween.SetTweensCapacity(200, 50); 
-        DOTween.defaultAutoKill = true;
     }
 
     private void OnEnable()

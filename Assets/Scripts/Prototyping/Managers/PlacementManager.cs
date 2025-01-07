@@ -134,7 +134,6 @@ public class PlacementManager : MonoBehaviour
             cellIndicator.SetActive(true);
             currentGameObject.layer = 2;
             
-            Debug.LogWarning("Hiding in placement!");
             BuilderInventory.Instance.HideInventory();
             
             InputManager.Instance.OnClicked += PlaceStructure;

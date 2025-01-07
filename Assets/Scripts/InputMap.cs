@@ -205,6 +205,94 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Mouse"",
+            ""id"": ""a723c69c-5b01-4495-8ae9-ba83b885c43b"",
+            ""actions"": [
+                {
+                    ""name"": ""Delta"",
+                    ""type"": ""Value"",
+                    ""id"": ""03a429a1-cf31-4a88-8d1a-c2e8dc36a296"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""LeftClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""4ae2f745-52e2-4651-bc96-06fbc3b04ae4"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RightClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""53792135-c3f5-4c67-8606-6188a716c84c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MiddleClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""79d55fb5-dae7-479d-a575-853087e572e2"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""c46f6c00-ca56-4f18-a580-fcf24e21d5ea"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Delta"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""32db3b9f-a94e-4db3-89f3-ef0981935391"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8fb09477-606a-4bde-8c9c-98fa37831414"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d652deb8-0a95-4f1e-9312-51bb30bed895"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MiddleClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -217,11 +305,18 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         m_main_CollapseAllTags = m_main.FindAction("Collapse All Tags", throwIfNotFound: true);
         m_main_Move = m_main.FindAction("Move", throwIfNotFound: true);
         m_main_ShowFinance = m_main.FindAction("Show Finance", throwIfNotFound: true);
+        // Mouse
+        m_Mouse = asset.FindActionMap("Mouse", throwIfNotFound: true);
+        m_Mouse_Delta = m_Mouse.FindAction("Delta", throwIfNotFound: true);
+        m_Mouse_LeftClick = m_Mouse.FindAction("LeftClick", throwIfNotFound: true);
+        m_Mouse_RightClick = m_Mouse.FindAction("RightClick", throwIfNotFound: true);
+        m_Mouse_MiddleClick = m_Mouse.FindAction("MiddleClick", throwIfNotFound: true);
     }
 
     ~@InputMap()
     {
         UnityEngine.Debug.Assert(!m_main.enabled, "This will cause a leak and performance issues, InputMap.main.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Mouse.enabled, "This will cause a leak and performance issues, InputMap.Mouse.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -365,6 +460,76 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         }
     }
     public MainActions @main => new MainActions(this);
+
+    // Mouse
+    private readonly InputActionMap m_Mouse;
+    private List<IMouseActions> m_MouseActionsCallbackInterfaces = new List<IMouseActions>();
+    private readonly InputAction m_Mouse_Delta;
+    private readonly InputAction m_Mouse_LeftClick;
+    private readonly InputAction m_Mouse_RightClick;
+    private readonly InputAction m_Mouse_MiddleClick;
+    public struct MouseActions
+    {
+        private @InputMap m_Wrapper;
+        public MouseActions(@InputMap wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Delta => m_Wrapper.m_Mouse_Delta;
+        public InputAction @LeftClick => m_Wrapper.m_Mouse_LeftClick;
+        public InputAction @RightClick => m_Wrapper.m_Mouse_RightClick;
+        public InputAction @MiddleClick => m_Wrapper.m_Mouse_MiddleClick;
+        public InputActionMap Get() { return m_Wrapper.m_Mouse; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MouseActions set) { return set.Get(); }
+        public void AddCallbacks(IMouseActions instance)
+        {
+            if (instance == null || m_Wrapper.m_MouseActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_MouseActionsCallbackInterfaces.Add(instance);
+            @Delta.started += instance.OnDelta;
+            @Delta.performed += instance.OnDelta;
+            @Delta.canceled += instance.OnDelta;
+            @LeftClick.started += instance.OnLeftClick;
+            @LeftClick.performed += instance.OnLeftClick;
+            @LeftClick.canceled += instance.OnLeftClick;
+            @RightClick.started += instance.OnRightClick;
+            @RightClick.performed += instance.OnRightClick;
+            @RightClick.canceled += instance.OnRightClick;
+            @MiddleClick.started += instance.OnMiddleClick;
+            @MiddleClick.performed += instance.OnMiddleClick;
+            @MiddleClick.canceled += instance.OnMiddleClick;
+        }
+
+        private void UnregisterCallbacks(IMouseActions instance)
+        {
+            @Delta.started -= instance.OnDelta;
+            @Delta.performed -= instance.OnDelta;
+            @Delta.canceled -= instance.OnDelta;
+            @LeftClick.started -= instance.OnLeftClick;
+            @LeftClick.performed -= instance.OnLeftClick;
+            @LeftClick.canceled -= instance.OnLeftClick;
+            @RightClick.started -= instance.OnRightClick;
+            @RightClick.performed -= instance.OnRightClick;
+            @RightClick.canceled -= instance.OnRightClick;
+            @MiddleClick.started -= instance.OnMiddleClick;
+            @MiddleClick.performed -= instance.OnMiddleClick;
+            @MiddleClick.canceled -= instance.OnMiddleClick;
+        }
+
+        public void RemoveCallbacks(IMouseActions instance)
+        {
+            if (m_Wrapper.m_MouseActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IMouseActions instance)
+        {
+            foreach (var item in m_Wrapper.m_MouseActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_MouseActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public MouseActions @Mouse => new MouseActions(this);
     public interface IMainActions
     {
         void OnPauseScreen(InputAction.CallbackContext context);
@@ -373,5 +538,12 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         void OnCollapseAllTags(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnShowFinance(InputAction.CallbackContext context);
+    }
+    public interface IMouseActions
+    {
+        void OnDelta(InputAction.CallbackContext context);
+        void OnLeftClick(InputAction.CallbackContext context);
+        void OnRightClick(InputAction.CallbackContext context);
+        void OnMiddleClick(InputAction.CallbackContext context);
     }
 }

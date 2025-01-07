@@ -33,6 +33,9 @@ public class InputManager : MonoBehaviour
 
     public event Action OnClicked;
 
+
+
+    public InputMap InputMap;
     private void Awake()
     {
         // Singleton
@@ -50,15 +53,18 @@ public class InputManager : MonoBehaviour
     private void Start()
     {
         mainCamera = UIManager.Instance.sceneCamera;
+        InputMap = new InputMap();
+        InputMap.main.Enable();
+        InputMap.Mouse.Enable();
     }
 
     private void Update() //into Building System
     {
         
         
-        if (Input.GetMouseButtonDown(0))
+        if (InputMap.Mouse.LeftClick.IsPressed())
             OnClicked?.Invoke();
-        if (Input.GetMouseButtonDown(1))
+        if (InputMap.Mouse.RightClick.IsPressed())
         {
             if (!PlacementManager.Instance.Placing() && UIManager.Instance.Mode == UIState.DEFAULT)
                 return;
@@ -107,6 +113,7 @@ public class InputManager : MonoBehaviour
         float moveX = Input.GetAxis("Horizontal") * dragSpeed;
         float moveZ = Input.GetAxis("Vertical") * dragSpeed;
 
+        Vector2 moveInputs = InputMap.main.Move.ReadValue<Vector2>();
         //relative movement 
         Vector3 forward = mainCamera.transform.forward;
         Vector3 right = mainCamera.transform.right;
@@ -118,7 +125,7 @@ public class InputManager : MonoBehaviour
 
         // apply movement
         Vector3 moveDirection = forward * moveZ + right * moveX;
-
+        //Vector3 moveDirection = forward *moveInputs.y + right * moveInputs.x;
 
         Vector3 newPosition = pivot.transform.position + moveDirection;
 

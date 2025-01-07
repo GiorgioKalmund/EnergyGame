@@ -12,8 +12,8 @@ public class PowerCable : MonoBehaviour
 
    public bool placed = false;
    
-   private Vector3 startPos;
-   private Vector3 endPos;
+   public Vector3 startPos;
+   public Vector3 endPos;
 
    // reference for endpoint?
 
@@ -34,10 +34,10 @@ public class PowerCable : MonoBehaviour
    }
 
    void Update() {
-       if (!placed)
+       /* if (!placed)
        {
            DrawCable();
-       }
+       } */
    }
 
    public void Place()
@@ -46,7 +46,7 @@ public class PowerCable : MonoBehaviour
        GraphManager.Instance.calculateAll();
    }
 
-   void DrawCable()
+   public void DrawCable()
    {
        if (!placed)
        {

@@ -18,6 +18,8 @@ public class ConnectCableMode : MonoBehaviour
 
     private bool isStartpoint = true;
     public static ConnectCableMode Instance;
+    private float cableY = 1.5f;
+    private GameObject cachedCable;
     void Awake(){
         if (Instance && Instance != this)
         {
@@ -30,7 +32,7 @@ public class ConnectCableMode : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        cachedCable = Instantiate(cablePrefab, new Vector3(0,-1000,0), Quaternion.identity);
     }
 
     // Update is called once per frame
@@ -60,8 +62,8 @@ public class ConnectCableMode : MonoBehaviour
         {
             //Wenn tile auch noch geblocked (Wald etc.) dann ungültig sonst ok
             if(GridDataManager.GetGridDataAtPos(arrPosition).GetComponent<TileDataWrapper>().tileData.currentPlacementType == PlacementType.Blocked){
-                /* Debug.Log("Falsch gesetzt"); 
-                Debug.Log($"{GridDataManager.GetGridDataAtPos(new Vector3Int(arrPosition.x,arrPosition.y,1))}"); */
+                Debug.Log("Falsch gesetzt"); 
+                Debug.Log($"{GridDataManager.GetGridDataAtPos(new Vector3Int(arrPosition.x,arrPosition.y,1))}");
                 return; 
             }
             
@@ -100,6 +102,8 @@ public class ConnectCableMode : MonoBehaviour
             
             tileBelow.GetComponent<TileDataWrapper>().tileData.currentPlacementType = PlacementType.Blocked;
 
+            GraphManager.Instance.wandlerArray[GraphManager.Instance.numOfWandler++] = powerTower.GetComponent<Wandler>();
+
         }
         if(isStartpoint){
             isStartpoint = false;
@@ -113,6 +117,26 @@ public class ConnectCableMode : MonoBehaviour
     private void PlaceCable(){
         //TODO 06.01: Cable Logic for Placing the cable goes here
         Debug.Log("Hallo ich bin ein Kabel");
+        GameObject cable = cachedCable;
+        PowerCable cableScript = cable.GetComponent<PowerCable>();
+        cableScript.startPos = startpoint.transform.position+Vector3.up*cableY;
+        cableScript.endPos = endpoint.transform.position+Vector3.up*cableY;
+
+        Wandler cableWandler = cable.GetComponent<Wandler>();
+        
+        float distance = Vector3.Distance(startpoint.transform.position, endpoint.transform.position);
+        float effectiveLoss = Mathf.Pow(1 - cableEfficiencyLossPerUnit, distance);
+        cableWandler.efficiency = effectiveLoss;
+
+        GraphManager.Instance.wandlerArray[GraphManager.Instance.numOfWandler++] = cableWandler;
+
+        GraphManager.Instance.ConnectWandler(startpoint.GetComponentInChildren<Wandler>(),cableWandler);
+        GraphManager.Instance.ConnectWandler(cableWandler,endpoint.GetComponentInChildren<Wandler>());
+
+        cableScript.DrawCable(); 
+        cableScript.Place();
+        cachedCable = Instantiate(cablePrefab, new Vector3(0,-1000,0), Quaternion.identity);
+
     }
 
     [Obsolete("Prints the position the mouse is at in the gridData array")]

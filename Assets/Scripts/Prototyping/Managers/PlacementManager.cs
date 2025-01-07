@@ -245,6 +245,7 @@ public class PlacementManager : MonoBehaviour
                         Debug.LogWarning("powerPlantType enum not set in powerplant.");
                         break;
                 }
+                Debug.Log(productionValue);
                 lastPlacedBuilding.GetComponentInChildren<Wandler>().generating = productionValue;
 
                 //Debug.Log($"alpha = {lastHoveredTileData.waterSpeed}");

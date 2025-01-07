@@ -199,7 +199,7 @@ public class PlacementManager : MonoBehaviour
         if (!citySelectionActive)
         {
             cellSprite.color = spriteColorRegular;
-            UIManager.Instance.ToggleConnectionModeIndicator(false);
+            //UIManager.Instance.ToggleConnectionModeIndicator(false);
             return;
         }
 

@@ -105,6 +105,7 @@ public class BuilderInventory : MonoBehaviour
         if (!builderSlots[slotId].RemoveCapacity(capacity))
         {
             // TODO: Trigger action if we go negative
+            UIManager.Instance.ShowDON();
         }
     }
     

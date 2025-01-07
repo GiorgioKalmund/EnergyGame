@@ -40,6 +40,7 @@ public class ConnectCableMode : MonoBehaviour
 
         if (GridDataManager.GetGridDataAtPos(arrPosition).GetComponent<TileDataWrapper>().tileData.currentPlacementType == PlacementType.Blocked)
         {
+            InputManager.Instance.InputMap.Mouse.LeftClick.performed += ctx => {SetConnectionPoints(isStartpoint);};
             return;
         }
 

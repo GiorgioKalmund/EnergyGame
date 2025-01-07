@@ -185,10 +185,12 @@ public class UIManager : MonoBehaviour
             DeactivateConnectingMode();
         } else{
             ActivateConnectingMode();
+            
         }
     }
     public void DeactivateConnectingMode()
     {
+        
         if (Mode == UIState.CONNECTING)
         {
             Mode = UIState.DEFAULT;

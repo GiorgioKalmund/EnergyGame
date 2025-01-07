@@ -46,8 +46,8 @@ public class GridDataManager : MonoBehaviour
     [Header("Grid")] 
     [SerializeField] private Grid grid;
     [SerializeField] private Transform tilesCenter;
-    private int textureWidth;
-    private int textureHeight;
+    private static int textureWidth;
+    private static int textureHeight;
 
     /// <summary>
     /// 
@@ -192,11 +192,11 @@ public class GridDataManager : MonoBehaviour
         pos.y = pos.z;
         pos.z = tmp;
 
-        pos.x *= -1;
-        pos.y *= -1;
+        pos.x = textureWidth + pos.x;
+        pos.y = textureHeight + pos.y;
 
-        pos.x -= 1;
-        pos.y -= 1;
+        /* pos.x -= 1;
+        pos.y -= 1; */
         
         return pos;
     }
@@ -214,7 +214,8 @@ public class GridDataManager : MonoBehaviour
     /// <param name="pos">Position in Array</param>
     /// <returns>The gameobject at Position or null</returns>
     public static GameObject GetGridDataAtPos(Vector3Int pos){
-        return GridData[pos.x,pos.y,pos.z];
+         
+        return GridData[Math.Clamp(pos.x,0,textureWidth-1),Math.Clamp(pos.y,0,textureHeight-1),pos.z];
     }
     public bool OverlayTexturesAllExistent()
     {

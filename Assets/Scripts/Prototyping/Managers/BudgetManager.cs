@@ -46,6 +46,8 @@ public class BudgetManager : MonoBehaviour
     {
         budget -= amount;
         UIManager.Instance.RenderBudget();
+        if (budget < 0)
+            UIManager.Instance.ShowDON();
         return true;
     }
 

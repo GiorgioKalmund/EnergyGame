@@ -38,6 +38,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Button nextLevelButton;
     [SerializeField] private Sprite nextLevelButtonSprite;
     public Color insufficientBudgetColor;
+    [SerializeField] private GameObject donQuiotePanel;
     
     [Header("Visual")]
     [SerializeField] private Image connectionActiveIndicatorImage;
@@ -327,6 +328,16 @@ public class UIManager : MonoBehaviour
            HideOverlay();
        else
            ShowOverlay(type);
+    }
+
+    public void ShowDON()
+    {
+        donQuiotePanel.SetActive(true);
+    }
+
+    public void HideDON()
+    {
+        donQuiotePanel.SetActive(false);
     }
 
 

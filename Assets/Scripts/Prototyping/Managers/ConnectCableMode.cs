@@ -54,19 +54,21 @@ public class ConnectCableMode : MonoBehaviour
         Vector3Int gridPosition = grid.WorldToCell(mousePos + new Vector3(0.5f, 0, 0.5f));
         Vector3Int arrPosition = GridDataManager.ConvertGridPosToArrayPos(gridPosition);
 
-        
+        //Kein wandler im tile oder oben drauf weil Endpoint ist tile aber hat Wandler
         if ((GridDataManager.GetGridDataAtPos(arrPosition).GetComponentInChildren<Wandler>()== null
           && GridDataManager.GetGridDataAtPos(new Vector3Int(arrPosition.x,arrPosition.y,1)) == null))
         {
+            //Wenn tile auch noch geblocked (Wald etc.) dann ungültig sonst ok
             if(GridDataManager.GetGridDataAtPos(arrPosition).GetComponent<TileDataWrapper>().tileData.currentPlacementType == PlacementType.Blocked){
-                Debug.Log("Falsch gesetzt"); 
-                Debug.Log($"{GridDataManager.GetGridDataAtPos(new Vector3Int(arrPosition.x,arrPosition.y,1))}");
+                /* Debug.Log("Falsch gesetzt"); 
+                Debug.Log($"{GridDataManager.GetGridDataAtPos(new Vector3Int(arrPosition.x,arrPosition.y,1))}"); */
                 return; 
             }
             
         }
         
         GameObject candidate = GridDataManager.GetGridDataAtPos(new Vector3Int(arrPosition.x, arrPosition.y, 1));
+        //Workaround für Endpoint ist ein Tile und nicht in index 1 in grid data
         if(GridDataManager.GetGridDataAtPos(arrPosition).GetComponentInChildren<Wandler>()){
             candidate = GridDataManager.GetGridDataAtPos(arrPosition);
         }
@@ -105,7 +107,7 @@ public class ConnectCableMode : MonoBehaviour
             PlaceCable();
             UIManager.Instance.DeactivateConnectingMode();
             isStartpoint = true;
-            //InputManager.Instance.InputMap.Mouse.LeftClick.performed -= ctx => {SetConnectionPoints(isStartpoint);};
+            
         }
     }
     private void PlaceCable(){

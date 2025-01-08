@@ -183,6 +183,7 @@ public class PlacementManager : MonoBehaviour
             producerDescriptor.AddCable(lastPlacedCable); */
 
             InputManager.Instance.OnClicked += SelectCity;
+            InputManager.Instance.OnClicked += StopPlacement;
             /* if(cable.GetComponent<Wandler>() != null){
                 Wandler cwandler = cable.GetComponent<Wandler>();
                 //Debug.Log("Got cable Wandler!");

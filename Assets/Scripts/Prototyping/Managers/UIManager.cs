@@ -47,6 +47,10 @@ public class UIManager : MonoBehaviour
     [Header("Overlays")] 
     [SerializeField] private Material overlayMaterial;
 
+    [Header("Banners")] 
+    [SerializeField] private GameObject bannerInstance;
+    [SerializeField] private GameObject bannerParent;
+
     public bool overlayOpen;
     public OverlayType overlayOpenType;
 
@@ -339,6 +343,13 @@ public class UIManager : MonoBehaviour
         donQuiotePanel.SetActive(false);
     }
 
+    public void AddEndpointBanner(GameObject endpoint, float x, float y)
+    {
+        GameObject banner = Instantiate(bannerInstance, bannerParent.transform, false);
+        banner.transform.localScale = Vector3.one;
+        banner.GetComponent<EndpointBanner>().SetEndpoint(endpoint, x,y);
+        endpoint.GetComponentInChildren<Wandler>().AddBanner(banner.GetComponent<EndpointBanner>());
+    }
 
 }
 

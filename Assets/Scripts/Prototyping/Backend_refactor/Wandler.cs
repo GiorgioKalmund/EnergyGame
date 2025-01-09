@@ -20,6 +20,8 @@ public class Wandler : MonoBehaviour
     private bool Endpoint;
 
     public Wandler onStartConnectTo;
+
+    private EndpointBanner banner;
     
     // Start is called before the first frame update
     void Start()
@@ -61,8 +63,6 @@ public class Wandler : MonoBehaviour
             if(graphManager.Matrix[i,InstanceID] == 1){
                 inputAmt += graphManager.wandlerArray[i].getOutput();
             }
-
-
         }
         input.Amount = inputAmt;
         //Debug.Log(InstanceID + " has an Input of: " + input.Amount);
@@ -80,5 +80,18 @@ public class Wandler : MonoBehaviour
         output.Amount = input.Amount * efficiency;
         //Debug.Log(InstanceID + " has an Output of:" + output.Amount);
         return input.Amount * efficiency / (numOfChildren == 0 ? 1 : numOfChildren);
+    }
+
+    public void AddBanner(EndpointBanner banner)
+    {
+        this.banner = banner;
+    }
+
+    public void UpdateEndpointText(float value)
+    {
+       if (!Endpoint)
+           return;
+       
+       banner.UpdateText(value);
     }
 }

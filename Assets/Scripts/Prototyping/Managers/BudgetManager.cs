@@ -54,10 +54,6 @@ public class BudgetManager : MonoBehaviour
         return budget - amount >= 0;
     }
 
-    
-    
-    
-    
     public void SetBudget(float amount)
     {
         budget = amount;

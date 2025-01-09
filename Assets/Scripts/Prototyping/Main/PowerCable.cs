@@ -46,7 +46,7 @@ public class PowerCable : MonoBehaviour
    {
        placed = true;
        // Place it 75% of the way towards the end position
-       Vector3 newPos = startPos + (endPos - startPos) / 1.333f;
+       Vector3 newPos = startPos + (endPos - startPos) * 0.75f;
        newPos.y += 0.5f;
        tagTree.transform.parent.gameObject.transform.position = newPos;
        tagTree.ExpandTree();

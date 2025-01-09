@@ -61,7 +61,7 @@ public class ConnectCableMode : MonoBehaviour
           && GridDataManager.GetGridDataAtPos(new Vector3Int(arrPosition.x,arrPosition.y,1)) == null))
         {
             //Wenn tile auch noch geblocked (Wald etc.) dann ungültig sonst ok
-            if(GridDataManager.GetGridDataAtPos(arrPosition).GetComponent<TileDataWrapper>().tileData.currentPlacementType == PlacementType.Blocked){
+            if(GridDataManager.GetGridDataAtPos(arrPosition).GetComponent<TileDataWrapper>().tileData.currentPlacementType != PlacementType.Default){
                 Debug.Log("Falsch gesetzt"); 
                 Debug.Log($"{GridDataManager.GetGridDataAtPos(new Vector3Int(arrPosition.x,arrPosition.y,1))}");
                 return; 

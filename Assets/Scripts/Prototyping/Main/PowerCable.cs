@@ -15,6 +15,8 @@ public class PowerCable : MonoBehaviour
    public Vector3 startPos;
    public Vector3 endPos;
 
+   public TagSelectionTree tagTree;
+
    // reference for endpoint?
 
    private void Awake()
@@ -43,6 +45,12 @@ public class PowerCable : MonoBehaviour
    public void Place()
    {
        placed = true;
+       // Place it 75% of the way towards the end position
+       Vector3 newPos = startPos + (endPos - startPos) / 1.333f;
+       newPos.y += 0.5f;
+       tagTree.transform.parent.gameObject.transform.position = newPos;
+       tagTree.ExpandTree();
+       tagTree.SetProductionText(GetComponent<Wandler>().getOutput());
        GraphManager.Instance.calculateAll();
    }
 

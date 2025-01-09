@@ -4,7 +4,6 @@ using TMPro;
 public class EndpointBanner : MonoBehaviour
 {
     public GameObject endpointGameObject;
-    public float x, y;
 
     [SerializeField] private TMP_Text text;
     void Start()
@@ -22,15 +21,13 @@ public class EndpointBanner : MonoBehaviour
         transform.position = new Vector3(screenPoint.x, transform.position.y, transform.position.z);
     }
 
-    public void SetEndpoint(GameObject endpoint, float x, float y)
+    public void SetEndpoint(GameObject endpoint)
     {
         endpointGameObject = endpoint;
-        this.x = x;
-        this.y = y;
     }
 
     public void UpdateText(float value)
     {
-        text.text = $"{value}MW";
+        text.text = $"{value:F0}MW";
     }
 }

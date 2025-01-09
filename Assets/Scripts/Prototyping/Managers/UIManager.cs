@@ -343,11 +343,11 @@ public class UIManager : MonoBehaviour
         donQuiotePanel.SetActive(false);
     }
 
-    public void AddEndpointBanner(GameObject endpoint, float x, float y)
+    public void AddEndpointBanner(GameObject endpoint)
     {
         GameObject banner = Instantiate(bannerInstance, bannerParent.transform, false);
         banner.transform.localScale = Vector3.one;
-        banner.GetComponent<EndpointBanner>().SetEndpoint(endpoint, x,y);
+        banner.GetComponent<EndpointBanner>().SetEndpoint(endpoint);
         endpoint.GetComponentInChildren<Wandler>().AddBanner(banner.GetComponent<EndpointBanner>());
     }
 

@@ -84,10 +84,12 @@ public class TagSelectionTree : MonoBehaviour
   }
   public void ExpandTree()
   {
-    foreach (var tagElement in tags)
-    {
-      tagElement.Open(); 
-    }
+    if (productionAvailable)
+      productionTag.Open();
+    else if (co2Available)
+      co2Tag.Open();
+    else if (financeAvailable)
+      financeTag.Open();
   }
   public void ToggleTag(TreeTagType type)
   {

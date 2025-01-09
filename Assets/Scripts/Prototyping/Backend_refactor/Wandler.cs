@@ -93,5 +93,7 @@ public class Wandler : MonoBehaviour
            return;
        
        banner.UpdateText(value);
+       
+       // TODO: Update texts of all connected cables
     }
 }

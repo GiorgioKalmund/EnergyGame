@@ -111,7 +111,7 @@ public class ConnectCableMode : MonoBehaviour
         if(isStartpoint){
             isStartpoint = false;
         } else{
-            UIManager.Instance.DeactivateConnectingMode();
+            
             isStartpoint = true;
             if(startpoint == endpoint){
                 Debug.Log("Connect cable to same object, no operation. ");

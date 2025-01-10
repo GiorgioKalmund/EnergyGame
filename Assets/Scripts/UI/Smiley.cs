@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
-using UnityEngine.ProBuilder;
 using UnityEngine.UI;
 
 public class Smiley : MonoBehaviour

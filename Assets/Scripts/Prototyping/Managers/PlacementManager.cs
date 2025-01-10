@@ -152,6 +152,7 @@ public class PlacementManager : MonoBehaviour
         // After a building is placed, we want to select a city to connect
         if (currentGameObject && !blocked)
         {
+            
             ProducerDescriptor producerDescriptor = currentGameObject.GetComponent<ProducerDescriptor>();
             producerDescriptor.Place(lastHoveredTileData);
 
@@ -160,8 +161,8 @@ public class PlacementManager : MonoBehaviour
             Vector3Int cellPos =Grid.WorldToCell(powerplantPos);
             cellPos = GridDataManager.ConvertGridPosToArrayPos(cellPos);
             cellPos.z = 1;
-            GridDataManager.GridData[cellPos.x,cellPos.y,cellPos.z] = producerDescriptor.gameObject; 
-            
+             
+            GridDataManager.SetGridDataAtPos(cellPos,producerDescriptor.gameObject);
             Debug.Log($"Inserted ${producerDescriptor.powerPlantType} onto ${cellPos}");
 
             /* Handle Building */

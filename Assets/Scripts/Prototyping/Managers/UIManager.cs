@@ -199,6 +199,7 @@ public class UIManager : MonoBehaviour
         {
             Mode = UIState.DEFAULT;
             ToggleConnectionModeIndicator(false);
+            ConnectCableMode.Instance.ResetCablesAfterExitingMode();
             if (BuilderInventory.Instance)
                 BuilderInventory.Instance.ShowInventory();
             else

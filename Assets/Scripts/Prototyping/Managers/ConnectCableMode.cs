@@ -50,11 +50,18 @@ public class ConnectCableMode : MonoBehaviour
     /// <param name="isStartpoint">Sets the startpoint if set to true, else the endpoint</param>
     public void SetConnectionPoints()
     {
-        
+        if(InputManager.IsPointOverUI()){
+            return;
+        }
         Grid grid = PlacementManager.Instance.Grid;
         Vector3 mousePos = InputManager.Instance.GetMousePositionInWorldSpace();
         Vector3Int gridPosition = grid.WorldToCell(mousePos + new Vector3(0.5f, 0, 0.5f));
         Vector3Int arrPosition = GridDataManager.ConvertGridPosToArrayPos(gridPosition);
+
+        if(arrPosition.z <0){
+            return;
+        }
+
 
         //Kein wandler im tile oder oben drauf weil Endpoint ist tile aber hat Wandler
         if ((GridDataManager.GetGridDataAtPos(arrPosition).GetComponentInChildren<Wandler>()== null
@@ -73,6 +80,7 @@ public class ConnectCableMode : MonoBehaviour
         //Workaround für Endpoint ist ein Tile und nicht in index 1 in grid data
         if(GridDataManager.GetGridDataAtPos(arrPosition).GetComponentInChildren<Wandler>()){
             candidate = GridDataManager.GetGridDataAtPos(arrPosition);
+
         }
         if (candidate != null) //powerplant is present
         {
@@ -122,6 +130,10 @@ public class ConnectCableMode : MonoBehaviour
             }
             
         }
+    }
+    
+    public void ResetCablesAfterExitingMode(){
+        isStartpoint = true;
     }
     private void PlaceCable(){
         

@@ -95,7 +95,6 @@ public class BuilderInventorySlot : MonoBehaviour, IPointerEnterHandler, IPointe
         else
             Debug.LogError("No Builder Inventory found!");
     }
-
     public void OnPointerExit(PointerEventData eventData)
     {
         if (BuilderInventory.Instance)

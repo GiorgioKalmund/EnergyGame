@@ -339,6 +339,7 @@ public class PlacementManager : MonoBehaviour
         placingObjectIndex = -1;
         cellIndicator.SetActive(false);
         InputManager.Instance.OnClicked -= PlaceStructure;
+        InputManager.Instance.OnClicked -= StopPlacement;
         currentGameObject = null;
         validNewPlacement = false; 
     }

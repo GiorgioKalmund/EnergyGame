@@ -148,7 +148,6 @@ public class BuilderInventory : MonoBehaviour
 
     public void CloseSpeechBubble()
     {
-        
         if (!speechBubble)
             return;
         

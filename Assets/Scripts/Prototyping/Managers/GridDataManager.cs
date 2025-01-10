@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using JetBrains.Annotations;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -178,7 +179,7 @@ public class GridDataManager : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Could not find appropriate map entry for "+pixelColor);
+                    Debug.Log("Could not find appropriate map entry for "+ pixelColor.ToHexString());
                 }
             }
         }

@@ -19,6 +19,14 @@ public class FPSCounter : MonoBehaviour
             int fps = (int)(1f / Time.unscaledDeltaTime);
             _fpsText.text = "FPS: " + fps;
             _timer = Time.unscaledTime + _hudRefreshRate;
+            
+            if (fps < 30)
+                _fpsText.color = Color.red;
+            else if (fps < 65)
+                _fpsText.color = new Color(255, 165, 0);
+            else
+                _fpsText.color = Color.green; 
+                
         }
     }
 }

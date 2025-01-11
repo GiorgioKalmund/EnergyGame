@@ -1907,9 +1907,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1879477451}
     - target: {fileID: 788136373460210966, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+      propertyPath: maxZoom
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 788136373460210966, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+      propertyPath: minZoom
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 788136373460210966, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+      propertyPath: dragSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 788136373460210966, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 17014428}
+    - target: {fileID: 788136373460210966, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+      propertyPath: verticalMinLimit
+      value: -20
+      objectReference: {fileID: 0}
     - target: {fileID: 1196758535455520636, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

@@ -13,17 +13,17 @@ public class InputManager : MonoBehaviour
 
     [Header("Zoom")]
     [SerializeField] private float zoomSpeed = 30f;
-    [SerializeField] private float minZoom = 5f;
-    [SerializeField] private float maxZoom = 50f;
+    [SerializeField] private float minZoom;
+    [SerializeField] private float maxZoom;
 
     [Header("Rotation and Movement")]
     //Movement dont put dragSpeed to fast sonst vibriert es
-    private float dragSpeed = 0.85f;
+    public float dragSpeed;
     private Vector3 cameraStartPosition;
     
     
     [SerializeField] private float rotationSpeed = 150f;
-    public float verticalMinLimit = -10f;
+    public float verticalMinLimit = -20f;
     public float verticalMaxLimit = 10f;
     private float currentVerticalAngle = 0f;
 
@@ -83,18 +83,21 @@ public class InputManager : MonoBehaviour
     
         zoom();
         move();
-
-        //rest camera
-        //just hard coded 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            mainCamera.transform.position = new Vector3(-30.2f, 29.4f, -29.3f);
-            
-            currentVerticalAngle = 0f;
-            pivot.transform.position = new Vector3(8f, 0f, 8f);
-            mainCamera.transform.LookAt(pivot.transform.position);
+            reset();
         }
+            
+        
 
+    }
+    private void reset()
+    {     
+        mainCamera.transform.position = new Vector3(-30.2f, 29.4f, -29.3f);
+        currentVerticalAngle = 0f;
+        pivot.transform.position = new Vector3(8f, 0f, 8f);
+        mainCamera.transform.LookAt(pivot.transform.position);
+        
     }
 
     private bool IsWithinValidGameField(Vector3 position)
@@ -115,10 +118,19 @@ public class InputManager : MonoBehaviour
     {
         if (IsPointOverUI())
             return;
+
+        float distanceToPivot = Vector3.Distance(mainCamera.transform.position, pivot.transform.position);
+        float normalizedDistance = Mathf.InverseLerp(minZoom, maxZoom, distanceToPivot);
+
+        //float sensitivity = Mathf.Pow(normalizedDistance, 2); 
+        //if still too fast use sensitiveity instead of normalized Dis
         
+        float adjustedDragSpeed = dragSpeed * normalizedDistance;
+        Debug.Log(adjustedDragSpeed);
+
         //WASD as input
-        float moveX = Input.GetAxis("Horizontal") * dragSpeed;
-        float moveZ = Input.GetAxis("Vertical") * dragSpeed;
+        float moveX = Input.GetAxis("Horizontal") * adjustedDragSpeed;
+        float moveZ = Input.GetAxis("Vertical") * adjustedDragSpeed;
 
         //relative movement 
         Vector3 forward = mainCamera.transform.forward;

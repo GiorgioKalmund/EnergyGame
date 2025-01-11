@@ -32,7 +32,15 @@ public class TagSelectionTree : MonoBehaviour
   private Action<InputAction.CallbackContext> showPowerAction;
   private Action<InputAction.CallbackContext> showCO2Action;
   private Action<InputAction.CallbackContext> showFinanceAction;
-  private Action<InputAction.CallbackContext> collapseAllTagsAction; 
+  private Action<InputAction.CallbackContext> collapseAllTagsAction;
+
+  private void Awake()
+  {
+    productionTag.type = TreeTagType.POWER;
+    co2Tag.type = TreeTagType.CO2;
+    financeTag.type = TreeTagType.FINANCE;
+  }
+
   private void OnEnable()
   {
     
@@ -42,15 +50,21 @@ public class TagSelectionTree : MonoBehaviour
 
     tags = new List<TagSelectionElement>() { productionTag, co2Tag, financeTag };
 
-    showPowerAction = ctx => { productionTag.Toggle(); };
-    showCO2Action = ctx => { co2Tag.Toggle(); };
-    showFinanceAction = ctx => { financeTag.Toggle(); };
+    showPowerAction = ctx => { ToggleProductionTag(); };
+    showCO2Action = ctx => { ToggleCo2Tag(); };
+    showFinanceAction = ctx => { ToggleFinanceTag(); };
     collapseAllTagsAction = ctx => { CollapseTree(); };
 
     inputMap.main.ShowPower.performed += showPowerAction;
     inputMap.main.ShowCO2.performed += showCO2Action;
     inputMap.main.ShowFinance.performed += showFinanceAction;
     inputMap.main.CollapseAllTags.performed += collapseAllTagsAction;
+    
+    // Deactivate relevant tree elements
+    productionTag.SetActive(productionAvailable);
+    co2Tag.SetActive(co2Available);
+    financeTag.SetActive(financeAvailable);
+
   }
 
   private void OnDisable()
@@ -68,6 +82,14 @@ public class TagSelectionTree : MonoBehaviour
   {
     transform.parent.GetComponent<Canvas>().worldCamera = UIManager.Instance.sceneCamera;
     RotateTowardsCamera(); 
+    
+    var globallyActive = OverlaysDropdown.Instance.globallyActiveTypes;
+    if (globallyActive.Contains(TreeTagType.POWER))
+      productionTag.Open();
+    if (globallyActive.Contains(TreeTagType.CO2))
+      co2Tag.Open();
+    if (globallyActive.Contains(TreeTagType.FINANCE))
+      financeTag.Open();
   }
 
   private void Update()
@@ -86,9 +108,9 @@ public class TagSelectionTree : MonoBehaviour
   {
     if (productionAvailable)
       productionTag.Open();
-    else if (co2Available)
+    if (co2Available)
       co2Tag.Open();
-    else if (financeAvailable)
+    if (financeAvailable)
       financeTag.Open();
   }
   public void ToggleTag(TreeTagType type)
@@ -152,6 +174,19 @@ public class TagSelectionTree : MonoBehaviour
   {
     if (OverlaysDropdown.Instance)
       OverlaysDropdown.Instance.RemoveTag(this);
+  }
+
+  private void ToggleProductionTag()
+  {
+    productionTag.Toggle();
+  }
+  private void ToggleCo2Tag()
+  {
+    co2Tag.Toggle();
+  }
+  private void ToggleFinanceTag()
+  {
+    financeTag.Toggle();
   }
 }
 

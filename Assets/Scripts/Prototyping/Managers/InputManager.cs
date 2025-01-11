@@ -54,8 +54,12 @@ public class InputManager : MonoBehaviour
     {
         mainCamera = UIManager.Instance.sceneCamera;
         InputMap = new InputMap();
-        InputMap.main.Enable();
         InputMap.Mouse.Enable();
+    }
+
+    private void OnDisable()
+    {
+        InputMap.Mouse.Disable();
     }
 
     private void Update() //into Building System
@@ -109,11 +113,13 @@ public class InputManager : MonoBehaviour
 
     private void move()
     {
+        if (IsPointOverUI())
+            return;
+        
         //WASD as input
         float moveX = Input.GetAxis("Horizontal") * dragSpeed;
         float moveZ = Input.GetAxis("Vertical") * dragSpeed;
 
-        Vector2 moveInputs = InputMap.main.Move.ReadValue<Vector2>();
         //relative movement 
         Vector3 forward = mainCamera.transform.forward;
         Vector3 right = mainCamera.transform.right;

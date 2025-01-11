@@ -11,6 +11,7 @@ public class OverlaysDropdown : MonoBehaviour
    [SerializeField] private List<GameObject> elements;
 
    public List<TagSelectionTree> allTags;
+   public HashSet<TreeTagType> globallyActiveTypes;
 
    public Ease animationEase = Ease.InOutCubic;
 
@@ -33,6 +34,7 @@ public class OverlaysDropdown : MonoBehaviour
        }
        
        GetComponent<Button>().onClick.AddListener(Toggle);
+       globallyActiveTypes = new HashSet<TreeTagType>();
        
        // Hide every item at the start
        foreach (var element in elements)
@@ -43,8 +45,6 @@ public class OverlaysDropdown : MonoBehaviour
 
    private void Start()
    {
-       // TODO: Properly distinguish between: valid combinations, overlays
-       
        Button powerTags = elements[0].AddComponent<Button>();
        powerTags.onClick.AddListener(delegate{ToggleAllTagsWithType(TreeTagType.POWER);});
        
@@ -221,6 +221,21 @@ public class OverlaysDropdown : MonoBehaviour
    {
        allTags.Remove(tagToBeRemoved);
    }
+   
+   
+  private void UpdateGlobalActiveList(TreeTagType type)
+  {
+    if (OverlaysDropdown.Instance.globallyActiveTypes.Contains(type))
+    {
+      Debug.Log("removing " + type);
+      OverlaysDropdown.Instance.globallyActiveTypes.Remove(type);
+    }
+    else
+    {
+      Debug.Log("adding " + type);
+      OverlaysDropdown.Instance.globallyActiveTypes.Add(type);
+    }
+  }
 
    private void OnDestroy()
    {

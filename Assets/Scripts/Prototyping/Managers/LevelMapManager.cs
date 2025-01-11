@@ -90,7 +90,6 @@ public class LevelMapManager : MonoBehaviour
      
         // TODO: Load current map
         LoadCurrentMap();
-        Debug.Log("LevelMapManager enabled! " + currentMap.ToSafeString());
         
         if (currentMap == LevelMapType.BAUSTELLE)
             ShowBaustelle();
@@ -181,7 +180,6 @@ public class LevelMapManager : MonoBehaviour
 
     public async void ShowBayern()
     {
-            Debug.Log("SHOWING BAY");
             arrowRight.SetActive(false);
 
             float localXPos = movingElement.transform.localPosition.x;
@@ -201,7 +199,6 @@ public class LevelMapManager : MonoBehaviour
 
     public async void ShowBaustelle()
     {
-            Debug.Log("SHOWING BAU");
             arrowLeft.SetActive(false);
 
             float localXPos = movingElement.transform.localPosition.x;

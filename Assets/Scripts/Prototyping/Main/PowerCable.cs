@@ -49,7 +49,10 @@ public class PowerCable : MonoBehaviour
        Vector3 newPos = startPos + (endPos - startPos) * 0.75f;
        newPos.y += 0.5f;
        tagTree.transform.parent.gameObject.transform.position = newPos;
-       tagTree.ExpandTree();
+       
+       // TODO: Dont't instantly expand, as this would cause the 'bobbing' between tags. Up for change
+       //tagTree.ExpandTree();
+       
        tagTree.SetProductionText(GetComponent<Wandler>().getOutput());
        GraphManager.Instance.calculateAll();
    }

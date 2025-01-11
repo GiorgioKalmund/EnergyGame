@@ -16,8 +16,7 @@ public class LevelManager : MonoBehaviour
     public float currentEnvironmentalImpact;
     [SerializeField] private float maxEnvironmentalImpact;
     [SerializeField] private bool demandMet = false;
-    //TODO: 11.01: check if demand for endpoint is met and increase the completed num of endpoints
-    public int endpointsCompleted= 0;
+    private int endpointsCompleted= 0;
     public int endpointsCount = 0;
     public static LevelManager Instance { get; private set; }
 
@@ -112,6 +111,19 @@ public class LevelManager : MonoBehaviour
     public void SetMaxEnvironmentalImpact(float increase)
     {
         maxEnvironmentalImpact += increase;
+    }
+
+    public int CompleteEndpoint()
+    {
+        endpointsCompleted++;
+
+        if (endpointsCompleted == endpointsCount)
+        {
+            // TODO: Trigger Win action
+            Debug.LogWarning("===GAME WON===");
+        }
+        
+        return endpointsCompleted;
     }
 
 

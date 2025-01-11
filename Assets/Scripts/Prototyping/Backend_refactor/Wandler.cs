@@ -18,6 +18,7 @@ public class Wandler : MonoBehaviour
 
     [SerializeField]
     private bool Endpoint;
+    private bool EndpointCompleted;
     public int endpointDemand;
     public Wandler onStartConnectTo;
 
@@ -82,17 +83,24 @@ public class Wandler : MonoBehaviour
         return input.Amount * efficiency / (numOfChildren == 0 ? 1 : numOfChildren);
     }
 
-    public void AddBanner(EndpointBanner banner)
+    public void AddBanner(EndpointBanner newBanner)
     {
-        this.banner = banner;
+        this.banner = newBanner;
+        UpdateEndpointText(0);
     }
 
     public void UpdateEndpointText(float value)
     {
-       if (!Endpoint)
+       if (!Endpoint || EndpointCompleted)
            return;
-       
+        
        banner.UpdateText(value, endpointDemand);
+       if (value > endpointDemand)
+       {
+           int completed = LevelManager.Instance.CompleteEndpoint();
+           UIManager.Instance.SetEndpointsCompleted(completed);
+           EndpointCompleted = true;
+       }
        
        // TODO: Update texts of all connected cables
     }

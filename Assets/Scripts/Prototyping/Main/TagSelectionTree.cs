@@ -90,6 +90,9 @@ public class TagSelectionTree : MonoBehaviour
       co2Tag.Open();
     if (globallyActive.Contains(TreeTagType.FINANCE))
       financeTag.Open();
+    
+    if (OverlaysDropdown.Instance)
+      OverlaysDropdown.Instance.AddTag(this);
   }
 
   private void Update()
@@ -150,8 +153,6 @@ public class TagSelectionTree : MonoBehaviour
     financeText.text = $"{descriptor.GetCost()}€";
     
     // Add itself to the global list contained in the OverlaysDropdown
-    if (OverlaysDropdown.Instance)
-      OverlaysDropdown.Instance.AddTag(this);
   }
 
   private void RotateTowardsCamera()

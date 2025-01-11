@@ -155,8 +155,9 @@ public class GridDataManager : MonoBehaviour
 
                     if (placementType == PlacementType.Endpoint)
                     {
-                        if (LevelManager.Instance)
-                            LevelManager.Instance.endpointsCount++;
+                        if (LevelManager.Instance){
+                                instance.GetComponentInChildren<Wandler>().endpointDemand = LevelManager.Instance.endpointDemands[LevelManager.Instance.endpointsCount++];
+                            }
                         else
                             Debug.LogError("GridDataManager: No LevelManager found!");
                         

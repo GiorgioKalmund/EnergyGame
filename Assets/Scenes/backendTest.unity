@@ -1287,6 +1287,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerTowerPrefab: {fileID: 3594782725111630582, guid: 2b88984f31fc2494dab9f61b79fb8370, type: 3}
   cablePrefab: {fileID: 9142062873766252308, guid: 21db73efe622f44959ba877f70eb0fab, type: 3}
+  cableYOffset: 0.5
 --- !u!1 &698906027
 GameObject:
   m_ObjectHideFlags: 0
@@ -1356,6 +1357,7 @@ MonoBehaviour:
   demandMet: 0
   endpointsCompleted: 0
   endpointsCount: 0
+  endpointDemands: 7800000046000000320000008200000050000000
   nextID: 0
 --- !u!4 &843959126
 Transform:

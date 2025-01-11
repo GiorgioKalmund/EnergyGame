@@ -18,7 +18,7 @@ public class Wandler : MonoBehaviour
 
     [SerializeField]
     private bool Endpoint;
-
+    public int endpointDemand;
     public Wandler onStartConnectTo;
 
     private EndpointBanner banner;
@@ -92,7 +92,7 @@ public class Wandler : MonoBehaviour
        if (!Endpoint)
            return;
        
-       banner.UpdateText(value);
+       banner.UpdateText(value, endpointDemand);
        
        // TODO: Update texts of all connected cables
     }

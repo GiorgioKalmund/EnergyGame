@@ -26,8 +26,8 @@ public class EndpointBanner : MonoBehaviour
         endpointGameObject = endpoint;
     }
 
-    public void UpdateText(float value)
+    public void UpdateText(float value, float demand)
     {
-        text.text = $"{value:F0}MW";
+        text.text = $"{value:F0}MW / {demand:F0}MW";
     }
 }

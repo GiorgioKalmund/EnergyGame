@@ -10,7 +10,7 @@ public class PowerCable : MonoBehaviour
    [SerializeField] private int lineVertexCount = 10;
    [SerializeField] private float lineFunctionDivisor = 6;
 
-   public bool placed = false;
+   public bool placed = true;
    
    public Vector3 startPos;
    public Vector3 endPos;
@@ -21,10 +21,10 @@ public class PowerCable : MonoBehaviour
 
    private void Awake()
    {
-       startPos = gameObject.transform.position;
+       /* startPos = gameObject.transform.position;
        startPos.y += 0.3f;
        endPos = PlacementManager.Instance.GetCellIndicatorTransform().position;
-       endPos.y += 0.3f;
+       endPos.y += 0.3f; */
    }
 
    private void Start()
@@ -36,10 +36,10 @@ public class PowerCable : MonoBehaviour
    }
 
    void Update() {
-       /* if (!placed)
+       if (!placed)
        {
            DrawCable();
-       } */
+       }
    }
 
    public void Place()
@@ -62,7 +62,7 @@ public class PowerCable : MonoBehaviour
        if (!placed)
        {
            endPos = PlacementManager.Instance.GetCellIndicatorTransform().position;
-           endPos.y += 0.3f;
+           endPos.y = PlacementManager.Instance.cellIndicatorPlacementY + ConnectCableMode.Instance.cableYOffset;
        }
        
        Vector3 direction = endPos - startPos;

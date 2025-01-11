@@ -18,8 +18,9 @@ public class ConnectCableMode : MonoBehaviour
 
     private bool isStartpoint = true;
     public static ConnectCableMode Instance;
-    private float cableYOffset = 0.5f;
+    public float cableYOffset = 0.5f;
     private GameObject cachedCable;
+    private PowerCable cachedCableScript;
     void Awake(){
         if (Instance && Instance != this)
         {
@@ -33,6 +34,9 @@ public class ConnectCableMode : MonoBehaviour
     void Start()
     {
         cachedCable = Instantiate(cablePrefab, new Vector3(0,-1000,0), Quaternion.identity);
+        cachedCableScript = cachedCable.GetComponent<PowerCable>();
+        
+        
     }
 
     
@@ -69,8 +73,8 @@ public class ConnectCableMode : MonoBehaviour
         {
             //Wenn tile auch noch geblocked (Wald etc.) dann ungültig sonst ok
             if(GridDataManager.GetGridDataAtPos(arrPosition).GetComponent<TileDataWrapper>().tileData.currentPlacementType != PlacementType.Default){
-                Debug.Log("Falsch gesetzt"); 
-                Debug.Log($"{GridDataManager.GetGridDataAtPos(new Vector3Int(arrPosition.x,arrPosition.y,1))}");
+                
+
                 return; 
             }
             
@@ -86,7 +90,8 @@ public class ConnectCableMode : MonoBehaviour
         {
             if (isStartpoint)
             {
-                startpoint = candidate; 
+                startpoint = candidate;
+                StartDrawingCableAfterStartpointIsSet();
             }
             else
             {
@@ -98,12 +103,13 @@ public class ConnectCableMode : MonoBehaviour
             GameObject tileBelow = GridDataManager.GetGridDataAtPos(arrPosition);
             Vector3 powerTowerPos = tileBelow.transform.position;
             powerTowerPos.y = PlacementManager.Instance.cellIndicatorPlacementY;
-            //tileBelow.transform.position+Vector3.up*1.5f
+            
             GameObject powerTower = Instantiate(powerTowerPrefab,powerTowerPos , Quaternion.identity);
-            Debug.Log("powerTower");
+            
             if (isStartpoint)
             {
                 startpoint = powerTower;
+                StartDrawingCableAfterStartpointIsSet();
             }
             else
             {
@@ -134,6 +140,10 @@ public class ConnectCableMode : MonoBehaviour
     
     public void ResetCablesAfterExitingMode(){
         isStartpoint = true;
+        cachedCable.GetComponent<LineRenderer>().enabled = false;
+        cachedCableScript.placed = false; //saves calculations
+
+
     }
     private void PlaceCable(){
         
@@ -157,7 +167,12 @@ public class ConnectCableMode : MonoBehaviour
         cableScript.DrawCable(); 
         
         cachedCable = Instantiate(cablePrefab, new Vector3(0,-1000,0), Quaternion.identity);
-
+        cachedCableScript = cachedCable.GetComponent<PowerCable>();
+    }
+    private void StartDrawingCableAfterStartpointIsSet(){
+        cachedCableScript.placed = false;
+        cachedCableScript.startPos = new Vector3(startpoint.transform.position.x,PlacementManager.Instance.cellIndicatorPlacementY+cableYOffset,startpoint.transform.position.z);
+        cachedCable.GetComponent<LineRenderer>().enabled = true;
     }
 
     [Obsolete("Prints the position the mouse is at in the gridData array")]

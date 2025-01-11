@@ -124,10 +124,11 @@ public class InputManager : MonoBehaviour
 
         //float sensitivity = Mathf.Pow(normalizedDistance, 2); 
         //if still too fast use sensitiveity instead of normalized Dis
-        
-        float adjustedDragSpeed = dragSpeed * normalizedDistance;
-        Debug.Log(adjustedDragSpeed);
+        float minDragSpeed = 0.06f;
 
+        float adjustedDragSpeed = Mathf.Max(dragSpeed * normalizedDistance, minDragSpeed);
+        Debug.Log(adjustedDragSpeed);
+        
         //WASD as input
         float moveX = Input.GetAxis("Horizontal") * adjustedDragSpeed;
         float moveZ = Input.GetAxis("Vertical") * adjustedDragSpeed;

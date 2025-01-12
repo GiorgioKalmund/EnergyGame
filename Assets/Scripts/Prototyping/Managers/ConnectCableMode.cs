@@ -81,6 +81,8 @@ public class ConnectCableMode : MonoBehaviour
         }
         
         GameObject candidate = GridDataManager.GetGridDataAtPos(new Vector3Int(arrPosition.x, arrPosition.y, 1));
+        //Verhindert Kraftwerk an Kraftwerk zu schließen
+        if(candidate && !isStartpoint) return;
         //Workaround für Endpoint ist ein Tile und nicht in index 1 in grid data
         if(GridDataManager.GetGridDataAtPos(arrPosition).GetComponentInChildren<Wandler>()){
             candidate = GridDataManager.GetGridDataAtPos(arrPosition);
@@ -95,6 +97,7 @@ public class ConnectCableMode : MonoBehaviour
             }
             else
             {
+
                 endpoint = candidate;
             }
         }

@@ -62,8 +62,23 @@ public class CharacterSpeechManager : MonoBehaviour
         else
             donBubble.ToggleSpeechBubble();
     }
+
+    void Update()
+    {
+        if(true == false){ //FIXME: Hardcoded
+            EndpointsBubbleAction(SpeechBubbleAction.OPEN);
+        }
+        if(!co2Bubble.isOpen && LevelManager.Instance.currentEnvironmentalImpact > LevelManager.Instance.GetMaxEnvironmentalImpact()){
+            Co2BubbleAction(SpeechBubbleAction.OPEN);
+        }
+        if(!financeBubble.isOpen && BudgetManager.Instance.budget <0){
+            FinanceBubbleAction(SpeechBubbleAction.TOGGLE);
+        }
+        
+
+    }
 }
 
-public enum SpeechBubbleAction{
+    public enum SpeechBubbleAction{
     OPEN, CLOSE, TOGGLE
 }

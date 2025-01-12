@@ -31,4 +31,7 @@ public class DialogueContainer : MonoBehaviour
     {
         return Dialogue.DialogueText[Random.Range(0,Dialogue.DialogueText.Length)];
     }
+    public string GetAtIndex(int index){
+        return Dialogue.DialogueText[index];
+    }
 }

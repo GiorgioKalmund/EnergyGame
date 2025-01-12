@@ -13,7 +13,7 @@ public class SpeechBubble : MonoBehaviour
     [SerializeField] private TMP_Text textbox;
     [SerializeField] public DialogueContainer DialogueContainer;
     [SerializeField] public DialogueObjectSetting dialogueSetting;
-    private bool isOpen = false;
+    public bool isOpen = false;
     [SerializeField] private float animationTime = 0.3f;
 
     private void Start()
@@ -21,9 +21,9 @@ public class SpeechBubble : MonoBehaviour
         transform.localScale = Vector3.zero;
     }
 
-    public void OpenSpeechbubble()
+    public void OpenSpeechbubble(int index = -1)
     {
-        string nextText = GetSpeechBubbleText();
+        string nextText = GetSpeechBubbleText(index);
         if (nextText.Equals(INVALID_DIALOGUE))
         {
             Debug.LogWarning("Invalid Dialogue String in Speechbubble.");
@@ -72,7 +72,7 @@ public class SpeechBubble : MonoBehaviour
         CloseSpeechbubble();
     }
 
-    private string GetSpeechBubbleText()
+    private string GetSpeechBubbleText(int index = -1) //optional
     {
         switch (dialogueSetting)
         {
@@ -82,7 +82,9 @@ public class SpeechBubble : MonoBehaviour
                 return DialogueContainer.GetFirstLine();
             case DialogueObjectSetting.RANDOM:
                 return DialogueContainer.GetRandom();
-
+            case DialogueObjectSetting.INDEX:
+                if(index != -1) return DialogueContainer.GetAtIndex(index);
+                break;
         }
         return INVALID_DIALOGUE;
     }
@@ -96,5 +98,6 @@ public enum DialogueObjectSetting
 {
     LINEAR,
     FIRSTONLY,
-    RANDOM
+    RANDOM,
+    INDEX
 }

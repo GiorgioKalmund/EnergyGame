@@ -59,9 +59,9 @@ public class GraphManager : MonoBehaviour
     public void calculateAll(){
         float total = 0;
         for(int i  = 0; i < numOfEndpoints; i++){
-            Endpoints[i].getOutput();
-            Debug.Log(Endpoints[i] + " - " + i + " : " + Endpoints[i].getOutput());
-            total += Endpoints[i].getOutput();
+            float output = Endpoints[i].getOutput();
+            Debug.Log(Endpoints[i] + " - " + i + " : " + output);
+            total += output;
         }
         
         // TODO: Split up into different endpoints and assign each of them their correct (new) value

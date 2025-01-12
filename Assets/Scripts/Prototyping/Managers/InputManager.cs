@@ -146,13 +146,18 @@ public class InputManager : MonoBehaviour
         //Vector3 moveDirection = forward *moveInputs.y + right * moveInputs.x;
 
         Vector3 newPosition = pivot.transform.position + moveDirection;
+        Vector3 constrainedPosition = pivot.transform.position;
 
-        // check if new position is still in field
-        if (IsWithinValidGameField(newPosition))
+        if (IsWithinValidGameField(new Vector3(newPosition.x, pivot.transform.position.y, pivot.transform.position.z)))
+            constrainedPosition.x = newPosition.x;
+        if (IsWithinValidGameField(new Vector3(pivot.transform.position.x, pivot.transform.position.y, newPosition.z)))
+            constrainedPosition.z = newPosition.z;
+
+        // Update position if any axis is valid
+        if (constrainedPosition != pivot.transform.position)
         {
             Vector3 cameraOffset = mainCamera.transform.position - pivot.transform.position;
-            pivot.transform.position = newPosition;
-            //update cam
+            pivot.transform.position = constrainedPosition;
             mainCamera.transform.position = pivot.transform.position + cameraOffset;
         }
 

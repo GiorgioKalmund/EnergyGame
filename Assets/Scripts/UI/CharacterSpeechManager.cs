@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class CharacterSpeechManager : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class CharacterSpeechManager : MonoBehaviour
     [SerializeField] private SpeechBubble co2Bubble;
     [SerializeField] private SpeechBubble financeBubble;
     [SerializeField] private SpeechBubble donBubble;
-    
+    [SerializeField] private SpeechBubble builderBubble;
     public static CharacterSpeechManager Instance { get; private set; }
 
     private void Awake()
@@ -21,6 +22,10 @@ public class CharacterSpeechManager : MonoBehaviour
         
         if (!endpointsBubble || !co2Bubble || !financeBubble || !donBubble)
             Debug.LogError("CharacterSpeechManager: Missing at least one bubble reference!");
+    }
+
+    void Start(){
+        StartCoroutine(StartFirstBuilderDialogue(5));
     }
 
     public void EndpointsBubbleAction(SpeechBubbleAction action)
@@ -62,6 +67,22 @@ public class CharacterSpeechManager : MonoBehaviour
         else
             donBubble.ToggleSpeechBubble();
     }
+
+    public void BuilderBubbleAction(SpeechBubbleAction action){
+        if(action == SpeechBubbleAction.OPEN){
+            builderBubble.OpenSpeechbubble();
+        } else if(action == SpeechBubbleAction.CLOSE){
+            builderBubble.CloseSpeechbubble();
+        } else{
+            builderBubble.ToggleSpeechBubble();
+        }
+    }
+
+    private IEnumerator StartFirstBuilderDialogue(int seconds){
+        yield return new WaitForSecondsRealtime(seconds);
+        BuilderBubbleAction(SpeechBubbleAction.OPEN);
+    }
+
 }
 
     public enum SpeechBubbleAction{

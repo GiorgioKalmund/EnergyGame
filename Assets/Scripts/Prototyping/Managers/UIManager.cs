@@ -133,7 +133,6 @@ public class UIManager : MonoBehaviour
 
     private void SetDefaultCursorTextures()
     {
-        Debug.Log("Set default cursor!");
         currentCursorTexture = cursorDefaultTexture;
         currentCursorDownTexture = cursorDownTexture;
         Cursor.SetCursor(currentCursorTexture, Vector2.zero, CursorMode.Auto);
@@ -342,14 +341,6 @@ public class UIManager : MonoBehaviour
     public void HideDON()
     {
         donQuiotePanel.SetActive(false);
-    }
-
-    public void AddEndpointBanner(GameObject endpoint)
-    {
-        GameObject banner = Instantiate(bannerInstance, bannerParent.transform, false);
-        banner.transform.localScale = Vector3.one;
-        banner.GetComponent<EndpointBanner>().SetEndpoint(endpoint);
-        endpoint.GetComponentInChildren<Wandler>().AddBanner(banner.GetComponent<EndpointBanner>());
     }
 
 }

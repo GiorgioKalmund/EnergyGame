@@ -127,7 +127,6 @@ public class InputManager : MonoBehaviour
         float minDragSpeed = 0.06f;
 
         float adjustedDragSpeed = Mathf.Max(dragSpeed * normalizedDistance, minDragSpeed);
-        Debug.Log(adjustedDragSpeed);
         
         //WASD as input
         float moveX = Input.GetAxis("Horizontal") * adjustedDragSpeed;

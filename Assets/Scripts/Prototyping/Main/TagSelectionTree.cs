@@ -34,6 +34,11 @@ public class TagSelectionTree : MonoBehaviour
   private Action<InputAction.CallbackContext> showFinanceAction;
   private Action<InputAction.CallbackContext> collapseAllTagsAction;
 
+  [Header("Endpoint")] 
+  [SerializeField] private bool isEndpoint = false;
+
+  [SerializeField] private Sprite endpointBackdrop;
+
   private void Awake()
   {
     productionTag.type = TreeTagType.POWER;
@@ -93,6 +98,13 @@ public class TagSelectionTree : MonoBehaviour
     
     if (OverlaysDropdown.Instance)
       OverlaysDropdown.Instance.AddTag(this);
+
+    if (isEndpoint)
+    {
+      productionTag.GetComponent<Image>().sprite = endpointBackdrop;
+      productionTag.OpenSilently();
+    }
+     
   }
 
   private void Update()
@@ -102,6 +114,9 @@ public class TagSelectionTree : MonoBehaviour
 
   public void CollapseTree()
   {
+    if (isEndpoint)
+      return;
+    
     foreach (var tagElement in tags)
     {
       tagElement.Close(); 
@@ -138,6 +153,9 @@ public class TagSelectionTree : MonoBehaviour
   
   public void CloseTag(TreeTagType type)
   {
+    if (isEndpoint)
+      return;
+    
     if (type == TreeTagType.POWER)
       productionTag.Close();
     else if (type == TreeTagType.CO2)
@@ -166,6 +184,14 @@ public class TagSelectionTree : MonoBehaviour
     currentProductionText.text = $"{value:F2}MW";
   }
 
+  public void SetEndpointProductionText(float current, float goal)
+  {
+    if (!isEndpoint)
+      return;
+    
+    currentProductionText.text = $"{current:F0}MW / {goal:F0}MW";
+  }
+
   public bool IsExpanded()
   {
     return expanded;
@@ -179,6 +205,9 @@ public class TagSelectionTree : MonoBehaviour
 
   private void ToggleProductionTag()
   {
+    if (isEndpoint)
+      return;
+    
     productionTag.Toggle();
   }
   private void ToggleCo2Tag()

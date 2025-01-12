@@ -16,15 +16,20 @@ public class TagSelectionElement : MonoBehaviour
     open = false;
   }
 
-  public void Open()
+  public void OpenSilently()
   {
     if (open || !active)
       return;
     
     transform.DOScale(1f, animationDuration).SetEase(animationEase).SetRecyclable();
     GetComponent<Image>().DOFade(1f, animationDuration).SetEase(animationEase).SetRecyclable();
-    OverlaysDropdown.Instance.globallyActiveTypes.Add(type);
     open = true;
+  }
+
+  public void Open()
+  {
+    OpenSilently();
+    OverlaysDropdown.Instance.globallyActiveTypes.Add(type);
   }
 
   public void Close()

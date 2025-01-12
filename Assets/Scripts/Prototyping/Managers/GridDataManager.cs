@@ -159,8 +159,6 @@ public class GridDataManager : MonoBehaviour
                             instance.GetComponentInChildren<Wandler>().endpointDemand = LevelManager.Instance.endpointDemands[LevelManager.Instance.endpointsCount++];
                         else
                             Debug.LogError("GridDataManager: No LevelManager found!");
-                        
-                        UIManager.Instance.AddEndpointBanner(instance);
                     }
                     
                     TileData tileData = new TileData(sunlight, windSpeed, waterSpeed, coalAmount, placementType, new Vector2(x, y), null);

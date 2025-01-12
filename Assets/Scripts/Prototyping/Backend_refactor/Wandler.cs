@@ -5,6 +5,7 @@ using UnityEngine.Assertions.Must;
 
 public class Wandler : MonoBehaviour
 {
+    [Header("Wandler")]
     public GraphManager graphManager;
     public int InstanceID;
     [SerializeField]
@@ -15,15 +16,15 @@ public class Wandler : MonoBehaviour
     public EnergyChunk output;
     [SerializeField]
     public float efficiency;
+    public Wandler onStartConnectTo;
 
+    [Header("Endpoint")]
     [SerializeField]
     private bool Endpoint;
     private bool EndpointCompleted;
+    [SerializeField] TagSelectionTree endpointTree = null;
     public int endpointDemand;
-    public Wandler onStartConnectTo;
 
-    private EndpointBanner banner;
-    
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +41,10 @@ public class Wandler : MonoBehaviour
         if(onStartConnectTo != null){
             addInputWandler(onStartConnectTo);
         }
+        
+        if (Endpoint)
+            UpdateEndpointText(0);
+        
         //graphManager.printMatrix();
     }
 
@@ -67,6 +72,7 @@ public class Wandler : MonoBehaviour
         }
         input.Amount = inputAmt;
         //Debug.Log(InstanceID + " has an Input of: " + input.Amount);
+        
         return;
     }
     public float getOutput(){
@@ -80,21 +86,18 @@ public class Wandler : MonoBehaviour
         }
         output.Amount = input.Amount * efficiency;
         //Debug.Log(InstanceID + " has an Output of:" + output.Amount);
-        return input.Amount * efficiency / (numOfChildren == 0 ? 1 : numOfChildren);
-    }
-
-    public void AddBanner(EndpointBanner newBanner)
-    {
-        this.banner = newBanner;
-        UpdateEndpointText(0);
+        float result = input.Amount * efficiency / (numOfChildren == 0 ? 1 : numOfChildren);
+        UpdateEndpointText(result);
+        return result;
     }
 
     public void UpdateEndpointText(float value)
     {
        if (!Endpoint || EndpointCompleted)
            return;
+       
+       endpointTree.SetEndpointProductionText(value, endpointDemand);
         
-       banner.UpdateText(value, endpointDemand);
        if (value > endpointDemand)
        {
            int completed = LevelManager.Instance.CompleteEndpoint();

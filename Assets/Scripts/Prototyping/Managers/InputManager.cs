@@ -176,7 +176,7 @@ public class InputManager : MonoBehaviour
 
 
         // Rotation around pivot
-        if (Input.GetMouseButton(0)) // left mouse button for rotation
+        if (Input.GetMouseButton(2)) // left mouse button for rotation
         {
             float horizontalRotation = Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime;
             float verticalRotation = -Input.GetAxis("Mouse Y") * rotationSpeed * Time.deltaTime;

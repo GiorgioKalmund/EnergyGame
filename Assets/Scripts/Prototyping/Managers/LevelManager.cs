@@ -16,7 +16,7 @@ public class LevelManager : MonoBehaviour
     public float currentEnvironmentalImpact;
     [SerializeField] private float maxEnvironmentalImpact;
     [SerializeField] private bool demandMet = false;
-    private int endpointsCompleted= 0;
+    public int endpointsCompleted= 0;
     public int endpointsCount = 0;
     public static LevelManager Instance { get; private set; }
 
@@ -113,16 +113,29 @@ public class LevelManager : MonoBehaviour
         maxEnvironmentalImpact += increase;
     }
 
+    /// <summary>
+    /// Calls UI as well
+    /// </summary>
+    /// <returns>Number of completed endpoints</returns>
     public int CompleteEndpoint()
     {
         endpointsCompleted++;
-
+        UIManager.Instance.SetEndpointsCompleted(endpointsCompleted);
         if (endpointsCompleted == endpointsCount)
         {
             // TODO: Trigger Win action
             Debug.LogWarning("===GAME WON===");
         }
         
+        return endpointsCompleted;
+    }
+    /// <summary>
+    /// Calls UI as well
+    /// </summary>
+    /// <returns>Number of completed endpoints</returns>
+    public int UncompleteEndpoint(){
+        endpointsCompleted--;
+        UIManager.Instance.SetEndpointsCompleted(endpointsCompleted);
         return endpointsCompleted;
     }
 

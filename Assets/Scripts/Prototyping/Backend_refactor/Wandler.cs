@@ -109,9 +109,13 @@ public class Wandler : MonoBehaviour
         
        if (value > endpointDemand && !EndpointCompleted)
        {
-           int completed = LevelManager.Instance.CompleteEndpoint();
-           UIManager.Instance.SetEndpointsCompleted(completed);
+           LevelManager.Instance.CompleteEndpoint();
+           
            EndpointCompleted = true;
+       }
+       if(EndpointCompleted && value < endpointDemand){
+            LevelManager.Instance.UncompleteEndpoint();
+            EndpointCompleted = false;
        }
        
        // TODO: Update texts of all connected cables

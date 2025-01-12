@@ -27,12 +27,9 @@ public class PlacementManager : MonoBehaviour
     [SerializeField]private LayerMask waterLayer; 
     [SerializeField] private LayerMask blockedLayer;
 
-    [Header("Cable")] 
-    [SerializeField] private GameObject cablePrefab;
+    
 
-    [SerializeField] private float cableEffLossPerUnit = 0.04f;
-
-    private PowerCable lastPlacedCable;
+    
 
     // Cell Indicator
     [Header("Cell Indicator")]
@@ -63,7 +60,7 @@ public class PlacementManager : MonoBehaviour
 
     public bool Placing()
     {
-        return currentGameObject != null || lastPlacedBuilding != null && citySelectionActive;
+        return currentGameObject != null;
     }
 
     public void Abort()
@@ -74,17 +71,7 @@ public class PlacementManager : MonoBehaviour
             {
                ResetCurrentGameObject(); 
             }
-            else
-            {
-                lastPlacedBuilding.GetComponent<ProducerDescriptor>().Sell();
-                lastPlacedBuilding = null;
-                currentGameObject = null;
-                placingObjectIndex = -1;
-                cellSprite.color = spriteColorRegular;
-                cellIndicator.SetActive(false);
-                UIManager.Instance.ToggleConnectionModeIndicator(false);
-                InputManager.Instance.OnClicked -= SelectCity;
-            }
+            
             BuilderInventory.Instance.ShowInventory();
         }
     }
@@ -149,103 +136,72 @@ public class PlacementManager : MonoBehaviour
         {
             return;
         }
-        // After a building is placed, we want to select a city to connect
-        if (currentGameObject && !blocked)
-        {
-            
-            ProducerDescriptor producerDescriptor = currentGameObject.GetComponent<ProducerDescriptor>();
-            producerDescriptor.Place(lastHoveredTileData);
 
-            //insert into gridData array
-            Vector3 powerplantPos = producerDescriptor.gameObject.transform.position;
-            Vector3Int cellPos =Grid.WorldToCell(powerplantPos);
-            cellPos = GridDataManager.ConvertGridPosToArrayPos(cellPos);
-            cellPos.z = 1;
-             
-            GridDataManager.SetGridDataAtPos(cellPos,producerDescriptor.gameObject);
-            Debug.Log($"Inserted ${producerDescriptor.powerPlantType} onto ${cellPos}");
-
-            /* Handle Building */
-            lastPlacedBuilding = currentGameObject;
-            
-            /* Handle Tile */
-            lastHoveredTileData.setPlacementType(PlacementType.Blocked);
-            lastHoveredTileData.SetCurrentBuilding(producerDescriptor);
-            currentGameObject = null;
-
-            InputManager.Instance.OnClicked += SelectCity;
-            InputManager.Instance.OnClicked += StopPlacement;
-        }
-
-    }
-    private void SelectCity()
-    {
-        if (!citySelectionActive)
-        {
-            cellSprite.color = spriteColorRegular;
+        if(blocked || !currentGameObject){
             return;
         }
+        
 
-        if (!lastPlacedBuilding)
-        {
-            return;
-        }
-        ProducerDescriptor producerDescriptor = lastPlacedBuilding.GetComponent<ProducerDescriptor>();
-        RaycastHit hit;
 
-        if (Physics.Raycast(cellIndicator.transform.position + Vector3.up * 0.2f, Vector3.down, out hit, 10f))
-        {
-            Transform hitTransform = hit.transform;
-            if (hitTransform.GetComponent<TileDataWrapper>().tileData.GetCurrentPlacementType()== PlacementType.Endpoint) // City layer
-            {
-                citySelectionActive = false;
-                
-                //lastPlacedBuilding is the powerPlant
-                float productionValue = lastPlacedBuilding.GetComponentInChildren<Wandler>().generating;
-                
-                //Replacement of old modification using name
-                //Enum is found on the bottom of this script
-                switch(producerDescriptor.powerPlantType){
-                    case PowerPlantType.COALPLANT:
-                        productionValue *= lastHoveredTileData.coalAmount;
-                        break;
-                    case PowerPlantType.WINDMILL:
-                        productionValue *= lastHoveredTileData.windSpeed;
-                        break;
-                    case PowerPlantType.HYDROPOWER:
-                        productionValue *= lastHoveredTileData.waterSpeed;
-                        break;
-                    case PowerPlantType.SOLARPANEL:
-                        productionValue *= lastHoveredTileData.sunlightHours;
-                        break;
-                    default:
-                        Debug.LogWarning("powerPlantType enum not set in powerplant.");
-                        break;
-                }
-                Debug.Log(productionValue);
-                lastPlacedBuilding.GetComponentInChildren<Wandler>().generating = productionValue;
+        ProducerDescriptor producerDescriptor = currentGameObject.GetComponent<ProducerDescriptor>();
+        producerDescriptor.Place(lastHoveredTileData);
 
-                //reset CellIndicator
-                cellSprite.color = spriteColorRegular;
-                cellIndicator.SetActive(false);
-                UIManager.Instance.DeactivateConnectingMode();
-                InputManager.Instance.OnClicked -= SelectCity;
-                
-            }
-            else
-            {
-                Debug.Log("Please select a valid city.");
-                if (!_flickering)
-                {
-                    StartCoroutine(FlickerIndicator(spriteColorWarning));
-                }
-            }
-        }
-        else
+        
+
+        //insert into gridData array
+        Vector3 powerplantPos = producerDescriptor.gameObject.transform.position;
+        Vector3Int cellPos = Grid.WorldToCell(powerplantPos);
+        cellPos = GridDataManager.ConvertGridPosToArrayPos(cellPos);
+        cellPos.z = 1;
+        GridDataManager.SetGridDataAtPos(cellPos, producerDescriptor.gameObject);
+        
+
+        
+        
+
+        /* Handle Tile */
+        lastHoveredTileData.setPlacementType(PlacementType.Blocked);
+        lastHoveredTileData.SetCurrentBuilding(producerDescriptor);
+        
+
+
+        float productionValue = currentGameObject.GetComponentInChildren<Wandler>().generating;
+
+        //Replacement of old modification using name
+        //Enum is found on the bottom of this script
+        switch (producerDescriptor.powerPlantType)
         {
-            Debug.LogError("Raycast missed!");
+            case PowerPlantType.COALPLANT:
+                productionValue *= lastHoveredTileData.coalAmount;
+                break;
+            case PowerPlantType.WINDMILL:
+                productionValue *= lastHoveredTileData.windSpeed;
+                break;
+            case PowerPlantType.HYDROPOWER:
+                productionValue *= lastHoveredTileData.waterSpeed;
+                break;
+            case PowerPlantType.SOLARPANEL:
+                productionValue *= lastHoveredTileData.sunlightHours;
+                break;
+            default:
+                Debug.LogWarning("powerPlantType enum not set in powerplant.");
+                break;
         }
+        Debug.Log(productionValue);
+        currentGameObject.GetComponentInChildren<Wandler>().generating = productionValue;
+
+
+        currentGameObject = null;
+        //reset CellIndicator
+        cellSprite.color = spriteColorRegular;
+        cellIndicator.SetActive(false);
+        //UIManager.Instance.DeactivateConnectingMode();
+
+        //InputManager.Instance.OnClicked += StopPlacement;
+        InputManager.Instance.OnClicked -= PlaceStructure;
+        BuilderInventory.Instance.ShowInventory();
     }
+    
 
     private void ResetCurrentGameObject()
     {
@@ -301,7 +257,7 @@ public class PlacementManager : MonoBehaviour
         }  
         
         
-        // If we are placing 
+        // Powerplant has been selected from inventory and is glued to the mouse 
         if (currentGameObject && validNewPlacement)
         {
             

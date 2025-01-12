@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.EventSystems;
@@ -127,10 +128,12 @@ public class InputManager : MonoBehaviour
         float minDragSpeed = 0.06f;
 
         float adjustedDragSpeed = Mathf.Max(dragSpeed * normalizedDistance, minDragSpeed);
-        
+
         //WASD as input
-        float moveX = Input.GetAxis("Horizontal") * adjustedDragSpeed;
-        float moveZ = Input.GetAxis("Vertical") * adjustedDragSpeed;
+        //float moveX = Input.GetAxis("Horizontal") * adjustedDragSpeed;
+        //float moveZ = Input.GetAxis("Vertical") * adjustedDragSpeed;
+        float moveX = Mathf.Clamp(Input.GetAxis("Horizontal") * adjustedDragSpeed, -1f, 1f);
+        float moveZ = Mathf.Clamp(Input.GetAxis("Vertical") * adjustedDragSpeed, -1f, 1f);
 
         //relative movement 
         Vector3 forward = mainCamera.transform.forward;
@@ -153,6 +156,12 @@ public class InputManager : MonoBehaviour
         if (IsWithinValidGameField(new Vector3(pivot.transform.position.x, pivot.transform.position.y, newPosition.z)))
             constrainedPosition.z = newPosition.z;
 
+        //check if valid
+        if (float.IsNaN(newPosition.x) || float.IsNaN(newPosition.z))
+        {
+            return;
+        }
+
         // Update position if any axis is valid
         if (constrainedPosition != pivot.transform.position)
         {
@@ -160,6 +169,9 @@ public class InputManager : MonoBehaviour
             pivot.transform.position = constrainedPosition;
             mainCamera.transform.position = pivot.transform.position + cameraOffset;
         }
+
+
+
 
 
 

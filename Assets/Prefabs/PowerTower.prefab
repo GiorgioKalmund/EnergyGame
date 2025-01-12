@@ -261,7 +261,7 @@ GameObject:
   - component: {fileID: 2042713469456913020}
   m_Layer: 0
   m_Name: PowerTower
-  m_TagString: Untagged
+  m_TagString: PowerTower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -298,8 +298,10 @@ MonoBehaviour:
   InstanceID: 0
   generating: 0
   efficiency: 1
-  Endpoint: 0
   onStartConnectTo: {fileID: 0}
+  Endpoint: 0
+  endpointTree: {fileID: 0}
+  endpointDemand: 0
 --- !u!1 &3616719251694198224
 GameObject:
   m_ObjectHideFlags: 0

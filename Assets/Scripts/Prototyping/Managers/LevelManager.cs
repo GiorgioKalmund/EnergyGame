@@ -70,12 +70,16 @@ public class LevelManager : MonoBehaviour
     public void AddEnvironmentalImpact(float impact)
     {
         currentEnvironmentalImpact += impact;
+        if (currentEnvironmentalImpact > maxEnvironmentalImpact)
+            CharacterSpeechManager.Instance.Co2BubbleAction(SpeechBubbleAction.OPEN);
         UIManager.Instance.UpdateCurrentEnvironmentalImpact();
     }
 
     public void ReduceEnvironmentalImpact(float impact)
     {
         currentEnvironmentalImpact -= impact;
+        if (currentEnvironmentalImpact <= maxEnvironmentalImpact)
+            CharacterSpeechManager.Instance.Co2BubbleAction(SpeechBubbleAction.CLOSE);
         UIManager.Instance.UpdateCurrentEnvironmentalImpact();
     }
 

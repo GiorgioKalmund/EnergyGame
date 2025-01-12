@@ -65,17 +65,10 @@ public class CharacterSpeechManager : MonoBehaviour
 
     void Update()
     {
-        if(true == false && false == true){ //FIXME: Hardcoded
+        if(true == false && false == true)
+        { //FIXME: Hardcoded
             EndpointsBubbleAction(SpeechBubbleAction.OPEN);
         }
-        if(!co2Bubble.isOpen && LevelManager.Instance.currentEnvironmentalImpact > LevelManager.Instance.GetMaxEnvironmentalImpact()){
-            Co2BubbleAction(SpeechBubbleAction.OPEN);
-        }
-        if(!financeBubble.isOpen && BudgetManager.Instance.budget <0){
-            FinanceBubbleAction(SpeechBubbleAction.TOGGLE);
-        }
-        
-
     }
 }
 

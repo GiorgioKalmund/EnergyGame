@@ -282,6 +282,7 @@ public class UIManager : MonoBehaviour
         if (BudgetManager.Instance.GetBudget() < 0)
         {
             budgetText.color = insufficientBudgetColor;
+            CharacterSpeechManager.Instance.FinanceBubbleAction(SpeechBubbleAction.TOGGLE);
         }
         else
         {

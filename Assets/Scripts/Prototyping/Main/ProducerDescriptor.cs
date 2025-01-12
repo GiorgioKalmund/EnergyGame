@@ -37,7 +37,6 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
         {
             buildingName = gameObject.name;
         }
-
     }
 
     public void Start()
@@ -45,7 +44,7 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
         id = LevelManager.Instance.nextID;
         LevelManager.Instance.nextID += 1;
         connectedCables = new List<PowerCable>();
-
+        
         tagTree.Setup(this);
     }
 
@@ -61,6 +60,7 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
         placed = true;
         SetTile(tile);
         LevelManager.Instance.AddEnvironmentalImpact(environmentalImpact);
+        UpdateProductionTag();
     }
     public void Sell()
     {
@@ -224,7 +224,8 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
 
     public void UpdateProductionTag()
     {
-        tagTree.SetProductionText(currentProduction);
+        Wandler wandler = GetComponent<Wandler>();
+        tagTree.SetProductionText(wandler.output.Amount);
     }
 
 

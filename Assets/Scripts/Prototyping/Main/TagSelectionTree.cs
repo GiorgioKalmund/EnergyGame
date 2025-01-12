@@ -134,11 +134,11 @@ public class TagSelectionTree : MonoBehaviour
   public void ToggleTag(TreeTagType type)
   {
     if (type == TreeTagType.POWER && productionAvailable)
-      productionTag.Toggle();
+      ToggleProductionTag(); 
     else if (type == TreeTagType.CO2 && co2Available)
-      co2Tag.Toggle();
+      ToggleCo2Tag();
     else if (financeAvailable)
-      financeTag.Toggle();
+      ToggleFinanceTag();
   }
 
   public void OpenTag(TreeTagType type)

@@ -62,14 +62,6 @@ public class CharacterSpeechManager : MonoBehaviour
         else
             donBubble.ToggleSpeechBubble();
     }
-
-    void Update()
-    {
-        if(true == false && false == true)
-        { //FIXME: Hardcoded
-            EndpointsBubbleAction(SpeechBubbleAction.OPEN);
-        }
-    }
 }
 
     public enum SpeechBubbleAction{

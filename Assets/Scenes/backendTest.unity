@@ -1432,6 +1432,7 @@ MonoBehaviour:
   currentEnvironmentalImpact: 0
   maxEnvironmentalImpact: 200
   demandMet: 0
+  endpointsCompleted: 0
   endpointsCount: 0
   endpointDemands: 7800000046000000320000008200000050000000
   nextID: 0
@@ -1833,6 +1834,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: fd7552fd8bf33e841a98872aef1bcaf9, type: 3}
       propertyPath: m_Name
       value: B 7 Base Configuration
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fd7552fd8bf33e841a98872aef1bcaf9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

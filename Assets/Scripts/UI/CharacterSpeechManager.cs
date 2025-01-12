@@ -65,7 +65,7 @@ public class CharacterSpeechManager : MonoBehaviour
 
     void Update()
     {
-        if(true == false){ //FIXME: Hardcoded
+        if(true == false && false == true){ //FIXME: Hardcoded
             EndpointsBubbleAction(SpeechBubbleAction.OPEN);
         }
         if(!co2Bubble.isOpen && LevelManager.Instance.currentEnvironmentalImpact > LevelManager.Instance.GetMaxEnvironmentalImpact()){

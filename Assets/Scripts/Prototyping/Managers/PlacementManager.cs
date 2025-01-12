@@ -172,36 +172,17 @@ public class PlacementManager : MonoBehaviour
             lastHoveredTileData.setPlacementType(PlacementType.Blocked);
             lastHoveredTileData.SetCurrentBuilding(producerDescriptor);
             currentGameObject = null;
-            // Prepare for citySelection
-            //citySelectionActive = true;
-            //Debug.Log("Building placed. Please select a city.");
-            //cellSprite.color = spriteColorConnecting;
-            //UIManager.Instance.ActiveConnectingMode();
-            
-            // Instantiate new cable
-            /* GameObject cable = Instantiate(cablePrefab, lastPlacedBuilding.transform.position, Quaternion.identity);
-            lastPlacedCable = cable.GetComponent<PowerCable>();
-            producerDescriptor.AddCable(lastPlacedCable); */
 
             InputManager.Instance.OnClicked += SelectCity;
             InputManager.Instance.OnClicked += StopPlacement;
-            /* if(cable.GetComponent<Wandler>() != null){
-                Wandler cwandler = cable.GetComponent<Wandler>();
-                //Debug.Log("Got cable Wandler!");
-                cwandler.onStartConnectTo = lastPlacedBuilding.GetComponent<Wandler>();
-                //Debug.Log("Connected Cable to plant!");
-            } */
         }
 
     }
-    //Select City current is at layer 6 -> TODO: adding new layer and change it to the city layer
-    //TODO: while clicking on a powerPlant highlight the linked City, also opposite way
     private void SelectCity()
     {
         if (!citySelectionActive)
         {
             cellSprite.color = spriteColorRegular;
-            //UIManager.Instance.ToggleConnectionModeIndicator(false);
             return;
         }
 
@@ -218,15 +199,9 @@ public class PlacementManager : MonoBehaviour
             if (hitTransform.GetComponent<TileDataWrapper>().tileData.GetCurrentPlacementType()== PlacementType.Endpoint) // City layer
             {
                 citySelectionActive = false;
-                Vector3 cityPosition = cellIndicator.transform.position;
-                Vector3 buildingPosition = lastPlacedBuilding.transform.position;
-
-                //caculate the relative dis between city and powerPlant
-                float distance = Vector3.Distance(buildingPosition, cityPosition);
-
+                
                 //lastPlacedBuilding is the powerPlant
                 float productionValue = lastPlacedBuilding.GetComponentInChildren<Wandler>().generating;
-                
                 
                 //Replacement of old modification using name
                 //Enum is found on the bottom of this script
@@ -249,39 +224,6 @@ public class PlacementManager : MonoBehaviour
                 }
                 Debug.Log(productionValue);
                 lastPlacedBuilding.GetComponentInChildren<Wandler>().generating = productionValue;
-
-                //Debug.Log($"alpha = {lastHoveredTileData.waterSpeed}");
-
-                //cost for cable
-                // TODO: This is not being returned when sold
-                // BudgetManager.Instance.UseBudget(distance);
-
-                /* if(hitTransform.GetComponentInChildren<Wandler>() != null){
-                    //Debug.Log(hitTransform.GetComponentInChildren<Wandler>());
-                    Wandler endWandler = hitTransform.GetComponentInChildren<Wandler>();
-                    //TODO REMOVE Endpoint addition
-                    //GraphManager.Instance.Endpoints[GraphManager.Instance.numOfEndpoints++] = endWandler;
-                    //--------------------------------------
-                    lastPlacedCable.GetComponent<Wandler>().addOutputWandler(endWandler);
-                }
-                else{
-                    Debug.Log(hit.transform.name + " does not have the Wandler Component");
-                }
-                
-                float effectiveLoss = Mathf.Pow((1 - cableEffLossPerUnit), distance);
-                lastPlacedCable.GetComponentInChildren<Wandler>().efficiency = effectiveLoss;
-
-                //von Wandler ersetzt
-                distance *= effectiveLoss;
-                productionValue -= distance;
-                productionValue = Mathf.Max(0, productionValue);
-                producerDescriptor.SetProduction(productionValue);
-                LevelManager.Instance.AddProduce(productionValue);
-
-
-                lastPlacedCable.Place(); */
-
-                //Debug.Log($"City selected. Distance to building: {distance} units.");
 
                 //reset CellIndicator
                 cellSprite.color = spriteColorRegular;
@@ -399,9 +341,6 @@ public class PlacementManager : MonoBehaviour
     {
         return cellIndicator.transform;
     }
-    
-   
-
     
     IEnumerator FlickerIndicator(Color flickerColor)
     {

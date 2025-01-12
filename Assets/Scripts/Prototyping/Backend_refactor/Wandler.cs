@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -86,19 +87,27 @@ public class Wandler : MonoBehaviour
         }
         output.Amount = input.Amount * efficiency;
         //Debug.Log(InstanceID + " has an Output of:" + output.Amount);
-        float result = input.Amount * efficiency / (numOfChildren == 0 ? 1 : numOfChildren);
-        UpdateEndpointText(result);
+        float result;
+        if (Endpoint)
+        {
+            result = Math.Max(0, input.Amount* efficiency - endpointDemand) / (numOfChildren == 0 ? 1 : numOfChildren);
+        }
+        else
+        {
+            result = input.Amount * efficiency / (numOfChildren == 0 ? 1 : numOfChildren);
+        }
+        UpdateEndpointText(input.Amount *efficiency);
         return result;
     }
 
     public void UpdateEndpointText(float value)
     {
-       if (!Endpoint || EndpointCompleted)
+       if (!Endpoint)
            return;
        
        endpointTree.SetEndpointProductionText(value, endpointDemand);
         
-       if (value > endpointDemand)
+       if (value > endpointDemand && !EndpointCompleted)
        {
            int completed = LevelManager.Instance.CompleteEndpoint();
            UIManager.Instance.SetEndpointsCompleted(completed);

@@ -1,9 +1,10 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
 {
-    [Header("Info")] 
+    [Header("Info")]
     public string buildingName;
     public PowerPlantType powerPlantType;
     [SerializeField] private PlacementType placement;
@@ -18,18 +19,18 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
     public int id;
     [Tooltip("ID it is associated with inside the database")]
     public int instanceId;
-    
+
     [Header("UI & UX")]
     [SerializeField] private Sprite imageSprite;
-    
+
     [Header("Tile")]
     public TileData tileOn;
 
     public List<PowerCable> connectedCables;
-    
-    [Header("Tag")] 
+
+    [Header("Tag")]
     [SerializeField] private TagSelectionTree tagTree;
-    
+
     public void Awake()
     {
         if (buildingName == "")
@@ -38,13 +39,13 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
         }
 
     }
-    
+
     public void Start()
     {
         id = LevelManager.Instance.nextID;
         LevelManager.Instance.nextID += 1;
         connectedCables = new List<PowerCable>();
-         
+
         tagTree.Setup(this);
     }
 
@@ -63,21 +64,38 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
     }
     public void Sell()
     {
-       BudgetManager.Instance.Sell(cost);
-       tileOn.Reset();
-       LevelManager.Instance.ReduceProduce(currentProduction);
-       LevelManager.Instance.ReduceEnvironmentalImpact(environmentalImpact);
-       foreach (PowerCable cable in connectedCables)
-       {
-           cable.Sell();
-       }
-       
-       if (UIManager.Instance.Mode == UIState.DESTROYING) 
-           UIManager.Instance.ToggleDestructionMode();
-       
-       if (BuilderInventory.Instance)
-           BuilderInventory.Instance.AddSlotCapacity(1, instanceId);
-       Destroy();
+        BudgetManager.Instance.Sell(cost);
+        tileOn.Reset();
+
+        LevelManager.Instance.ReduceEnvironmentalImpact(environmentalImpact);
+
+        GraphManager g = GraphManager.Instance;
+        Wandler w = GetComponentInChildren<Wandler>();
+        List<Wandler> neighbors = new();
+        for (int i = 0; i < g.numOfWandler; i++)
+        {
+            if(g.Matrix[w.InstanceID, i] != 0 || g.Matrix[i, w.InstanceID] != 0){
+                neighbors.Add(g.wandlerArray[i]);
+            }
+        }
+
+        for(int j = 0; j < neighbors.Count; j++){
+            Wandler neighbor = neighbors.ElementAt(j);
+            //Destroy only surrounding power cables not power plants 
+            if(neighbor.gameObject.GetComponentInChildren<PowerCable>()){
+                g.RemoveWandler(neighbor);
+                Destroy(neighbor.gameObject);
+            }
+        }
+
+        GraphManager.Instance.RemoveWandler(GetComponent<Wandler>());
+
+        if (UIManager.Instance.Mode == UIState.DESTROYING)
+            UIManager.Instance.ToggleDestructionMode();
+
+        if (BuilderInventory.Instance)
+            BuilderInventory.Instance.AddSlotCapacity(1, instanceId);
+        Destroy();
     }
 
     public void Destroy()
@@ -106,7 +124,7 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
     {
         if (!placed)
             return;
-        
+
         UpdateProductionTag();
         if (tagTree)
         {
@@ -119,7 +137,7 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
     {
         if (!selected)
             return;
-        
+
         if (tagTree)
         {
             tagTree.CollapseTree();
@@ -136,7 +154,7 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
     {
         return this.maxProduction;
     }
-    
+
     public float GetCurrentProduction()
     {
         return this.currentProduction;
@@ -209,7 +227,7 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
         tagTree.SetProductionText(currentProduction);
     }
 
-  
+
 }
 
 

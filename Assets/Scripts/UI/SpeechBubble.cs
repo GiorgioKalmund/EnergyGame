@@ -1,9 +1,8 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
+using DG.Tweening;
 
 [RequireComponent(typeof(DialogueContainer))]
 public class SpeechBubble : MonoBehaviour
@@ -15,7 +14,12 @@ public class SpeechBubble : MonoBehaviour
     [SerializeField] public DialogueContainer DialogueContainer;
     [SerializeField] public DialogueObjectSetting dialogueSetting;
     private bool isOpen = false;
+    [SerializeField] private float animationTime = 0.3f;
 
+    private void Start()
+    {
+        transform.localScale = Vector3.zero;
+    }
 
     public void OpenSpeechbubble()
     {
@@ -25,6 +29,7 @@ public class SpeechBubble : MonoBehaviour
             Debug.LogWarning("Invalid Dialogue String in Speechbubble.");
             return;
         }
+        transform.DOScale(1f, animationTime);
         // only continue if dialogue is valid
         isOpen = true;
         textbox.text = nextText;
@@ -39,6 +44,7 @@ public class SpeechBubble : MonoBehaviour
             Debug.LogWarning("Tried to close Speechbubble that was not open.");
             return;
         }
+        transform.DOScale(0f, animationTime);
         isOpen = false;
         textbox.text = "";
         //Put animation to close the speechbubble here
@@ -81,7 +87,10 @@ public class SpeechBubble : MonoBehaviour
         return INVALID_DIALOGUE;
     }
 
-
+    private void OnDestroy()
+    {
+        DOTween.Kill(transform);
+    }
 }
 public enum DialogueObjectSetting
 {

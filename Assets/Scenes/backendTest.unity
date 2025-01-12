@@ -599,6 +599,22 @@ MonoBehaviour:
   prefab9: {fileID: 2643937061277584625, guid: 3f037ca6dec2e418b96937e8dc729f8d, type: 3}
   grid: {fileID: 936100650}
   tilesCenter: {fileID: 1879477452}
+  strength1: 0.55
+  strength2: 0.7
+  strength3: 0.85
+  strength4: 1
+  wind1: {r: 0.85490197, g: 0.5568628, b: 0.90588236, a: 1}
+  wind2: {r: 0.74509805, g: 0.18039216, b: 0.8392157, a: 1}
+  wind3: {r: 0.627451, g: 0, b: 0.78431374, a: 1}
+  wind4: {r: 0.4627451, g: 0, b: 0.7372549, a: 1}
+  sun1: {r: 0.9490196, g: 0.7411765, b: 0.11372549, a: 1}
+  sun2: {r: 0.9490196, g: 0.64705884, b: 0.08627451, a: 1}
+  sun3: {r: 0.9490196, g: 0.47058824, b: 0.047058824, a: 1}
+  sun4: {r: 0.8509804, g: 0.23921569, b: 0.015686275, a: 1}
+  water1: {r: 0.50980395, g: 0.7882353, b: 0.8509804, a: 1}
+  water2: {r: 0.18039216, g: 0.5176471, b: 0.6509804, a: 1}
+  water3: {r: 0.11372549, g: 0.32156864, b: 0.4509804, a: 1}
+  water4: {r: 0.039215688, g: 0.20392157, b: 0.34901962, a: 1}
 --- !u!4 &449172140
 Transform:
   m_ObjectHideFlags: 0
@@ -2619,7 +2635,7 @@ Transform:
   m_GameObject: {fileID: 1879477451}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8, y: 0, z: 8}
+  m_LocalPosition: {x: 7, y: 0, z: 7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

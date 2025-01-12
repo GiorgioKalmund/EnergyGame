@@ -50,6 +50,30 @@ public class GridDataManager : MonoBehaviour
     private static int textureWidth;
     private static int textureHeight;
 
+    private Color clearColor = Color.clear;
+    [Header("Overlay Colours")] 
+    public float strength1;
+    public float strength2;
+    public float strength3;
+    public float strength4;
+    [Header("WIND")] 
+    [SerializeField] private Color wind1 = Color.white;
+    [SerializeField] private Color wind2 = Color.white;
+    [SerializeField] private Color wind3 = Color.white;
+    [SerializeField] private Color wind4 = Color.white;
+
+    [Header("SUN")] 
+    [SerializeField] private Color sun1 = Color.white;
+    [SerializeField] private Color sun2 = Color.white;
+    [SerializeField] private Color sun3 = Color.white;
+    [SerializeField] private Color sun4 = Color.white;
+    
+    [Header("WATER")] 
+    [SerializeField] private Color water1 = Color.white;
+    [SerializeField] private Color water2 = Color.white;
+    [SerializeField] private Color water3 = Color.white;
+    [SerializeField] private Color water4 = Color.white;
+   
     /// <summary>
     /// 
     /// First index: x 
@@ -133,21 +157,46 @@ public class GridDataManager : MonoBehaviour
 
                     if (sunTexture)
                     {
-                        sunlight = sunTexture.GetPixel(x, y).a;
-                        
-                    }
-                    if (windTexture)
-                    {
-                        windSpeed = windTexture.GetPixel(x, y).a;
+                        var color  = sunTexture.GetPixel(x, y);
+                        if (color.Equals(sun1))
+                            sunlight = strength1;
+                        else if (color.Equals(sun2))
+                            sunlight = strength2;
+                        else if (color.Equals(sun3))
+                            sunlight = strength3;
+                        else if (color.Equals(sun4))
+                            sunlight = strength4;
+                        else sunlight = 0f;
                     }
                     if (waterTexture)
                     {
-                        waterSpeed = waterTexture.GetPixel(x, y).a;
+                        var color  = waterTexture.GetPixel(x, y);
+                        if (color.Equals(water1))
+                            waterSpeed = strength1;
+                        else if (color.Equals(water2))
+                            waterSpeed = strength2;
+                        else if (color.Equals(water3))
+                            waterSpeed = strength3;
+                        else if (color.Equals(water4))
+                            waterSpeed = strength4;
+                        else waterSpeed = 0f; 
+                    }
+                    if (windTexture)
+                    {
+                        var color  = windTexture.GetPixel(x, y);
+                        if (color.Equals(wind1))
+                            windSpeed = strength1;
+                        else if (color.Equals(wind2))
+                            windSpeed = strength2;
+                        else if (color.Equals(wind3))
+                            windSpeed = strength3;
+                        else if (color.Equals(wind4))
+                            windSpeed = strength4;
+                        else windSpeed = 0f;
                     }
                     if (coalTexture)
                     {
                         coalAmount = coalTexture.GetPixel(x, y).a;
-                        
                     }
 
                     //map each block with placementType

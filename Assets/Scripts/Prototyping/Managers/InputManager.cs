@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using Debug = UnityEngine.Debug;
 
 public class InputManager : MonoBehaviour
 {
@@ -34,7 +35,7 @@ public class InputManager : MonoBehaviour
 
     public event Action OnClicked;
 
-
+  
 
     public InputMap InputMap;
     private void Awake()
@@ -117,8 +118,8 @@ public class InputManager : MonoBehaviour
 
     private void move()
     {
-        if (IsPointOverUI())
-            return;
+        //if (IsPointOverUI())
+        //    return;
 
         float distanceToPivot = Vector3.Distance(mainCamera.transform.position, pivot.transform.position);
         float normalizedDistance = Mathf.InverseLerp(minZoom, maxZoom, distanceToPivot);
@@ -130,10 +131,9 @@ public class InputManager : MonoBehaviour
         float adjustedDragSpeed = Mathf.Max(dragSpeed * normalizedDistance, minDragSpeed);
 
         //WASD as input
-        //float moveX = Input.GetAxis("Horizontal") * adjustedDragSpeed;
-        //float moveZ = Input.GetAxis("Vertical") * adjustedDragSpeed;
         float moveX = Mathf.Clamp(Input.GetAxis("Horizontal") * adjustedDragSpeed, -1f, 1f);
         float moveZ = Mathf.Clamp(Input.GetAxis("Vertical") * adjustedDragSpeed, -1f, 1f);
+
 
         //relative movement 
         Vector3 forward = mainCamera.transform.forward;
@@ -159,6 +159,7 @@ public class InputManager : MonoBehaviour
         //check if valid
         if (float.IsNaN(newPosition.x) || float.IsNaN(newPosition.z))
         {
+            Debug.LogWarning("Invalid movement detected: NaN values encountered.");
             return;
         }
 

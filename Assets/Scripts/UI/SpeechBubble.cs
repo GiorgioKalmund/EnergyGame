@@ -44,7 +44,7 @@ public class SpeechBubble : MonoBehaviour
             Debug.LogWarning("Tried to close Speechbubble that was not open.");
             return;
         }
-        await transform.DOScale(0f, animationTime).SetDelay(10).AsyncWaitForCompletion();
+        await transform.DOScale(0f, animationTime).SetDelay(SPEECHBUBBLE_DURATION).AsyncWaitForCompletion();
         isOpen = false;
         textbox.text = "";
     }

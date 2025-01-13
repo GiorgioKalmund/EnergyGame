@@ -9,33 +9,24 @@ using UnityEngine.InputSystem;
 
 public class TagSelectionTree : MonoBehaviour
 {
-  [Header("Tags")] 
-  [SerializeField] private TagSelectionElement productionTag;
+  [Header("Tags")] [SerializeField] private TagSelectionElement productionTag;
   [SerializeField] private TagSelectionElement co2Tag;
   [SerializeField] private TagSelectionElement financeTag;
 
-  [Header("Availabilities")] 
-  public bool productionAvailable;
+  [Header("Availabilities")] public bool productionAvailable;
   public bool co2Available;
   public bool financeAvailable;
 
   private List<TagSelectionElement> tags;
   public bool expanded;
 
-  private InputMap inputMap;
-  
-  [Header("Values")]
-  [SerializeField] private TMP_Text currentProductionText;
+
+  [Header("Values")] [SerializeField] private TMP_Text currentProductionText;
   [SerializeField] private TMP_Text environmentalImpactText;
   [SerializeField] private TMP_Text financeText;
 
-  private Action<InputAction.CallbackContext> showPowerAction;
-  private Action<InputAction.CallbackContext> showCO2Action;
-  private Action<InputAction.CallbackContext> showFinanceAction;
-  private Action<InputAction.CallbackContext> collapseAllTagsAction;
 
-  [Header("Endpoint")] 
-  [SerializeField] private bool isEndpoint = false;
+  [Header("Endpoint")] [SerializeField] private bool isEndpoint = false;
 
   [SerializeField] private Sprite endpointBackdrop;
 
@@ -48,23 +39,11 @@ public class TagSelectionTree : MonoBehaviour
 
   private void OnEnable()
   {
-    
-    // Create a new map and subscribe every combo to it
-    inputMap = new InputMap();
-    inputMap.main.Enable();
+
 
     tags = new List<TagSelectionElement>() { productionTag, co2Tag, financeTag };
 
-    showPowerAction = ctx => { ToggleProductionTag(); };
-    showCO2Action = ctx => { ToggleCo2Tag(); };
-    showFinanceAction = ctx => { ToggleFinanceTag(); };
-    collapseAllTagsAction = ctx => { CollapseTree(); };
 
-    inputMap.main.ShowPower.performed += showPowerAction;
-    inputMap.main.ShowCO2.performed += showCO2Action;
-    inputMap.main.ShowFinance.performed += showFinanceAction;
-    inputMap.main.CollapseAllTags.performed += collapseAllTagsAction;
-    
     // Deactivate relevant tree elements
     productionTag.SetActive(productionAvailable);
     co2Tag.SetActive(co2Available);
@@ -72,22 +51,12 @@ public class TagSelectionTree : MonoBehaviour
 
   }
 
-  private void OnDisable()
-  {
-    // Unsubscribe and disable input for this specific instance 
-    inputMap.main.ShowPower.performed -= showPowerAction;
-    inputMap.main.ShowCO2.performed -= showCO2Action;
-    inputMap.main.ShowFinance.performed -= showFinanceAction;
-    inputMap.main.CollapseAllTags.performed -= collapseAllTagsAction;
-
-    inputMap.main.Disable();
-  }
 
   private void Start()
   {
     transform.parent.GetComponent<Canvas>().worldCamera = UIManager.Instance.sceneCamera;
-    RotateTowardsCamera(); 
-    
+    RotateTowardsCamera();
+
     var globallyActive = OverlaysDropdown.Instance.globallyActiveTypes;
     if (globallyActive.Contains(TreeTagType.POWER))
       productionTag.Open();
@@ -95,7 +64,7 @@ public class TagSelectionTree : MonoBehaviour
       co2Tag.Open();
     if (globallyActive.Contains(TreeTagType.FINANCE))
       financeTag.Open();
-    
+
     if (OverlaysDropdown.Instance)
       OverlaysDropdown.Instance.AddTag(this);
 
@@ -104,7 +73,7 @@ public class TagSelectionTree : MonoBehaviour
       productionTag.GetComponent<Image>().sprite = endpointBackdrop;
       productionTag.OpenSilently();
     }
-     
+
   }
 
   private void Update()
@@ -116,12 +85,24 @@ public class TagSelectionTree : MonoBehaviour
   {
     if (isEndpoint)
       return;
-    
+
     foreach (var tagElement in tags)
     {
-      tagElement.Close(); 
+      tagElement.Close();
     }
   }
+
+  public void CollapseTreeSilently()
+  {
+    if (isEndpoint)
+      return;
+
+    foreach (var tagElement in tags)
+    {
+      tagElement.CloseSilently();
+    }
+  }
+
   public void ExpandTree()
   {
     if (productionAvailable)
@@ -131,7 +112,18 @@ public class TagSelectionTree : MonoBehaviour
     if (financeAvailable)
       financeTag.Open();
   }
-  public void ToggleTag(TreeTagType type)
+
+  public void ExpandTreeSilently()
+  {
+    if (productionAvailable)
+      productionTag.OpenSilently();
+    if (co2Available)
+      co2Tag.OpenSilently();
+    if (financeAvailable)
+      financeTag.OpenSilently();
+  }
+
+public void ToggleTag(TreeTagType type)
   {
     if (type == TreeTagType.POWER && productionAvailable)
       ToggleProductionTag(); 

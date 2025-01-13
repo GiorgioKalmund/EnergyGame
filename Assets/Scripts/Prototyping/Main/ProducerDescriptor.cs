@@ -128,7 +128,7 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
         UpdateProductionTag();
         if (tagTree)
         {
-            tagTree.ExpandTree();
+            tagTree.ExpandTreeSilently();
         }
         selected = true;
     }
@@ -140,7 +140,7 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
 
         if (tagTree)
         {
-            tagTree.CollapseTree();
+            tagTree.CollapseTreeSilently();
         }
         selected = false;
     }

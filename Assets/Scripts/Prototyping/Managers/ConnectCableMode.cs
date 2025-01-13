@@ -128,6 +128,7 @@ public class ConnectCableMode : MonoBehaviour
         if(isStartpoint){
             isStartpoint = false;
         } else{
+            Debug.Log(endpoint.tag +":"+ endpoint.name);
             
             isStartpoint = true;
             if(startpoint == endpoint){
@@ -136,6 +137,9 @@ public class ConnectCableMode : MonoBehaviour
                 return;
             } else{
             PlaceCable();
+            if(endpoint.CompareTag("Endpoint")){
+                UIManager.Instance.DeactivateConnectingMode();
+            }
             }
             
         }

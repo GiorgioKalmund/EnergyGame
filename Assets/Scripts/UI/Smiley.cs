@@ -20,7 +20,7 @@ public class Smiley : MonoBehaviour
     private Expression prevExpression;
     private FaceRenderer model;
 
-    private bool insted = false;
+    private int insted = 0;
     void Start(){
         RawImage img = GetComponentInChildren<RawImage>();
         faceRenderer = Instantiate(faceRenderer, GetComponent<RectTransform>().transform.position, Quaternion.identity);
@@ -200,11 +200,17 @@ public class Smiley : MonoBehaviour
         prevExpression = expression;
     }
 
-    void LateUpdate(){
-        Vector3[] fourCornersArray = new Vector3[4];
-        GetComponent<RectTransform>().GetWorldCorners(fourCornersArray);
-        Debug.Log("VALLAHHHHHHHH    " + fourCornersArray[0]);
-        faceRenderer.transform.position = fourCornersArray[0];
+    void LateUpdate()
+    {
+        // Frame magic
+        if (insted < 3)
+            insted++;
+        if (insted == 3)
+        {
+            Vector3[] fourCornersArray = new Vector3[4];
+            GetComponent<RectTransform>().GetWorldCorners(fourCornersArray);
+            faceRenderer.transform.position = fourCornersArray[0];
+        }
     }
 }
 

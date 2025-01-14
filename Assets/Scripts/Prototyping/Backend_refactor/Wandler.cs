@@ -112,21 +112,35 @@ public class Wandler : MonoBehaviour
             for(int i = 0; i<graphManager.numOfWandler;i++){
                 if(graphManager.Matrix[InstanceID,i] == 1 || graphManager.Matrix[i,InstanceID] == 1){
                     if(graphManager.wandlerArray[i].distance == -1 || graphManager.wandlerArray[i].distance > distance+1){
-                        graphManager.wandlerArray[i].distance = distance+1;
+                        if(graphManager.wandlerArray[i].Endpoint == false){
+                            graphManager.wandlerArray[i].distance = distance+1;
+                        }
+                        else{
+                            graphManager.wandlerArray[i].distance = 0;
+                        }
                         graphManager.wandlerArray[i].calcDistance();
                     }
                 }
             }
+            //if(tagTree)
+                //tagTree.SetProductionText(distance);
     }
 
     public void recalcDirection(){
         visited = true;
             for(int i = 0; i<graphManager.numOfWandler;i++){
                 if(graphManager.Matrix[InstanceID,i] == 1 || graphManager.Matrix[i,InstanceID] == 1){
-                    if(graphManager.wandlerArray[i].distance > distance){
-                        graphManager.Matrix[InstanceID, i] = 0;
-                        graphManager.Matrix[i, InstanceID] = 1;
-                        graphManager.wandlerArray[i].recalcDirection();
+                    if(graphManager.wandlerArray[i].visited == false){
+                        if(graphManager.wandlerArray[i].distance > distance){
+                            graphManager.Matrix[InstanceID, i] = 0;
+                            graphManager.Matrix[i, InstanceID] = 1;
+                            graphManager.wandlerArray[i].recalcDirection();
+                        }
+                        else if(graphManager.wandlerArray[i].distance < distance){
+                            graphManager.Matrix[InstanceID, i] = 1;
+                            graphManager.Matrix[i, InstanceID] = 0;
+                            graphManager.wandlerArray[i].recalcDirection();
+                        }
                     }
                 }
             }

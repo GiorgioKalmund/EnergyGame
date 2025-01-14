@@ -64,6 +64,8 @@ public class GraphManager : MonoBehaviour
 
     [ContextMenu("Calculate Energy Grid")]
     public void calculateAll(){
+        calcDistance();
+        recalcDirection();
         float total = 0;
         for(int i  = 0; i < numOfEndpoints; i++){
             float output = Endpoints[i].getOutput();

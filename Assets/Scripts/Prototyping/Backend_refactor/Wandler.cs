@@ -45,6 +45,7 @@ public class Wandler : MonoBehaviour
         input = new EnergyChunk();
         output = new EnergyChunk();
 
+
         if(onStartConnectTo != null){
             addInputWandler(onStartConnectTo);
         }

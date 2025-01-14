@@ -158,7 +158,7 @@ public void ToggleTag(TreeTagType type)
 
   public void Setup(ProducerDescriptor descriptor)
   {
-    currentProductionText.text = $"{descriptor.GetMaxProduction()} MW";
+    //currentProductionText.text = $"{descriptor.GetMaxProduction()} MW";
     environmentalImpactText.text = $"{descriptor.GetEnvironmentalImpact()} CO2t";
     financeText.text = $"{descriptor.GetCost()}€";
     

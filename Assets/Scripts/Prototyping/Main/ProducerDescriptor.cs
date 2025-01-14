@@ -45,6 +45,7 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
         LevelManager.Instance.nextID += 1;
         connectedCables = new List<PowerCable>();
         
+        //maxProduction = GetComponent<Wandler>().generating;
         tagTree.Setup(this);
     }
 

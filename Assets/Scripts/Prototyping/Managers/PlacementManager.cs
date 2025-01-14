@@ -189,6 +189,7 @@ public class PlacementManager : MonoBehaviour
         }
         Debug.Log(productionValue);
         currentGameObject.GetComponentInChildren<Wandler>().generating = productionValue;
+        currentGameObject.GetComponentInChildren<Wandler>().tagTree.SetProductionText(productionValue);
 
 
         currentGameObject = null;

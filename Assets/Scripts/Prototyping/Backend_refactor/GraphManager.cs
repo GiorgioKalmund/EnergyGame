@@ -46,6 +46,8 @@ public class GraphManager : MonoBehaviour
             Matrix[wandler.InstanceID, i] = 0;
             Matrix[i, wandler.InstanceID] = 0;
         }
+        
+        Destroy(wandler.gameObject);
         calculateAll();
     }
 
@@ -80,7 +82,10 @@ public class GraphManager : MonoBehaviour
 
     public void calcDistance(){
         for(int i  = 0; i < numOfWandler; i++){
-            wandlerArray[i].distance = -1;
+            if(wandlerArray[i]){
+                wandlerArray[i].distance = -1;
+            }
+            
         }
         for(int i  = 0; i < numOfEndpoints; i++){
             Endpoints[i].distance = 0;
@@ -93,7 +98,10 @@ public class GraphManager : MonoBehaviour
             Endpoints[i].recalcDirection();
         }
         for(int i  = 0; i < numOfWandler; i++){
-            wandlerArray[i].visited = false;
+            if(wandlerArray[i]){
+                wandlerArray[i].visited = false;
+            }
+            
         }
     }
 }

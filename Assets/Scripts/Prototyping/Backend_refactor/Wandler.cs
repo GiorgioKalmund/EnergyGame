@@ -30,6 +30,7 @@ public class Wandler : MonoBehaviour
     public int endpointDemand;
     public int distance = -1;
     public bool visited = false;
+    public int overflowDistance = 10000000;
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +44,7 @@ public class Wandler : MonoBehaviour
 
         input = new EnergyChunk();
         output = new EnergyChunk();
+
 
         if(onStartConnectTo != null){
             addInputWandler(onStartConnectTo);
@@ -118,6 +120,9 @@ public class Wandler : MonoBehaviour
                         else{
                             graphManager.wandlerArray[i].distance = 0;
                         }
+                        if(graphManager.Matrix[i,InstanceID] == 1 && graphManager.wandlerArray[i].Endpoint){
+                            return;
+                        }
                         graphManager.wandlerArray[i].calcDistance();
                     }
                 }
@@ -130,13 +135,13 @@ public class Wandler : MonoBehaviour
         visited = true;
             for(int i = 0; i<graphManager.numOfWandler;i++){
                 if(graphManager.Matrix[InstanceID,i] == 1 || graphManager.Matrix[i,InstanceID] == 1){
-                    if(graphManager.wandlerArray[i].visited == false){
+                    if(graphManager.wandlerArray[i].visited == false && graphManager.wandlerArray[i].Endpoint == false && Endpoint == false){
                         if(graphManager.wandlerArray[i].distance > distance){
                             graphManager.Matrix[InstanceID, i] = 0;
                             graphManager.Matrix[i, InstanceID] = 1;
                             graphManager.wandlerArray[i].recalcDirection();
                         }
-                        else if(graphManager.wandlerArray[i].distance < distance){
+                        else if(graphManager.wandlerArray[i].distance < distance && graphManager.wandlerArray[i].Endpoint == false && Endpoint == false){
                             graphManager.Matrix[InstanceID, i] = 1;
                             graphManager.Matrix[i, InstanceID] = 0;
                             graphManager.wandlerArray[i].recalcDirection();

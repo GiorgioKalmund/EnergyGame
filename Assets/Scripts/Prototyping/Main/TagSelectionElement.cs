@@ -20,7 +20,7 @@ public class TagSelectionElement : MonoBehaviour
   {
     if (open || !active)
       return;
-    
+
     transform.DOScale(1f, animationDuration).SetEase(animationEase).SetRecyclable();
     GetComponent<Image>().DOFade(1f, animationDuration).SetEase(animationEase).SetRecyclable();
     open = true;
@@ -34,16 +34,21 @@ public class TagSelectionElement : MonoBehaviour
 
   public void Close()
   {
+    CloseSilently();
+    OverlaysDropdown.Instance.globallyActiveTypes.Remove(type);
+  }
+
+  public void CloseSilently(){
+    
     if (!open)
       return;
-    
+
     transform.DOScale(0f, animationDuration).SetEase(animationEase).SetRecyclable();
     GetComponent<Image>().DOFade(0f, animationDuration).SetEase(animationEase).SetRecyclable();
-    OverlaysDropdown.Instance.globallyActiveTypes.Remove(type);
     open = false;
   }
 
-  public void Toggle()
+public void Toggle()
   {
     if (open)
       Close();

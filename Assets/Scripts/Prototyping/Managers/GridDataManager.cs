@@ -73,6 +73,8 @@ public class GridDataManager : MonoBehaviour
     [SerializeField] private Color water2 = Color.white;
     [SerializeField] private Color water3 = Color.white;
     [SerializeField] private Color water4 = Color.white;
+
+    [SerializeField] private GameObject endpointPrefab;
    
     /// <summary>
     /// 
@@ -204,10 +206,12 @@ public class GridDataManager : MonoBehaviour
 
                     if (placementType == PlacementType.Endpoint)
                     {
+                        GameObject endpoint = Instantiate(endpointPrefab,new Vector3(x,PlacementManager.Instance.cellIndicatorPlacementY,y),Quaternion.identity);
                         if (LevelManager.Instance)
-                            instance.GetComponentInChildren<Wandler>().endpointDemand = LevelManager.Instance.endpointDemands[LevelManager.Instance.endpointsCount++];
+                            endpoint.GetComponentInChildren<Wandler>().endpointDemand = LevelManager.Instance.endpointDemands[LevelManager.Instance.endpointsCount++];
                         else
                             Debug.LogError("GridDataManager: No LevelManager found!");
+                        GridData[x,y,1] = endpoint;
                     }
                     
                     TileData tileData = new TileData(sunlight, windSpeed, waterSpeed, coalAmount, placementType, new Vector2(x, y), null);

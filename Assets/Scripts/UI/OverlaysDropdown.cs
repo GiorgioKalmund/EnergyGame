@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using DG.Tweening;
-using UnityEngine.Serialization;
+using UnityEngine.InputSystem;
 
 public class OverlaysDropdown : MonoBehaviour
 {
@@ -20,6 +20,16 @@ public class OverlaysDropdown : MonoBehaviour
    
    public static OverlaysDropdown Instance { get; private set; }
 
+  private InputMap inputMap;
+  private Action<InputAction.CallbackContext> showPowerAction;
+  private Action<InputAction.CallbackContext> showCO2Action;
+  private Action<InputAction.CallbackContext> showFinanceAction;
+  private Action<InputAction.CallbackContext> collapseAllTagsAction;
+
+  public bool PowerOpen { get; private set;  }
+  public bool Co2Open { get; private set;  }
+  public bool FinanceOpen { get; private set; }
+  
    private float resetYPosition;
 
    private void Awake()
@@ -41,7 +51,38 @@ public class OverlaysDropdown : MonoBehaviour
        {
            element.transform.localScale = Vector3.zero;
        }
+
+       PowerOpen = false;
+       Co2Open = false;
+       FinanceOpen = false;
    }
+
+   private void OnEnable()
+   {
+        // Create a new map and subscribe every combo to it
+        inputMap = new InputMap();
+        inputMap.main.Enable();
+        
+        showPowerAction = ctx => { ToggleAllTagsWithType(TreeTagType.POWER); };
+        showCO2Action = ctx => { ToggleAllTagsWithType(TreeTagType.CO2); };
+        showFinanceAction = ctx => { ToggleAllTagsWithType(TreeTagType.FINANCE); };
+        collapseAllTagsAction = ctx => { CollapseAllTags(); };
+
+        inputMap.main.ShowPower.performed += showPowerAction;
+        inputMap.main.ShowCO2.performed += showCO2Action;
+        inputMap.main.ShowFinance.performed += showFinanceAction;
+        inputMap.main.CollapseAllTags.performed += collapseAllTagsAction;
+    }
+    private void OnDisable()
+    {
+        // Unsubscribe and disable input for this specific instance 
+        inputMap.main.ShowPower.performed -= showPowerAction;
+        inputMap.main.ShowCO2.performed -= showCO2Action;
+        inputMap.main.ShowFinance.performed -= showFinanceAction;
+        inputMap.main.CollapseAllTags.performed -= collapseAllTagsAction;
+
+        inputMap.main.Disable();
+    }
 
    private void Start()
    {
@@ -123,9 +164,28 @@ public class OverlaysDropdown : MonoBehaviour
 
    public void ToggleAllTagsWithType(TreeTagType type)
    {
+       bool openTags = false;
+       if (type == TreeTagType.POWER)
+       {
+           PowerOpen = !PowerOpen;
+           openTags = PowerOpen;
+       }
+       else if (type == TreeTagType.CO2)
+       {
+           Co2Open = !Co2Open;
+           openTags = Co2Open;
+       }
+       else if (type == TreeTagType.FINANCE)
+       {
+           FinanceOpen = !FinanceOpen;
+           openTags = FinanceOpen;
+       }
        foreach (var tagTree in allTags)
        {
-           tagTree.ToggleTag(type);
+           if (openTags)
+            tagTree.OpenTag(type);
+           else
+               tagTree.CloseTag(type);
        }
    }
    
@@ -223,20 +283,6 @@ public class OverlaysDropdown : MonoBehaviour
    }
    
    
-  private void UpdateGlobalActiveList(TreeTagType type)
-  {
-    if (OverlaysDropdown.Instance.globallyActiveTypes.Contains(type))
-    {
-      Debug.Log("removing " + type);
-      OverlaysDropdown.Instance.globallyActiveTypes.Remove(type);
-    }
-    else
-    {
-      Debug.Log("adding " + type);
-      OverlaysDropdown.Instance.globallyActiveTypes.Add(type);
-    }
-  }
-
    private void OnDestroy()
    {
        DOTween.KillAll();

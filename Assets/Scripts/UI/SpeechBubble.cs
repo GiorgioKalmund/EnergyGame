@@ -34,23 +34,19 @@ public class SpeechBubble : MonoBehaviour
         isOpen = true;
         textbox.text = nextText;
         //Put animation to open the speechbubble here
-        StartCoroutine(CloseSpeechbubbleAfterTimeout(SPEECHBUBBLE_DURATION));
+        CloseSpeechbubble();
     }
 
-    public void CloseSpeechbubble()
+    public async void CloseSpeechbubble()
     {
         if (!isOpen)
         {
             Debug.LogWarning("Tried to close Speechbubble that was not open.");
             return;
         }
-        transform.DOScale(0f, animationTime);
+        await transform.DOScale(0f, animationTime).SetDelay(SPEECHBUBBLE_DURATION).AsyncWaitForCompletion();
         isOpen = false;
         textbox.text = "";
-        //Put animation to close the speechbubble here
-
-        //Avoids calling close twice
-        StopAllCoroutines();
     }
 
     //Call this in the smiley button
@@ -65,11 +61,6 @@ public class SpeechBubble : MonoBehaviour
         {
             CloseSpeechbubble();
         }
-    }
-    private IEnumerator CloseSpeechbubbleAfterTimeout(float seconds)
-    {
-        yield return new WaitForSeconds(seconds);
-        CloseSpeechbubble();
     }
 
     private string GetSpeechBubbleText(int index = -1) //optional

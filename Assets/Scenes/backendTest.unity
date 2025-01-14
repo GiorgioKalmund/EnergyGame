@@ -615,6 +615,7 @@ MonoBehaviour:
   water2: {r: 0.18039216, g: 0.5176471, b: 0.6509804, a: 1}
   water3: {r: 0.11372549, g: 0.32156864, b: 0.4509804, a: 1}
   water4: {r: 0.039215688, g: 0.20392157, b: 0.34901962, a: 1}
+  endpointPrefab: {fileID: 3594782725111630582, guid: 59aaded9b157249f9b5052ca9acf8955, type: 3}
 --- !u!4 &449172140
 Transform:
   m_ObjectHideFlags: 0
@@ -1855,12 +1856,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 8.019038, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 1413452169}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!23 &1413452169
 MeshRenderer:
   m_ObjectHideFlags: 0

@@ -37,7 +37,6 @@ public class PlacementManager : MonoBehaviour
     [SerializeField] private Color spriteColorRegular;
     [SerializeField] private Color spriteColorWarning;
     [SerializeField] private Color spriteColorConnecting;
-    private bool _flickering;
 
     [CanBeNull] private GameObject currentGameObject;
     [SerializeField] private bool blocked;
@@ -185,8 +184,49 @@ public class PlacementManager : MonoBehaviour
         
 
 
-        float productionValue = currentGameObject.GetComponentInChildren<Wandler>().generating;
+        //float productionValue = currentGameObject.GetComponentInChildren<Wandler>().generating;
 
+        //Replacement of old modification using name
+        //Enum is found on the bottom of this script
+        /* switch (producerDescriptor.powerPlantType)
+        {
+            case PowerPlantType.COALPLANT:
+                productionValue *= lastHoveredTileData.coalAmount;
+                break;
+            case PowerPlantType.WINDMILL:
+                productionValue *= lastHoveredTileData.windSpeed;
+                break;
+            case PowerPlantType.HYDROPOWER:
+                productionValue *= lastHoveredTileData.waterSpeed;
+                break;
+            case PowerPlantType.SOLARPANEL:
+                productionValue *= lastHoveredTileData.sunlightHours;
+                break;
+            default:
+                Debug.LogWarning("powerPlantType enum not set in powerplant.");
+                break;
+        }
+        Debug.Log(productionValue);
+        currentGameObject.GetComponentInChildren<Wandler>().generating = productionValue;
+        currentGameObject.GetComponentInChildren<Wandler>().tagTree.SetProductionText(productionValue); */
+        SetGeneratingValue();
+
+        currentGameObject = null;
+        //reset CellIndicator
+        cellSprite.color = spriteColorRegular;
+        cellIndicator.SetActive(false);
+        //UIManager.Instance.DeactivateConnectingMode();
+
+        //InputManager.Instance.OnClicked += StopPlacement;
+        InputManager.Instance.OnClicked -= PlaceStructure;
+        BuilderInventory.Instance.ShowInventory();
+    }
+    private void SetGeneratingValue(){
+        if(!currentGameObject || lastHoveredTileData == null){
+            return;
+        }
+        float productionValue = currentGameObject.GetComponentInChildren<Wandler>().generating;
+        ProducerDescriptor producerDescriptor = currentGameObject.GetComponent<ProducerDescriptor>();
         //Replacement of old modification using name
         //Enum is found on the bottom of this script
         switch (producerDescriptor.powerPlantType)
@@ -207,22 +247,9 @@ public class PlacementManager : MonoBehaviour
                 Debug.LogWarning("powerPlantType enum not set in powerplant.");
                 break;
         }
-        Debug.Log(productionValue);
         currentGameObject.GetComponentInChildren<Wandler>().generating = productionValue;
         currentGameObject.GetComponentInChildren<Wandler>().tagTree.SetProductionText(productionValue);
-
-
-        currentGameObject = null;
-        //reset CellIndicator
-        cellSprite.color = spriteColorRegular;
-        cellIndicator.SetActive(false);
-        //UIManager.Instance.DeactivateConnectingMode();
-
-        //InputManager.Instance.OnClicked += StopPlacement;
-        InputManager.Instance.OnClicked -= PlaceStructure;
-        BuilderInventory.Instance.ShowInventory();
     }
-    
 
     private void ResetCurrentGameObject()
     {
@@ -295,7 +322,7 @@ public class PlacementManager : MonoBehaviour
             
             PlacementType currentPlacementType = ProducerDescriptor.GetPlacementType(); 
             //RaycastHit hit;
-            if (Physics.Raycast( cellIndicator.transform.position + Vector3.up * 0.2f, Vector3.down, out hit, 10f))
+            /* if (Physics.Raycast( cellIndicator.transform.position + Vector3.up * 0.2f, Vector3.down, out hit, 10f))
             {
                 ground = hit.transform.gameObject;
                 if (ground.GetComponent<TileDataWrapper>())
@@ -307,7 +334,14 @@ public class PlacementManager : MonoBehaviour
                     cellSprite.color = blocked ? spriteColorWarning : spriteColorRegular;
                 }
                 
+            } */
+            Vector3Int arrPosition= GridDataManager.GetArrayPositionAtMousePosition();
+            if(arrPosition.z>=0){
+                lastHoveredTileData = GridDataManager.GetGridDataAtPos(arrPosition).GetComponent<TileDataWrapper>().tileData;
             }
+            PlacementType groundType = lastHoveredTileData.GetCurrentPlacementType();
+            blocked = !currentPlacementType.Equals(groundType);
+                cellSprite.color = blocked ? spriteColorWarning : spriteColorRegular;
         }
         else if (!citySelectionActive) // If we are strolling & selecting
         {
@@ -323,13 +357,13 @@ public class PlacementManager : MonoBehaviour
     
     IEnumerator FlickerIndicator(Color flickerColor)
     {
-        _flickering = true;
         Color old = cellSprite.color;
         cellSprite.color = flickerColor;
         yield return new WaitForSeconds(0.05f);
         cellSprite.color = old;
-        _flickering = false;
     }
+    
+    
 }
 public enum PowerPlantType{
     NOTSELECTED,

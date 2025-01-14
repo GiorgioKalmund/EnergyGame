@@ -729,6 +729,7 @@ MonoBehaviour:
   endpointDemand: 0
   distance: -1
   visited: 0
+  overflowDistance: 10000000
 --- !u!1 &4860439438263813055
 GameObject:
   m_ObjectHideFlags: 0

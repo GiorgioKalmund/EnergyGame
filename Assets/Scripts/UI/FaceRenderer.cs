@@ -29,7 +29,7 @@ public class FaceRenderer : MonoBehaviour
 
     public void setTexture()
     {
-        texture = new RenderTexture(100, 100, 16, RenderTextureFormat.ARGB32);
+        texture = new RenderTexture(256, 256, 16, RenderTextureFormat.ARGB32);
         texture.Create();
         GetComponentInChildren<Camera>().targetTexture = texture;
         GetComponentInChildren<Camera>().targetDisplay = -1;

@@ -177,7 +177,7 @@ public class InputManager : MonoBehaviour
 
 
         // Rotation around pivot
-        if (Input.GetMouseButton(2)) // left mouse button for rotation
+        if (Input.GetMouseButton(2) && !IsPointOverUI()) // left mouse button for rotation
         {
             float horizontalRotation = Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime;
             float verticalRotation = -Input.GetAxis("Mouse Y") * rotationSpeed * Time.deltaTime;
@@ -200,9 +200,6 @@ public class InputManager : MonoBehaviour
 
     private void zoom()
     {
-        if (IsPointOverUI())
-            return;
-
         float scrollDelta = Input.GetAxis("Mouse ScrollWheel");
         // Ignore small changes
         if (Mathf.Abs(scrollDelta) > Mathf.Epsilon)

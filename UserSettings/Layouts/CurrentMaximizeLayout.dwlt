@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 65190
+  controlID: 70628
   draggingID: 0
 --- !u!114 &2
 MonoBehaviour:
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 65191
+  controlID: 70629
   draggingID: 0
 --- !u!114 &4
 MonoBehaviour:
@@ -174,7 +174,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 65192
+  controlID: 70630
   draggingID: 0
 --- !u!114 &5
 MonoBehaviour:
@@ -239,9 +239,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 90dc0f00
-      m_LastClickedID: 1039504
-      m_ExpandedIDs: fe22f2ff0c23f2ff8adc0f0094dc0f00
+      m_SelectedIDs: 80661000
+      m_LastClickedID: 1074816
+      m_ExpandedIDs: 3addf1ff666510007c651000b6651000ea651000226610002a661000ae661000de6610003c671000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -635,9 +635,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 404.9499, y: 216.74675, z: 0.020808237}
+    m_Target: {x: 122.5772, y: 657.4827, z: 0.61446494}
     speed: 2
-    m_Value: {x: 404.9499, y: 216.74675, z: 0.020808237}
+    m_Value: {x: 122.5772, y: 657.4827, z: 0.61446494}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -687,9 +687,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 67.74153
+    m_Target: 134.38083
     speed: 2
-    m_Value: 67.74153
+    m_Value: 134.38083
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -786,7 +786,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs/UI
+    - Assets/Art&UI/Final Sprites
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -794,15 +794,15 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefabs/UI
+  - Assets/Art&UI/Final Sprites
   m_LastFoldersGridSize: -1
   m_LastProjectPath: /Users/giorgiokalmund/Unity/EnergyGame
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 176.50693}
-    m_SelectedIDs: ecd40000
-    m_LastClickedID: 54508
+    scrollPos: {x: 0, y: 72.50333}
+    m_SelectedIDs: 20610400
+    m_LastClickedID: 287008
     m_ExpandedIDs: 00000000e2d40000e4d40000e6d40000e8d40000ead40000ecd40000eed4000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -856,8 +856,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 90dc0f00
-    m_LastClickedInstanceID: 1039504
+    m_SelectedInstanceIDs: 80661000
+    m_LastClickedInstanceID: 1074816
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
@@ -940,8 +940,8 @@ MonoBehaviour:
     y: 0
     width: 340.5
     height: 780
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}

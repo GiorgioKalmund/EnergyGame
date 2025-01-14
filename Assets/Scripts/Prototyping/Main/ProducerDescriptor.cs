@@ -77,6 +77,7 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
         {
             if(g.Matrix[w.InstanceID, i] != 0 || g.Matrix[i, w.InstanceID] != 0){
                 neighbors.Add(g.wandlerArray[i]);
+                
             }
         }
 
@@ -85,17 +86,19 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
             //Destroy only surrounding power cables not power plants 
             if(neighbor.gameObject.GetComponentInChildren<PowerCable>()){
                 g.RemoveWandler(neighbor);
-                Destroy(neighbor.gameObject);
+                // Destroy(neighbor.gameObject);
             }
         }
 
         GraphManager.Instance.RemoveWandler(GetComponent<Wandler>());
-
+        
         if (UIManager.Instance.Mode == UIState.DESTROYING)
             UIManager.Instance.ToggleDestructionMode();
 
         if (BuilderInventory.Instance)
             BuilderInventory.Instance.AddSlotCapacity(1, instanceId);
+
+        tileOn.currentPlacementType = PlacementType.Default;
         Destroy();
     }
 

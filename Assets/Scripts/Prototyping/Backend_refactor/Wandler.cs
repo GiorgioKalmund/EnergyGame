@@ -105,7 +105,7 @@ public class Wandler : MonoBehaviour
             result = input.Amount * efficiency / (numOfChildren == 0 ? 1 : numOfChildren);
         }
         UpdateEndpointText(input.Amount *efficiency);
-        if(tagTree)
+        if(tagTree&&generating==0)
             tagTree.SetProductionText(result);
         return result;
     }

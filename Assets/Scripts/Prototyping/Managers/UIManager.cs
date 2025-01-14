@@ -289,7 +289,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            budgetText.color = standardBudgetColor;
+            budgetText.color = new Color(0.21f, 0.21f, 0.21f);
         }
     }
 

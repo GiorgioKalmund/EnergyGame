@@ -1,4 +1,7 @@
+using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class Smiley : MonoBehaviour
@@ -16,9 +19,11 @@ public class Smiley : MonoBehaviour
     private RenderTexture tex;
     private Expression prevExpression;
     private FaceRenderer model;
+
+    private bool insted = false;
     void Start(){
         RawImage img = GetComponentInChildren<RawImage>();
-        faceRenderer = Instantiate(faceRenderer, transform.position, Quaternion.identity);
+        faceRenderer = Instantiate(faceRenderer, GetComponent<RectTransform>().transform.position, Quaternion.identity);
         faceRenderer.GetComponent<FaceRenderer>().setTexture();
         model = faceRenderer.GetComponent<FaceRenderer>();
         tex = faceRenderer.GetComponent<FaceRenderer>().texture;
@@ -193,6 +198,13 @@ public class Smiley : MonoBehaviour
         }
 
         prevExpression = expression;
+    }
+
+    void LateUpdate(){
+        Vector3[] fourCornersArray = new Vector3[4];
+        GetComponent<RectTransform>().GetWorldCorners(fourCornersArray);
+        Debug.Log("VALLAHHHHHHHH    " + fourCornersArray[0]);
+        faceRenderer.transform.position = fourCornersArray[0];
     }
 }
 

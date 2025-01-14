@@ -3,21 +3,33 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 public class FaceRenderer : MonoBehaviour
 {
     public GameObject character;
     public RenderTexture texture;
     GameObject c;
+    private Vector3 mousePos;
     
     void Start(){
-        transform.position = new Vector3(100000 + UnityEngine.Random.Range(-1000, 1000), 100000 + UnityEngine.Random.Range(-1000, 1000),100000 + UnityEngine.Random.Range(-1000, 1000));
+        //transform.position += new Vector3(100000, 100000, 100000);
         texture.name = UnityEngine.Random.Range(0,9999).ToString();
+    }
+
+    void Update(){
+        mousePos = Input.mousePosition;
+        //mousePos += new Vector3(100000, 100000, 100000);;
+        mousePos.z -= 1000;
+
+        c.transform.LookAt(mousePos);
+        //c.transform.Rotate(0,90,0);
     }
 
     public void setTexture()
     {
-        texture = new RenderTexture(256, 256, 16, RenderTextureFormat.ARGB32);
+        texture = new RenderTexture(100, 100, 16, RenderTextureFormat.ARGB32);
         texture.Create();
         GetComponentInChildren<Camera>().targetTexture = texture;
         GetComponentInChildren<Camera>().targetDisplay = -1;

@@ -218,7 +218,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7116951200478528478}
   - component: {fileID: 3079120604941524442}
-  - component: {fileID: 1679285532000828047}
   m_Layer: 5
   m_Name: Settings Panel
   m_TagString: Untagged
@@ -238,6 +237,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 4591149280142689126}
   - {fileID: 671279255605643146}
   - {fileID: 8912009937982601429}
   - {fileID: 6321251179619150252}
@@ -256,13 +256,58 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4425189649606151337}
   m_CullTransparentMesh: 1
---- !u!114 &1679285532000828047
+--- !u!1 &8086244926997454739
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4591149280142689126}
+  - component: {fileID: 3593196300031707408}
+  - component: {fileID: 5250108165179351745}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4591149280142689126
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8086244926997454739}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 7116951200478528478}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 19200, y: 10800}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &3593196300031707408
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8086244926997454739}
+  m_CullTransparentMesh: 1
+--- !u!114 &5250108165179351745
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4425189649606151337}
+  m_GameObject: {fileID: 8086244926997454739}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -276,8 +321,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 19d4929d980ab409c806d8b182022a5d, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -365,18 +410,18 @@ PrefabInstance:
     - target: {fileID: 953073986017558245, guid: 4aecbcbe53c6d444d884d5921c0ce807, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 2013690793, guid: eb11d983ab3e54a1e93173ab1ca1de79, type: 3}
+      objectReference: {fileID: 21300000, guid: fbccb84bdbd3442cd8f78c70744bb412, type: 3}
     - target: {fileID: 953073986017558245, guid: 4aecbcbe53c6d444d884d5921c0ce807, type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 953073986017558245, guid: 4aecbcbe53c6d444d884d5921c0ce807, type: 3}
       propertyPath: m_Color.g
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 953073986017558245, guid: 4aecbcbe53c6d444d884d5921c0ce807, type: 3}
       propertyPath: m_Color.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5940689513532083307, guid: 4aecbcbe53c6d444d884d5921c0ce807, type: 3}
       propertyPath: m_Pivot.x
@@ -461,14 +506,14 @@ PrefabInstance:
     - target: {fileID: 7239992468924636790, guid: 4aecbcbe53c6d444d884d5921c0ce807, type: 3}
       propertyPath: image
       value: 
-      objectReference: {fileID: 21300000, guid: d8c7b17b0eb810144bbfcde5f95f7dcb, type: 3}
+      objectReference: {fileID: 21300000, guid: fbccb84bdbd3442cd8f78c70744bb412, type: 3}
     - target: {fileID: 7239992468924636790, guid: 4aecbcbe53c6d444d884d5921c0ce807, type: 3}
       propertyPath: description
       value: Controls
       objectReference: {fileID: 0}
     - target: {fileID: 7658519564356499178, guid: 4aecbcbe53c6d444d884d5921c0ce807, type: 3}
       propertyPath: m_Name
-      value: Settings Button (2)
+      value: Controls Button
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -506,7 +551,7 @@ PrefabInstance:
     - target: {fileID: 953073986017558245, guid: 4aecbcbe53c6d444d884d5921c0ce807, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: d8c7b17b0eb810144bbfcde5f95f7dcb, type: 3}
+      objectReference: {fileID: 21300000, guid: 2959ada7cb34c43a59be065ddcd81a5c, type: 3}
     - target: {fileID: 5940689513532083307, guid: 4aecbcbe53c6d444d884d5921c0ce807, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -590,14 +635,14 @@ PrefabInstance:
     - target: {fileID: 7239992468924636790, guid: 4aecbcbe53c6d444d884d5921c0ce807, type: 3}
       propertyPath: image
       value: 
-      objectReference: {fileID: 21300000, guid: d8c7b17b0eb810144bbfcde5f95f7dcb, type: 3}
+      objectReference: {fileID: 21300000, guid: 2959ada7cb34c43a59be065ddcd81a5c, type: 3}
     - target: {fileID: 7239992468924636790, guid: 4aecbcbe53c6d444d884d5921c0ce807, type: 3}
       propertyPath: description
       value: Restart
       objectReference: {fileID: 0}
     - target: {fileID: 7658519564356499178, guid: 4aecbcbe53c6d444d884d5921c0ce807, type: 3}
       propertyPath: m_Name
-      value: Settings Button (1)
+      value: Restart Button
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -631,7 +676,7 @@ PrefabInstance:
     - target: {fileID: 953073986017558245, guid: 4aecbcbe53c6d444d884d5921c0ce807, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 610d5b2fd10fab748a47a188031358bb, type: 3}
+      objectReference: {fileID: 21300000, guid: 0cc31535619d34f6389a2ed6b55f3d0c, type: 3}
     - target: {fileID: 5940689513532083307, guid: 4aecbcbe53c6d444d884d5921c0ce807, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -715,14 +760,14 @@ PrefabInstance:
     - target: {fileID: 7239992468924636790, guid: 4aecbcbe53c6d444d884d5921c0ce807, type: 3}
       propertyPath: image
       value: 
-      objectReference: {fileID: 21300000, guid: 610d5b2fd10fab748a47a188031358bb, type: 3}
+      objectReference: {fileID: 21300000, guid: 0cc31535619d34f6389a2ed6b55f3d0c, type: 3}
     - target: {fileID: 7239992468924636790, guid: 4aecbcbe53c6d444d884d5921c0ce807, type: 3}
       propertyPath: description
       value: Highscore
       objectReference: {fileID: 0}
     - target: {fileID: 7658519564356499178, guid: 4aecbcbe53c6d444d884d5921c0ce807, type: 3}
       propertyPath: m_Name
-      value: Settings Button (3)
+      value: Highscore Button
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -760,7 +805,7 @@ PrefabInstance:
     - target: {fileID: 953073986017558245, guid: 4aecbcbe53c6d444d884d5921c0ce807, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 7eef58be273a34c719ea7d77e480ad16, type: 3}
+      objectReference: {fileID: 21300000, guid: 1e9920c5a112c4a69a26c383500511d6, type: 3}
     - target: {fileID: 5940689513532083307, guid: 4aecbcbe53c6d444d884d5921c0ce807, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -844,14 +889,14 @@ PrefabInstance:
     - target: {fileID: 7239992468924636790, guid: 4aecbcbe53c6d444d884d5921c0ce807, type: 3}
       propertyPath: image
       value: 
-      objectReference: {fileID: 21300000, guid: 7eef58be273a34c719ea7d77e480ad16, type: 3}
+      objectReference: {fileID: 21300000, guid: 1e9920c5a112c4a69a26c383500511d6, type: 3}
     - target: {fileID: 7239992468924636790, guid: 4aecbcbe53c6d444d884d5921c0ce807, type: 3}
       propertyPath: description
       value: Karte
       objectReference: {fileID: 0}
     - target: {fileID: 7658519564356499178, guid: 4aecbcbe53c6d444d884d5921c0ce807, type: 3}
       propertyPath: m_Name
-      value: Settings Button
+      value: Map Button
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

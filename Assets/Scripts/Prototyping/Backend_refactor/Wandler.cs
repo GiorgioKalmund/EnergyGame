@@ -19,12 +19,17 @@ public class Wandler : MonoBehaviour
     public float efficiency;
     public Wandler onStartConnectTo;
 
+    [Header("Tag Tree")]
+    public TagSelectionTree tagTree;
+
     [Header("Endpoint")]
     [SerializeField]
     private bool Endpoint;
     private bool EndpointCompleted;
     [SerializeField] TagSelectionTree endpointTree = null;
     public int endpointDemand;
+    public int distance = -1;
+    public bool visited = false;
 
     // Start is called before the first frame update
     void Start()
@@ -90,6 +95,7 @@ public class Wandler : MonoBehaviour
         float result;
         if (Endpoint)
         {
+            //Output overflow
             result = Math.Max(0, input.Amount* efficiency - endpointDemand) / (numOfChildren == 0 ? 1 : numOfChildren);
         }
         else
@@ -97,13 +103,41 @@ public class Wandler : MonoBehaviour
             result = input.Amount * efficiency / (numOfChildren == 0 ? 1 : numOfChildren);
         }
         UpdateEndpointText(input.Amount *efficiency);
+        if(tagTree)
+            tagTree.SetProductionText(result);
         return result;
+    }
+
+    public void calcDistance(){
+            for(int i = 0; i<graphManager.numOfWandler;i++){
+                if(graphManager.Matrix[InstanceID,i] == 1 || graphManager.Matrix[i,InstanceID] == 1){
+                    if(graphManager.wandlerArray[i].distance == -1 || graphManager.wandlerArray[i].distance > distance+1){
+                        graphManager.wandlerArray[i].distance = distance+1;
+                        graphManager.wandlerArray[i].calcDistance();
+                    }
+                }
+            }
+    }
+
+    public void recalcDirection(){
+        visited = true;
+            for(int i = 0; i<graphManager.numOfWandler;i++){
+                if(graphManager.Matrix[InstanceID,i] == 1 || graphManager.Matrix[i,InstanceID] == 1){
+                    if(graphManager.wandlerArray[i].distance > distance){
+                        graphManager.Matrix[InstanceID, i] = 0;
+                        graphManager.Matrix[i, InstanceID] = 1;
+                        graphManager.wandlerArray[i].recalcDirection();
+                    }
+                }
+            }
     }
 
     public void UpdateEndpointText(float value)
     {
-       if (!Endpoint)
-           return;
+       if (!Endpoint){
+           
+       }
+       else{
        
        endpointTree.SetEndpointProductionText(value, endpointDemand);
         
@@ -119,5 +153,6 @@ public class Wandler : MonoBehaviour
        }
        
        // TODO: Update texts of all connected cables
+       }
     }
 }

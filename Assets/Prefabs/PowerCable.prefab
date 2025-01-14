@@ -275,8 +275,13 @@ MonoBehaviour:
   InstanceID: 0
   generating: 0
   efficiency: 1
-  Endpoint: 0
   onStartConnectTo: {fileID: 0}
+  tagTree: {fileID: 4726853060765473155}
+  Endpoint: 0
+  endpointTree: {fileID: 0}
+  endpointDemand: 0
+  distance: -1
+  visited: 0
 --- !u!1001 &7398599235444849524
 PrefabInstance:
   m_ObjectHideFlags: 0

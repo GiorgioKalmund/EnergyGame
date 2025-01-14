@@ -33,6 +33,13 @@ public class GraphManager : MonoBehaviour
         return;
     }
 
+    public void DisconnectWandler(Wandler from, Wandler to){
+        Debug.Log("Connecting "+from.InstanceID+ " with "+to.InstanceID);
+        Matrix[from.InstanceID, to.InstanceID] = 0;
+        calculateAll();
+        return;
+    }
+
     public void RemoveWandler(Wandler wandler){
         wandlerArray[wandler.InstanceID] = null;
         for(int i = 0; i < numOfWandler; i++){
@@ -67,5 +74,24 @@ public class GraphManager : MonoBehaviour
         // TODO: Split up into different endpoints and assign each of them their correct (new) value
         
         // TODO: 
+    }
+
+    public void calcDistance(){
+        for(int i  = 0; i < numOfWandler; i++){
+            wandlerArray[i].distance = -1;
+        }
+        for(int i  = 0; i < numOfEndpoints; i++){
+            Endpoints[i].distance = 0;
+            Endpoints[i].calcDistance();
+        }
+    }
+
+    public void recalcDirection(){
+        for(int i  = 0; i < numOfEndpoints; i++){
+            Endpoints[i].recalcDirection();
+        }
+        for(int i  = 0; i < numOfWandler; i++){
+            wandlerArray[i].visited = false;
+        }
     }
 }

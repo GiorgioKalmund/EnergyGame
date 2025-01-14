@@ -559,8 +559,13 @@ MonoBehaviour:
   InstanceID: 0
   generating: 100
   efficiency: 1
-  Endpoint: 0
   onStartConnectTo: {fileID: 0}
+  tagTree: {fileID: 8574434109094794907}
+  Endpoint: 0
+  endpointTree: {fileID: 0}
+  endpointDemand: 0
+  distance: -1
+  visited: 0
 --- !u!1 &8465016442759146058
 GameObject:
   m_ObjectHideFlags: 0

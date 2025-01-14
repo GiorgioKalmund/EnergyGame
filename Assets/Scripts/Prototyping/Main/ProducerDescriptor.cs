@@ -224,8 +224,7 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
 
     public void UpdateProductionTag()
     {
-        Wandler wandler = GetComponent<Wandler>();
-        tagTree.SetProductionText(wandler.output.Amount);
+        return;
     }
 
 

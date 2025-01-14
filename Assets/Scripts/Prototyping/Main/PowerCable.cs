@@ -53,7 +53,7 @@ public class PowerCable : MonoBehaviour
        // TODO: Dont't instantly expand, as this would cause the 'bobbing' between tags. Up for change
        //tagTree.ExpandTree();
        
-       tagTree.SetProductionText(GetComponent<Wandler>().getOutput());
+       //tagTree.SetProductionText(GetComponent<Wandler>().getOutput());
        GraphManager.Instance.calculateAll();
    }
 

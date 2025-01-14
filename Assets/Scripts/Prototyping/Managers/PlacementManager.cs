@@ -339,9 +339,13 @@ public class PlacementManager : MonoBehaviour
             if(arrPosition.z>=0){
                 lastHoveredTileData = GridDataManager.GetGridDataAtPos(arrPosition).GetComponent<TileDataWrapper>().tileData;
             }
-            PlacementType groundType = lastHoveredTileData.GetCurrentPlacementType();
-            blocked = !currentPlacementType.Equals(groundType);
+            if(lastHoveredTileData != null){
+                PlacementType groundType = lastHoveredTileData.GetCurrentPlacementType();
+                blocked = !currentPlacementType.Equals(groundType);
                 cellSprite.color = blocked ? spriteColorWarning : spriteColorRegular;
+            }
+            
+            
         }
         else if (!citySelectionActive) // If we are strolling & selecting
         {

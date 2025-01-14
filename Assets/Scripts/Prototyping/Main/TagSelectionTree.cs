@@ -174,7 +174,7 @@ public void ToggleTag(TreeTagType type)
 
   public void SetProductionText(float value)
   {
-    currentProductionText.text = $"{value:F2}MW";
+    currentProductionText.text = $"{value:F0}MW";
   }
 
   public void SetEndpointProductionText(float current, float goal)

@@ -37,6 +37,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Button pauseButton;
     [SerializeField] private Button nextLevelButton;
     [SerializeField] private Sprite nextLevelButtonSprite;
+    private Color standardBudgetColor;
     public Color insufficientBudgetColor;
     [SerializeField] private GameObject donQuiotePanel;
     
@@ -96,6 +97,8 @@ public class UIManager : MonoBehaviour
             throw new Exception("UIManager: No Overlay Material detected!");
         else
             HideOverlay();
+
+        standardBudgetColor = budgetText.color;
 
     }
 
@@ -286,7 +289,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            budgetText.color = Color.white;
+            budgetText.color = standardBudgetColor;
         }
     }
 

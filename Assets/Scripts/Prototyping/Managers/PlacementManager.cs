@@ -73,6 +73,7 @@ public class PlacementManager : MonoBehaviour
             }
             
             BuilderInventory.Instance.ShowInventory();
+            UIManager.Instance.HideOverlay();
         }
     }
 
@@ -114,6 +115,24 @@ public class PlacementManager : MonoBehaviour
         {
             throw new Exception("GameObject could not be instantiated!");
         }
+        switch(currentGameObject.GetComponentInChildren<ProducerDescriptor>().powerPlantType){
+            case PowerPlantType.COALPLANT:
+                UIManager.Instance.ShowOverlay(OverlayType.COAL);
+                break;
+            case PowerPlantType.WINDMILL:
+                UIManager.Instance.ShowOverlay(OverlayType.WIND);
+                break;
+            case PowerPlantType.HYDROPOWER:
+                UIManager.Instance.ShowOverlay(OverlayType.WATER);
+                break;
+            case PowerPlantType.SOLARPANEL:
+                UIManager.Instance.ShowOverlay(OverlayType.SUN);
+                break;
+            default:
+                Debug.Log("No type");
+                break;
+        }
+        
         SelectionManager.Instance.ClearSelection();
         if (currentGameObject.GetComponent<ProducerDescriptor>())
         {
@@ -122,6 +141,7 @@ public class PlacementManager : MonoBehaviour
             currentGameObject.layer = 2;
             
             BuilderInventory.Instance.HideInventory();
+            //UIManager.Instance.HideOverlay();
             
             InputManager.Instance.OnClicked += PlaceStructure;
         } 
@@ -142,7 +162,7 @@ public class PlacementManager : MonoBehaviour
         }
         
 
-
+        UIManager.Instance.HideOverlay();
         ProducerDescriptor producerDescriptor = currentGameObject.GetComponent<ProducerDescriptor>();
         producerDescriptor.Place(lastHoveredTileData);
 
@@ -234,6 +254,8 @@ public class PlacementManager : MonoBehaviour
             Debug.Log("Cannot cancel while in selection mode!");
             return;
         }
+
+        UIManager.Instance.HideOverlay();
 
         placingObjectIndex = -1;
         cellIndicator.SetActive(false);

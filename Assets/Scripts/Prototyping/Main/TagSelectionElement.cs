@@ -22,7 +22,6 @@ public class TagSelectionElement : MonoBehaviour
       return;
 
     transform.DOScale(1f, animationDuration).SetEase(animationEase).SetRecyclable();
-    GetComponent<Image>().DOFade(1f, animationDuration).SetEase(animationEase).SetRecyclable();
     open = true;
   }
 
@@ -44,7 +43,6 @@ public class TagSelectionElement : MonoBehaviour
       return;
 
     transform.DOScale(0f, animationDuration).SetEase(animationEase).SetRecyclable();
-    GetComponent<Image>().DOFade(0f, animationDuration).SetEase(animationEase).SetRecyclable();
     open = false;
   }
 

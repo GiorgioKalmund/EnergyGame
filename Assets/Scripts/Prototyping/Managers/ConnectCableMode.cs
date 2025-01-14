@@ -60,11 +60,8 @@ public class ConnectCableMode : MonoBehaviour
         if(InputManager.IsPointOverUI()){
             return;
         }
-        Grid grid = PlacementManager.Instance.Grid;
-        Vector3 mousePos = InputManager.Instance.GetMousePositionInWorldSpace();
-        Vector3Int gridPosition = grid.WorldToCell(mousePos + new Vector3(0.5f, 0, 0.5f));
-        Vector3Int arrPosition = GridDataManager.ConvertGridPosToArrayPos(gridPosition);
-
+        
+        Vector3Int arrPosition = GridDataManager.GetArrayPositionAtMousePosition();
         if(arrPosition.z <0){
             return;
         }

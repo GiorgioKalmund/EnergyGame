@@ -275,6 +275,13 @@ public class GridDataManager : MonoBehaviour
     {
         return windTexture && sunTexture && coalTexture && waterTexture;
     }
+    public static Vector3Int GetArrayPositionAtMousePosition(){
+        Grid grid = PlacementManager.Instance.Grid;
+        Vector3 mousePos = InputManager.Instance.GetMousePositionInWorldSpace();
+        Vector3Int gridPosition = grid.WorldToCell(mousePos + new Vector3(0.5f, 0, 0.5f));
+        Vector3Int arrPosition = ConvertGridPosToArrayPos(gridPosition);
+        return arrPosition;
+    }
 }
 
 [System.Serializable]

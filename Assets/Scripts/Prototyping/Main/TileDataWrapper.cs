@@ -21,14 +21,28 @@ public class TileDataWrapper : MonoBehaviour
             
         } else if (UIManager.Instance.Mode == UIState.DESTROYING)
         {
-            ISelectableEntity descriptor = tileData.currentBuilding;
+            /* ISelectableEntity descriptor = tileData.currentBuilding;
             if (descriptor as ProducerDescriptor)
             { 
                 ProducerDescriptor producer = (ProducerDescriptor)descriptor;
                  
                 if (producer)
                     producer.Sell();
+            } */
+
+            Grid grid = PlacementManager.Instance.Grid;
+            Vector3 mousePos = InputManager.Instance.GetMousePositionInWorldSpace();
+            Vector3Int gridPosition = grid.WorldToCell(mousePos + new Vector3(0.5f, 0, 0.5f));
+            Vector3Int arrPosition = GridDataManager.ConvertGridPosToArrayPos(gridPosition);
+            arrPosition.z = 1;
+            GameObject toDelete;
+            if(toDelete = GridDataManager.GetGridDataAtPos(arrPosition)){
+                if(toDelete.CompareTag("Endpoint")){
+                    return;
+                }
+                toDelete.GetComponent<ProducerDescriptor>().Sell();
             }
+
         }
     }
 

@@ -134,7 +134,7 @@ public class OverlaysDropdown : MonoBehaviour
        for (int index = 0; index < elements.Count; index++)
        {
            elements[index].GetComponent<Image>().DOFade(0f, 0.5f).SetEase(animationEase);
-           elements[index].transform.DOScale(0f, 0.5f + 0.1f * index).SetEase(animationEase);
+           elements[index].transform.DOScale(0f, 0.5f + 0.1f).SetEase(animationEase);
            float targetY = GetTargetYPosForTreeElement(index, true);
            elements[index].transform.DOLocalMoveY(targetY , 0.3f).SetEase(animationEase);
        }

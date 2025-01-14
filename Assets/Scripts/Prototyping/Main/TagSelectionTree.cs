@@ -27,6 +27,7 @@ public class TagSelectionTree : MonoBehaviour
 
 
   [Header("Endpoint")] [SerializeField] private bool isEndpoint = false;
+  [SerializeField] private Image productionBackdropImage;
 
   [SerializeField] private Sprite endpointBackdrop;
 
@@ -70,7 +71,7 @@ public class TagSelectionTree : MonoBehaviour
 
     if (isEndpoint)
     {
-      productionTag.GetComponent<Image>().sprite = endpointBackdrop;
+      productionBackdropImage.sprite = endpointBackdrop;
       productionTag.OpenSilently();
     }
 

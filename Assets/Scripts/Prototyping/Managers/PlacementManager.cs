@@ -209,7 +209,7 @@ public class PlacementManager : MonoBehaviour
         Debug.Log(productionValue);
         currentGameObject.GetComponentInChildren<Wandler>().generating = productionValue;
         currentGameObject.GetComponentInChildren<Wandler>().tagTree.SetProductionText(productionValue); */
-        SetGeneratingValue();
+        SetGeneratingValue(true);
 
         currentGameObject = null;
         //reset CellIndicator
@@ -221,7 +221,7 @@ public class PlacementManager : MonoBehaviour
         InputManager.Instance.OnClicked -= PlaceStructure;
         BuilderInventory.Instance.ShowInventory();
     }
-    private void SetGeneratingValue(){
+    private void SetGeneratingValue(bool setInWandler){
         if(!currentGameObject || lastHoveredTileData == null){
             return;
         }
@@ -247,7 +247,10 @@ public class PlacementManager : MonoBehaviour
                 Debug.LogWarning("powerPlantType enum not set in powerplant.");
                 break;
         }
-        currentGameObject.GetComponentInChildren<Wandler>().generating = productionValue;
+        if(setInWandler){
+            currentGameObject.GetComponentInChildren<Wandler>().generating = productionValue;
+        }
+        
         currentGameObject.GetComponentInChildren<Wandler>().tagTree.SetProductionText(productionValue);
     }
 
@@ -343,6 +346,7 @@ public class PlacementManager : MonoBehaviour
                 PlacementType groundType = lastHoveredTileData.GetCurrentPlacementType();
                 blocked = !currentPlacementType.Equals(groundType);
                 cellSprite.color = blocked ? spriteColorWarning : spriteColorRegular;
+                SetGeneratingValue(false);
             }
             
             

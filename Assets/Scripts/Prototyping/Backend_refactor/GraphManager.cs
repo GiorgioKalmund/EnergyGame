@@ -71,7 +71,6 @@ public class GraphManager : MonoBehaviour
         float total = 0;
         for(int i  = 0; i < numOfEndpoints; i++){
             float output = Endpoints[i].getOutput();
-            Debug.Log(Endpoints[i] + " - " + i + " : " + output);
             total += output;
         }
         

@@ -37,7 +37,6 @@ public class PlacementManager : MonoBehaviour
     [SerializeField] private Color spriteColorRegular;
     [SerializeField] private Color spriteColorWarning;
     [SerializeField] private Color spriteColorConnecting;
-    private bool _flickering;
 
     [CanBeNull] private GameObject currentGameObject;
     [SerializeField] private bool blocked;
@@ -228,7 +227,6 @@ public class PlacementManager : MonoBehaviour
                 Debug.LogWarning("powerPlantType enum not set in powerplant.");
                 break;
         }
-        Debug.Log(productionValue);
         currentGameObject.GetComponentInChildren<Wandler>().generating = productionValue;
         currentGameObject.GetComponentInChildren<Wandler>().tagTree.SetProductionText(productionValue);
     }
@@ -334,12 +332,10 @@ public class PlacementManager : MonoBehaviour
     
     IEnumerator FlickerIndicator(Color flickerColor)
     {
-        _flickering = true;
         Color old = cellSprite.color;
         cellSprite.color = flickerColor;
         yield return new WaitForSeconds(0.05f);
         cellSprite.color = old;
-        _flickering = false;
     }
     
     

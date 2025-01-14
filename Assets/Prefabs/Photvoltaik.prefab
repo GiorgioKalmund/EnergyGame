@@ -799,7 +799,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graphManager: {fileID: 0}
   InstanceID: 0
-  generating: 100
+  generating: 20
   efficiency: 1
   onStartConnectTo: {fileID: 0}
   tagTree: {fileID: 4119328465554458212}
@@ -808,6 +808,7 @@ MonoBehaviour:
   endpointDemand: 0
   distance: -1
   visited: 0
+  overflowDistance: 10000000
 --- !u!1001 &2170443051582432403
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -486,7 +486,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graphManager: {fileID: 0}
   InstanceID: 0
-  generating: 100
+  generating: 25
   efficiency: 1
   onStartConnectTo: {fileID: 0}
   tagTree: {fileID: 5449344369322635694}
@@ -495,6 +495,7 @@ MonoBehaviour:
   endpointDemand: 0
   distance: -1
   visited: 0
+  overflowDistance: 10000000
 --- !u!1 &4481338823864832879
 GameObject:
   m_ObjectHideFlags: 0

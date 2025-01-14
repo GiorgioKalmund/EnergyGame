@@ -11,6 +11,13 @@ public class CharacterSpeechManager : MonoBehaviour
     [SerializeField] private SpeechBubble financeBubble;
     [SerializeField] private SpeechBubble donBubble;
     [SerializeField] private SpeechBubble builderBubble;
+
+    [Header("Dialogues")]
+    [SerializeField] private Dialogue endpointsDialogue;
+    [SerializeField] private Dialogue co2Dialogue;
+    [SerializeField] private Dialogue financeDialogue;
+    [SerializeField] private Dialogue donDialogue;
+    [SerializeField] private Dialogue builderDialogue;
     public static CharacterSpeechManager Instance { get; private set; }
 
     private void Awake()
@@ -24,7 +31,19 @@ public class CharacterSpeechManager : MonoBehaviour
             Debug.LogError("CharacterSpeechManager: Missing at least one bubble reference!");
     }
 
-    void Start(){
+    void Start()
+    {
+        if (endpointsBubble)
+            endpointsBubble.transform.gameObject.GetComponent<DialogueContainer>().Dialogue = endpointsDialogue;
+        if (co2Bubble)
+            co2Bubble.transform.gameObject.GetComponent<DialogueContainer>().Dialogue = co2Dialogue;
+        if (financeBubble)
+            financeBubble.transform.gameObject.GetComponent<DialogueContainer>().Dialogue = financeDialogue;
+        if (donBubble)
+            donBubble.transform.gameObject.GetComponent<DialogueContainer>().Dialogue = donDialogue;
+        if (builderBubble)
+            builderBubble.transform.gameObject.GetComponent<DialogueContainer>().Dialogue = builderDialogue;
+        
         StartCoroutine(StartFirstBuilderDialogue(5));
     }
 

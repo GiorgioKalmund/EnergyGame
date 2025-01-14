@@ -1527,17 +1527,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &874440882 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1624195359012579245, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
-  m_PrefabInstance: {fileID: 1578725952}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbca306d3137262499a752f85e1ec169, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &916575687
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1856,12 +1845,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 8.019038, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_renderer: {fileID: 1413452169}
-  m_maskType: 0
   _SortingLayer: 0
   _SortingLayerID: 0
   _SortingOrder: 0
+  m_hasFontAssetChanged: 0
+  m_renderer: {fileID: 1413452169}
+  m_maskType: 0
 --- !u!23 &1413452169
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2127,7 +2116,7 @@ PrefabInstance:
     - target: {fileID: 111804554543395060, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
       propertyPath: DialogueContainer
       value: 
-      objectReference: {fileID: 874440882}
+      objectReference: {fileID: 0}
     - target: {fileID: 323464721359252783, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2251,7 +2240,7 @@ PrefabInstance:
     - target: {fileID: 2214300481886129675, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
       propertyPath: builder
       value: 
-      objectReference: {fileID: 1964043861}
+      objectReference: {fileID: 0}
     - target: {fileID: 2214300481886129675, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
       propertyPath: budgetDialogue
       value: 
@@ -2516,6 +2505,26 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 17014428}
+    - target: {fileID: 7163467277849852114, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+      propertyPath: co2Dialogue
+      value: 
+      objectReference: {fileID: 11400000, guid: 0ea683a02afb4c84aa0c27abc1666ba7, type: 2}
+    - target: {fileID: 7163467277849852114, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+      propertyPath: donDialogue
+      value: 
+      objectReference: {fileID: 11400000, guid: 808b46c36742c5c4b86558fa6266d1d7, type: 2}
+    - target: {fileID: 7163467277849852114, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+      propertyPath: builderDialogue
+      value: 
+      objectReference: {fileID: 11400000, guid: 3170d6076e2dcdd468782caa43450640, type: 2}
+    - target: {fileID: 7163467277849852114, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+      propertyPath: financeDialogue
+      value: 
+      objectReference: {fileID: 11400000, guid: 9c1b361a6eca1f3488e7b4834bd88e15, type: 2}
+    - target: {fileID: 7163467277849852114, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+      propertyPath: endpointsDialogue
+      value: 
+      objectReference: {fileID: 11400000, guid: 4f84432ddf6dc394db2c1ee237cefb2e, type: 2}
     - target: {fileID: 7921899595768174904, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2799,17 +2808,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1964043861 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4685611568633992947, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
-  m_PrefabInstance: {fileID: 1578725952}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28eaf50da21ebec47a09bb58553f79e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1970139634 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3642559788022638927, guid: 4cbd0d6b63bd74ff5839aafdd534a04f, type: 3}

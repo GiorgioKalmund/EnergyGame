@@ -23,8 +23,8 @@ public class LevelMapMarker : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     [SerializeField] private Sprite lockedImage;
     [SerializeField] private Sprite unlockedImage;
     [SerializeField] private TMP_Text displayText;
-
-    private Image _spriteImage;
+    
+    [SerializeField] private Image backdropImage;
     private Button toggleButton;
 
     [Header("Popup")]
@@ -42,7 +42,6 @@ public class LevelMapMarker : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     private void Start()
     {
         LevelMapManager.Instance.AddMarker(this);
-        _spriteImage = GetComponent<Image>();
         toggleButton = GetComponent<Button>();
         if (!toggleButton)
         {
@@ -51,7 +50,9 @@ public class LevelMapMarker : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         }
 
         unlocked = false;
-        _spriteImage.sprite = lockedImage;
+        if (!backdropImage)
+            Debug.Log("No backdrop!");
+        backdropImage.sprite = lockedImage;
 
 
         // Apply the function to the toggle button
@@ -143,7 +144,7 @@ public class LevelMapMarker : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         }
         
         unlocked = true;
-        _spriteImage.sprite = unlockedImage;
+        backdropImage.sprite = unlockedImage;
     }
 
     public void Lock()
@@ -158,7 +159,7 @@ public class LevelMapMarker : MonoBehaviour, IPointerEnterHandler, IPointerExitH
             step.Lock();
         }
         unlocked = false;
-        _spriteImage.sprite = lockedImage;
+        backdropImage.sprite = lockedImage;
         popupButton.onClick.RemoveAllListeners();
     }
 

@@ -49,6 +49,23 @@ public class SpeechBubble : MonoBehaviour
         textbox.text = "";
     }
 
+    public void CloseSpeechBubbleInstantly()
+    {
+        // Kill current delayed close
+        DOTween.Kill(transform);
+        
+        if (!isOpen)
+        {
+            Debug.LogWarning("Tried to close Speechbubble that was not open.");
+            return;
+        }
+
+        transform.DOScale(0f, animationTime);
+        isOpen = false;
+        textbox.text = "";
+        
+    }
+
     //Call this in the smiley button
     public void ToggleSpeechBubble()
     {

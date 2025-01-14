@@ -21,6 +21,9 @@ public class ConnectCableMode : MonoBehaviour
     public float cableYOffset = 0.5f;
     private GameObject cachedCable;
     private PowerCable cachedCableScript;
+
+    private GameObject cachedPowerTower;
+    
     void Awake(){
         if (Instance && Instance != this)
         {
@@ -35,7 +38,7 @@ public class ConnectCableMode : MonoBehaviour
     {
         cachedCable = Instantiate(cablePrefab, new Vector3(0,-1000,0), Quaternion.identity);
         cachedCableScript = cachedCable.GetComponent<PowerCable>();
-        
+        cachedPowerTower = Instantiate(powerTowerPrefab,new Vector3(0,-1000,0),Quaternion.identity);
         
     }
 
@@ -67,7 +70,7 @@ public class ConnectCableMode : MonoBehaviour
         }
 
 
-        //Kein wandler im tile oder oben drauf weil Endpoint ist tile aber hat Wandler
+        /* //Kein wandler im tile oder oben drauf weil Endpoint ist tile aber hat Wandler
         if ((GridDataManager.GetGridDataAtPos(arrPosition).GetComponentInChildren<Wandler>()== null
           && GridDataManager.GetGridDataAtPos(new Vector3Int(arrPosition.x,arrPosition.y,1)) == null))
         {
@@ -78,16 +81,16 @@ public class ConnectCableMode : MonoBehaviour
                 return; 
             }
             
-        }
+        } */
         
         GameObject candidate = GridDataManager.GetGridDataAtPos(new Vector3Int(arrPosition.x, arrPosition.y, 1));
         //Verhindert Kraftwerk an Kraftwerk zu schließen
-        if(candidate && !candidate.tag.Contains("PowerTower") && !isStartpoint) return;
+        /* if(candidate && !candidate.tag.Contains("PowerTower") && !isStartpoint) return;
         //Workaround für Endpoint ist ein Tile und nicht in index 1 in grid data
         if(GridDataManager.GetGridDataAtPos(arrPosition).GetComponentInChildren<Wandler>()){
             candidate = GridDataManager.GetGridDataAtPos(arrPosition);
 
-        }
+        } */
         if (candidate != null) //powerplant is present
         {
             if (isStartpoint)
@@ -101,14 +104,16 @@ public class ConnectCableMode : MonoBehaviour
                 endpoint = candidate;
             }
         }
-        else //powerplant is not present
+        else if(GridDataManager.GetGridDataAtPos(arrPosition).GetComponent<TileDataWrapper>().tileData.currentPlacementType == PlacementType.Default) //powerplant is not present
         {
             GameObject tileBelow = GridDataManager.GetGridDataAtPos(arrPosition);
             Vector3 powerTowerPos = tileBelow.transform.position;
             powerTowerPos.y = PlacementManager.Instance.cellIndicatorPlacementY;
             
-            GameObject powerTower = Instantiate(powerTowerPrefab,powerTowerPos , Quaternion.identity);
+            GameObject powerTower = cachedPowerTower;
+            powerTower.transform.position = powerTowerPos;
             
+            cachedPowerTower = Instantiate(powerTowerPrefab,new Vector3(0,-1000,0),Quaternion.identity);
             if (isStartpoint)
             {
                 startpoint = powerTower;
@@ -124,6 +129,8 @@ public class ConnectCableMode : MonoBehaviour
 
             GraphManager.Instance.wandlerArray[GraphManager.Instance.numOfWandler++] = powerTower.GetComponent<Wandler>();
 
+        } else{
+            return;
         }
         if(isStartpoint){
             isStartpoint = false;
@@ -172,6 +179,7 @@ public class ConnectCableMode : MonoBehaviour
         GraphManager.Instance.ConnectWandler(cableWandler,endpoint.GetComponentInChildren<Wandler>());
         cableScript.Place();
         cableScript.DrawCable(); 
+        
         
         cachedCable = Instantiate(cablePrefab, new Vector3(0,-1000,0), Quaternion.identity);
         cachedCableScript = cachedCable.GetComponent<PowerCable>();

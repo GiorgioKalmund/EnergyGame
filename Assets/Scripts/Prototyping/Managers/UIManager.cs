@@ -83,7 +83,7 @@ public class UIManager : MonoBehaviour
         // GridDataManager updates the completed endpoints text on Start 
         
         // Assign pause button functionality
-        pauseButton.onClick.AddListener(delegate { SettingsManager.Instance.ToggleSettingsPanel(true); });
+        pauseButton.onClick.AddListener(SettingsManager.Instance.ToggleSettingsPanel);
         
         // TODO: Assign next level button functionality & determine if we need to already unlock it (i.e. the level has already been completed at least once)
         nextLevelButton.onClick.AddListener(GoToNextLevel);

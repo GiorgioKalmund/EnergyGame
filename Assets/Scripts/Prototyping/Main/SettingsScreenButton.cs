@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using DG.Tweening;
 using TMPro;
 
-public class SettingsScreenButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class SettingsScreenButton : MonoBehaviour
 {
    [Header("Visual")] 
    [SerializeField] private Sprite image;
@@ -20,18 +20,6 @@ public class SettingsScreenButton : MonoBehaviour, IPointerEnterHandler, IPointe
       GetComponent<Image>().sprite = image;
       button = GetComponent<Button>();
       descriptionObject.text = description;
-   }
-   
-   public void OnPointerEnter(PointerEventData eventData)
-   {
-       if (gameObject.transform != null) 
-           gameObject.transform.DOScale(1.1f, 0.2f).SetEase(Ease.InOutElastic).SetRecyclable();
-   }
-
-   public void OnPointerExit(PointerEventData eventData)
-   {
-       if (gameObject.transform != null) 
-           gameObject.transform.DOScale(1f, 0.2f).SetEase(Ease.InOutElastic).SetRecyclable();
    }
 
    public Button GetButton()

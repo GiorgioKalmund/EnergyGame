@@ -606,7 +606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09360e98d9b14bfda42a1c4dc88cb6ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlockUntilLevel: 7
+  unlockUntilLevel: 1
   markers: []
   maxMarkerCount: 9
   currentMap: 0

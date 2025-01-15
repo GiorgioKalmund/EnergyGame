@@ -25,7 +25,7 @@ public class SettingsManager : MonoBehaviour
    {
       if (Instance && Instance != this)
       {
-         Destroy(this.gameObject);
+         Destroy(gameObject);
       }
       else
       {
@@ -40,7 +40,7 @@ public class SettingsManager : MonoBehaviour
    {
       if (Input.GetKeyDown(KeyCode.Backspace))
       {
-         ToggleSettingsPanel(false);
+         ToggleSettingsPanel();
       }
    }
 
@@ -49,7 +49,7 @@ public class SettingsManager : MonoBehaviour
       // Set up options buttons
       // Main menu / map button
       var backToMapButton = optionButtons[0];
-      backToMapButton.GetButton().onClick.AddListener(delegate { SceneManager.LoadSceneAsync(mapSceneName);});
+      backToMapButton.GetButton().onClick.AddListener(LoadSceneAsnyc);
       
       // Restart button
       var restartButton = optionButtons[1];
@@ -65,10 +65,9 @@ public class SettingsManager : MonoBehaviour
    }
 
 
-   public void ToggleSettingsPanel(bool freezeTime)
+   public void ToggleSettingsPanel()
    {
       settingsPanel.SetActive(!settingsPanel.activeSelf);
-      Time.timeScale = Time.timeScale.Equals(1f) && freezeTime ? 0f : 1f;
       settingsOpen = !settingsOpen;
       controlsGameObject.SetActive(false);
       highScoreGameObject.SetActive(false);
@@ -89,5 +88,11 @@ public class SettingsManager : MonoBehaviour
          ToggleControlsScreen();
       }
       highScoreGameObject.SetActive(!highScoreGameObject.activeSelf);
+   }
+
+   private void LoadSceneAsnyc()
+   {
+      Debug.Log(name + " is loading map scene");
+      SceneManager.LoadSceneAsync(mapSceneName);
    }
 }

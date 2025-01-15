@@ -3173,8 +3173,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pivot: {fileID: 0}
   zoomSpeed: 30
-  minZoom: 5
-  maxZoom: 50
+  minZoom: 10
+  maxZoom: 80
   dragSpeed: 0
   rotationSpeed: 150
   verticalMinLimit: -10

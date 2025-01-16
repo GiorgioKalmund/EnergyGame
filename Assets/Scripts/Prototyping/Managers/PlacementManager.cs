@@ -378,5 +378,7 @@ public enum PowerPlantType{
     COALPLANT,
     WINDMILL,
     HYDROPOWER,
-    SOLARPANEL
+    SOLARPANEL,
+    GAS,
+    NUCLEAR
 }

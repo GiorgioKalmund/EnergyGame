@@ -110,7 +110,7 @@ public class UIManager : MonoBehaviour
     public void RenderBudget()
     {
         UpdateBudgetColor();
-        budgetText.text = $"{BudgetManager.Instance.GetBudget():F2}€";
+        budgetText.text = $"{BudgetManager.Instance.GetBudget():F0}€";
     }
     private void ChangeCursor()
     {
@@ -151,7 +151,7 @@ public class UIManager : MonoBehaviour
     public void UpdateCurrentEnvironmentalImpact()
     {
         if (LevelManager.Instance && currentEnvironmentText)
-            currentEnvironmentText.text = $"{LevelManager.Instance.GetCurrentEnvironmentalImpact():F2} / {LevelManager.Instance.GetMaxEnvironmentalImpact():F2} CO2t";
+            currentEnvironmentText.text = $"{LevelManager.Instance.GetCurrentEnvironmentalImpact():F0} / {LevelManager.Instance.GetMaxEnvironmentalImpact():F0} CO2t";
     }
 
     public void SetQualityLevel(int level)

@@ -56,9 +56,10 @@ public class BuilderInventorySlot : MonoBehaviour, IPointerEnterHandler, IPointe
         slotImage.color = Color.gray;
     }
 
-    public void AddCapacity(int value)
+    public bool AddCapacity(int value)
     {
         SetCapacity(capacity + value);
+        return capacity >= 0;
     }
     public bool RemoveCapacity(int value)
     {

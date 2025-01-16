@@ -97,7 +97,10 @@ public class BuilderInventory : MonoBehaviour
 
     public void AddSlotCapacity(int capacity, int slotId)
     {
-        builderSlots[slotId].AddCapacity(capacity);
+        if (builderSlots[slotId].AddCapacity(capacity))
+        {
+            UIManager.Instance.HideDON();
+        };
     }
 
     public void RemoveSlotCapacity(int capacity, int slotId)

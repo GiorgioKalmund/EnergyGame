@@ -3,10 +3,16 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using DG.Tweening;
+using TMPro;
 using UnityEngine.InputSystem;
 
 public class OverlaysDropdown : MonoBehaviour
 {
+    [Header("Text")] 
+    [SerializeField] private TMP_Text toggleText;
+
+    public float textAnimationTime = 0.1f;
+    
    [Header("Elements")] 
    [SerializeField] private List<GameObject> elements;
 
@@ -112,7 +118,7 @@ public class OverlaysDropdown : MonoBehaviour
        resetYPosition = elements[0].transform.localPosition.y;
    }
 
-   public void Expand()
+   public async void Expand()
    {
        if (expanded)
            return;
@@ -123,10 +129,14 @@ public class OverlaysDropdown : MonoBehaviour
            float targetY = GetTargetYPosForTreeElement(index, false);
            elements[index].transform.DOLocalMoveY(targetY , 0.3f).SetEase(animationEase);
        }
+
+       await toggleText.DOFade(0f, textAnimationTime).AsyncWaitForCompletion();
+       toggleText.text = "Tags";
+       toggleText.DOFade(1f, textAnimationTime);
        expanded = true;
    }
 
-   public void Collapse()
+   public async void Collapse()
    {
        if (!expanded)
            return;
@@ -138,6 +148,10 @@ public class OverlaysDropdown : MonoBehaviour
            float targetY = GetTargetYPosForTreeElement(index, true);
            elements[index].transform.DOLocalMoveY(targetY , 0.3f).SetEase(animationEase);
        }
+       
+       await toggleText.DOFade(0f, textAnimationTime).AsyncWaitForCompletion();
+       toggleText.text = "Tags & Overlays";
+       toggleText.DOFade(1f, textAnimationTime);
        expanded = false;
    }
 

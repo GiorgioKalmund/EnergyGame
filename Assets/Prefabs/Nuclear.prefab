@@ -172,13 +172,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddc24fade6ba06f49b18cb35300f79e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingName: Gas
-  powerPlantType: 5
-  placement: 0
-  cost: 105
-  maxProduction: 40
+  buildingName: Nuclear
+  powerPlantType: 6
+  placement: 3
+  cost: 17
+  maxProduction: 66
   currentProduction: 0
-  environmentalImpact: 2
+  environmentalImpact: 5
   placed: 0
   selected: 0
   id: 0
@@ -207,7 +207,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graphManager: {fileID: 0}
   InstanceID: 0
-  generating: 25
+  generating: 66
   efficiency: 1
   onStartConnectTo: {fileID: 0}
   tagTree: {fileID: 5449344369322635694}

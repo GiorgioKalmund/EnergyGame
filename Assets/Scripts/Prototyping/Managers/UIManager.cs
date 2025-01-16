@@ -110,7 +110,7 @@ public class UIManager : MonoBehaviour
     public void RenderBudget()
     {
         UpdateBudgetColor();
-        budgetText.text = $"{BudgetManager.Instance.GetBudget():F0}€";
+        budgetText.text = $"{BudgetManager.Instance.GetBudget():F0} Mio €";
     }
     private void ChangeCursor()
     {
@@ -269,7 +269,7 @@ public class UIManager : MonoBehaviour
     public void SetEndpointsCompleted(int newValue)
     {
         if (LevelManager.Instance)
-            fulfilledEndpointsText.text = $"{newValue} / {LevelManager.Instance.endpointsCount}";
+            fulfilledEndpointsText.text = $"{newValue} / {LevelManager.Instance.endpointsCount} Completed";
         else
             Debug.LogError("GridDataManager: No LevelManager found!");
     }

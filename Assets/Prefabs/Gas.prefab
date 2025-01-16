@@ -176,10 +176,10 @@ MonoBehaviour:
   buildingName: Gas
   powerPlantType: 5
   placement: 0
-  cost: 105
+  cost: 12
   maxProduction: 40
   currentProduction: 0
-  environmentalImpact: 2
+  environmentalImpact: 237
   placed: 0
   selected: 0
   id: 0
@@ -208,7 +208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graphManager: {fileID: 0}
   InstanceID: 0
-  generating: 25
+  generating: 40
   efficiency: 1
   onStartConnectTo: {fileID: 0}
   tagTree: {fileID: 5449344369322635694}

@@ -11,11 +11,9 @@ using Debug = UnityEngine.Debug;
 public class LevelManager : MonoBehaviour
 {
     [Header("Stats")] 
-    [SerializeField] private float currentDemand;
     public float currentProduction;
     public float currentEnvironmentalImpact;
     [SerializeField] private float maxEnvironmentalImpact;
-    [SerializeField] private bool demandMet = false;
     public int endpointsCompleted= 0;
     public int endpointsCount = 0;
     public static LevelManager Instance { get; private set; }
@@ -44,29 +42,6 @@ public class LevelManager : MonoBehaviour
         UIManager.Instance.UpdateCurrentEnvironmentalImpact();
     }
 
-    public void AddProduce(float value)
-    {
-        currentProduction += value;
-        CheckIfDemandIsMet();
-    }
-
-    public void ReduceProduce(float value)
-    {
-        currentProduction = Mathf.Max(0, currentProduction - value);
-        CheckIfDemandIsMet();
-    }
-
-    public void AddDemand(float value)
-    {
-        currentDemand += value;
-    }
-
-    public void DecreaseDemand(float value)
-    {
-        currentDemand = Mathf.Max(0f, currentDemand - value);
-        CheckIfDemandIsMet();
-    }
-
     public void AddEnvironmentalImpact(float impact)
     {
         currentEnvironmentalImpact += impact;
@@ -83,20 +58,6 @@ public class LevelManager : MonoBehaviour
         UIManager.Instance.UpdateCurrentEnvironmentalImpact();
     }
 
-    public float GetCurrentDemand()
-    {
-        return currentDemand;
-    }
-
-    public float GetCurrentProduction()
-    {
-        return currentProduction;
-    }
-    public bool GetDemandMet()
-    {
-        return demandMet;
-    }
-
     public float GetMaxEnvironmentalImpact()
     {
         return maxEnvironmentalImpact;
@@ -105,16 +66,6 @@ public class LevelManager : MonoBehaviour
     public float GetCurrentEnvironmentalImpact()
     {
         return currentEnvironmentalImpact;
-    }
-
-    private void CheckIfDemandIsMet()
-    {
-        demandMet = currentProduction >= currentDemand;
-    }
-
-    public void SetMaxEnvironmentalImpact(float increase)
-    {
-        maxEnvironmentalImpact += increase;
     }
 
     /// <summary>

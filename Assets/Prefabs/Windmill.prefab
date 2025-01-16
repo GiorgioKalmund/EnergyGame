@@ -174,10 +174,10 @@ MonoBehaviour:
   buildingName: Windmill
   powerPlantType: 2
   placement: 0
-  cost: 105
-  maxProduction: 25
+  cost: 8
+  maxProduction: 48
   currentProduction: 0
-  environmentalImpact: 2
+  environmentalImpact: 3
   placed: 0
   selected: 0
   id: 0
@@ -206,7 +206,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graphManager: {fileID: 0}
   InstanceID: 0
-  generating: 25
+  generating: 48
   efficiency: 1
   onStartConnectTo: {fileID: 0}
   tagTree: {fileID: 5449344369322635694}

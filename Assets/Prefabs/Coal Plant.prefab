@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.003, y: 0.01674}
+  m_AnchoredPosition: {x: 0.0103, y: 0.0036}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &2767947945950510024
@@ -154,10 +154,10 @@ MonoBehaviour:
   buildingName: Coal Plant
   powerPlantType: 1
   placement: 0
-  cost: 400
-  maxProduction: 153
+  cost: 13
+  maxProduction: 43
   currentProduction: 0
-  environmentalImpact: 137
+  environmentalImpact: 550
   placed: 0
   selected: 0
   id: 0
@@ -207,7 +207,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graphManager: {fileID: 0}
   InstanceID: 0
-  generating: 153
+  generating: 43
   efficiency: 1
   onStartConnectTo: {fileID: 0}
   tagTree: {fileID: 5687023131775538927}

@@ -184,10 +184,10 @@ MonoBehaviour:
   buildingName: Hydropower
   powerPlantType: 3
   placement: 1
-  cost: 160
-  maxProduction: 51
+  cost: 5
+  maxProduction: 20
   currentProduction: 0
-  environmentalImpact: 2
+  environmentalImpact: 7
   placed: 0
   selected: 0
   id: 0
@@ -216,7 +216,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graphManager: {fileID: 0}
   InstanceID: 0
-  generating: 51
+  generating: 20
   efficiency: 1
   onStartConnectTo: {fileID: 0}
   tagTree: {fileID: 8574434109094794907}

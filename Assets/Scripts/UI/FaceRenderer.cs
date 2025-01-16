@@ -15,7 +15,7 @@ public class FaceRenderer : MonoBehaviour
     
     void Start(){
         //transform.position += new Vector3(100000, 100000, 100000);
-        texture.name = UnityEngine.Random.Range(0,9999).ToString();
+        texture.name = Random.Range(0,9999).ToString();
     }
 
     void Update(){
@@ -31,8 +31,9 @@ public class FaceRenderer : MonoBehaviour
     {
         texture = new RenderTexture(256, 256, 16, RenderTextureFormat.ARGB32);
         texture.Create();
-        GetComponentInChildren<Camera>().targetTexture = texture;
-        GetComponentInChildren<Camera>().targetDisplay = -1;
+        Camera cam = GetComponentInChildren<Camera>();
+        cam.targetTexture = texture;
+        cam.targetDisplay = -1;
         texture.Release();
     }
 

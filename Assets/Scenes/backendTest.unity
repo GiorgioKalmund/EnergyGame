@@ -1684,10 +1684,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d778cac187f6470c97ce2c50f52e614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentDemand: 300
+  currentDemand: -1
   currentProduction: 0
   currentEnvironmentalImpact: 0
-  maxEnvironmentalImpact: 200
+  maxEnvironmentalImpact: 1100
   demandMet: 0
   endpointsCompleted: 0
   endpointsCount: 0
@@ -2178,7 +2178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d1ac90a8c0bbc34bb329575cca85bb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  budget: 1025
+  budget: 90
 --- !u!4 &1457948854
 Transform:
   m_ObjectHideFlags: 0

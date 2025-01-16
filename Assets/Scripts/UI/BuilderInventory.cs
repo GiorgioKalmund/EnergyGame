@@ -146,7 +146,7 @@ public class BuilderInventory : MonoBehaviour
         speechBubbleName.text = $"{descriptor.GetName()}";
         speechBubbleOutput.text = $"{descriptor.GetMaxProduction()} MW";
         speechBubbleCO2.text = $"{descriptor.GetEnvironmentalImpact()} CO2t";
-        speechBubbleCost.text = $"{descriptor.GetCost()}€";
+        speechBubbleCost.text = $"{descriptor.GetCost()} Mio €";
     }
 
     public void CloseSpeechBubble()

@@ -2401,6 +2401,10 @@ PrefabInstance:
       propertyPath: minZoom
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 788136373460210966, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1196758535455520636, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2759,7 +2763,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 411728340077753474, guid: 7abca82c9c3b4434690941bfe54f933f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.32
+      value: -6.64
       objectReference: {fileID: 0}
     - target: {fileID: 411728340077753474, guid: 7abca82c9c3b4434690941bfe54f933f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2767,7 +2771,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 411728340077753474, guid: 7abca82c9c3b4434690941bfe54f933f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.85
+      value: 5.91
       objectReference: {fileID: 0}
     - target: {fileID: 411728340077753474, guid: 7abca82c9c3b4434690941bfe54f933f, type: 3}
       propertyPath: m_LocalRotation.w

@@ -1,14 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
+using UnityEditor;
+using Debug = UnityEngine.Debug;
 
 public class Cutscene_Manager : MonoBehaviour
 {
     public SpeechBubble character1Bubble; 
     public SpeechBubble character2Bubble; 
     public bool isDialogueActive = false; 
-    private bool isCharacter1Speaking = true;
+    public bool isCharacter1Speaking = true;
 
     public void StartDialogue()
     {
@@ -26,13 +26,13 @@ public class Cutscene_Manager : MonoBehaviour
     {
         StartDialogue();
     }
-    public void ShowNextDialogue()
+    public async void ShowNextDialogue()
     {
         if (!isDialogueActive)
         {
             return;
         }
-
+        
         // Alternate between characters
         if (isCharacter1Speaking)
         {
@@ -42,7 +42,7 @@ public class Cutscene_Manager : MonoBehaviour
                 return;
             }
 
-            character1Bubble.OpenSpeechbubble();
+            await character1Bubble.OpenSpeechbubble();
         }
         else
         {
@@ -52,21 +52,21 @@ public class Cutscene_Manager : MonoBehaviour
                 return;
             }
 
-            character2Bubble.OpenSpeechbubble();
+            await character2Bubble.OpenSpeechbubble();
         }
 
         // Alternate the speaker for the next dialogue
         isCharacter1Speaking = !isCharacter1Speaking;
+        ShowNextDialogue();
     }
 
-    private void EndDialogue()
+    private async void EndDialogue()
     {
         isDialogueActive = false;
 
         // Close both speech bubbles
-        character1Bubble.CloseSpeechBubbleInstantly();
-        character2Bubble.CloseSpeechBubbleInstantly();
-
+        await character1Bubble.CloseSpeechbubble();
+        await character2Bubble.CloseSpeechbubble();
     }
 
     private void Update()

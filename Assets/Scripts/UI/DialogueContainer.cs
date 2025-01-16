@@ -34,4 +34,9 @@ public class DialogueContainer : MonoBehaviour
     public string GetAtIndex(int index){
         return Dialogue.DialogueText[index];
     }
+
+    public bool HasNextLine()
+    {
+        return dialogueCounter < Dialogue.DialogueText.Length;
+    }
 }

@@ -31,6 +31,7 @@ public class OverlaysDropdown : MonoBehaviour
   private Action<InputAction.CallbackContext> showCO2Action;
   private Action<InputAction.CallbackContext> showFinanceAction;
   private Action<InputAction.CallbackContext> collapseAllTagsAction;
+  private Action<InputAction.CallbackContext> toggleDropdownAction;
 
   public bool PowerOpen { get; private set;  }
   public bool Co2Open { get; private set;  }
@@ -73,12 +74,14 @@ public class OverlaysDropdown : MonoBehaviour
         showCO2Action = ctx => { ToggleAllTagsWithType(TreeTagType.CO2); };
         showFinanceAction = ctx => { ToggleAllTagsWithType(TreeTagType.FINANCE); };
         collapseAllTagsAction = ctx => { CollapseAllTags(); };
+        toggleDropdownAction = ctx => { Toggle(); };
 
         inputMap.main.ShowPower.performed += showPowerAction;
         inputMap.main.ShowCO2.performed += showCO2Action;
         inputMap.main.ShowFinance.performed += showFinanceAction;
         inputMap.main.CollapseAllTags.performed += collapseAllTagsAction;
-    }
+        inputMap.main.ToggleDropdown.performed += toggleDropdownAction;
+   }
     private void OnDisable()
     {
         // Unsubscribe and disable input for this specific instance 

@@ -80,6 +80,15 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Toggle Dropdown"",
+                    ""type"": ""Button"",
+                    ""id"": ""ed4d697c-3f45-4af8-a1ac-b413a80a34be"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -203,6 +212,17 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""action"": ""Show Finance"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c8234201-63a9-48d6-9fd7-63cffc409200"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Toggle Dropdown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -305,6 +325,7 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         m_main_CollapseAllTags = m_main.FindAction("Collapse All Tags", throwIfNotFound: true);
         m_main_Move = m_main.FindAction("Move", throwIfNotFound: true);
         m_main_ShowFinance = m_main.FindAction("Show Finance", throwIfNotFound: true);
+        m_main_ToggleDropdown = m_main.FindAction("Toggle Dropdown", throwIfNotFound: true);
         // Mouse
         m_Mouse = asset.FindActionMap("Mouse", throwIfNotFound: true);
         m_Mouse_Delta = m_Mouse.FindAction("Delta", throwIfNotFound: true);
@@ -384,6 +405,7 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_main_CollapseAllTags;
     private readonly InputAction m_main_Move;
     private readonly InputAction m_main_ShowFinance;
+    private readonly InputAction m_main_ToggleDropdown;
     public struct MainActions
     {
         private @InputMap m_Wrapper;
@@ -394,6 +416,7 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         public InputAction @CollapseAllTags => m_Wrapper.m_main_CollapseAllTags;
         public InputAction @Move => m_Wrapper.m_main_Move;
         public InputAction @ShowFinance => m_Wrapper.m_main_ShowFinance;
+        public InputAction @ToggleDropdown => m_Wrapper.m_main_ToggleDropdown;
         public InputActionMap Get() { return m_Wrapper.m_main; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -421,6 +444,9 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
             @ShowFinance.started += instance.OnShowFinance;
             @ShowFinance.performed += instance.OnShowFinance;
             @ShowFinance.canceled += instance.OnShowFinance;
+            @ToggleDropdown.started += instance.OnToggleDropdown;
+            @ToggleDropdown.performed += instance.OnToggleDropdown;
+            @ToggleDropdown.canceled += instance.OnToggleDropdown;
         }
 
         private void UnregisterCallbacks(IMainActions instance)
@@ -443,6 +469,9 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
             @ShowFinance.started -= instance.OnShowFinance;
             @ShowFinance.performed -= instance.OnShowFinance;
             @ShowFinance.canceled -= instance.OnShowFinance;
+            @ToggleDropdown.started -= instance.OnToggleDropdown;
+            @ToggleDropdown.performed -= instance.OnToggleDropdown;
+            @ToggleDropdown.canceled -= instance.OnToggleDropdown;
         }
 
         public void RemoveCallbacks(IMainActions instance)
@@ -538,6 +567,7 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         void OnCollapseAllTags(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnShowFinance(InputAction.CallbackContext context);
+        void OnToggleDropdown(InputAction.CallbackContext context);
     }
     public interface IMouseActions
     {

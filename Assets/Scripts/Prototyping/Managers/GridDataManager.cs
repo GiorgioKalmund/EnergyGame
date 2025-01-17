@@ -17,7 +17,6 @@ public class GridDataManager : MonoBehaviour
     [SerializeField] [CanBeNull] public Texture2D windTexture;
     [SerializeField] [CanBeNull] public Texture2D waterTexture;
     [SerializeField] [CanBeNull] public Texture2D coalTexture;
-    [SerializeField] [CanBeNull] private Texture2D displayTexture;
     [SerializeField] private GameObject mapOverlay;
 
     [Header("Tiles")]
@@ -91,7 +90,11 @@ public class GridDataManager : MonoBehaviour
         textureWidth = mapTexture.width;
         textureHeight = mapTexture.height;
 
-        mapOverlay.GetComponent<Renderer>().material.mainTexture = displayTexture;
+        MaterialPropertyBlock block = new MaterialPropertyBlock();
+        Renderer r = mapOverlay.GetComponent<Renderer>();
+        r.GetPropertyBlock(block);
+        block.SetTexture("_Texture", mapTexture);
+        r.SetPropertyBlock(block);
         
         ColorToGameObjectMap = new Dictionary<Color, GameObject>
         {
@@ -133,9 +136,6 @@ public class GridDataManager : MonoBehaviour
         grid.cellSize = new Vector3(1, 1, 1);
         grid.transform.position = new Vector3((int)textureHeight , 1f, (int)textureWidth );
         
-        if (!displayTexture || displayTexture.name == "alpha")
-            mapOverlay.SetActive(false);
-
         Debug.Log($"Grid setup complete. Center position : {tilesCenter.position}, Grid position: {grid.transform.position}");
     }
 
@@ -209,7 +209,7 @@ public class GridDataManager : MonoBehaviour
 
                     if (placementType == PlacementType.Endpoint)
                     {
-                        GameObject endpoint = Instantiate(endpointPrefab,new Vector3(x,PlacementManager.Instance.cellIndicatorPlacementY,y),Quaternion.identity);
+                        GameObject endpoint = Instantiate(endpointPrefab,new Vector3(x,PlacementManager.Instance.cellIndicatorPlacementY - 0.02f,y),Quaternion.identity);
                         if (LevelManager.Instance)
                             endpoint.GetComponentInChildren<Wandler>().endpointDemand = LevelManager.Instance.endpointDemands[LevelManager.Instance.endpointsCount++];
                         else

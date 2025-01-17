@@ -60,7 +60,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &5828113476871683253
 MonoBehaviour:
@@ -153,9 +153,13 @@ MonoBehaviour:
   generating: 0
   efficiency: 1
   onStartConnectTo: {fileID: 0}
+  tagTree: {fileID: 0}
   Endpoint: 1
   endpointTree: {fileID: 3568066342023227599}
   endpointDemand: 0
+  distance: -1
+  visited: 0
+  overflowDistance: 10000000
 --- !u!1001 &1634925900461771320
 PrefabInstance:
   m_ObjectHideFlags: 0

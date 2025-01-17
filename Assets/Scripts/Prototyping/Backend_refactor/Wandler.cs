@@ -126,7 +126,7 @@ public class Wandler : MonoBehaviour
                             graphManager.wandlerArray[i].distance = 0;
                         }
                         if(graphManager.Matrix[i,InstanceID] == 1 && graphManager.wandlerArray[i].Endpoint){
-                            return;
+                            //return;
                         }
                         graphManager.wandlerArray[i].calcDistance();
                     }
@@ -140,7 +140,7 @@ public class Wandler : MonoBehaviour
         visited = true;
             for(int i = 0; i<graphManager.numOfWandler;i++){
                 if(graphManager.Matrix[InstanceID,i] == 1 || graphManager.Matrix[i,InstanceID] == 1){
-                    if(graphManager.wandlerArray[i].Endpoint == false && Endpoint == false){
+                    //if(graphManager.wandlerArray[i].Endpoint == false && Endpoint == false){
                         if(graphManager.wandlerArray[i].distance > distance){
                             graphManager.Matrix[InstanceID, i] = 0;
                             graphManager.Matrix[i, InstanceID] = 1;
@@ -150,7 +150,7 @@ public class Wandler : MonoBehaviour
                             graphManager.Matrix[i, InstanceID] = 0;
                         }
                         Debug.DrawLine(transform.position, graphManager.wandlerArray[i].transform.position);
-                    }
+                    //}
                     if(!graphManager.wandlerArray[i].visited)
                         graphManager.wandlerArray[i].recalcDirection();
                 }

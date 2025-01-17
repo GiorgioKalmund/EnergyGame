@@ -60,7 +60,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &3741259627066500976
 MonoBehaviour:
@@ -282,6 +282,7 @@ MonoBehaviour:
   endpointDemand: 0
   distance: -1
   visited: 0
+  overflowDistance: 10000000
 --- !u!1001 &7398599235444849524
 PrefabInstance:
   m_ObjectHideFlags: 0

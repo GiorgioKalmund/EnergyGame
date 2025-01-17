@@ -132,6 +132,9 @@ public class GridDataManager : MonoBehaviour
         //SetUp for Grid default (1x1)
         grid.cellSize = new Vector3(1, 1, 1);
         grid.transform.position = new Vector3((int)textureHeight , 1f, (int)textureWidth );
+        
+        if (!displayTexture || displayTexture.name == "alpha")
+            mapOverlay.SetActive(false);
 
         Debug.Log($"Grid setup complete. Center position : {tilesCenter.position}, Grid position: {grid.transform.position}");
     }

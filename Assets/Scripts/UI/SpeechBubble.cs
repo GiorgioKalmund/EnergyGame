@@ -22,13 +22,13 @@ public class SpeechBubble : MonoBehaviour
         transform.localScale = Vector3.zero;
     }
 
-    public async Task<Boolean> OpenSpeechbubble(int index = -1)
+    public async Task OpenSpeechbubble(int index = -1)
     {
         string nextText = GetSpeechBubbleText(index);
         if (nextText.Equals(INVALID_DIALOGUE))
         {
             Debug.LogWarning("Invalid Dialogue String in Speechbubble.");
-            return false;
+            return;
         }
         transform.DOScale(1f, animationTime);
         // only continue if dialogue is valid
@@ -36,21 +36,20 @@ public class SpeechBubble : MonoBehaviour
         textbox.text = nextText;
         //Put animation to open the speechbubble here
         
-        return await CloseSpeechbubble();
+        CloseSpeechbubble();
     }
 
-    public async Task<Boolean> CloseSpeechbubble()
+    public async void CloseSpeechbubble()
     {
         if (!isOpen)
         {
             Debug.LogWarning("Tried to close Speechbubble that was not open.");
-            return false;
+            return;
         }
 
         await transform.DOScale(0f, animationTime).SetDelay(SPEECHBUBBLE_DURATION).AsyncWaitForCompletion();
         isOpen = false;
         textbox.text = "";
-        return true;
     }
 
     public void CloseSpeechBubbleInstantly()

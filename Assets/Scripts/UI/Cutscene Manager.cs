@@ -68,7 +68,6 @@ public class Cutscene_Manager : MonoBehaviour
                 yield break;
             }
 
-       
             yield return currentSpeaker.OpenSpeechbubble();
             // Move to the next turn
             currentTurnIndex++;
@@ -80,7 +79,7 @@ public class Cutscene_Manager : MonoBehaviour
         }
     }
 
-    public async void EndDialogue()
+    public void EndDialogue()
     {
         isDialogueActive = false;
 
@@ -89,6 +88,8 @@ public class Cutscene_Manager : MonoBehaviour
         {
             turn.speaker.CloseSpeechBubbleInstantly(); 
         }
+        
+        // TODO: Probably not instant switch (ask Design)
         SceneManager.LoadScene(NextScene);
     }
 }

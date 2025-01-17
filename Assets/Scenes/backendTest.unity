@@ -1667,6 +1667,30 @@ PrefabInstance:
       propertyPath: grid
       value: 
       objectReference: {fileID: 6191906082463203712}
+    - target: {fileID: 7874358633279477564, guid: 4df33afdf6ab54fc0be0ac3fde008583, type: 3}
+      propertyPath: mapTexture
+      value: 
+      objectReference: {fileID: 2800000, guid: 80db9f6d2bf69db49a57ac248645ec29, type: 3}
+    - target: {fileID: 7874358633279477564, guid: 4df33afdf6ab54fc0be0ac3fde008583, type: 3}
+      propertyPath: sunTexture
+      value: 
+      objectReference: {fileID: 2800000, guid: 6afd1e6341604f74db9d51b748978177, type: 3}
+    - target: {fileID: 7874358633279477564, guid: 4df33afdf6ab54fc0be0ac3fde008583, type: 3}
+      propertyPath: coalTexture
+      value: 
+      objectReference: {fileID: 2800000, guid: 34927282e1af93444808de6f9cc66288, type: 3}
+    - target: {fileID: 7874358633279477564, guid: 4df33afdf6ab54fc0be0ac3fde008583, type: 3}
+      propertyPath: windTexture
+      value: 
+      objectReference: {fileID: 2800000, guid: eae0f38635ed6dc4cbe4a86e7564916c, type: 3}
+    - target: {fileID: 7874358633279477564, guid: 4df33afdf6ab54fc0be0ac3fde008583, type: 3}
+      propertyPath: waterTexture
+      value: 
+      objectReference: {fileID: 2800000, guid: 6c4cb9f145129624088f4abaf6c4df9e, type: 3}
+    - target: {fileID: 7874358633279477564, guid: 4df33afdf6ab54fc0be0ac3fde008583, type: 3}
+      propertyPath: displayTexture
+      value: 
+      objectReference: {fileID: 2800000, guid: 408bdba3593f0498f9275d4e54f9696f, type: 3}
     - target: {fileID: 9097855661943446268, guid: 4df33afdf6ab54fc0be0ac3fde008583, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

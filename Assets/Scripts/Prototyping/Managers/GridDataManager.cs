@@ -233,7 +233,7 @@ public class GridDataManager : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Could not find appropriate map entry for "+ pixelColor.ToHexString());
+                    Debug.LogError("Could not find appropriate map entry for "+ pixelColor.ToHexString());
                 }
             }
         }

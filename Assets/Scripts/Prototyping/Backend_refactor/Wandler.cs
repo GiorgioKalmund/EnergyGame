@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
 
@@ -31,6 +32,9 @@ public class Wandler : MonoBehaviour
     public int distance = -1;
     public bool visited = false;
     public int overflowDistance = 10000000;
+
+
+    private int test = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -71,9 +75,10 @@ public class Wandler : MonoBehaviour
     }
 
     public void ComputeInput(){
+        //visited = true;
         float inputAmt = generating;
         //Debug.Log("Now calculating Input for: "+InstanceID);
-        for(int i = 0; i<graphManager.Matrix.GetLength(0);i++){
+        for(int i = 0; i<graphManager.numOfWandler;i++){
             if(graphManager.Matrix[i,InstanceID] == 1){
                 inputAmt += graphManager.wandlerArray[i].getOutput();
             }
@@ -87,7 +92,7 @@ public class Wandler : MonoBehaviour
         ComputeInput();
         //Debug.Log("Now Calculating Output for: "+ InstanceID);
         int numOfChildren = 0;
-        for(int i = 0; i<graphManager.Matrix.GetLength(0);i++){
+        for(int i = 0; i<graphManager.numOfWandler;i++){
             if(graphManager.Matrix[InstanceID,i] == 1){
                 numOfChildren++;
             }
@@ -135,18 +140,19 @@ public class Wandler : MonoBehaviour
         visited = true;
             for(int i = 0; i<graphManager.numOfWandler;i++){
                 if(graphManager.Matrix[InstanceID,i] == 1 || graphManager.Matrix[i,InstanceID] == 1){
-                    if(graphManager.wandlerArray[i].visited == false && graphManager.wandlerArray[i].Endpoint == false && Endpoint == false){
+                    if(graphManager.wandlerArray[i].Endpoint == false && Endpoint == false){
                         if(graphManager.wandlerArray[i].distance > distance){
                             graphManager.Matrix[InstanceID, i] = 0;
                             graphManager.Matrix[i, InstanceID] = 1;
-                            graphManager.wandlerArray[i].recalcDirection();
                         }
-                        else if(graphManager.wandlerArray[i].distance < distance && graphManager.wandlerArray[i].Endpoint == false && Endpoint == false){
+                        else if(graphManager.wandlerArray[i].distance < distance){
                             graphManager.Matrix[InstanceID, i] = 1;
                             graphManager.Matrix[i, InstanceID] = 0;
-                            graphManager.wandlerArray[i].recalcDirection();
                         }
+                        Debug.DrawLine(transform.position, graphManager.wandlerArray[i].transform.position);
                     }
+                    if(!graphManager.wandlerArray[i].visited)
+                        graphManager.wandlerArray[i].recalcDirection();
                 }
             }
     }

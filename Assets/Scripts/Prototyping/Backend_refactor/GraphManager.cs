@@ -66,8 +66,10 @@ public class GraphManager : MonoBehaviour
 
     [ContextMenu("Calculate Energy Grid")]
     public void calculateAll(){
+        //Debug.LogError("ALL DIRECTIONS WILL BE RECALCULATED");
         calcDistance();
         recalcDirection();
+        //Debug.LogError("EVERYTHING IS BEING CALCULATED");
         float total = 0;
         for(int i  = 0; i < numOfEndpoints; i++){
             float output = Endpoints[i].getOutput();
@@ -93,14 +95,18 @@ public class GraphManager : MonoBehaviour
     }
 
     public void recalcDirection(){
+        setVisitedFalse();
         for(int i  = 0; i < numOfEndpoints; i++){
             Endpoints[i].recalcDirection();
         }
+        setVisitedFalse();
+    }
+
+    private void setVisitedFalse(){
         for(int i  = 0; i < numOfWandler; i++){
             if(wandlerArray[i]){
                 wandlerArray[i].visited = false;
             }
-            
         }
     }
 }

@@ -2,78 +2,90 @@ using System.Diagnostics;
 using UnityEngine;
 using UnityEditor;
 using Debug = UnityEngine.Debug;
+using System.Collections.Generic;
 
 public class Cutscene_Manager : MonoBehaviour
 {
-    public SpeechBubble character1Bubble; 
-    public SpeechBubble character2Bubble; 
-    public bool isDialogueActive = false; 
-    public bool isCharacter1Speaking = true;
+    [System.Serializable]
+    public class DialogueTurn
+    {
+        public SpeechBubble speaker; // The character speaking
+    }
+
+    public List<DialogueTurn> dialogueSequence; 
+    public bool isDialogueActive = false;
+
+    private int currentTurnIndex = 0;
+
 
     public void StartDialogue()
     {
         if (isDialogueActive)
-        {     
+        {
+            return;
+        }
+
+        if (dialogueSequence == null || dialogueSequence.Count == 0)
+        {
+            Debug.LogWarning("Dialogue sequence is empty!");
             return;
         }
 
         isDialogueActive = true;
-        isCharacter1Speaking = true; 
-        ShowNextDialogue();
+        currentTurnIndex = 0;
+
+        StartCoroutine(DialogueRoutine());
     }
+
 
     void Start()
     {
         StartDialogue();
     }
-    public async void ShowNextDialogue()
+
+
+    private System.Collections.IEnumerator DialogueRoutine()
     {
-        if (!isDialogueActive)
+        while (isDialogueActive)
         {
-            return;
-        }
-        
-        // Alternate between characters
-        if (isCharacter1Speaking)
-        {
-            if (!character1Bubble.DialogueContainer.HasNextLine())
+            if (currentTurnIndex >= dialogueSequence.Count)
             {
                 EndDialogue();
-                return;
+                yield break; // Exit the coroutine
             }
 
-            await character1Bubble.OpenSpeechbubble();
-        }
-        else
-        {
-            if (!character2Bubble.DialogueContainer.HasNextLine())
+            DialogueTurn currentTurn = dialogueSequence[currentTurnIndex];
+            SpeechBubble currentSpeaker = currentTurn.speaker;
+
+            // Check if the current speaker has dialogue left
+            if (!currentSpeaker.DialogueContainer.HasNextLine())
             {
+                Debug.LogWarning($"{currentSpeaker.name} has no more lines to speak.");
                 EndDialogue();
-                return;
+                yield break;
             }
 
-            await character2Bubble.OpenSpeechbubble();
-        }
+            // Show the next line for the current speaker
+            yield return currentSpeaker.OpenSpeechbubble();
 
-        // Alternate the speaker for the next dialogue
-        isCharacter1Speaking = !isCharacter1Speaking;
-        ShowNextDialogue();
+            // Move to the next turn
+            currentTurnIndex++;
+
+            // Wait for user input to continue
+            yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+        }
     }
 
     private async void EndDialogue()
     {
         isDialogueActive = false;
 
-        // Close both speech bubbles
-        await character1Bubble.CloseSpeechbubble();
-        await character2Bubble.CloseSpeechbubble();
-    }
-
-    private void Update()
-    {
-        if (isDialogueActive && Input.GetKeyDown(KeyCode.Space)) // Change KeyCode as needed
+        // Close all speech bubbles instantly
+        foreach (var turn in dialogueSequence)
         {
-            ShowNextDialogue();
+            turn.speaker.CloseSpeechBubbleInstantly();
         }
     }
+
+    
 }

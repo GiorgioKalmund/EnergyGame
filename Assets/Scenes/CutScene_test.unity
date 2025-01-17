@@ -1062,8 +1062,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f390cef7c577da43adf5c6b6c6bfb6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character1Bubble: {fileID: 910719638}
-  character2Bubble: {fileID: 1256096106}
+  dialogueSequence:
+  - speaker: {fileID: 910719638}
+  - speaker: {fileID: 1256096106}
+  - speaker: {fileID: 910719638}
+  - speaker: {fileID: 1256096106}
+  - speaker: {fileID: 910719638}
+  - speaker: {fileID: 1256096106}
   isDialogueActive: 0
 --- !u!4 &1095286312
 Transform:

@@ -25,7 +25,7 @@ public class Wandler : MonoBehaviour
 
     [Header("Endpoint")]
     [SerializeField]
-    private bool Endpoint;
+    public bool Endpoint;
     private bool EndpointCompleted;
     [SerializeField] TagSelectionTree endpointTree = null;
     public int endpointDemand;
@@ -103,7 +103,7 @@ public class Wandler : MonoBehaviour
         if (Endpoint)
         {
             //Output overflow
-            result = Math.Max(0, input.Amount* efficiency - endpointDemand) / (numOfChildren == 0 ? 1 : numOfChildren);
+            result = 0;//Math.Max(0, input.Amount* efficiency - endpointDemand) / (numOfChildren == 0 ? 1 : numOfChildren);
         }
         else
         {

@@ -139,7 +139,13 @@ public class ConnectCableMode : MonoBehaviour
                 Debug.Log("Connect cable to same object, no operation. ");
 
                 return;
-            } else{
+            } 
+            else if(startpoint.GetComponentInChildren<Wandler>().Endpoint && endpoint.GetComponentInChildren<Wandler>().Endpoint){
+                Debug.Log("Connect cable between two Endpoints, no operation. ");
+
+                return;
+            }
+            else{
             PlaceCable();
             if(endpoint.CompareTag("Endpoint")){
                 UIManager.Instance.DeactivateConnectingMode();

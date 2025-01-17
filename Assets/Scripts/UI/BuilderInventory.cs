@@ -84,7 +84,11 @@ public class BuilderInventory : MonoBehaviour
             descriptor.instanceId = index;
             
             // TODO: Determine Starting Capacity dynamically
-            slot.Setup(descriptor, index, 3);
+            if (index == 3)
+                slot.Setup(descriptor, index, 3);
+            else 
+                slot.Setup(descriptor, index, 0);
+                
             
             // Update internal List
             builderSlots.Add(slot);

@@ -35,6 +35,9 @@ public class InputManager : MonoBehaviour
 
     public event Action OnClicked;
 
+    private Vector3 resetCameraPosition;
+    private Vector3 resetPivotPosition;
+
   
 
     public InputMap InputMap;
@@ -57,6 +60,8 @@ public class InputManager : MonoBehaviour
         mainCamera = UIManager.Instance.sceneCamera;
         InputMap = new InputMap();
         InputMap.Mouse.Enable();
+        resetCameraPosition = mainCamera.transform.position;
+        resetPivotPosition = pivot.transform.position;
     }
 
     private void OnDisable()
@@ -94,10 +99,10 @@ public class InputManager : MonoBehaviour
 
     }
     private void reset()
-    {     
-        mainCamera.transform.position = new Vector3(-30.2f, 29.4f, -29.3f);
+    {
+        mainCamera.transform.position = resetCameraPosition;
         currentVerticalAngle = 0f;
-        pivot.transform.position = new Vector3(8f, 0f, 8f);
+        pivot.transform.position = resetPivotPosition;
         mainCamera.transform.LookAt(pivot.transform.position);
         
     }

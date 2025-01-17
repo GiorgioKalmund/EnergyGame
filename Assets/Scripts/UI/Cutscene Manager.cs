@@ -3,13 +3,15 @@ using UnityEngine;
 using UnityEditor;
 using Debug = UnityEngine.Debug;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class Cutscene_Manager : MonoBehaviour
 {
+    [SerializeField] public int NextScene;
     [System.Serializable]
     public class DialogueTurn
     {
-        public SpeechBubble speaker; // The character speaking
+        public SpeechBubble speaker; 
     }
 
     public List<DialogueTurn> dialogueSequence; 
@@ -48,10 +50,11 @@ public class Cutscene_Manager : MonoBehaviour
     {
         while (isDialogueActive)
         {
+            //dislogEnd exit
             if (currentTurnIndex >= dialogueSequence.Count)
             {
-                EndDialogue();
-                yield break; // Exit the coroutine
+                EndDialogue();          
+                yield break;
             }
 
             DialogueTurn currentTurn = dialogueSequence[currentTurnIndex];
@@ -65,27 +68,27 @@ public class Cutscene_Manager : MonoBehaviour
                 yield break;
             }
 
-            // Show the next line for the current speaker
+       
             yield return currentSpeaker.OpenSpeechbubble();
-
             // Move to the next turn
             currentTurnIndex++;
 
             // Wait for user input to continue
             yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+            currentSpeaker.CloseSpeechBubbleInstantly();
+
         }
     }
 
-    private async void EndDialogue()
+    public async void EndDialogue()
     {
         isDialogueActive = false;
 
-        // Close all speech bubbles instantly
+        // Close all speech bubbles completely
         foreach (var turn in dialogueSequence)
         {
-            turn.speaker.CloseSpeechBubbleInstantly();
+            turn.speaker.CloseSpeechBubbleInstantly(); 
         }
+        SceneManager.LoadScene(NextScene);
     }
-
-    
 }

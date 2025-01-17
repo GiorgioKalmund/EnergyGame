@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Cutscene_Dialog2
   m_EditorClassIdentifier: 
   DialogueText:
-  - Halloooo
-  - 'No thank you '
-  - 'Bye bye
-
-'
+  - "\u201CSpitze?! Ich glaub ich spinne! So macht ihr bitte nicht weiter! So viele
+    neue \r\nEnergiekraftwerke! Die erzeugen so viele Abgase! "
+  - "Doch nat\xFCrlich! Es gibt ja verschiedene Kraftwerke. Dein Energieplaner \r\nkennt
+    sich sicher damit aus. Lass uns doch ein Ziel \xFCberlegen, und dann kann \r\ner
+    das ja umsetzen."

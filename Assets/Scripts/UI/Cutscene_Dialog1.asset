@@ -13,13 +13,10 @@ MonoBehaviour:
   m_Name: Cutscene_Dialog1
   m_EditorClassIdentifier: 
   DialogueText:
-  - 'hallo
-
-'
-  - 'Nice to meet you
-
-
-'
-  - 'Bye
-
-'
+  - 'Wow, das sieht ja spitze aus! Kannst du bitte genauso weitermachen!! '
+  - "\u201CHmm, du hast schon recht. Allerdings m\xFCssen wir ja unser Projekt \r\nBavaria
+    one voran bringen. Dazu brauche ich die Energie. Da kann ich nicht \r\nnoch auf
+    die Abgase achten."
+  - "Naja, irgendwie hat sie ja schon recht. Das n\xE4chste Projekt sollte nicht
+    \r\nmehr als \u2026.  Co2 aussto\xDFen. Ich bin mir aber sicher, dass \r\ndu
+    das hin bekommst."

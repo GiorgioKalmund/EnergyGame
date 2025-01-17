@@ -196,7 +196,8 @@ public class LevelMapMarker : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         {
             GameObject pathStep = Instantiate(LevelMapManager.Instance.GetPathObject(), next.gameObject.transform.position, Quaternion.identity);
             pathStep.gameObject.transform.SetParent(LevelMapManager.Instance.GetPathParent().transform);
-            pathStep.transform.localScale = new Vector3(1f, 1f, 1f);
+            float scale = LevelMapManager.Instance.pathScale;
+            pathStep.transform.localScale = new Vector3(scale, scale, scale);
             next.prevPathSteps.Add(pathStep.GetComponent<LevelPathMarker>());
         
             pathStep.transform.position -= distance * stepLength * (index + 1);

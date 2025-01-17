@@ -26,6 +26,7 @@ public class LevelMapManager : MonoBehaviour
     [Header("Path")]
     [SerializeField] private GameObject pathGameObject;
     [SerializeField] private GameObject pathParent;
+    public float pathScale = 0.5f;
 
     [Header("Backdrop")] 
     [SerializeField] private Button backdropResetButtonBayern;

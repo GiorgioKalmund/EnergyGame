@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class Cutscene_Manager : MonoBehaviour
 {
-    [SerializeField] public int NextScene;
+    [SerializeField] public string NextScene;
     [System.Serializable]
     public class DialogueTurn
     {

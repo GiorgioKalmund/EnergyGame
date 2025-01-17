@@ -21,7 +21,7 @@ public class LevelMapManager : MonoBehaviour
     public int maxMarkerCount;
     public LevelMapMarker CurrentlySelectedMarker { get; set; }
 
-    public LevelMapType currentMap = LevelMapType.BAUSTELLE;
+    public LevelMapType currentMap;
 
     [Header("Path")]
     [SerializeField] private GameObject pathGameObject;
@@ -101,7 +101,7 @@ public class LevelMapManager : MonoBehaviour
     // TODO: Dynamically load from storage / player prefs
     private void LoadCurrentMap()
     {
-        LevelMapType loadedMap = LevelMapType.BAUSTELLE;
+        LevelMapType loadedMap = LevelMapType.BAYERN;
         currentMap = loadedMap; 
     }
 

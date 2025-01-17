@@ -171,6 +171,7 @@ public class UIManager : MonoBehaviour
 
     public void ActivateConnectingMode()
     {
+        PlacementManager.Instance.Abort(); //Avoids still having the power plant hovering when in connection mode
         ResetMode(); 
         if (Mode != UIState.CONNECTING)
         {
@@ -216,6 +217,7 @@ public class UIManager : MonoBehaviour
 
     public void ActivateDestructionMode()
     {
+        
         Mode = UIState.DESTROYING;
     }
 
@@ -240,8 +242,10 @@ public class UIManager : MonoBehaviour
             }
         }
 
-        if (enable)
+        if (enable){
             SetDestructionCursorTextures();
+            PlacementManager.Instance.Abort();
+        }
         else
             SetDefaultCursorTextures();
             

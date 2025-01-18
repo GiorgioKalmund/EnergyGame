@@ -172,7 +172,7 @@ public void ToggleTag(TreeTagType type)
 
   public void SetProductionText(float value)
   {
-    currentProductionText.text = $"{value:F0}MW";
+    currentProductionText.text = $"{Mathf.Floor(value)}MW";
   }
 
   public void SetEndpointProductionText(float current, float goal)
@@ -180,7 +180,7 @@ public void ToggleTag(TreeTagType type)
     if (!isEndpoint)
       return;
     
-    currentProductionText.text = $"{current:F0}MW / {goal:F0}MW";
+    currentProductionText.text = $"{Mathf.Floor(current)}MW / {Mathf.Floor(goal)}MW";
   }
 
   public bool IsExpanded()

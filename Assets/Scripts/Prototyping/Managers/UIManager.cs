@@ -151,7 +151,7 @@ public class UIManager : MonoBehaviour
     public void UpdateCurrentEnvironmentalImpact()
     {
         if (LevelManager.Instance && currentEnvironmentText)
-            currentEnvironmentText.text = $"{LevelManager.Instance.GetCurrentEnvironmentalImpact():F0} / {LevelManager.Instance.GetMaxEnvironmentalImpact():F0} CO2t";
+            currentEnvironmentText.text = $"{LevelManager.Instance.GetCurrentEnvironmentalImpact():F0} / {LevelManager.Instance.GetMaxEnvironmentalImpact():F0} t CO<sub>2</sub>";
     }
 
     public void SetQualityLevel(int level)

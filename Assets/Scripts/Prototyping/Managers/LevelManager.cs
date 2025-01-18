@@ -20,7 +20,9 @@ public class LevelManager : MonoBehaviour
 
     //Endpoints von oben links nach unten rechts auf der Map durchnummeriert
     public int[] endpointDemands;
-     
+
+    public int[] powerPlantInventoryCapacities = new int[6];
+      
     public int nextID = 0;
 
     private void Awake()
@@ -34,7 +36,6 @@ public class LevelManager : MonoBehaviour
         {
             Instance = this;
         }
-
     }
 
     private void Start()

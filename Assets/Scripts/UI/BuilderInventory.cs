@@ -72,6 +72,9 @@ public class BuilderInventory : MonoBehaviour
     {
         // Initially hide the bubble with no animation
         speechBubble.transform.localScale = Vector3.zero;
+
+        if (LevelManager.Instance.powerPlantInventoryCapacities.Length != prefabs.Count)
+            throw new Exception("BuilderInventory: Capacity array length != Slots length");
         
         for (int index = 0; index < prefabs.Count; index++)
         {
@@ -83,11 +86,7 @@ public class BuilderInventory : MonoBehaviour
             ProducerDescriptor descriptor = prefabs[index].GetComponent<ProducerDescriptor>();
             descriptor.instanceId = index;
             
-            // TODO: Determine Starting Capacity dynamically
-            if (index == 3)
-                slot.Setup(descriptor, index, 3);
-            else 
-                slot.Setup(descriptor, index, 0);
+            slot.Setup(descriptor, index, LevelManager.Instance.powerPlantInventoryCapacities[index]);
                 
             
             // Update internal List
@@ -149,7 +148,7 @@ public class BuilderInventory : MonoBehaviour
 
         speechBubbleName.text = $"{descriptor.GetName()}";
         speechBubbleOutput.text = $"{descriptor.GetMaxProduction()} MW";
-        speechBubbleCO2.text = $"{descriptor.GetEnvironmentalImpact()} CO2t";
+        speechBubbleCO2.text = $"{descriptor.GetEnvironmentalImpact()} t CO<sub>2</sub>";
         speechBubbleCost.text = $"{descriptor.GetCost()} Mio €";
     }
 

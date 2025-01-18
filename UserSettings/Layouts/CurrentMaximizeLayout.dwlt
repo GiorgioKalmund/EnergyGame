@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 2003
+  controlID: 8379
   draggingID: 0
 --- !u!114 &2
 MonoBehaviour:
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 2004
+  controlID: 8380
   draggingID: 0
 --- !u!114 &4
 MonoBehaviour:
@@ -174,7 +174,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 2005
+  controlID: 8381
   draggingID: 0
 --- !u!114 &5
 MonoBehaviour:
@@ -239,9 +239,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: f8da0000
-      m_LastClickedID: 56056
-      m_ExpandedIDs: d09affff0cfbffff1cdb000044db000082db0000
+      m_SelectedIDs: 8c810100
+      m_LastClickedID: 0
+      m_ExpandedIDs: de6efbffb874fbffd874fbffac75fbffbe7ffbffc880fbff348cfbffb88cfbffb2a9fbff5cd5fbff6adbfbff78e1fbff86e7fbff8eedfbffb6f3fbff1ef9fbffcc0bfcff1e14fcff8819fcff3c22fcffc639fcff1e42fcff2c49fcff1a90fcffcc92fcff1a9bfcff2aaefcffb8c1fcfff6c1fcff80adfdff86adfdff9ecdfdffa0cdfdffe8eefdff2a01feff7a08feffc00ffeff1017feff7c1efeff6a4bfeff78c8fefff45bfffffa5bffff7c61ffff1e7cffff207cffffd09affff0cfbffff1cdb000044db000082db0000ee18020004f7020028f7020050f702008ef70200e63803000a3903003239030070390300
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -257,7 +257,7 @@ MonoBehaviour:
         m_IsRenaming: 0
         m_OriginalEventType: 11
         m_IsRenamingFilename: 0
-        m_ClientGUIView: {fileID: 5}
+        m_ClientGUIView: {fileID: 0}
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -330,7 +330,7 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 1
-      snapOffset: {x: -176.5, y: -26}
+      snapOffset: {x: -179, y: -26}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 3
       id: Tool Settings
@@ -626,7 +626,7 @@ MonoBehaviour:
       sizeOverriden: 0
     m_OverlaysVisible: 1
   m_WindowGUID: cc27987af1a868c49b0894db9c0f5429
-  m_Gizmos: 0
+  m_Gizmos: 1
   m_OverrideSceneCullingMask: 6917529027641081856
   m_SceneIsLit: 1
   m_SceneLighting: 1
@@ -635,9 +635,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 26.513504, y: -23.36689, z: -0.8200617}
+    m_Target: {x: -488.62698, y: 418.28397, z: 5.886726}
     speed: 2
-    m_Value: {x: 26.513504, y: -23.36689, z: -0.8200617}
+    m_Value: {x: -488.62698, y: 418.28397, z: 5.886726}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -687,16 +687,16 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 70.49686
+    m_Target: 397.58365
     speed: 2
-    m_Value: 70.49686
+    m_Value: 397.58365
   m_Ortho:
     m_Target: 1
     speed: 2
     m_Value: 1
   m_CameraSettings:
-    m_Speed: 1.0070827
-    m_SpeedNormalized: 0.503293
+    m_Speed: 1.0058473
+    m_SpeedNormalized: 0.502675
     m_SpeedMin: 0.001
     m_SpeedMax: 2
     m_EasingEnabled: 1
@@ -707,7 +707,7 @@ MonoBehaviour:
     m_FarClip: 10000
     m_DynamicClip: 1
     m_OcclusionCulling: 0
-  m_LastSceneViewRotation: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
+  m_LastSceneViewRotation: {x: -0.375762, y: -0.09373302, z: 0.03823404, w: -0.92118186}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
@@ -776,7 +776,7 @@ MonoBehaviour:
     m_SaveData: []
     m_OverlaysVisible: 1
   m_SearchFilter:
-    m_NameFilter: level se
+    m_NameFilter: B.7
     m_ClassNames: []
     m_AssetLabels: []
     m_AssetBundleNames: []
@@ -786,23 +786,23 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs/UI
+    - Assets/Scenes
     m_Globs: []
-    m_OriginalText: level se
+    m_OriginalText: B.7
     m_ImportLogFlags: 0
     m_FilterByTypeIntersection: 0
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefabs/UI
+  - Assets/Scenes
   m_LastFoldersGridSize: -1
   m_LastProjectPath: /Users/giorgiokalmund/Unity/EnergyGame
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 342.47565}
-    m_SelectedIDs: 54b40000
-    m_LastClickedID: 46164
+    scrollPos: {x: 0, y: 333.5}
+    m_SelectedIDs: 76b50000
+    m_LastClickedID: 46454
     m_ExpandedIDs: 000000004eb4000050b4000052b4000054b4000056b4000058b4000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -856,9 +856,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: f8da0000
-    m_LastClickedInstanceID: 56056
-    m_HadKeyboardFocusLastEvent: 0
+    m_SelectedInstanceIDs: 8c810100
+    m_LastClickedInstanceID: 98700
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -940,8 +940,8 @@ MonoBehaviour:
     y: 0
     width: 340.5
     height: 780
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}

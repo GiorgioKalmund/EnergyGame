@@ -32,5 +32,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CutScene_test.unity
     guid: b3629967711cdbc479cbd6fe5f091df3
+  - enabled: 1
+    path: Assets/Scenes/Levels/Baustelle/T.3 - Wind.unity
+    guid: 95ee5eb2330414e4f83ecc85118d2b96
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 79382d7c2cb974ab9b69bdd65383b5f7, type: 3}

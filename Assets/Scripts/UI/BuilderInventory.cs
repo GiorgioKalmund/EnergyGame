@@ -28,6 +28,10 @@ public class BuilderInventory : MonoBehaviour
     [SerializeField] private ObjectsDatabase database;
     [SerializeField] private List<GameObject> prefabs;
 
+    [Header("Construction")] 
+    public bool isConstructionInventory;
+    [SerializeField] private int constructionSlotToUnlock;
+
     [Header("References")]
     [SerializeField] private GameObject inventory;
     [SerializeField] private Button inventoryToggle;
@@ -75,7 +79,7 @@ public class BuilderInventory : MonoBehaviour
 
         if (LevelManager.Instance.powerPlantInventoryCapacities.Length != prefabs.Count)
             throw new Exception("BuilderInventory: Capacity array length != Slots length");
-        
+         
         for (int index = 0; index < prefabs.Count; index++)
         {
             // Create a new slot for the element from the list
@@ -86,7 +90,7 @@ public class BuilderInventory : MonoBehaviour
             ProducerDescriptor descriptor = prefabs[index].GetComponent<ProducerDescriptor>();
             descriptor.instanceId = index;
             
-            slot.Setup(descriptor, index, LevelManager.Instance.powerPlantInventoryCapacities[index]);
+            slot.Setup(descriptor, index, LevelManager.Instance.powerPlantInventoryCapacities[index], isConstructionInventory && index != constructionSlotToUnlock);
                 
             
             // Update internal List

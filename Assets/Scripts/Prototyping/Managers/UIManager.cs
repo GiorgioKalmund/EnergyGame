@@ -78,7 +78,7 @@ public class UIManager : MonoBehaviour
         SetDefaultCursorTextures(); 
         
         // Set Quality Level to Ultra
-        SetQualityLevel(5);
+        SetQualityLevel(3);
         
         // GridDataManager updates the completed endpoints text on Start 
         

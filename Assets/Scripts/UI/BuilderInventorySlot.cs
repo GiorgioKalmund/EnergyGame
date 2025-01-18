@@ -11,6 +11,9 @@ public class BuilderInventorySlot : MonoBehaviour, IPointerEnterHandler, IPointe
     public int objectInstanceId;
     [Header("Visual")]
     [SerializeField] private Image slotImage;
+    [SerializeField] private Image backDrop;
+    [SerializeField] private Sprite lockedBackdropImage;
+    [SerializeField] private GameObject lockedLock;
     [SerializeField] private TMP_Text slotCapacityText;
     [SerializeField] private Color positiveSlotColor;
     [SerializeField] private Color neutralSlotColor;
@@ -28,32 +31,28 @@ public class BuilderInventorySlot : MonoBehaviour, IPointerEnterHandler, IPointe
         {
             button.onClick.AddListener(StartPlacement);
         }
-        active = false;
+        active = true;
     }
     
     // Assigns image, cost text and id inside the database to the slot
-    public void Setup(ProducerDescriptor descriptor, int objId, int startingCapacity)
+    public void Setup(ProducerDescriptor descriptor, int objId, int startingCapacity, bool locked = false)
     {
         entity = descriptor;
         slotImage.sprite = entity.GetSprite();
         objectInstanceId = objId;
         SetCapacity(startingCapacity);
+        
+        if (locked)
+            Lock();
     }
 
-    public void Activate()
-    {
-        // Show that the slot is available 
-        active = true;
-        button.interactable = true;
-        slotImage.color = Color.white;
-    }
-    
-    public void Deactivate()
+    public void Lock()
     {
         // Show that the slot is available 
         active = false;
         button.interactable = false;
-        slotImage.color = Color.gray;
+        backDrop.sprite = lockedBackdropImage;
+        lockedLock.SetActive(true);
     }
 
     public bool AddCapacity(int value)
@@ -91,6 +90,9 @@ public class BuilderInventorySlot : MonoBehaviour, IPointerEnterHandler, IPointe
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (!active)
+            return;
+        
         if (BuilderInventory.Instance)
             BuilderInventory.Instance.OpenSpeechBubble(entity);
         else
@@ -98,6 +100,9 @@ public class BuilderInventorySlot : MonoBehaviour, IPointerEnterHandler, IPointe
     }
     public void OnPointerExit(PointerEventData eventData)
     {
+        if (!active)
+            return;
+        
         if (BuilderInventory.Instance)
             BuilderInventory.Instance.CloseSpeechBubble();
         else

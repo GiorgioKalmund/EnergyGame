@@ -21,6 +21,7 @@ public class LevelMapMarker : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     
     [Header("Visual")] 
     [SerializeField] private Sprite lockedImage;
+    [SerializeField] private GameObject lockedImageLock;
     [SerializeField] private Sprite unlockedImage;
     [SerializeField] private TMP_Text displayText;
     
@@ -67,7 +68,7 @@ public class LevelMapMarker : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         popupDescriptionText.text = linkedSceneName;
         popupButton = popup.GetComponentInChildren<Button>();
         popupButton.onClick.AddListener(delegate{SceneManager.LoadScene(linkedSceneName);});
-        displayText.text = $"{(markerID + 1)}";
+        displayText.text = "";
         
         // Set scale, so hover animations work properly afterwards
         gameObject.transform.DOScale(1f, 0.1f);
@@ -144,6 +145,8 @@ public class LevelMapMarker : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         }
         
         unlocked = true;
+        lockedImageLock.SetActive(false);
+        displayText.text = $"{(markerID + 1)}";
         backdropImage.sprite = unlockedImage;
     }
 
@@ -160,6 +163,8 @@ public class LevelMapMarker : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         }
         unlocked = false;
         backdropImage.sprite = lockedImage;
+        lockedImageLock.SetActive(true);
+        displayText.text = "";
         popupButton.onClick.RemoveAllListeners();
     }
 

@@ -160,10 +160,8 @@ public void ToggleTag(TreeTagType type)
   public void Setup(ProducerDescriptor descriptor)
   {
     //currentProductionText.text = $"{descriptor.GetMaxProduction()} MW";
-    environmentalImpactText.text = $"{descriptor.GetEnvironmentalImpact()} CO2t";
-    financeText.text = $"{descriptor.GetCost()}€";
-    
-    // Add itself to the global list contained in the OverlaysDropdown
+    environmentalImpactText.text = $"{descriptor.GetEnvironmentalImpact():F0} t CO<sub>2</sub>";
+    financeText.text = $"{descriptor.GetCost():F0} Mio €";
   }
 
   private void RotateTowardsCamera()

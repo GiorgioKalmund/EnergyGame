@@ -1317,6 +1317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NextScene: B.1
+  skipButton: {fileID: 1618154357}
   dialogueSequence:
   - speaker: {fileID: 910719638}
   - speaker: {fileID: 1256096106}
@@ -1667,7 +1668,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1095286311}
         m_TargetAssemblyTypeName: Cutscene_Manager, Assembly-CSharp
-        m_MethodName: EndDialogue
+        m_MethodName: nextScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -1,13 +1,16 @@
 using System.Diagnostics;
+using TMPro;
 using UnityEngine;
 using UnityEditor;
 using Debug = UnityEngine.Debug;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using static System.Net.Mime.MediaTypeNames;
 
 public class Cutscene_Manager : MonoBehaviour
 {
     [SerializeField] public string NextScene;
+    [SerializeField] public GameObject skipButton;
     [System.Serializable]
     public class DialogueTurn
     {
@@ -82,11 +85,19 @@ public class Cutscene_Manager : MonoBehaviour
     public void EndDialogue()
     {
         isDialogueActive = false;
-
-        // Close all speech bubbles completely
         CloseAllSpeechBubbles();
 
-        // TODO: Probably not instant switch (ask Design)
+        //change skip button into start
+        if (skipButton != null)
+        {
+            TextMeshProUGUI buttonText = skipButton.GetComponentInChildren<TextMeshProUGUI>();
+            buttonText.text = "Start";
+            
+        }
+    }
+
+    public void nextScene()
+    {
         SceneManager.LoadScene(NextScene);
     }
 

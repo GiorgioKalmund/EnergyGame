@@ -84,12 +84,19 @@ public class Cutscene_Manager : MonoBehaviour
         isDialogueActive = false;
 
         // Close all speech bubbles completely
-        foreach (var turn in dialogueSequence)
-        {
-            turn.speaker.CloseSpeechBubbleInstantly(); 
-        }
-        
+        CloseAllSpeechBubbles();
+
         // TODO: Probably not instant switch (ask Design)
         SceneManager.LoadScene(NextScene);
+    }
+
+
+    public void CloseAllSpeechBubbles()
+    {
+        foreach (var turn in dialogueSequence)
+        {
+            turn.speaker.transform.localScale = Vector3.zero; 
+            turn.speaker.isOpen = false;   
+        }
     }
 }

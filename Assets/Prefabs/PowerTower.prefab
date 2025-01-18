@@ -166,6 +166,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &1617606919832415630
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7860128083477040314}
+  m_Layer: 0
+  m_Name: CableAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7860128083477040314
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1617606919832415630}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.475, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8097860240469911566}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2996001422366894132
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,6 +313,7 @@ Transform:
   m_Children:
   - {fileID: 5608786517492361944}
   - {fileID: 2066060734097127509}
+  - {fileID: 7860128083477040314}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2042713469456913020
@@ -339,7 +371,7 @@ MonoBehaviour:
     coalAmount: 0
     currentPlacementType: 0
     coords: {x: 0, y: 0}
-  connectedCables: []
+  cableAnchor: {fileID: 7860128083477040314}
   tagTree: {fileID: 1922051438853078392}
 --- !u!1 &3616719251694198224
 GameObject:

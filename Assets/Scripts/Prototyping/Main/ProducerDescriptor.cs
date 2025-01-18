@@ -26,7 +26,7 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
     [Header("Tile")]
     public TileData tileOn;
 
-    public List<PowerCable> connectedCables;
+    public Transform cableAnchor;
 
     [Header("Tag")]
     [SerializeField] private TagSelectionTree tagTree;
@@ -43,10 +43,11 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
     {
         id = LevelManager.Instance.nextID;
         LevelManager.Instance.nextID += 1;
-        connectedCables = new List<PowerCable>();
+        
         
         //maxProduction = GetComponent<Wandler>().generating;
-        tagTree.Setup(this);
+        if(tagTree) tagTree.Setup(this);
+        
     }
 
     public bool isPlaced()
@@ -159,16 +160,7 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
         return this.maxProduction;
     }
 
-    public float GetCurrentProduction()
-    {
-        return this.currentProduction;
-    }
-
-    public void SetProduction(float newProductionValue)
-    {
-        currentProduction = newProductionValue;
-        UpdateProductionTag();
-    }
+    
     public float GetCost()
     {
         return this.cost;
@@ -214,11 +206,6 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
     public string GetName()
     {
         return buildingName;
-    }
-
-    public void AddCable(PowerCable newCable)
-    {
-        connectedCables.Add(newCable);
     }
 
     public void CloseTag()

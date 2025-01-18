@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1910434253530329451
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2141670861961702186}
+  m_Layer: 0
+  m_Name: CableAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2141670861961702186
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1910434253530329451}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
+  m_LocalPosition: {x: 0.0926, y: 0.0755, z: -0.0976}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 948267761306603131}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3116897014336507890
 GameObject:
   m_ObjectHideFlags: 0
@@ -136,6 +167,7 @@ Transform:
   m_Children:
   - {fileID: 7296546567992917608}
   - {fileID: 4940475422523512042}
+  - {fileID: 2141670861961702186}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!65 &7620025156697038847
@@ -190,7 +222,7 @@ MonoBehaviour:
     coalAmount: 0
     currentPlacementType: 0
     coords: {x: 0, y: 0}
-  connectedCables: []
+  cableAnchor: {fileID: 2141670861961702186}
   tagTree: {fileID: 4119328465554458212}
 --- !u!114 &7999580096320430728
 MonoBehaviour:

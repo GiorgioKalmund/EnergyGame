@@ -167,10 +167,13 @@ public class ConnectCableMode : MonoBehaviour
         
         GameObject cable = cachedCable;
         PowerCable cableScript = cable.GetComponent<PowerCable>();
-        cableScript.startPos = new Vector3(startpoint.transform.position.x,PlacementManager.Instance.cellIndicatorPlacementY+cableYOffset,startpoint.transform.position.z);
-        cableScript.endPos = new Vector3(endpoint.transform.position.x,PlacementManager.Instance.cellIndicatorPlacementY+cableYOffset,endpoint.transform.position.z);
-        
         Wandler cableWandler = cable.GetComponent<Wandler>();
+
+        
+        cableScript.startPos = startpoint.GetComponent<ProducerDescriptor>().cableAnchor.position;
+        cableScript.endPos = endpoint.GetComponent<ProducerDescriptor>().cableAnchor.position;
+        
+        
         
         float distance = Vector3.Distance(startpoint.transform.position, endpoint.transform.position);
         float effectiveLoss = Mathf.Pow(1 - cableEfficiencyLossPerUnit, distance);
@@ -189,7 +192,7 @@ public class ConnectCableMode : MonoBehaviour
     }
     private void StartDrawingCableAfterStartpointIsSet(){
         cachedCableScript.placed = false;
-        cachedCableScript.startPos = new Vector3(startpoint.transform.position.x,PlacementManager.Instance.cellIndicatorPlacementY+cableYOffset,startpoint.transform.position.z);
+        cachedCableScript.startPos = startpoint.GetComponent<ProducerDescriptor>().cableAnchor.position;
         cachedCable.GetComponent<LineRenderer>().enabled = true;
     }
 

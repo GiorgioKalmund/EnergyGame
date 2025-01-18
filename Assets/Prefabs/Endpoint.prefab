@@ -112,6 +112,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8097860240469911566}
   - component: {fileID: 2042713469456913020}
+  - component: {fileID: 3452147171992583896}
   m_Layer: 0
   m_Name: Endpoint
   m_TagString: Endpoint
@@ -134,6 +135,7 @@ Transform:
   m_Children:
   - {fileID: 3000986697628096228}
   - {fileID: 354595612814077989}
+  - {fileID: 4122737473961004827}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2042713469456913020
@@ -160,6 +162,70 @@ MonoBehaviour:
   distance: -1
   visited: 0
   overflowDistance: 10000000
+--- !u!114 &3452147171992583896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3594782725111630582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddc24fade6ba06f49b18cb35300f79e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingName: 
+  powerPlantType: 0
+  placement: 0
+  cost: 0
+  maxProduction: 0
+  currentProduction: 0
+  environmentalImpact: 0
+  placed: 0
+  selected: 0
+  id: 0
+  instanceId: 0
+  imageSprite: {fileID: 0}
+  tileOn:
+    sunlightHours: 0
+    windSpeed: 0
+    waterSpeed: 0
+    coalAmount: 0
+    currentPlacementType: 0
+    coords: {x: 0, y: 0}
+  cableAnchor: {fileID: 4122737473961004827}
+  tagTree: {fileID: 0}
+--- !u!1 &8612015831095572509
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4122737473961004827}
+  m_Layer: 0
+  m_Name: cableAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4122737473961004827
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8612015831095572509}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.47037488, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8097860240469911566}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1634925900461771320
 PrefabInstance:
   m_ObjectHideFlags: 0

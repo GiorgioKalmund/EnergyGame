@@ -102,6 +102,37 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!1 &807633370623579962
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4801332698325512845}
+  m_Layer: 0
+  m_Name: CableAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4801332698325512845
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 807633370623579962}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.5, y: -0.5, z: -0.5, w: -0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3020603047093061210}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2698100121599932702
 GameObject:
   m_ObjectHideFlags: 0
@@ -136,6 +167,7 @@ Transform:
   m_Children:
   - {fileID: 4437704182729506834}
   - {fileID: 1231865570017700138}
+  - {fileID: 4801332698325512845}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -90, y: 180, z: 90}
 --- !u!65 &3864889695037877949
@@ -190,7 +222,7 @@ MonoBehaviour:
     coalAmount: 0
     currentPlacementType: 0
     coords: {x: 0, y: 0}
-  connectedCables: []
+  cableAnchor: {fileID: 4801332698325512845}
   tagTree: {fileID: 5449344369322635694}
 --- !u!114 &4395601256411512883
 MonoBehaviour:

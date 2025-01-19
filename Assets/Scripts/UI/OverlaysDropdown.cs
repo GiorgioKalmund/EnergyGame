@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
@@ -107,10 +107,10 @@ public class OverlaysDropdown : MonoBehaviour
        // Skip one index for the "divider"
        
        Button sunOverlay = elements[4].AddComponent<Button>();
-       sunOverlay.onClick.AddListener(delegate{UIManager.Instance.ToggleOverlay(OverlayType.SUN);});
+       sunOverlay.onClick.AddListener(delegate{UIManager.Instance.ToggleOverlay(OverlayType.WIND);});
        
        Button windOverlay = elements[5].AddComponent<Button>();
-       windOverlay.onClick.AddListener(delegate{UIManager.Instance.ToggleOverlay(OverlayType.WIND);});
+       windOverlay.onClick.AddListener(delegate{UIManager.Instance.ToggleOverlay(OverlayType.SUN);});
 
        Button waterOverlay = elements[6].AddComponent<Button>();
        waterOverlay.onClick.AddListener(delegate{UIManager.Instance.ToggleOverlay(OverlayType.WATER);});

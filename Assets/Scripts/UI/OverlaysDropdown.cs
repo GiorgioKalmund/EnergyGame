@@ -183,7 +183,7 @@ public class OverlaysDropdown : MonoBehaviour
 
             lockImageObj.transform.SetParent(element.transform, false);
             lockImageObj.transform.localPosition = Vector3.zero; 
-            lockImage.rectTransform.sizeDelta = new Vector2(50, 50); // Beispielgröße
+            lockImage.rectTransform.sizeDelta = new Vector2(50, 50); 
         }
     
     }

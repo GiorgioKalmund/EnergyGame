@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8fc7952d3fe584a4494e4205c57378cf, type: 3}
-  m_Name: T_6_Atom
+  m_Name: T7_Atom
   m_EditorClassIdentifier: 
   DialogueText:
   - "Welches Ger\xE4usch macht ein Uran-Utan? Richtig! U-U-U-Uran!"

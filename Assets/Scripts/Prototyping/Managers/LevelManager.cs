@@ -27,6 +27,8 @@ public class LevelManager : MonoBehaviour
     public int nextID = 0;
 
     private bool isWon = false;
+
+    private int storedLevelCompletedCount = 0;
     private void Awake()
     {
         // Singleton
@@ -84,7 +86,11 @@ public class LevelManager : MonoBehaviour
             // TODO: Trigger Win action
             Debug.LogWarning("===GAME WON===");
             isWon = true;
-            UIManager.Instance.nextLevelLock.SetActive(false);
+            UIManager.Instance.UnlockNextLevelButton();
+
+            storedLevelCompletedCount = PlayerPrefs.GetInt("levels_completed");
+            PlayerPrefs.SetInt("levels_completed", ++storedLevelCompletedCount);
+            
         }
         
         return endpointsCompleted;

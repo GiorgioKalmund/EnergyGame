@@ -88,10 +88,7 @@ public class UIManager : MonoBehaviour
         
         // TODO: Assign next level button functionality & determine if we need to already unlock it (i.e. the level has already been completed at least once)
         nextLevelButton.onClick.AddListener(GoToNextLevel);
-        if (false)
-        {
-            UnlockNextLevelButton();
-        }
+        nextLevelButton.interactable = true;
         
         // Check if overlay material / object is present
         if (!overlayMaterial)
@@ -281,8 +278,8 @@ public class UIManager : MonoBehaviour
 
     public void UnlockNextLevelButton()
     {
+        nextLevelLock.SetActive(false);
         nextLevelButton.interactable = true;
-        nextLevelButton.image.sprite = nextLevelButtonSprite;
     }
 
     public void UpdateBudgetColor()

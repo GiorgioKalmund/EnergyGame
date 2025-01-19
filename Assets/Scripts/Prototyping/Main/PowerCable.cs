@@ -31,7 +31,7 @@ public class PowerCable : MonoBehaviour
    {
        _lineRenderer = GetComponent<LineRenderer>();
        _lineRenderer.positionCount = lineVertexCount;
-       lineFunctionDivisor = 0.64f * lineVertexCount;
+       lineFunctionDivisor = 0.9f * lineVertexCount;
        
    }
 

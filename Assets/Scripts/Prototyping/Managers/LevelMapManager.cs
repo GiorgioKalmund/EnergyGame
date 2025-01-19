@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LevelMapManager : MonoBehaviour
@@ -65,7 +66,6 @@ public class LevelMapManager : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(WaitForAllMarkers());
         // Backdrop should act as a 'click away to close' area
         backdropResetButtonBayern.onClick.AddListener(CloseCurrentlySelectedMarker);
         backdropResetButtonBaustelle.onClick.AddListener(CloseCurrentlySelectedMarker);
@@ -78,7 +78,6 @@ public class LevelMapManager : MonoBehaviour
         moveAnimationTime = 0f;
         
         // Default to Bayern, as this is what is reflected in the scene 
-        currentMap = LevelMapType.BAYERN;
         arrowRight.SetActive(false);
         
         // Reset animation time back to original value
@@ -87,22 +86,35 @@ public class LevelMapManager : MonoBehaviour
 
     private void OnEnable()
     {
-        
-     
-        // TODO: Load current map
         LoadCurrentMap();
         
         if (currentMap == LevelMapType.BAUSTELLE)
             ShowBaustelle();
         else
             ShowBayern();
+        
+        StartCoroutine(WaitForAllMarkers());
+        blackoutImage.DOFade(0f, moveAnimationTime / 2);
     }
 
     // TODO: Dynamically load from storage / player prefs
     private void LoadCurrentMap()
     {
-        LevelMapType loadedMap = LevelMapType.BAYERN;
-        currentMap = loadedMap; 
+       currentMap = LevelMapType.BAUSTELLE;
+       if (PlayerPrefs.GetInt("levels_completed") > 7)
+           currentMap = LevelMapType.BAYERN;
+    }
+
+    public void ProgressLockAll()
+    {
+        PlayerPrefs.SetInt("levels_completed", 0);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    
+    public void ProgressUnlockAll()
+    {
+        PlayerPrefs.SetInt("levels_completed", maxMarkerCount - 1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void AddMarker(LevelMapMarker marker)
@@ -168,7 +180,8 @@ public class LevelMapManager : MonoBehaviour
         yield return new WaitUntil(() => markers.Count >= maxMarkerCount);
 
         LinkMarkers();
-        UnlockUntilMarkerId(unlockUntilLevel - 1);
+        unlockUntilLevel = PlayerPrefs.GetInt("levels_completed");
+        UnlockUntilMarkerId(unlockUntilLevel);
     }
 
     private void CloseCurrentlySelectedMarker()
@@ -188,7 +201,6 @@ public class LevelMapManager : MonoBehaviour
             if (moveAnimationTime >= 0.05f)
                 await blackoutImage.DOFade(1f, moveAnimationTime / 2).AsyncWaitForCompletion();
             
-            Debug.Log(movingElement.transform.localPosition.x);
             if (movingElement.transform.localPosition.x >= 959)
                 await movingElement.transform.DOLocalMoveX(localXPos - 1920, 0.1f).SetEase(animationEase).SetRecyclable().AsyncWaitForCompletion();
             await blackoutImage.DOFade(0f, moveAnimationTime / 2).AsyncWaitForCompletion();

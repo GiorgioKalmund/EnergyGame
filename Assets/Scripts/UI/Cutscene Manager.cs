@@ -39,7 +39,7 @@ public class Cutscene_Manager : MonoBehaviour
         isDialogueActive = true;
         currentTurnIndex = 0;
 
-        StartCoroutine(DialogueRoutine());
+        ShowNextDialogue();
     }
 
 
@@ -49,43 +49,41 @@ public class Cutscene_Manager : MonoBehaviour
     }
 
 
-    private System.Collections.IEnumerator DialogueRoutine()
+    public async void ShowNextDialogue()
     {
-        while (isDialogueActive)
+        if (!isDialogueActive)
         {
-            //dislogEnd exit
-            if (currentTurnIndex >= dialogueSequence.Count)
-            {
-                EndDialogue();          
-                yield break;
-            }
-
-            DialogueTurn currentTurn = dialogueSequence[currentTurnIndex];
-            SpeechBubble currentSpeaker = currentTurn.speaker;
-
-            // Check if the current speaker has dialogue left
-            if (!currentSpeaker.DialogueContainer.HasNextLine())
-            {
-                Debug.LogWarning($"{currentSpeaker.name} has no more lines to speak.");
-                EndDialogue();
-                yield break;
-            }
-
-            yield return currentSpeaker.OpenSpeechbubble();
-            // Move to the next turn
-            currentTurnIndex++;
-
-            // Wait for user input to continue
-            yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
-            currentSpeaker.CloseSpeechBubbleInstantly();
-
+            EndDialogue();
+            return;
         }
+
+        if (currentTurnIndex >= dialogueSequence.Count)
+        {
+            EndDialogue();
+            return;
+        }
+
+        DialogueTurn currentTurn = dialogueSequence[currentTurnIndex];
+        SpeechBubble currentSpeaker = currentTurn.speaker;
+
+        // Check if the current speaker has dialogue left
+        if (!currentSpeaker.DialogueContainer.HasNextLine())
+        {
+            EndDialogue();
+            return;
+        }
+
+        await currentSpeaker.OpenSpeechbubble();
+        currentTurnIndex++;
+        //currentSpeaker.CloseSpeechBubbleInstantly();
+
+        ShowNextDialogue();
     }
 
     public void EndDialogue()
     {
         isDialogueActive = false;
-        CloseAllSpeechBubbles();
+        //CloseAllSpeechBubbles();
 
         //change skip button into start
         if (skipButton != null)

@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using DG.Tweening;
 
+
 [RequireComponent(typeof(DialogueContainer))]
 public class SpeechBubble : MonoBehaviour
 {
@@ -22,36 +23,37 @@ public class SpeechBubble : MonoBehaviour
         transform.localScale = Vector3.zero;
     }
 
-    public async Task OpenSpeechbubble(int index = -1)
+    public async Task<Boolean> OpenSpeechbubble(int index = -1)
     {
         string nextText = GetSpeechBubbleText(index);
         if (nextText.Equals(INVALID_DIALOGUE))
         {
             Debug.LogWarning("Invalid Dialogue String in Speechbubble.");
-            return;
+            return false;
         }
         transform.DOScale(1f, animationTime);
         // only continue if dialogue is valid
         isOpen = true;
         textbox.text = nextText;
         //Put animation to open the speechbubble here
-        
-        CloseSpeechbubble();
+
+        return await CloseSpeechbubble();
     }
 
-    public async void CloseSpeechbubble()
+
+    public async Task<Boolean> CloseSpeechbubble()
     {
         if (!isOpen)
         {
             Debug.LogWarning("Tried to close Speechbubble that was not open.");
-            return;
+            return false;
         }
 
         await transform.DOScale(0f, animationTime).SetDelay(SPEECHBUBBLE_DURATION).AsyncWaitForCompletion();
         isOpen = false;
         textbox.text = "";
+        return true;
     }
-
     public void CloseSpeechBubbleInstantly()
     {
         // Kill current delayed close

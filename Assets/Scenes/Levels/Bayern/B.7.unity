@@ -1631,6 +1631,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1603941016197921393, guid: 4df33afdf6ab54fc0be0ac3fde008583, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 97b4bd9f464246b4d99db2728755593c, type: 2}
     - target: {fileID: 5977264133004849666, guid: 4df33afdf6ab54fc0be0ac3fde008583, type: 3}
       propertyPath: m_Name
       value: GridDataManager

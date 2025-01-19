@@ -1397,7 +1397,9 @@ PrefabInstance:
       value: Bauarbeiter-Level-3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 902818418888832961, guid: 31d72b41b7e473d4db2d1563a483229f, type: 3}
+    - {fileID: 1364076815127437966, guid: 31d72b41b7e473d4db2d1563a483229f, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31d72b41b7e473d4db2d1563a483229f, type: 3}

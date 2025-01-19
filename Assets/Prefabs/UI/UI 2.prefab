@@ -2054,6 +2054,8 @@ MonoBehaviour:
   animationEase: 10
   expanded: 0
   tagsClosed: 0
+  lockSprite: {fileID: 21300000, guid: 908675f31063a45fdad3291cb9d930c2, type: 3}
+  lockBackdropSprite: {fileID: 21300000, guid: cb1f8e095b5b44d8ebd1b316ce1e7b22, type: 3}
 --- !u!1 &2604362667864195861
 GameObject:
   m_ObjectHideFlags: 0
@@ -3890,7 +3892,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fbccb84bdbd3442cd8f78c70744bb412, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1926922e8ee684cb699a8fdda2456a6a, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1

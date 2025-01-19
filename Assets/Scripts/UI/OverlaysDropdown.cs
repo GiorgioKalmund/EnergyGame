@@ -38,6 +38,7 @@ public class OverlaysDropdown : MonoBehaviour
 
 
   [SerializeField] private Sprite lockSprite;
+  [SerializeField] private Sprite lockBackdropSprite;
 
   public bool PowerOpen { get; private set;  }
   public bool Co2Open { get; private set;  }
@@ -176,6 +177,15 @@ public class OverlaysDropdown : MonoBehaviour
 
         if (element != null && lockSprite != null)
         {
+            Image[] images = element.GetComponentsInChildren<Image>();
+            Image backdrop;
+            if (images[0].name.Equals("Backdrop"))
+                backdrop = images[0];
+            else
+                backdrop = images[1];
+            
+            backdrop.sprite = lockBackdropSprite;
+            element.GetComponent<Button>().interactable = false;
             GameObject lockImageObj = new GameObject("LockImage");
             Image lockImage = lockImageObj.AddComponent<Image>();
 

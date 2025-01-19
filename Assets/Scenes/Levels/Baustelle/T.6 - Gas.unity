@@ -855,9 +855,17 @@ PrefabInstance:
       value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 7163467277849852114, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+      propertyPath: isTutorial
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7163467277849852114, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
       propertyPath: builderDialogue
       value: 
       objectReference: {fileID: 11400000, guid: e84ab22bf902dde44bb4d67dd5c2382c, type: 2}
+    - target: {fileID: 7163467277849852114, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+      propertyPath: OpenFirstSpeechbubbleDelay
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7665221562481136575, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
       propertyPath: m_IsActive
       value: 0

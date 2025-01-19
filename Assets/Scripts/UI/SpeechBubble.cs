@@ -28,6 +28,7 @@ public class SpeechBubble : MonoBehaviour
         while (DialogueContainer.HasNextLine())
         {
             await OpenSpeechbubble();
+            await transform.DOLocalMoveX(transform.localPosition.x,0).SetDelay(2*animationTime).AsyncWaitForCompletion(); //Schlimmster hack in diesem gesamten Projekt 
         } 
     }
     

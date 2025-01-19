@@ -5,6 +5,10 @@ using System.Collections;
 
 public class CharacterSpeechManager : MonoBehaviour
 {
+
+    public bool isTutorial; //Talk through whole dialogue if yes
+    public int OpenFirstSpeechbubbleDelay;
+    public static int TalkDelay = 1;
     [Header("Characters")] 
     [SerializeField] private SpeechBubble endpointsBubble;
     [SerializeField] private SpeechBubble co2Bubble;
@@ -44,7 +48,11 @@ public class CharacterSpeechManager : MonoBehaviour
         if (builderBubble)
             builderBubble.transform.gameObject.GetComponent<DialogueContainer>().Dialogue = builderDialogue;
         
+        if(isTutorial){
+            _ = builderBubble.Talk();
+        } else{
         StartCoroutine(StartFirstBuilderDialogue(5));
+        }
     }
 
     public void EndpointsBubbleAction(SpeechBubbleAction action)

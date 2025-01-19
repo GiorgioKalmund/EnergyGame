@@ -537,7 +537,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3642316311416885715, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: linkedSceneName
-      value: CutScene_test
+      value: T.2 - Solar
       objectReference: {fileID: 0}
     - target: {fileID: 8043455232930199327, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: m_Name
@@ -1083,7 +1083,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3642316311416885715, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: linkedSceneName
-      value: CutScene_test
+      value: T.4 - Wasser
       objectReference: {fileID: 0}
     - target: {fileID: 8043455232930199327, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: m_Name
@@ -1245,7 +1245,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3642316311416885715, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: linkedSceneName
-      value: CutScene_test
+      value: T.3 - Wind
       objectReference: {fileID: 0}
     - target: {fileID: 8043455232930199327, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: m_Name
@@ -2410,7 +2410,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3642316311416885715, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: linkedSceneName
-      value: CutScene_test
+      value: T.5 - Kohle
       objectReference: {fileID: 0}
     - target: {fileID: 8043455232930199327, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: m_Name
@@ -3420,7 +3420,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: d576747215439475a8b9b3d3dd548bad, type: 3}
     - target: {fileID: 3642316311416885715, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: linkedSceneName
-      value: T.3 - Wind
+      value: T.1 - Strom
       objectReference: {fileID: 0}
     - target: {fileID: 6265534064307119082, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: m_Colors.m_DisabledColor.b

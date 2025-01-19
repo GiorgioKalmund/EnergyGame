@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fc7952d3fe584a4494e4205c57378cf, type: 3}
+  m_Name: T_5_Kohle
+  m_EditorClassIdentifier: 
+  DialogueText:
+  - "Geld allein macht nicht gl\xFCcklich. Man muss es auch ausgeben!"
+  - Und deshalb zeig' ich dir jetzt, wie man Kohle verbrennt.
+  - "\xD6ffne doch mal die Kohlekarte."
+  - Die Kohlekarte zeight dirm wo Kohle vorhanden ist, und wo nicht.
+  - Ob man Kohle auch sinnvoll verbrennen kann? Ja, mit dem Kohlekraftwerk!
+  - "Wir bauen es immer direkt bei der Kohle, sonst m\xFCssten wir die Kohle ja noch
+    transportieren!"
+  - Abgase entstehen nur beim Bau.. und beim Betrieb. Und zwar viele!
+  - "Kosten tut es nicht so viel, im Verh\xE4ltnis zu dem was es leistet."
+  - "Bau mal eins, das die Fssilien so richtig ein\xE4schert!"

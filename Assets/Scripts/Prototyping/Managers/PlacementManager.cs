@@ -182,33 +182,6 @@ public class PlacementManager : MonoBehaviour
         lastHoveredTileData.setPlacementType(PlacementType.Blocked);
         lastHoveredTileData.SetCurrentBuilding(producerDescriptor);
         
-
-
-        //float productionValue = currentGameObject.GetComponentInChildren<Wandler>().generating;
-
-        //Replacement of old modification using name
-        //Enum is found on the bottom of this script
-        /* switch (producerDescriptor.powerPlantType)
-        {
-            case PowerPlantType.COALPLANT:
-                productionValue *= lastHoveredTileData.coalAmount;
-                break;
-            case PowerPlantType.WINDMILL:
-                productionValue *= lastHoveredTileData.windSpeed;
-                break;
-            case PowerPlantType.HYDROPOWER:
-                productionValue *= lastHoveredTileData.waterSpeed;
-                break;
-            case PowerPlantType.SOLARPANEL:
-                productionValue *= lastHoveredTileData.sunlightHours;
-                break;
-            default:
-                Debug.LogWarning("powerPlantType enum not set in powerplant.");
-                break;
-        }
-        Debug.Log(productionValue);
-        currentGameObject.GetComponentInChildren<Wandler>().generating = productionValue;
-        currentGameObject.GetComponentInChildren<Wandler>().tagTree.SetProductionText(productionValue); */
         SetGeneratingValue(true);
 
         currentGameObject = null;
@@ -221,6 +194,7 @@ public class PlacementManager : MonoBehaviour
         InputManager.Instance.OnClicked -= PlaceStructure;
         BuilderInventory.Instance.ShowInventory();
     }
+
     private void SetGeneratingValue(bool setInWandler){
         if(!currentGameObject || lastHoveredTileData == null){
             return;
@@ -242,6 +216,10 @@ public class PlacementManager : MonoBehaviour
                 break;
             case PowerPlantType.SOLARPANEL:
                 productionValue *= lastHoveredTileData.sunlightHours;
+                break;
+            case PowerPlantType.GAS:
+                break;
+            case PowerPlantType.NUCLEAR:
                 break;
             default:
                 Debug.LogWarning("powerPlantType enum not set in powerplant.");
@@ -324,20 +302,7 @@ public class PlacementManager : MonoBehaviour
             }
             
             PlacementType currentPlacementType = ProducerDescriptor.GetPlacementType(); 
-            //RaycastHit hit;
-            /* if (Physics.Raycast( cellIndicator.transform.position + Vector3.up * 0.2f, Vector3.down, out hit, 10f))
-            {
-                ground = hit.transform.gameObject;
-                if (ground.GetComponent<TileDataWrapper>())
-                {
-                    TileData tileData = ground.GetComponent<TileDataWrapper>().tileData;
-                    lastHoveredTileData = tileData; 
-                    PlacementType groundType = tileData.GetCurrentPlacementType();
-                    blocked = !currentPlacementType.Equals(groundType);
-                    cellSprite.color = blocked ? spriteColorWarning : spriteColorRegular;
-                }
-                
-            } */
+            //Get Tile Data below the mouse and set cell sprite and output preview accordingly
             Vector3Int arrPosition= GridDataManager.GetArrayPositionAtMousePosition();
             if(arrPosition.z>=0){
                 lastHoveredTileData = GridDataManager.GetGridDataAtPos(arrPosition).GetComponent<TileDataWrapper>().tileData;

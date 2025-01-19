@@ -127,19 +127,9 @@ public class OverlaysDropdown : MonoBehaviour
        
        resetYPosition = elements[0].transform.localPosition.y;
 
-
-
-        //lock
-        GameObject inventoryObject = GameObject.Find("Inventory");
-        if (inventoryObject != null)
+        if (BuilderInventory.Instance.isConstructionInventory)
         {
-            BuilderInventory builderInventory = inventoryObject.GetComponent<BuilderInventory>();
-            if (builderInventory != null)
-            {
-                int constructionSlotToUnlock = builderInventory.getConstructionSlotToUnlock();
-
-                LockElements(constructionSlotToUnlock);
-            }
+            LockElements(BuilderInventory.Instance.getConstructionSlotToUnlock());
         }
     }
     private void LockElements(int constructionSlotToUnlock)

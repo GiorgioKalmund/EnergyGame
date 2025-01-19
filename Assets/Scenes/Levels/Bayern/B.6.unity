@@ -1971,10 +1971,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentProduction: 0
   currentEnvironmentalImpact: 0
-  maxEnvironmentalImpact: 600
+  maxEnvironmentalImpact: 2000
   endpointsCompleted: 0
   endpointsCount: 0
-  endpointDemands: 3c000000500000004600000050000000
+  endpointDemands: 48000000640000004b00000046000000
   powerPlantInventoryCapacities: 020000000200000002000000020000000100000001000000
   nextID: 0
 --- !u!156049354 &6191906082463203712
@@ -2200,7 +2200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d1ac90a8c0bbc34bb329575cca85bb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  budget: 80
+  budget: 85
 --- !u!114 &8845099889201581318
 MonoBehaviour:
   m_ObjectHideFlags: 0

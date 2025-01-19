@@ -657,7 +657,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2954710773904093129, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
       propertyPath: constructionSlotToUnlock
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3115134933627206203, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
       propertyPath: sceneCamera
@@ -1994,7 +1994,7 @@ MonoBehaviour:
   endpointsCompleted: 0
   endpointsCount: 0
   endpointDemands: 2c0f0100
-  powerPlantInventoryCapacities: 000000000000000000000000000000000100000000000000
+  powerPlantInventoryCapacities: 000000000000000000000000000000000000000001000000
   nextID: 0
 --- !u!156049354 &6191906082463203712
 Grid:

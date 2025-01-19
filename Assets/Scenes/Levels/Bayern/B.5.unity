@@ -1809,7 +1809,7 @@ PrefabInstance:
     - target: {fileID: 7874358633279477564, guid: 4df33afdf6ab54fc0be0ac3fde008583, type: 3}
       propertyPath: waterTexture
       value: 
-      objectReference: {fileID: 2800000, guid: c0cd538cf96032046a43f47fc8720289, type: 3}
+      objectReference: {fileID: 2800000, guid: 6befb9761e51640949d2644409bf5518, type: 3}
     - target: {fileID: 7874358633279477564, guid: 4df33afdf6ab54fc0be0ac3fde008583, type: 3}
       propertyPath: displayTexture
       value: 

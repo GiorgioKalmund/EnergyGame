@@ -5,6 +5,7 @@ using System.Diagnostics;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using Debug = UnityEngine.Debug;
 
@@ -25,6 +26,7 @@ public class LevelManager : MonoBehaviour
       
     public int nextID = 0;
 
+    private bool isWon = false;
     private void Awake()
     {
         // Singleton
@@ -81,6 +83,8 @@ public class LevelManager : MonoBehaviour
         {
             // TODO: Trigger Win action
             Debug.LogWarning("===GAME WON===");
+            isWon = true;
+            UIManager.Instance.nextLevelLock.SetActive(false);
         }
         
         return endpointsCompleted;
@@ -94,8 +98,11 @@ public class LevelManager : MonoBehaviour
         UIManager.Instance.SetEndpointsCompleted(endpointsCompleted);
         return endpointsCompleted;
     }
-
-
+    
+    public void LoadNextLevel(){
+        if(!isWon) return;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+    }
 }
 
   

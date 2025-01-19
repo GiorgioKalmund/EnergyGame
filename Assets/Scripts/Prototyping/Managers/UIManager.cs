@@ -37,6 +37,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Button pauseButton;
     [SerializeField] private Button nextLevelButton;
     [SerializeField] private Sprite nextLevelButtonSprite;
+    [SerializeField] public GameObject nextLevelLock;
     private Color standardBudgetColor;
     public Color insufficientBudgetColor;
     [SerializeField] private GameObject donQuiotePanel;
@@ -299,7 +300,7 @@ public class UIManager : MonoBehaviour
 
     public void GoToNextLevel()
     {
-        
+        LevelManager.Instance.LoadNextLevel();
     }
 
     public void ShowOverlay(OverlayType type)
@@ -351,6 +352,7 @@ public class UIManager : MonoBehaviour
         donQuiotePanel.SetActive(false);
     }
 
+    
 }
 
 public enum UIState 

@@ -30,9 +30,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Levels/Bayern/B.7.unity
     guid: 737fe0a48e83069488a9523a8978e444
   - enabled: 1
-    path: Assets/Scenes/CutScene_test.unity
-    guid: b3629967711cdbc479cbd6fe5f091df3
-  - enabled: 1
     path: Assets/Scenes/Levels/Baustelle/T.0 - Bauen.unity
     guid: a9ae73b4bf7c48c4d9c2276563ad7d3e
   - enabled: 1
@@ -56,5 +53,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Baustelle/T.7 - Atom.unity
     guid: 6e55ef4e3872e8548a05828e12015b0f
+  - enabled: 1
+    path: Assets/Scenes/CutScene_test.unity
+    guid: b3629967711cdbc479cbd6fe5f091df3
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 79382d7c2cb974ab9b69bdd65383b5f7, type: 3}

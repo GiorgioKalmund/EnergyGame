@@ -169,4 +169,9 @@ public class BuilderInventory : MonoBehaviour
     {
         return expanded;
     }
+
+    public int getConstructionSlotToUnlock()
+    {
+        return constructionSlotToUnlock;
+    }
 }

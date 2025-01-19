@@ -668,6 +668,14 @@ PrefabInstance:
       value: UI 2
       objectReference: {fileID: 0}
     - target: {fileID: 3216179216171380646, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+      propertyPath: lockPrefab
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3216179216171380646, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+      propertyPath: lockSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 908675f31063a45fdad3291cb9d930c2, type: 3}
+    - target: {fileID: 3216179216171380646, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
       propertyPath: elements.Array.data[4]
       value: 
       objectReference: {fileID: 1364297264}

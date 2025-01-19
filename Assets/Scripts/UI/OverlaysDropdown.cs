@@ -1,10 +1,13 @@
-﻿    using System;
+﻿using System;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using DG.Tweening;
 using TMPro;
 using UnityEngine.InputSystem;
+using System.Diagnostics;
+
+
 
 public class OverlaysDropdown : MonoBehaviour
 {
@@ -32,6 +35,9 @@ public class OverlaysDropdown : MonoBehaviour
   private Action<InputAction.CallbackContext> showFinanceAction;
   private Action<InputAction.CallbackContext> collapseAllTagsAction;
   private Action<InputAction.CallbackContext> toggleDropdownAction;
+
+
+  [SerializeField] private Sprite lockSprite;
 
   public bool PowerOpen { get; private set;  }
   public bool Co2Open { get; private set;  }
@@ -119,9 +125,69 @@ public class OverlaysDropdown : MonoBehaviour
        coalOverlay.onClick.AddListener(delegate{UIManager.Instance.ToggleOverlay(OverlayType.COAL);});
        
        resetYPosition = elements[0].transform.localPosition.y;
-   }
 
-   public async void Expand()
+
+
+        //lock
+        GameObject inventoryObject = GameObject.Find("Inventory");
+        if (inventoryObject != null)
+        {
+            BuilderInventory builderInventory = inventoryObject.GetComponent<BuilderInventory>();
+            if (builderInventory != null)
+            {
+                int constructionSlotToUnlock = builderInventory.getConstructionSlotToUnlock();
+
+                LockElements(constructionSlotToUnlock);
+            }
+        }
+    }
+    private void LockElements(int constructionSlotToUnlock)
+    {
+        // Use switch-case to lock specific elements
+        switch (constructionSlotToUnlock)
+        {
+            case 0:
+                LockElement(5);
+                LockElement(6);
+                LockElement(7);
+                break;
+            case 1:
+                LockElement(4);
+                LockElement(6);
+                LockElement(7);
+                break;
+            case 2:
+                LockElement(4);
+                LockElement(5);
+                LockElement(7);
+                break;
+            case 3:
+                LockElement(4);
+                LockElement(5);
+                LockElement(6);
+                break;
+            default:
+                break;
+        }
+    }
+    private void LockElement(int index)
+    {
+        GameObject element = elements[index];
+
+        if (element != null && lockSprite != null)
+        {
+            GameObject lockImageObj = new GameObject("LockImage");
+            Image lockImage = lockImageObj.AddComponent<Image>();
+
+            lockImage.sprite = lockSprite;
+
+            lockImageObj.transform.SetParent(element.transform, false);
+            lockImageObj.transform.localPosition = Vector3.zero; 
+            lockImage.rectTransform.sizeDelta = new Vector2(50, 50); // Beispielgröße
+        }
+    
+    }
+    public async void Expand()
    {
        if (expanded)
            return;

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fc7952d3fe584a4494e4205c57378cf, type: 3}
+  m_Name: B1_C_BGM
+  m_EditorClassIdentifier: 
+  DialogueText:
+  - "Ah Don Quijote. Ja lang ist's her. Ich w\xFCrde mich nat\xFCrlich auch freuen,
+    Sie \xF6fters zu sehen, aber leider bin ich sehr besch\xE4ftigt mit meinen Aufgaben
+    als B\xFCrgermeisterin. Das glaubt man garnicht wie viel Arbeit das ist."
+  - "Danke f\xFCr Ihr Angebot. Allerdings habe ich gleich einen wichtigen Termin
+    mit unserem neuen Energieplaner. Bei den vielen Kraftwerk- "
+  - "Ach das w\xE4re doch auch unh\xF6flich... Ich h\xF6r mir das mal an was der
+    Herr zu sagen hat. W\xE4hrenddessen k\xF6nnen Sie sich ja mal in der Stadt umschauen,
+    ob hier alles nach dem Rechten zugeht."
+  - "Ah, Sie m\xFCssen der neue Energieplaner sein! Freut mich, Sie kennenzulernen. "
+  - "Ich habe auch gleich schon den ersten Auftrag f\xFCr Sie. Dieses Dorf hier ben\xF6tigt
+    dringend mehr Energie."

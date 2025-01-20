@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fc7952d3fe584a4494e4205c57378cf, type: 3}
+  m_Name: B1_C_Don_Quijote
+  m_EditorClassIdentifier: 
+  DialogueText:
+  - "Ohh wie wunderbar, dass ich Sie endlich wieder sehe! Ihre Anwesenheit ist mir
+    immer eine Freude! Ich w\xFCnschte wir k\xF6nnten uns \xF6fters sehen!"
+  - "Ach, wenn Sie Hilfe brauchen, k\xF6nnen Sie sich doch immer an mich wenden.
+    So einer sch\xF6nen Frau wie Ihnen helfe ich liebend gerne!"
+  - "KRAFTWERKEN?! WARUM DENN DAS? Es l\xE4uft doch alles wie am Schn\xFCrchen, da
+    ben\xF6tigen wir gar nichts anderes!"
+  - "Wenn Sie mich fragen ist das alles v\xF6lliger Schwachsinn, neumodischer Schmarrn."
+  - SO ETWAS SOLL AUF GAR KEINEN FALL UMGESETZT WERDEN! Sagen Sie dem netten Herren
+    doch einfach ab.
+  - Klar, das mache ich liebend gerne! Bis dann!

@@ -710,6 +710,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2954710773904093129, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+      propertyPath: overlaysToLock.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2954710773904093129, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+      propertyPath: overlaysToLock.Array.data[0]
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3115134933627206203, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
       propertyPath: sceneCamera
       value: 
@@ -717,6 +725,14 @@ PrefabInstance:
     - target: {fileID: 3147309710417777724, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
       propertyPath: m_Name
       value: UI 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3216179216171380646, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+      propertyPath: elementsToLock.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3216179216171380646, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+      propertyPath: elementsToLock.Array.data[0]
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3644909771561919961, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
       propertyPath: m_Pivot.x

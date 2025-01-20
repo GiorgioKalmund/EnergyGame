@@ -5,8 +5,6 @@ using UnityEngine.UI;
 using DG.Tweening;
 using TMPro;
 using UnityEngine.InputSystem;
-using System.Diagnostics;
-
 
 
 public class OverlaysDropdown : MonoBehaviour
@@ -21,6 +19,9 @@ public class OverlaysDropdown : MonoBehaviour
 
    public List<TagSelectionTree> allTags;
    public HashSet<TreeTagType> globallyActiveTypes;
+    
+   [Tooltip("4 - WIND\n5 - SOLAR\n6 - WATER\n7 - COAL")]
+   [SerializeField] private int[] elementsToLock;
 
    public Ease animationEase = Ease.InOutCubic;
 
@@ -35,7 +36,7 @@ public class OverlaysDropdown : MonoBehaviour
   private Action<InputAction.CallbackContext> showFinanceAction;
   private Action<InputAction.CallbackContext> collapseAllTagsAction;
   private Action<InputAction.CallbackContext> toggleDropdownAction;
-
+  
 
   [SerializeField] private Sprite lockSprite;
   [SerializeField] private Sprite lockBackdropSprite;
@@ -104,33 +105,42 @@ public class OverlaysDropdown : MonoBehaviour
    {
        Button powerTags = elements[0].AddComponent<Button>();
        powerTags.onClick.AddListener(delegate{ToggleAllTagsWithType(TreeTagType.POWER);});
+       powerTags.targetGraphic = GetComponentInChildren<Image>();
        
        Button co2Tags = elements[1].AddComponent<Button>();
        co2Tags.onClick.AddListener(delegate{ToggleAllTagsWithType(TreeTagType.CO2);});
+       co2Tags.targetGraphic = GetComponentInChildren<Image>();
        
        Button financeTags = elements[2].AddComponent<Button>();
        financeTags.onClick.AddListener(delegate{ToggleAllTagsWithType(TreeTagType.FINANCE);});
+       financeTags.targetGraphic = GetComponentInChildren<Image>();
         
        // Skip one index for the "divider"
        
        Button sunOverlay = elements[4].AddComponent<Button>();
        sunOverlay.onClick.AddListener(delegate{UIManager.Instance.ToggleOverlay(OverlayType.WIND);});
+       sunOverlay.targetGraphic = GetComponentInChildren<Image>();
        
        Button windOverlay = elements[5].AddComponent<Button>();
        windOverlay.onClick.AddListener(delegate{UIManager.Instance.ToggleOverlay(OverlayType.SUN);});
+       windOverlay.targetGraphic = GetComponentInChildren<Image>();
 
        Button waterOverlay = elements[6].AddComponent<Button>();
        waterOverlay.onClick.AddListener(delegate{UIManager.Instance.ToggleOverlay(OverlayType.WATER);});
+       waterOverlay.targetGraphic = GetComponentInChildren<Image>();
        
        Button coalOverlay = elements[7].AddComponent<Button>();
        coalOverlay.onClick.AddListener(delegate{UIManager.Instance.ToggleOverlay(OverlayType.COAL);});
+       coalOverlay.targetGraphic = GetComponentInChildren<Image>();
        
        resetYPosition = elements[0].transform.localPosition.y;
 
         if (BuilderInventory.Instance.isConstructionInventory)
         {
             LockElements(BuilderInventory.Instance.getConstructionSlotToUnlock());
+            
         }
+        LockElements(elementsToLock);
     }
     private void LockElements(int constructionSlotToUnlock)
     {
@@ -159,6 +169,15 @@ public class OverlaysDropdown : MonoBehaviour
                 break;
             default:
                 break;
+        }
+    }
+
+    private void LockElements(int[] elementsToLock)
+    {
+        Debug.Log("Locking" + elementsToLock);
+        foreach (var value in elementsToLock)
+        {
+            LockElement(value);
         }
     }
     private void LockElement(int index)

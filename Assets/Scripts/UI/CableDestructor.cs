@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -34,6 +35,9 @@ public class CableDestructor : MonoBehaviour
     {
         destructor.transform.DOScale(Vector3.zero, animationTime);
     }
-    
-    
+
+    private void OnDestroy()
+    {
+        DOTween.Kill(destructor.transform);
+    }
 }

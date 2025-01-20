@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
-using UnityEngine.InputSystem.Android;
 
 public class PowerCable : MonoBehaviour
 {

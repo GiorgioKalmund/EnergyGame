@@ -194,7 +194,7 @@ MonoBehaviour:
   selected: 0
   id: 0
   instanceId: 0
-  imageSprite: {fileID: 21300000, guid: 4b727f2cebfcc724fb8e7b048add920a, type: 3}
+  imageSprite: {fileID: 21300000, guid: c8498db12b64cc9478351a86e1b03109, type: 3}
   tileOn:
     sunlightHours: 0
     windSpeed: 0

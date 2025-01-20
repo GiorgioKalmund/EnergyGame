@@ -13,4 +13,15 @@ MonoBehaviour:
   m_Name: T1_Strom
   m_EditorClassIdentifier: 
   DialogueText:
-  - "Ha\xF6llo diese Szene ist noch nicht fertig"
+  - 'Wir brauchen Strom. Und woher kommt Strom?
+
+    Ich geh dir einen Tipp:'
+  - Die Steckdose ist es nicht.
+  - "\xD6ffne doch mal auf der linken Seite die Strom \xDCbersicht."
+  - Ah! Jetzt siehst du's. Strom kommt von den Kraftwerken
+  - Leider machen Kraftwerke nicht nur Strom, sondern auch Abgase...
+  - Und einen kleinen Geldbeutel.
+  - Oh, ich glaube da fehlt eine Stromleitung!
+  - Siehst du es?
+  - Verlege eine Stromleitung vom Kraftwerk zum Strommast!
+  - "Den Knopf daf\xFCr findest du, wenn du auf mich klickst!"

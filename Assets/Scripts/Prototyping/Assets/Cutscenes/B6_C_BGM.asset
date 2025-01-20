@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fc7952d3fe584a4494e4205c57378cf, type: 3}
+  m_Name: B6_C_BGM
+  m_EditorClassIdentifier: 
+  DialogueText:
+  - "Ich habs Dir ja gesagt, er ist verr\xFCckt! Komplett gegen den Fortschritt. "
+  - "H\xE4tte Don Quijote nur einen Bruchteil deines Verstandes und deiner Intelligenz,
+    dann w\xE4re ihm schon geholfen."
+  - Na Don Quijote, wie finden Sie unsere neue Solarpanele?
+  - "Ach ja, ist es nicht am\xFCsant. Da haben wir ja beide ja immer was zu lachen.
+    Obwohl... In Deiner Anwesenheit ist meine Stimmung stehts \xFCberragend gut,
+    so wie Du."
+  - Nun will ich Dich aber nicht weiter aufhalten!

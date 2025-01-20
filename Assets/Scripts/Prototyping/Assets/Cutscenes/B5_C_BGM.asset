@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fc7952d3fe584a4494e4205c57378cf, type: 3}
+  m_Name: B5_C_BGM
+  m_EditorClassIdentifier: 
+  DialogueText:
+  - "Ach, ignorieren Sie einfach was Don Quijote sagt. Er ist v\xF6llig verr\xFCckt,
+    schauen Sie sich Ihn doch an, wie er dort gegen die Windr\xE4der k\xE4mpft."
+  - Ich hab's Dir ja gesagt! Oh entschuldige, jetzt ist mir ausversehen das "Du"
+    rausgerutscht. Aber dann lass uns doch gleich dabei bleiben, oder?
+  - Ich meine, wir haben ja schon so viel zusammen erlebt... und kennen uns jetzt
+    auch schon eine Zeit lang...
+  - "Ah und bevor ich's vergesse hier ist dein N\xE4chster Auftrag. Zeig mir was
+    du drauf hast!"

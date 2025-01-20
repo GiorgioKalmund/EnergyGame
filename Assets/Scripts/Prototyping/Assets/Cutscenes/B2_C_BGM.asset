@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fc7952d3fe584a4494e4205c57378cf, type: 3}
+  m_Name: B2_C_BGM
+  m_EditorClassIdentifier: 
+  DialogueText:
+  - "Ich bin absolut positiv \xFCberrascht von Ihnen! Genau so k\xF6nnen Sie weitermachen!!\nIch
+    habe hier direkt schon das n\xE4chste Projekt!"
+  - "Ich verstehe ihre Unruhe, aber haben Sie noch nicht gesehen, was unser \xFCberragender
+    Energieplaner hier schon vorangebracht hat?"
+  - Das tut mir jetzt leid, dass Sie das mitbekommen haben. Ich bin auf jeden Fall
+    absolut begeistert von Ihrere Arbeit! Ich hoffe, Sie kommen mit diesem Budget
+    aus.

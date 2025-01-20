@@ -2010,7 +2010,7 @@ MonoBehaviour:
   maxEnvironmentalImpact: 50
   endpointsCompleted: 0
   endpointsCount: 0
-  endpointDemands: 480000003700000020000000
+  endpointDemands: 480000003700000037000000
   powerPlantInventoryCapacities: 0a0000000a0000000a0000000a0000000a0000000a000000
   nextID: 0
 --- !u!156049354 &6191906082463203712

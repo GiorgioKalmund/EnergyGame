@@ -179,7 +179,7 @@ public void ToggleTag(TreeTagType type)
   {
     if (!isEndpoint)
       return;
-    
+     
     currentProductionText.text = $"{Mathf.Floor(current)}MW / {Mathf.Floor(goal)}MW";
   }
 

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.InputSystem.Android;
 
 public class PowerCable : MonoBehaviour
 {
@@ -17,7 +18,8 @@ public class PowerCable : MonoBehaviour
 
    public TagSelectionTree tagTree;
 
-   // reference for endpoint?
+   [Header("Destructor")] 
+   [SerializeField] private GameObject destructorButton;
 
    private void Awake()
    {
@@ -32,7 +34,6 @@ public class PowerCable : MonoBehaviour
        _lineRenderer = GetComponent<LineRenderer>();
        _lineRenderer.positionCount = lineVertexCount;
        lineFunctionDivisor = 0.9f * lineVertexCount;
-       
    }
 
    void Update() {
@@ -45,15 +46,12 @@ public class PowerCable : MonoBehaviour
    public void Place()
    {
        placed = true;
+       
        // Place it 50% of the way towards the end position
        Vector3 newPos = startPos + (endPos - startPos) * 0.5f;
        newPos.y += 0.5f;
        tagTree.transform.parent.gameObject.transform.position = newPos;
        
-       // TODO: Dont't instantly expand, as this would cause the 'bobbing' between tags. Up for change
-       //tagTree.ExpandTree();
-       
-       //tagTree.SetProductionText(GetComponent<Wandler>().getOutput());
        GraphManager.Instance.calculateAll();
    }
 
@@ -75,9 +73,13 @@ public class PowerCable : MonoBehaviour
            Vector3 pointToDraw = startPos + (index * direction / lineVertexCount);
            pointToDraw.y += ApplyCableFunction((index - half) / lineFunctionDivisor) - subtraction;
            _lineRenderer.SetPosition(index, pointToDraw);
+
+           Vector3 dir = UIManager.Instance.sceneCamera.transform.position - pointToDraw;
+           if (index == lineVertexCount / 2)
+               destructorButton.transform.position = pointToDraw + Vector3.Normalize(dir) * 0.3f;
        }
    }
-   
+
    float ApplyCableFunction(float x)
    {
        return Mathf.Sqrt(Mathf.Pow(x, 2f) + 1);

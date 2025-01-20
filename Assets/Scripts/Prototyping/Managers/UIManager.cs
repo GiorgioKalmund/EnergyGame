@@ -56,6 +56,8 @@ public class UIManager : MonoBehaviour
     public bool overlayOpen;
     public OverlayType overlayOpenType;
 
+    public List<CableDestructor> allDestructors;
+
     private void Awake()
     {
         if (Instance && Instance != this)
@@ -243,9 +245,13 @@ public class UIManager : MonoBehaviour
         if (enable){
             SetDestructionCursorTextures();
             PlacementManager.Instance.Abort();
+            ShowAllDestructors();
         }
         else
+        {
+            HideAllDestructors();
             SetDefaultCursorTextures();
+        }
             
     }
 
@@ -347,6 +353,22 @@ public class UIManager : MonoBehaviour
     public void HideDON()
     {
         donQuiotePanel.SetActive(false);
+    }
+
+    public void ShowAllDestructors()
+    {
+        foreach (var destructor in allDestructors)
+        {
+            destructor.Activate();
+        }
+    }
+    
+    public void HideAllDestructors()
+    {
+        foreach (var destructor in allDestructors)
+        {
+            destructor.Deactivate();
+        }
     }
 
     

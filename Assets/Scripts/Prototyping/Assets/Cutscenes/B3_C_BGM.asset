@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DialogueText:
   - Das sieht ja spitze aus! Sie sind ja noch tausendmal besser als ich dachte!
+  - $NEUTRAL
   - Hmm, du hast schon Recht. Aber was soll man machen, wir brauchen halt Energie
   - Naja, irgendwie hat sie ja schon recht. Wir sollten schon darauf achten, nicht
     so viel CO<sub>2</sub>

@@ -1,46 +1,54 @@
+using System.Text.RegularExpressions;
 using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.ProBuilder;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class Smiley : MonoBehaviour
 {
     [Header("Character")]
     [SerializeField]
     private Smileys character;
-    [SerializeField]
-    private Expression expression;
+    
+    public Expression Expression;
     [SerializeField]
     private GameObject[] models;
     [Header("Rendering")]
     [SerializeField]
-    private GameObject faceRenderer;
+    public GameObject FaceRenderer;
     private RenderTexture tex;
     private Expression prevExpression;
     private FaceRenderer model;
     private int off = 100;
 
     private int insted = 0;
+    private RawImage img;
     void Start(){
-        RawImage img = GetComponentInChildren<RawImage>();
-        faceRenderer = Instantiate(faceRenderer, GetComponent<RectTransform>().transform.position, Quaternion.identity);
+        img = GetComponentInChildren<RawImage>();
+        FaceRenderer = Instantiate(FaceRenderer, GetComponent<RectTransform>().transform.position, Quaternion.identity);
         off = off+Random.Range(1,900);
-        faceRenderer.transform.position *= off;
+        FaceRenderer.transform.position *= off;
         //faceRenderer.transform.SetParent(Camera.main.transform);
-        faceRenderer.GetComponent<FaceRenderer>().setTexture();
-        model = faceRenderer.GetComponent<FaceRenderer>();
+        FaceRenderer.GetComponent<FaceRenderer>().setTexture();
+        model = FaceRenderer.GetComponent<FaceRenderer>();
         model.off = off;
-        tex = faceRenderer.GetComponent<FaceRenderer>().texture;
+        tex = FaceRenderer.GetComponent<FaceRenderer>().texture;
         if(tex == null){
             Debug.Log("No texture");
         }
+        if(Regex.Match(SceneManager.GetActiveScene().name,@"B[0-9]_C").Success){
+            img.enabled = false;
+        }
         img.texture = tex;
-        prevExpression = expression;
-
+        prevExpression = Expression;
+        
         switch(character){
             case Smileys.Baumeister:
-                switch(expression){
+                switch(Expression){
                     case Expression.Frown:
                     case Expression.Smile:
                     case Expression.Neutral:
@@ -52,7 +60,7 @@ public class Smiley : MonoBehaviour
                 }
                 break;
             case Smileys.Bürgermeisterin:
-                switch(expression){
+                switch(Expression){
                         case Expression.Frown:
                             model.character = models[1];
                             break;
@@ -68,7 +76,7 @@ public class Smiley : MonoBehaviour
                     }
                 break;
             case Smileys.Don:
-            switch(expression){            
+            switch(Expression){            
                         case Expression.Neutral:
                         case Expression.Smile:
                         case Expression.Frown:
@@ -80,7 +88,7 @@ public class Smiley : MonoBehaviour
                     }
                 break;
             case Smileys.Greta:
-            switch(expression){
+            switch(Expression){
                         case Expression.Frown:
                             model.character = models[5];
                             break;
@@ -96,7 +104,7 @@ public class Smiley : MonoBehaviour
                     }
                 break;
             case Smileys.Monopoly:
-            switch(expression){
+            switch(Expression){
                         case Expression.Frown:
                             model.character = models[8];
                             break;
@@ -120,11 +128,11 @@ public class Smiley : MonoBehaviour
 
     void Update(){
 
-        if(expression != prevExpression){
-            Debug.Log("Switched from "+prevExpression+" to "+expression);
+        if(Expression != prevExpression){
+            Debug.Log("Switched from "+prevExpression+" to "+Expression);
             switch(character){
             case Smileys.Baumeister:
-                switch(expression){
+                switch(Expression){
                     case Expression.Frown:
                     case Expression.Smile:
                     case Expression.Neutral:
@@ -136,7 +144,7 @@ public class Smiley : MonoBehaviour
                 }
                 break;
             case Smileys.Bürgermeisterin:
-                switch(expression){
+                switch(Expression){
                         case Expression.Frown:
                             model.character = models[1];
                             break;
@@ -152,7 +160,7 @@ public class Smiley : MonoBehaviour
                     }
                 break;
             case Smileys.Don:
-            switch(expression){            
+            switch(Expression){            
                         case Expression.Neutral:
                         case Expression.Smile:
                         case Expression.Frown:
@@ -164,7 +172,7 @@ public class Smiley : MonoBehaviour
                     }
                 break;
             case Smileys.Greta:
-            switch(expression){
+            switch(Expression){
                         case Expression.Frown:
                             model.character = models[5];
                             break;
@@ -180,7 +188,7 @@ public class Smiley : MonoBehaviour
                     }
                 break;
             case Smileys.Monopoly:
-            switch(expression){
+            switch(Expression){
                         case Expression.Frown:
                             model.character = models[8];
                             break;
@@ -202,7 +210,16 @@ public class Smiley : MonoBehaviour
         model.loadCharacter();
         }
 
-        prevExpression = expression;
+        prevExpression = Expression;
+    }
+    public void SetRenderTextureActive(bool isActive){
+        img.enabled = isActive;
+    }
+    public GameObject GetFaceRenderer(){
+        return FaceRenderer;
+    }
+    public RawImage GetImg(){
+        return img;
     }
 
     void LateUpdate()
@@ -232,7 +249,7 @@ enum Smileys{
     Bürgermeisterin
 }
 
-enum Expression{
+public enum Expression{
     Frown,
     Neutral,
     Smile

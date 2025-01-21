@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: 0
-  expression: 0
+  Expression: 0
   models:
   - {fileID: 919132149155446097, guid: b17c7ca08973f444ea1e6d855f7c3cbe, type: 3}
   - {fileID: 919132149155446097, guid: 798ee041f6a6e254e92071dc87dd27c7, type: 3}
@@ -64,7 +64,7 @@ MonoBehaviour:
   - {fileID: 919132149155446097, guid: f0baca5996d108540b197c41eafd97dc, type: 3}
   - {fileID: 919132149155446097, guid: 8bea8f1aa8f4eec4296117ad27f42012, type: 3}
   - {fileID: 919132149155446097, guid: 984a79e3ae0c89843b85f3480bd8c772, type: 3}
-  faceRenderer: {fileID: 2556626258329585012, guid: 95c9ad7ad3d5aec4f8b04d51b455c5da, type: 3}
+  FaceRenderer: {fileID: 2556626258329585012, guid: 95c9ad7ad3d5aec4f8b04d51b455c5da, type: 3}
 --- !u!1 &5852514066940993156
 GameObject:
   m_ObjectHideFlags: 0

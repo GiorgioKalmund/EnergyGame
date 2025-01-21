@@ -162,7 +162,7 @@ public class ConnectCableMode : MonoBehaviour
 
 
     }
-    private void PlaceCable(){
+    public GameObject PlaceCable(){
         
         
         GameObject cable = cachedCable;
@@ -189,13 +189,19 @@ public class ConnectCableMode : MonoBehaviour
         
         cachedCable = Instantiate(cablePrefab, new Vector3(0,-1000,0), Quaternion.identity);
         cachedCableScript = cachedCable.GetComponent<PowerCable>();
+        return cable;
     }
     private void StartDrawingCableAfterStartpointIsSet(){
         cachedCableScript.placed = false;
         cachedCableScript.startPos = startpoint.GetComponent<ProducerDescriptor>().cableAnchor.position;
         cachedCable.GetComponent<LineRenderer>().enabled = true;
     }
-
+    public void SetStartpoint(GameObject start){
+        startpoint = start;
+    }
+    public void SetEnpoint(GameObject end){
+        endpoint = end;
+    }
     [Obsolete("Prints the position the mouse is at in the gridData array")]
     private void Test()
     {

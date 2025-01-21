@@ -20,7 +20,7 @@ public class FaceRenderer : MonoBehaviour
     public GameObject lookAt;
     public Vector3 relativePos;
     public int off;
-    
+    private bool hasTweened = false;
     void Start(){
         //transform.position += new Vector3(100000, 100000, 100000);
         texture.name = Random.Range(0,9999).ToString();
@@ -38,10 +38,12 @@ public class FaceRenderer : MonoBehaviour
 
             c.transform.LookAt(mousePos.TransformPoint(transform.position - relativePos));
             //c.transform.Rotate(0,90,0);
+            hasTweened = false;
         }
-        else{
+        else if(!hasTweened){
             mousePos.position = lookAt.transform.position*off;
             c.transform.DOLookAt(mousePos.position + transform.position - relativePos, 0.5f);
+            hasTweened = true;
         }
     }
 

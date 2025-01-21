@@ -16,11 +16,14 @@ MonoBehaviour:
   - '$ENABLE
 
 '
+  - $LOOKAT
   - "Ich bin absolut positiv \xFCberrascht von Ihnen! Genau so k\xF6nnen Sie weitermachen!!\nIch
     habe hier direkt schon das n\xE4chste Projekt!"
   - $NEUTRAL
+  - $STOPLOOKAT
   - "Ich verstehe ihre Unruhe, aber haben Sie noch nicht gesehen, was unser \xFCberragender
     Energieplaner hier schon vorangebracht hat?"
+  - $LOOKAT
   - Das tut mir jetzt leid, dass Sie das mitbekommen haben. Ich bin auf jeden Fall
     absolut begeistert von Ihrere Arbeit! Ich hoffe, Sie kommen mit diesem Budget
     aus.

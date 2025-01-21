@@ -2051,6 +2051,7 @@ MonoBehaviour:
   - {fileID: 3095933212470517722}
   - {fileID: 8324332066552878495}
   allTags: []
+  elementsToLock: 
   animationEase: 10
   expanded: 0
   tagsClosed: 0
@@ -2989,9 +2990,9 @@ Canvas:
   m_GameObject: {fileID: 3147309710417777724}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 1
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -3001,7 +3002,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1000
   m_TargetDisplay: 0
 --- !u!114 &7347345692221427760
 MonoBehaviour:
@@ -3077,6 +3078,7 @@ MonoBehaviour:
   bannerParent: {fileID: 0}
   overlayOpen: 0
   overlayOpenType: 0
+  allDestructors: []
 --- !u!114 &6747998863823799526
 MonoBehaviour:
   m_ObjectHideFlags: 0

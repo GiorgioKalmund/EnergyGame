@@ -19,13 +19,18 @@ public class Smiley : MonoBehaviour
     private RenderTexture tex;
     private Expression prevExpression;
     private FaceRenderer model;
+    private int off = 100;
 
     private int insted = 0;
     void Start(){
         RawImage img = GetComponentInChildren<RawImage>();
         faceRenderer = Instantiate(faceRenderer, GetComponent<RectTransform>().transform.position, Quaternion.identity);
+        off = off+Random.Range(1,900);
+        faceRenderer.transform.position *= off;
+        //faceRenderer.transform.SetParent(Camera.main.transform);
         faceRenderer.GetComponent<FaceRenderer>().setTexture();
         model = faceRenderer.GetComponent<FaceRenderer>();
+        model.off = off;
         tex = faceRenderer.GetComponent<FaceRenderer>().texture;
         if(tex == null){
             Debug.Log("No texture");
@@ -209,8 +214,13 @@ public class Smiley : MonoBehaviour
         {
             Vector3[] fourCornersArray = new Vector3[4];
             GetComponent<RectTransform>().GetWorldCorners(fourCornersArray);
-            faceRenderer.transform.position = fourCornersArray[0];
+            model.relativePos = Camera.main.WorldToScreenPoint(fourCornersArray[0]);
+            insted = 4;
         }
+    }
+
+    public void cutsceneLookAt(GameObject o = null){
+        model.lookAt = o;
     }
 }
 

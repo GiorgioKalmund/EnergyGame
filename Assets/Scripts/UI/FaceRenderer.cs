@@ -1,30 +1,47 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Quaternion = UnityEngine.Quaternion;
 using Random = UnityEngine.Random;
+using Vector3 = UnityEngine.Vector3;
 
 public class FaceRenderer : MonoBehaviour
 {
     public GameObject character;
     public RenderTexture texture;
     GameObject c;
-    private Vector3 mousePos;
+    private Transform mousePos;
+    public GameObject empty;
+    public GameObject lookAt;
+    public Vector3 relativePos;
+    public int off;
     
     void Start(){
         //transform.position += new Vector3(100000, 100000, 100000);
         texture.name = Random.Range(0,9999).ToString();
+        empty = new GameObject();
+        mousePos = empty.transform;
     }
 
     void Update(){
-        mousePos = Input.mousePosition;
-        //mousePos += new Vector3(100000, 100000, 100000);;
-        mousePos.z -= 1000;
+        if(lookAt == null){
+            //mousePos += new Vector3(100000, 100000, 100000);
+            //mousePos.position = new Vector3(Input.mousePosition.x/Screen.width, Input.mousePosition.y/Screen.height, -1000);
+            //mousePos.position *= GetComponentInParent<Canvas>().
+            mousePos.position = Input.mousePosition;
+            mousePos.position += new Vector3(0,0,-1000);
 
-        c.transform.LookAt(mousePos);
-        //c.transform.Rotate(0,90,0);
+            c.transform.LookAt(mousePos.TransformPoint(transform.position - relativePos));
+            //c.transform.Rotate(0,90,0);
+        }
+        else{
+            mousePos.position = lookAt.transform.position*off;
+            c.transform.LookAt(mousePos.position + transform.position - relativePos);
+        }
     }
 
     public void setTexture()

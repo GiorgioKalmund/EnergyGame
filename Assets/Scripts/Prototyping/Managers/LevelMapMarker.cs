@@ -13,6 +13,7 @@ public class LevelMapMarker : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public bool unlocked { get; private set; }
     public int markerID;
     public string linkedSceneName = "";
+    public string displayName = "";
 
     [Header("Neighbours")] 
     [SerializeField] private LevelMapMarker prev;
@@ -65,7 +66,7 @@ public class LevelMapMarker : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
         // Apply function to the popup button 
         popup.SetActive(true);
-        popupDescriptionText.text = linkedSceneName;
+        popupDescriptionText.text = displayName; 
         popupButton = popup.GetComponentInChildren<Button>();
         popupButton.onClick.AddListener(delegate{SceneManager.LoadScene(linkedSceneName);});
         displayText.text = "";

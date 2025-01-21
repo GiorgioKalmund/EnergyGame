@@ -22,14 +22,10 @@ public class SpeechBubble : MonoBehaviour
     [SerializeField] private GameObject _lookAtObj;
     [SerializeField] private GameObject _lookAtObj2;
 
-    private void Awake()
-    {
-        _smiley.transform.gameObject.transform.localScale = Vector3.zero;
-    }
-
     private void Start()
     {
         transform.localScale = Vector3.zero;
+        _smiley.transform.localScale = Vector3.zero;
     }
 
     public async Task Talk()
@@ -50,18 +46,18 @@ public class SpeechBubble : MonoBehaviour
         string nextText = GetSpeechBubbleText(index);
         switch(nextText.Trim()){
             case "$ENABLE":
-                _smiley.transform.gameObject.transform.localScale = Vector3.one;
+                _smiley.transform.localScale = Vector3.one;
                  
                 Sequence appear = DOTween.Sequence();
-                appear.Append(_smiley.transform.gameObject.transform.DOScale(Vector3.one*1.5f,0.2f)).SetEase(Ease.InQuad);
-                appear.Append(_smiley.transform.gameObject.transform.DOScale(Vector3.one,0.2f)).SetEase(Ease.OutQuad);
+                appear.Append(_smiley.transform.DOScale(Vector3.one*1.5f,0.2f)).SetEase(Ease.InQuad);
+                appear.Append(_smiley.transform.DOScale(Vector3.one,0.2f)).SetEase(Ease.OutQuad);
                 
                 await appear.Play().AsyncWaitForCompletion();
                 break;
             case "$DISABLE":
                 Sequence disappear = DOTween.Sequence();
-                disappear.Append(_smiley.transform.gameObject.transform.DOScale(Vector3.one*1.5f,0.2f)).SetEase(Ease.InQuad);
-                disappear.Append(_smiley.transform.gameObject.transform.DOScale(Vector3.zero,0.2f)).SetEase(Ease.OutQuad);
+                disappear.Append(_smiley.transform.DOScale(Vector3.one*1.5f,0.2f)).SetEase(Ease.InQuad);
+                disappear.Append(_smiley.transform.DOScale(Vector3.zero,0.2f)).SetEase(Ease.OutQuad);
                 
                 _smiley.transform.gameObject.transform.localScale = Vector3.zero;
                 await disappear.Play().AsyncWaitForCompletion();

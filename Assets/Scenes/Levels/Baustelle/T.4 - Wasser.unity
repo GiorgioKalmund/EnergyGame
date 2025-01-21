@@ -991,12 +991,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 8.019038, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_renderer: {fileID: 1413452169}
-  m_maskType: 0
   _SortingLayer: 0
   _SortingLayerID: 0
   _SortingOrder: 0
+  m_hasFontAssetChanged: 0
+  m_renderer: {fileID: 1413452169}
+  m_maskType: 0
 --- !u!23 &1413452169
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2066,15 +2066,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8832960514201011447, guid: 866d902be49bd4ac8af2772dc61a6831, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -34.4
+      value: -12.32
       objectReference: {fileID: 0}
     - target: {fileID: 8832960514201011447, guid: 866d902be49bd4ac8af2772dc61a6831, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 29.4
+      value: 12.19
       objectReference: {fileID: 0}
     - target: {fileID: 8832960514201011447, guid: 866d902be49bd4ac8af2772dc61a6831, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -33.2
+      value: -11.92
       objectReference: {fileID: 0}
     - target: {fileID: 8832960514201011447, guid: 866d902be49bd4ac8af2772dc61a6831, type: 3}
       propertyPath: m_LocalRotation.w

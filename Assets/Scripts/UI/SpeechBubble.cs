@@ -46,6 +46,12 @@ public class SpeechBubble : MonoBehaviour
     public async Task OpenSpeechbubble(int index = -1)
     {
         string nextText = GetSpeechBubbleText(index);
+
+        if (nextText.Contains("Öffne"))
+        {
+            if (OverlaysDropdown.Instance)
+                OverlaysDropdown.Instance.Expand();
+        }
         switch(nextText.Trim()){
             case "$ENABLE":
                 Sequence appear = DOTween.Sequence();

@@ -6,6 +6,7 @@ using UnityEditor;
 using Debug = UnityEngine.Debug;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using static System.Net.Mime.MediaTypeNames;
 
 public class Cutscene_Manager : MonoBehaviour
@@ -53,6 +54,13 @@ public class Cutscene_Manager : MonoBehaviour
     {
         StartDialogue();
     }
+
+    public void SkipCurrentLine()
+    {
+        SpeechBubble currentSpeaker = dialogueSequence[currentTurnIndex].speaker;
+        currentSpeaker.CloseSpeechBubbleInstantly();
+    }
+
 
 
     public async void ShowNextDialogue()

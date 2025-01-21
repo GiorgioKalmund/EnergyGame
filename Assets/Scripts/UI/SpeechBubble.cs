@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Serialization;
 
 
 [RequireComponent(typeof(DialogueContainer))]
@@ -18,14 +19,16 @@ public class SpeechBubble : MonoBehaviour
     public bool isOpen = false;
     [SerializeField] private float animationTime = 0.3f;
 
-    [SerializeField] private Smiley _smiley;
+    [SerializeField] private Smiley smiley;
+    [SerializeField] private GameObject smileyScaler;
     [SerializeField] private GameObject _lookAtObj;
     [SerializeField] private GameObject _lookAtObj2;
 
     private void Start()
     {
         transform.localScale = Vector3.zero;
-        _smiley.transform.localScale = Vector3.zero;
+        if (smileyScaler)
+            smileyScaler.transform.localScale = Vector3.zero;
     }
 
     public async Task Talk()
@@ -42,46 +45,42 @@ public class SpeechBubble : MonoBehaviour
     
     public async Task OpenSpeechbubble(int index = -1)
     {
-        
         string nextText = GetSpeechBubbleText(index);
         switch(nextText.Trim()){
             case "$ENABLE":
-                _smiley.transform.localScale = Vector3.one;
-                 
                 Sequence appear = DOTween.Sequence();
-                appear.Append(_smiley.transform.DOScale(Vector3.one*1.5f,0.2f)).SetEase(Ease.InQuad);
-                appear.Append(_smiley.transform.DOScale(Vector3.one,0.2f)).SetEase(Ease.OutQuad);
+                appear.Append(smileyScaler.transform.DOScale(Vector3.one*1.5f,0.2f)).SetEase(Ease.InQuad);
+                appear.Append(smileyScaler.transform.DOScale(Vector3.one,0.2f)).SetEase(Ease.OutQuad);
                 
                 await appear.Play().AsyncWaitForCompletion();
                 break;
             case "$DISABLE":
                 Sequence disappear = DOTween.Sequence();
-                disappear.Append(_smiley.transform.DOScale(Vector3.one*1.5f,0.2f)).SetEase(Ease.InQuad);
-                disappear.Append(_smiley.transform.DOScale(Vector3.zero,0.2f)).SetEase(Ease.OutQuad);
+                disappear.Append(smileyScaler.transform.DOScale(Vector3.one*1.5f,0.2f)).SetEase(Ease.InQuad);
+                disappear.Append(smileyScaler.transform.DOScale(Vector3.zero,0.2f)).SetEase(Ease.OutQuad);
                 
-                _smiley.transform.gameObject.transform.localScale = Vector3.zero;
                 await disappear.Play().AsyncWaitForCompletion();
                 break;
             case "$SMILE":
-                _smiley.Expression = Expression.Smile;
+                smiley.Expression = Expression.Smile;
                 await transform.DOLocalMoveX(transform.localPosition.x,0).SetDelay(animationTime).AsyncWaitForCompletion(); //Schlimmster hack in diesem gesamten Projekt 
                 break;
             case "$NEUTRAL":
-                _smiley.Expression = Expression.Neutral;
+                smiley.Expression = Expression.Neutral;
                 await transform.DOLocalMoveX(transform.localPosition.x,0).SetDelay(animationTime).AsyncWaitForCompletion();
                 break;
             case "$FROWN":
-                _smiley.Expression = Expression.Frown;
+                smiley.Expression = Expression.Frown;
                 await transform.DOLocalMoveX(transform.localPosition.x,0).SetDelay(animationTime).AsyncWaitForCompletion();
                 break;
             case "$LOOKAT":
-                _smiley.cutsceneLookAt(_lookAtObj);
+                smiley.cutsceneLookAt(_lookAtObj);
                 break;
             case "$LOOKAT2":
-                _smiley.cutsceneLookAt(_lookAtObj2);
+                smiley.cutsceneLookAt(_lookAtObj2);
                 break;
             case "$STOPLOOKAT":
-                _smiley.cutsceneLookAt();
+                smiley.cutsceneLookAt();
                 break;
             case INVALID_DIALOGUE:
                 Debug.LogWarning("Invalid Dialogue String in Speechbubble");

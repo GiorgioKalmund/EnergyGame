@@ -24,10 +24,10 @@ public class StructurePrebuilder : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(counter < 10){
+        if(counter < 3){
             counter++;
         }
-        else if(counter == 10){
+        else if(counter == 3){
             windmill1.GetComponent<Wandler>().tagTree.SetProductionText(42);
             ConnectCableMode.Instance.SetStartpoint(windmill1);
             ConnectCableMode.Instance.SetEnpoint(GridDataManager.GetGridDataAtPos(new Vector3Int(2,2,1)));

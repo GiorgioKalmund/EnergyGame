@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using DG.Tweening;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -40,7 +41,7 @@ public class FaceRenderer : MonoBehaviour
         }
         else{
             mousePos.position = lookAt.transform.position*off;
-            c.transform.LookAt(mousePos.position + transform.position - relativePos);
+            c.transform.DOLookAt(mousePos.position + transform.position - relativePos, 0.5f);
         }
     }
 

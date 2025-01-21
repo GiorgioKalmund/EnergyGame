@@ -30,7 +30,7 @@ public class Smiley : MonoBehaviour
     void Start(){
         
         FaceRenderer = Instantiate(FaceRenderer, GetComponent<RectTransform>().transform.position, Quaternion.identity);
-        off = off+Random.Range(1,900);
+        off = off+Random.Range(1,500);
         FaceRenderer.transform.position *= off;
         //faceRenderer.transform.SetParent(Camera.main.transform);
         FaceRenderer.GetComponent<FaceRenderer>().setTexture();

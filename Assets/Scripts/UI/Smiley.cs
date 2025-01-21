@@ -28,7 +28,7 @@ public class Smiley : MonoBehaviour
     private int insted = 0;
     private RawImage img;
     void Start(){
-        img = GetComponentInChildren<RawImage>();
+        
         FaceRenderer = Instantiate(FaceRenderer, GetComponent<RectTransform>().transform.position, Quaternion.identity);
         off = off+Random.Range(1,900);
         FaceRenderer.transform.position *= off;
@@ -40,6 +40,7 @@ public class Smiley : MonoBehaviour
         if(tex == null){
             Debug.Log("No texture");
         }
+        img = GetComponentInChildren<RawImage>();
         if(Regex.Match(SceneManager.GetActiveScene().name,@"B[0-9]_C").Success){
             img.enabled = false;
         }
@@ -230,7 +231,7 @@ public class Smiley : MonoBehaviour
         if (insted == 3)
         {
             Vector3[] fourCornersArray = new Vector3[4];
-            GetComponent<RectTransform>().GetWorldCorners(fourCornersArray);
+            img.GetComponent<RectTransform>().GetWorldCorners(fourCornersArray);
             if(GetComponentInParent<Canvas>().renderMode == RenderMode.ScreenSpaceCamera){
                 model.relativePos = Camera.main.WorldToScreenPoint(fourCornersArray[0]);
             }

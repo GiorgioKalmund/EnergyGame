@@ -19,6 +19,7 @@ public class SpeechBubble : MonoBehaviour
     [SerializeField] private float animationTime = 0.3f;
 
     [SerializeField] private Smiley _smiley;
+    [SerializeField] private GameObject _lookAtObj;
     private void Start()
     {
         transform.localScale = Vector3.zero;
@@ -39,8 +40,9 @@ public class SpeechBubble : MonoBehaviour
         string nextText = GetSpeechBubbleText(index);
         switch(nextText.Trim()){
             case "$ENABLE":
+                _smiley.SetRenderTextureActive(true);
                 _smiley.GetImg().transform.localScale = Vector3.zero;
-                _smiley.SetRenderTextureActive(true); 
+                 
                 Sequence appear = DOTween.Sequence();
                 appear.Append(_smiley.GetImg().transform.DOScale(Vector3.one*1.5f,0.2f)).SetEase(Ease.InQuad);
                 appear.Append(_smiley.GetImg().transform.DOScale(Vector3.one,0.2f)).SetEase(Ease.OutQuad);
@@ -66,6 +68,12 @@ public class SpeechBubble : MonoBehaviour
             case "$FROWN":
                 _smiley.Expression = Expression.Frown;
                 await transform.DOLocalMoveX(transform.localPosition.x,0).SetDelay(animationTime).AsyncWaitForCompletion();
+                break;
+            case "$LOOKAT":
+                _smiley.cutsceneLookAt(_lookAtObj);
+                break;
+            case "$STOPLOOKAT":
+                _smiley.cutsceneLookAt();
                 break;
             case INVALID_DIALOGUE:
                 Debug.LogWarning("Invalid Dialogue String in Speechbubble");

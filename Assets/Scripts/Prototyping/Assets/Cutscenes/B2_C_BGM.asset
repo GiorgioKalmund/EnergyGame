@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: B2_C_BGM
   m_EditorClassIdentifier: 
   DialogueText:
+  - '$ENABLE
+
+'
   - "Ich bin absolut positiv \xFCberrascht von Ihnen! Genau so k\xF6nnen Sie weitermachen!!\nIch
     habe hier direkt schon das n\xE4chste Projekt!"
   - $NEUTRAL
@@ -21,3 +24,6 @@ MonoBehaviour:
   - Das tut mir jetzt leid, dass Sie das mitbekommen haben. Ich bin auf jeden Fall
     absolut begeistert von Ihrere Arbeit! Ich hoffe, Sie kommen mit diesem Budget
     aus.
+  - '$DISABLE
+
+'

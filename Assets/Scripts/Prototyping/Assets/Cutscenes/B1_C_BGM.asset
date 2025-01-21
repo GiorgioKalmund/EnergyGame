@@ -22,6 +22,8 @@ MonoBehaviour:
   - "Ach das w\xE4re doch auch unh\xF6flich... Ich h\xF6r mir das mal an was der
     Herr zu sagen hat. W\xE4hrenddessen k\xF6nnen Sie sich ja mal in der Stadt umschauen,
     ob hier alles nach dem Rechten zugeht."
+  - $LOOKAT
   - "Ah, Sie m\xFCssen der neue Energieplaner sein! Freut mich, Sie kennenzulernen. "
   - "Ich habe auch gleich schon den ersten Auftrag f\xFCr Sie. Dieses Dorf hier ben\xF6tigt
     dringend mehr Energie."
+  - $DISABLE

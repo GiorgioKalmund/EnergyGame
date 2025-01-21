@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: B1_C_Don_Quijote
   m_EditorClassIdentifier: 
   DialogueText:
+  - $ENABLE
   - "Ohh wie wunderbar, dass ich Sie endlich wieder sehe! Ihre Anwesenheit ist mir
     immer eine Freude! Ich w\xFCnschte wir k\xF6nnten uns \xF6fters sehen!"
   - "Ach, wenn Sie Hilfe brauchen, k\xF6nnen Sie sich doch immer an mich wenden.
@@ -23,3 +24,4 @@ MonoBehaviour:
   - SO ETWAS SOLL AUF GAR KEINEN FALL UMGESETZT WERDEN! Sagen Sie dem Neuen doch
     einfach ab.
   - Klar, das mache ich liebend gerne! Bis dann!
+  - $DISABLE

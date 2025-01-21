@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: B2_C_Monopoly
   m_EditorClassIdentifier: 
   DialogueText:
+  - $ENABLE
   - "Gut, dass ich Sie hier antreffe! Ich habe mir soeben einen \xDCberlick \xFCber
     die Ausgaben der letzten Monate gemacht. Das kann so nicht weiter gehen!"
   - "Nein, tats\xE4chlich ist mir das relativ egal. So viel Geld k\xF6nnen wir da
     nicht mehr rein stecken. Im n\xE4chsten Monat werden wir das Budget k\xFCrzen,
     dann lernen sie hoffentlich mal, wie man mit Geld umgeht."
+  - '$DISABLE
+
+'

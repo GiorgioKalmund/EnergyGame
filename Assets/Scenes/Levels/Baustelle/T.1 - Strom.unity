@@ -1398,7 +1398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af2e3d2bc5b9d7eafb126c091d25efc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _windmillPrefab: {fileID: 2698100121599932702, guid: d0972884f8d7cd042b8a8a14b8d24443, type: 3}
+  _windmillPrefab: {fileID: 7083639843144445973, guid: 889c23d73df3d5d4fa7de407382e3e23, type: 3}
   _cablePrefab: {fileID: 9142062873766252308, guid: 21db73efe622f44959ba877f70eb0fab, type: 3}
 --- !u!4 &2006223233
 Transform:
@@ -2037,7 +2037,7 @@ MonoBehaviour:
   maxEnvironmentalImpact: 10000
   endpointsCompleted: 0
   endpointsCount: 0
-  endpointDemands: 50000000
+  endpointDemands: 46000000
   powerPlantInventoryCapacities: 000000000200000000000000000000000000000000000000
   nextID: 0
 --- !u!156049354 &6191906082463203712

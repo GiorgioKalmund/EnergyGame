@@ -568,7 +568,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f390cef7c577da43adf5c6b6c6bfb6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NextScene: B.1
+  NextScene: B.6
   skipButton: {fileID: 1618154357}
   dialogueSequence:
   - speaker: {fileID: 384885190}

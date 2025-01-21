@@ -572,18 +572,15 @@ MonoBehaviour:
   skipButton: {fileID: 1618154357}
   dialogueSequence:
   - speaker: {fileID: 384885190}
-  - speaker: {fileID: 1044849711}
-  - speaker: {fileID: 1044849711}
+  - speaker: {fileID: 384885190}
+  - speaker: {fileID: 384885190}
   - speaker: {fileID: 384885190}
   - speaker: {fileID: 1044849711}
   - speaker: {fileID: 384885190}
   - speaker: {fileID: 1044849711}
-  - speaker: {fileID: 1044849711}
-  - speaker: {fileID: 1044849711}
   - speaker: {fileID: 384885190}
   - speaker: {fileID: 1044849711}
   - speaker: {fileID: 1044849711}
-  - speaker: {fileID: 384885190}
   - speaker: {fileID: 384885190}
   - speaker: {fileID: 384885190}
   - speaker: {fileID: 384885190}
@@ -725,7 +722,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5181638694278104009, guid: 1ef692f879d18e8ffbf220baa7a311f1, type: 3}
       propertyPath: m_Name
-      value: DON
+      value: monopoly
       objectReference: {fileID: 0}
     - target: {fileID: 5794969730343404274, guid: 1ef692f879d18e8ffbf220baa7a311f1, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -737,7 +734,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7306415251116732894, guid: 1ef692f879d18e8ffbf220baa7a311f1, type: 3}
       propertyPath: character
-      value: 2
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7306415251116732894, guid: 1ef692f879d18e8ffbf220baa7a311f1, type: 3}
+      propertyPath: Expression
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7983884533838357658, guid: 1ef692f879d18e8ffbf220baa7a311f1, type: 3}
       propertyPath: m_SizeDelta.x
@@ -773,12 +774,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8416939082823711360, guid: 1ef692f879d18e8ffbf220baa7a311f1, type: 3}
       propertyPath: m_Name
-      value: monopoly
+      value: monopoly bubble
       objectReference: {fileID: 0}
     - target: {fileID: 9190443903581576613, guid: 1ef692f879d18e8ffbf220baa7a311f1, type: 3}
       propertyPath: Dialogue
       value: 
-      objectReference: {fileID: 11400000, guid: 6b59ea660a7852844a816317cd48e6f3, type: 2}
+      objectReference: {fileID: 11400000, guid: 87f341641fa85d4439a6c61012d269c5, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1165,7 +1166,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7306415251116732894, guid: 1ef692f879d18e8ffbf220baa7a311f1, type: 3}
       propertyPath: Expression
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7533533428801489660, guid: 1ef692f879d18e8ffbf220baa7a311f1, type: 3}
       propertyPath: _lookAtObj
@@ -1210,7 +1211,7 @@ PrefabInstance:
     - target: {fileID: 9190443903581576613, guid: 1ef692f879d18e8ffbf220baa7a311f1, type: 3}
       propertyPath: Dialogue
       value: 
-      objectReference: {fileID: 11400000, guid: 9b1bc5686eb8b6d47a984555331e7ee6, type: 2}
+      objectReference: {fileID: 11400000, guid: bf6ee00c95f552d4398b06a89311e8a0, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

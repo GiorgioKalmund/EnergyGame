@@ -20,6 +20,7 @@ public class SpeechBubble : MonoBehaviour
 
     [SerializeField] private Smiley _smiley;
     [SerializeField] private GameObject _lookAtObj;
+    [SerializeField] private GameObject _lookAtObj2;
     private void Start()
     {
         transform.localScale = Vector3.zero;
@@ -71,6 +72,9 @@ public class SpeechBubble : MonoBehaviour
                 break;
             case "$LOOKAT":
                 _smiley.cutsceneLookAt(_lookAtObj);
+                break;
+            case "$LOOKAT2":
+                _smiley.cutsceneLookAt(_lookAtObj2);
                 break;
             case "$STOPLOOKAT":
                 _smiley.cutsceneLookAt();

@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: B4_C_BGM
   m_EditorClassIdentifier: 
   DialogueText:
+  - $ENABLE
+  - $LOOKAT
   - "Wow! Sagen Sie mal, wie schaffen Sie es denn immer, die perfekte L\xF6sung zu
     finden! Ich bin jetzt schon \xFCberzeugt, dass Sie genau der Richtige f\xFCr
     mein gro\xDFes Projekt Ba-"
   - "Oh, dar\xFCber darf ich ja noch gar nicht plaudern."
   - $NEUTRAL
+  - $STOPLOOKAT
+  - $DISABLE

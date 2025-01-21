@@ -13,6 +13,11 @@ MonoBehaviour:
   m_Name: B4_C_Don_Quijote
   m_EditorClassIdentifier: 
   DialogueText:
+  - $ENABLE
   - "DU MIT DEINEN KRAFTWERKEN!!! Machst sie ganz verr\xFCckt!"
+  - $LOOKAT2
   - "Ich werde gegen euch k\xE4mpfen! Und die B\xFCrgermeisterin besch\xFCtzen!"
+  - $STOPLOOKAT
+  - $LOOKAT
   - "Ich werde sie besch\xFCtzen! Und zwar vor DIR!"
+  - $DISABLE

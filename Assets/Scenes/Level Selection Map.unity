@@ -3514,6 +3514,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cursorDefaultTexture: {fileID: 2800000, guid: 4e2e0555c7ab84ffeac393e1819fe904, type: 3}
   cursorDownTexture: {fileID: 2800000, guid: e1250c16ce63b436f86c8757abef3648, type: 3}
+  hotspot: {x: 5, y: 2}
 --- !u!1001 &1913643221
 PrefabInstance:
   m_ObjectHideFlags: 0

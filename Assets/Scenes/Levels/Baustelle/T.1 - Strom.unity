@@ -916,12 +916,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 8.019038, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 1413452169}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!23 &1413452169
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1369,6 +1369,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7685150317375565051, guid: 4cbd0d6b63bd74ff5839aafdd534a04f, type: 3}
   m_PrefabInstance: {fileID: 305862197}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2006223231
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2006223233}
+  - component: {fileID: 2006223232}
+  m_Layer: 0
+  m_Name: Prebuilder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2006223232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2006223231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af2e3d2bc5b9d7eafb126c091d25efc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _windmillPrefab: {fileID: 7083639843144445973, guid: 889c23d73df3d5d4fa7de407382e3e23, type: 3}
+  _cablePrefab: {fileID: 9142062873766252308, guid: 21db73efe622f44959ba877f70eb0fab, type: 3}
+--- !u!4 &2006223233
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2006223231}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.813117, y: 5.301475, z: -5.7517743}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2034362886 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 568455131247407364, guid: 588e86ae9a01a4a3a8bd47894d5272f4, type: 3}
@@ -1991,7 +2037,7 @@ MonoBehaviour:
   maxEnvironmentalImpact: 10000
   endpointsCompleted: 0
   endpointsCount: 0
-  endpointDemands: 1e000000
+  endpointDemands: 46000000
   powerPlantInventoryCapacities: 000000000200000000000000000000000000000000000000
   nextID: 0
 --- !u!156049354 &6191906082463203712
@@ -2603,3 +2649,4 @@ SceneRoots:
   - {fileID: 2064495600}
   - {fileID: 1608921102}
   - {fileID: 129338102}
+  - {fileID: 2006223233}

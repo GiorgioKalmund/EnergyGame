@@ -18,10 +18,13 @@ MonoBehaviour:
     Ich geh dir einen Tipp:'
   - Die Steckdose ist es nicht.
   - "\xD6ffne doch mal auf der linken Seite die Strom \xDCbersicht."
-  - Ah! Jetzt siehst du's. Strom kommt von den Kraftwerken
-  - Leider machen Kraftwerke nicht nur Strom, sondern auch Abgase...
+  - Ah! Jetzt siehst du's. Strom kommt von den Kraftwerken.
+  - "Leider k\xF6nnen Kabel den Strom nicht ohne Verluste leiten."
+  - "Au\xDFerdem machen Kraftwerke nicht nur Strom, sondern produzieren auch Abgase."
   - Und einen kleinen Geldbeutel.
-  - Oh, ich glaube da fehlt eine Stromleitung!
-  - Siehst du es?
-  - Verlege eine Stromleitung vom Kraftwerk zum Strommast!
-  - "Den Knopf daf\xFCr findest du, wenn du auf mich klickst!"
+  - "Die Info-Kn\xF6pfe dazu findest du unter der Strom \xDCbersicht."
+  - Oh, ich sehe wir produzieren noch nicht genug Strom!
+  - "W\xE4hle ein Kraftwerk aus, indem du auf mich klickst und platziere es an einem
+    passenden Ort."
+  - "Jetzt m\xFCssen wir es nur noch verkabeln."
+  - Den Knopf findest du, wenn du auf mich klickst.

@@ -35,20 +35,25 @@ public class SpeechBubble : MonoBehaviour
     
     public async Task OpenSpeechbubble(int index = -1)
     {
-        Sequence bingusBongus = DOTween.Sequence();
-        bingusBongus.Append(_smiley.GetImg().transform.DOScale(Vector3.one*1.5f,0.2f)).SetEase(Ease.InQuad);
-        bingusBongus.Append(_smiley.GetImg().transform.DOScale(Vector3.one,0.2f)).SetEase(Ease.OutQuad);
+        
         string nextText = GetSpeechBubbleText(index);
         switch(nextText.Trim()){
             case "$ENABLE":
                 _smiley.GetImg().transform.localScale = Vector3.zero;
                 _smiley.SetRenderTextureActive(true); 
-
+                Sequence appear = DOTween.Sequence();
+                appear.Append(_smiley.GetImg().transform.DOScale(Vector3.one*1.5f,0.2f)).SetEase(Ease.InQuad);
+                appear.Append(_smiley.GetImg().transform.DOScale(Vector3.one,0.2f)).SetEase(Ease.OutQuad);
                 
-                bingusBongus.Play();
+                appear.Play();
                 break;
             case "$DISABLE":
+                Sequence disappear = DOTween.Sequence();
+                disappear.Append(_smiley.GetImg().transform.DOScale(Vector3.one*1.5f,0.2f)).SetEase(Ease.InQuad);
+                disappear.Append(_smiley.GetImg().transform.DOScale(Vector3.zero,0.2f)).SetEase(Ease.OutQuad);
                 
+                await disappear.Play().AsyncWaitForCompletion();
+                _smiley.SetRenderTextureActive(false);
                 break;
             case "$SMILE":
                 _smiley.Expression = Expression.Smile;

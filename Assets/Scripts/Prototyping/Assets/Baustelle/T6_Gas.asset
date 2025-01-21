@@ -13,4 +13,12 @@ MonoBehaviour:
   m_Name: T6_Gas
   m_EditorClassIdentifier: 
   DialogueText:
-  - "Das G in Gas steht f\xFCr Gas (Das level ist noch nicht fertig)"
+  - Riechst du das auch?
+  - "Riecht f\xFCr mich nach Energie?"
+  - Erdgas wird aus dem Ausland importiert.
+  - Und zwar nicht wegen des guten Geruchs.
+  - Nein, sondern weil man es in Strom verwandeln kann.
+  - Gaskraftwerke leisten ziemlich viel.
+  - Allerdings entstehen auch Treibhausgase.
+  - "Das Preis-Leistungsverh\xE4ltnis passt."
+  - Bau mal eins, das so richtig Gas gibt!

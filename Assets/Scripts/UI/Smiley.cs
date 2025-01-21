@@ -30,7 +30,7 @@ public class Smiley : MonoBehaviour
     void Start(){
         
         FaceRenderer = Instantiate(FaceRenderer, GetComponent<RectTransform>().transform.position, Quaternion.identity);
-        off = off+Random.Range(1,500);
+        off += Random.Range(1,500);
         FaceRenderer.transform.position *= off;
         //faceRenderer.transform.SetParent(Camera.main.transform);
         FaceRenderer.GetComponent<FaceRenderer>().setTexture();
@@ -42,7 +42,7 @@ public class Smiley : MonoBehaviour
         }
         img = GetComponentInChildren<RawImage>();
         if(Regex.Match(SceneManager.GetActiveScene().name,@"B[0-9]_C").Success){
-            img.enabled = false;
+            //img.enabled = false;
         }
         img.texture = tex;
         prevExpression = Expression;
@@ -212,9 +212,6 @@ public class Smiley : MonoBehaviour
         }
 
         prevExpression = Expression;
-    }
-    public void SetRenderTextureActive(bool isActive){
-        img.enabled = isActive;
     }
     public GameObject GetFaceRenderer(){
         return FaceRenderer;

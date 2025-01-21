@@ -1,19 +1,14 @@
 using System;
-using System.Diagnostics;
 using TMPro;
 using UnityEngine;
-using UnityEditor;
-using Debug = UnityEngine.Debug;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using static System.Net.Mime.MediaTypeNames;
 
 public class Cutscene_Manager : MonoBehaviour
 {
     [SerializeField] public string NextScene;
     [SerializeField] public GameObject skipButton;
-    [System.Serializable]
+    [Serializable]
     public class DialogueTurn
     {
         public SpeechBubble speaker; 
@@ -23,12 +18,6 @@ public class Cutscene_Manager : MonoBehaviour
     public bool isDialogueActive = false;
 
     private int currentTurnIndex = 0;
-
-    private void Awake()
-    {
-        skipButton.GetComponentInChildren<TextMeshProUGUI>().text = "Start";
-        skipButton.SetActive(false);
-    }
 
     public void StartDialogue()
     {
@@ -53,6 +42,8 @@ public class Cutscene_Manager : MonoBehaviour
     void Start()
     {
         StartDialogue();
+        skipButton.GetComponentInChildren<TextMeshProUGUI>().text = "Start";
+        skipButton.SetActive(false);
     }
 
     public void SkipCurrentLine()

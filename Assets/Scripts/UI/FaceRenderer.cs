@@ -24,7 +24,7 @@ public class FaceRenderer : MonoBehaviour
     void Start(){
         //transform.position += new Vector3(100000, 100000, 100000);
         texture.name = Random.Range(0,9999).ToString();
-        empty = new GameObject();
+        empty = new GameObject("IGNORE BUT DONT DELETE");
         mousePos = empty.transform;
     }
 

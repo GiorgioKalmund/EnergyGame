@@ -77,5 +77,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Cutscenes/B5_C.unity
     guid: d765075a87666e34ea326c2826924f54
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: 2533affc2e9574424b13be6d5e72c690
+  - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: 24c3aca2c57034535b279f80eb62dcdf
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 79382d7c2cb974ab9b69bdd65383b5f7, type: 3}

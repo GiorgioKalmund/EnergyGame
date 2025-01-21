@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using TMPro;
 using UnityEngine;
@@ -22,6 +23,11 @@ public class Cutscene_Manager : MonoBehaviour
 
     private int currentTurnIndex = 0;
 
+    private void Awake()
+    {
+        skipButton.GetComponentInChildren<TextMeshProUGUI>().text = "Start";
+        skipButton.SetActive(false);
+    }
 
     public void StartDialogue()
     {
@@ -88,9 +94,7 @@ public class Cutscene_Manager : MonoBehaviour
         //change skip button into start
         if (skipButton != null)
         {
-            TextMeshProUGUI buttonText = skipButton.GetComponentInChildren<TextMeshProUGUI>();
-            buttonText.text = "Start";
-            
+            skipButton.SetActive(true);
         }
     }
 

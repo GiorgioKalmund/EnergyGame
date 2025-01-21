@@ -39,5 +39,6 @@ public class CableDestructor : MonoBehaviour
     private void OnDestroy()
     {
         DOTween.Kill(destructor.transform);
+        UIManager.Instance.allDestructors.Remove(this);
     }
 }

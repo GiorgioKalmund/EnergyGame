@@ -71,8 +71,6 @@ public class InputManager : MonoBehaviour
 
     private void Update() //into Building System
     {
-        
-        
         if (InputMap.Mouse.LeftClick.IsPressed())
             OnClicked?.Invoke();
         if (InputMap.Mouse.RightClick.IsPressed())

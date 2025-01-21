@@ -218,7 +218,7 @@ public class OverlaysDropdown : MonoBehaviour
        }
 
        await toggleText.DOFade(0f, textAnimationTime).AsyncWaitForCompletion();
-       toggleText.text = "Tags";
+       toggleText.text = "Schilder";
        toggleText.DOFade(1f, textAnimationTime);
        expanded = true;
    }
@@ -237,7 +237,7 @@ public class OverlaysDropdown : MonoBehaviour
        }
        
        await toggleText.DOFade(0f, textAnimationTime).AsyncWaitForCompletion();
-       toggleText.text = "Tags & Overlays";
+       toggleText.text = "Schilder & Karten";
        toggleText.DOFade(1f, textAnimationTime);
        expanded = false;
    }

@@ -278,7 +278,7 @@ public class UIManager : MonoBehaviour
     public void SetEndpointsCompleted(int newValue)
     {
         if (LevelManager.Instance)
-            fulfilledEndpointsText.text = $"{newValue} / {LevelManager.Instance.endpointsCount} Completed";
+            fulfilledEndpointsText.text = $"{newValue} / {LevelManager.Instance.endpointsCount} Versorgt";
         else
             Debug.LogError("GridDataManager: No LevelManager found!");
     }

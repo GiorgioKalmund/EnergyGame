@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddc24fade6ba06f49b18cb35300f79e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingName: Coal Plant
+  buildingName: Kohlekraft
   powerPlantType: 1
   placement: 0
   cost: 13
@@ -193,7 +193,7 @@ MonoBehaviour:
   placed: 0
   selected: 0
   id: 0
-  instanceId: 0
+  instanceId: 3
   imageSprite: {fileID: 21300000, guid: c8498db12b64cc9478351a86e1b03109, type: 3}
   tileOn:
     sunlightHours: 0

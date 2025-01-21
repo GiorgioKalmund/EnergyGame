@@ -203,7 +203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddc24fade6ba06f49b18cb35300f79e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingName: Windmill
+  buildingName: Windkraft
   powerPlantType: 2
   placement: 0
   cost: 8
@@ -213,7 +213,7 @@ MonoBehaviour:
   placed: 0
   selected: 0
   id: 0
-  instanceId: 3
+  instanceId: 0
   imageSprite: {fileID: 21300000, guid: c6a653ad3397828479b3565ce18e69fe, type: 3}
   tileOn:
     sunlightHours: 0

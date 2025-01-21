@@ -1130,7 +1130,7 @@ MonoBehaviour:
   blackout: {fileID: 337082118}
   scrollingElement: {fileID: 2064405262}
   startDelay: 0
-  durationMultiplier: 2
+  durationMultiplier: 4
   animationEase: 1
   mainMenuSceneName: Main Menu
 --- !u!1 &1324530014

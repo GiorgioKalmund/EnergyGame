@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 9408
+  controlID: 22808
   draggingID: 0
 --- !u!114 &2
 MonoBehaviour:
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 9409
+  controlID: 22809
   draggingID: 0
 --- !u!114 &4
 MonoBehaviour:
@@ -174,7 +174,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 9410
+  controlID: 22810
   draggingID: 0
 --- !u!114 &5
 MonoBehaviour:
@@ -239,9 +239,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: a07f0000
       m_LastClickedID: 0
-      m_ExpandedIDs: 726afeff4a2bffff4c34ffff045dffff165fffff3860ffff5461ffffe662ffff7c64ffff0866ffff9667ffff2469ffff406bffffd6a4ffffb4aeffff9aafffff26d4ffff18ddfffface3fffff2faffff0cfbffff8c7b0000c67b00000a8800002e8800004e8800006cb60000
+      m_ExpandedIDs: 42f5fdff76f6fdff18fbfdff4a23feff7427feff6a29feff782bfeff802dfeff7c2ffeffe631feff0433feff1656feff3459feff726afeff4a2bffff4c34ffff045dffff165fffff3860ffff5461ffffe662ffff7c64ffff0866ffff9667ffff2469ffff406bffffd6a4ffffb4aeffff9aafffff26d4ffff18ddfffface3fffff2faffff0cfbffff8c7b0000c67b00000a8800002e8800004e8800006cb60000de3301007034010072390100863a0100483b0100163c0100d83c01008c3d0100b03e0100d43e0100063f0100503f0100f2720100
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -635,9 +635,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 3.813117, y: 5.301475, z: -5.7517743}
+    m_Target: {x: 0, y: 1, z: -9}
     speed: 2
-    m_Value: {x: 3.813117, y: 5.301475, z: -5.7517743}
+    m_Value: {x: 0, y: 1, z: -9}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -687,9 +687,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: -0.0078099673, y: -0.0024024807, z: 0.000018725093, w: -0.9999666}
   m_Size:
-    m_Target: 10
+    m_Target: 562.0043
     speed: 2
-    m_Value: 10
+    m_Value: 562.0043
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -776,7 +776,7 @@ MonoBehaviour:
     m_SaveData: []
     m_OverlaysVisible: 1
   m_SearchFilter:
-    m_NameFilter: 
+    m_NameFilter: main me
     m_ClassNames: []
     m_AssetLabels: []
     m_AssetBundleNames: []
@@ -786,24 +786,24 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets
+    - Assets/Scenes/Levels/Cutscenes
     m_Globs: []
-    m_OriginalText: 
+    m_OriginalText: main me
     m_ImportLogFlags: 0
     m_FilterByTypeIntersection: 0
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets
+  - Assets/Scenes/Levels/Cutscenes
   m_LastFoldersGridSize: -1
   m_LastProjectPath: /Users/giorgiokalmund/Unity/EnergyGame
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 127}
-    m_SelectedIDs: 6c7e0000
-    m_LastClickedID: 32364
-    m_ExpandedIDs: 000000006c7e00006e7e0000707e0000727e0000747e0000767e000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 451.00452}
+    m_SelectedIDs: 5cb50000
+    m_LastClickedID: 46428
+    m_ExpandedIDs: 000000006c7e00006e7e0000707e0000727e0000747e0000767e0000b87e0000c48c000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -831,7 +831,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000006c7e00006e7e0000707e0000727e0000747e0000767e000000ca9a3bffffff7f
+    m_ExpandedIDs: 000000006c7e00006e7e0000707e0000727e0000747e0000767e0000b87e0000c48c000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -856,8 +856,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
+    m_SelectedInstanceIDs: a07f0000
+    m_LastClickedInstanceID: 32672
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:

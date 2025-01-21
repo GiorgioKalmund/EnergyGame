@@ -533,7 +533,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3642316311416885715, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: markerID
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3642316311416885715, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: displayName
@@ -622,7 +622,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unlockUntilLevel: 0
   markers: []
-  maxMarkerCount: 15
+  maxMarkerCount: 14
   currentMap: 0
   pathGameObject: {fileID: 3959553496423863317, guid: c34a5133bd35b472587937cfcf419bd3, type: 3}
   pathParent: {fileID: 1099320118}
@@ -729,7 +729,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3642316311416885715, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: markerID
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3642316311416885715, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: displayName
@@ -1090,7 +1090,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3642316311416885715, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: markerID
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3642316311416885715, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: displayName
@@ -1256,7 +1256,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3642316311416885715, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: markerID
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3642316311416885715, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: displayName
@@ -1828,7 +1828,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3642316311416885715, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: markerID
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3642316311416885715, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: displayName
@@ -1946,7 +1946,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3642316311416885715, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: markerID
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3642316311416885715, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: displayName
@@ -2248,7 +2248,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3642316311416885715, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: markerID
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 3642316311416885715, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: displayName
@@ -2704,7 +2704,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3642316311416885715, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: markerID
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3642316311416885715, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: displayName
@@ -2956,7 +2956,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3642316311416885715, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: markerID
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3642316311416885715, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: displayName
@@ -3078,7 +3078,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3642316311416885715, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: markerID
-      value: 14
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 3642316311416885715, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: displayName
@@ -3200,7 +3200,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3642316311416885715, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: markerID
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 3642316311416885715, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: displayName
@@ -3366,7 +3366,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3642316311416885715, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: markerID
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3642316311416885715, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: displayName
@@ -3621,11 +3621,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2410359187824446668, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -2177
+      value: -2043
       objectReference: {fileID: 0}
     - target: {fileID: 2410359187824446668, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -371
+      value: -427
       objectReference: {fileID: 0}
     - target: {fileID: 2410359187824446668, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3645,7 +3645,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3642316311416885715, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: markerID
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3642316311416885715, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: displayName
@@ -4086,7 +4086,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3642316311416885715, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: markerID
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3642316311416885715, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: displayName
@@ -4528,6 +4528,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3642316311416885715, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3642316311416885715, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: displayName
       value: Bauen
       objectReference: {fileID: 0}
@@ -4558,6 +4562,10 @@ PrefabInstance:
     - target: {fileID: 8043455232930199327, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
       propertyPath: m_Name
       value: MapMarker - Bauen
+      objectReference: {fileID: 0}
+    - target: {fileID: 8043455232930199327, guid: 8e544e6034a874806b64d2d47d460cbb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

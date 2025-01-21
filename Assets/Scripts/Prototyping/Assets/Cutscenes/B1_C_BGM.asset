@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: B1_C_BGM
   m_EditorClassIdentifier: 
   DialogueText:
+  - $ENABLE
   - "Ah Don Quijote. Ja lang ist's her. Ich w\xFCrde mich nat\xFCrlich auch freuen,
     Sie \xF6fters zu sehen, aber leider bin ich sehr besch\xE4ftigt mit meinen Aufgaben
     als B\xFCrgermeisterin. Das glaubt man garnicht wie viel Arbeit das ist."

@@ -370,6 +370,10 @@ PrefabInstance:
       propertyPath: Dialogue
       value: 
       objectReference: {fileID: 11400000, guid: 012830890d329d04284c62f2700b6cf9, type: 2}
+    - target: {fileID: 6412217222729839287, guid: 814e56fb7bde54e4aa45cb4a9919fc19, type: 3}
+      propertyPath: _smiley
+      value: 
+      objectReference: {fileID: 324433405}
     - target: {fileID: 6826557105753939153, guid: 814e56fb7bde54e4aa45cb4a9919fc19, type: 3}
       propertyPath: m_SizeDelta.y
       value: 3100
@@ -515,6 +519,10 @@ PrefabInstance:
       propertyPath: Dialogue
       value: 
       objectReference: {fileID: 11400000, guid: 90cead6923827894699fb10c831c2916, type: 2}
+    - target: {fileID: 6412217222729839287, guid: 814e56fb7bde54e4aa45cb4a9919fc19, type: 3}
+      propertyPath: _smiley
+      value: 
+      objectReference: {fileID: 1938748817}
     - target: {fileID: 6826557105753939153, guid: 814e56fb7bde54e4aa45cb4a9919fc19, type: 3}
       propertyPath: m_SizeDelta.y
       value: 3100
@@ -641,6 +649,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7306415251116732894, guid: 7adfca393b1b4e640b6b2163e7958081, type: 3}
+      propertyPath: Expression
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7306415251116732894, guid: 7adfca393b1b4e640b6b2163e7958081, type: 3}
       propertyPath: expression
       value: 0
       objectReference: {fileID: 0}
@@ -676,6 +688,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 110552683}
   m_SourcePrefab: {fileID: 100100000, guid: 7adfca393b1b4e640b6b2163e7958081, type: 3}
+--- !u!114 &324433405 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7306415251116732894, guid: 7adfca393b1b4e640b6b2163e7958081, type: 3}
+  m_PrefabInstance: {fileID: 324433404}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1c441dd150a8074ab28fc52cf3b52a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &355733218
 GameObject:
   m_ObjectHideFlags: 0
@@ -1293,6 +1316,7 @@ MonoBehaviour:
   - speaker: {fileID: 910719638}
   - speaker: {fileID: 910719638}
   - speaker: {fileID: 1256096106}
+  - speaker: {fileID: 910719638}
   - speaker: {fileID: 1256096106}
   - speaker: {fileID: 1256096106}
   isDialogueActive: 0
@@ -1968,6 +1992,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 213339410}
   m_SourcePrefab: {fileID: 100100000, guid: 7adfca393b1b4e640b6b2163e7958081, type: 3}
+--- !u!114 &1938748817 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7306415251116732894, guid: 7adfca393b1b4e640b6b2163e7958081, type: 3}
+  m_PrefabInstance: {fileID: 1938748816}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1c441dd150a8074ab28fc52cf3b52a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

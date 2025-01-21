@@ -10,7 +10,7 @@ using DG.Tweening;
 public class SpeechBubble : MonoBehaviour
 {
     //This is the current string to indicate that something went wrong when getting the dialogue string 
-    public static string INVALID_DIALOGUE = "NULL";
+    public const string INVALID_DIALOGUE = "NULL";
     public static float SPEECHBUBBLE_DURATION = 10f;
     [SerializeField] private TMP_Text textbox;
     [SerializeField] public DialogueContainer DialogueContainer;
@@ -18,6 +18,7 @@ public class SpeechBubble : MonoBehaviour
     public bool isOpen = false;
     [SerializeField] private float animationTime = 0.3f;
 
+    [SerializeField] private Smiley _smiley;
     private void Start()
     {
         transform.localScale = Vector3.zero;
@@ -34,18 +35,44 @@ public class SpeechBubble : MonoBehaviour
     
     public async Task OpenSpeechbubble(int index = -1)
     {
+        Sequence bingusBongus = DOTween.Sequence();
+        bingusBongus.Append(_smiley.GetImg().transform.DOScale(Vector3.one*1.5f,0.2f)).SetEase(Ease.InQuad);
+        bingusBongus.Append(_smiley.GetImg().transform.DOScale(Vector3.one,0.2f)).SetEase(Ease.OutQuad);
         string nextText = GetSpeechBubbleText(index);
-        if (nextText.Equals(INVALID_DIALOGUE))
-        {
-            Debug.LogWarning("Invalid Dialogue String in Speechbubble.");
-            return;
-        }
-        transform.DOScale(1f, animationTime);
-        // only continue if dialogue is valid
-        isOpen = true;
-        textbox.text = nextText;
+        switch(nextText.Trim()){
+            case "$ENABLE":
+                _smiley.GetImg().transform.localScale = Vector3.zero;
+                _smiley.SetRenderTextureActive(true); 
 
-         await CloseSpeechbubble();
+                
+                bingusBongus.Play();
+                break;
+            case "$DISABLE":
+                
+                break;
+            case "$SMILE":
+                _smiley.Expression = Expression.Smile;
+                await transform.DOLocalMoveX(transform.localPosition.x,0).SetDelay(animationTime).AsyncWaitForCompletion(); //Schlimmster hack in diesem gesamten Projekt 
+                break;
+            case "$NEUTRAL":
+                _smiley.Expression = Expression.Neutral;
+                await transform.DOLocalMoveX(transform.localPosition.x,0).SetDelay(animationTime).AsyncWaitForCompletion();
+                break;
+            case "$FROWN":
+                _smiley.Expression = Expression.Frown;
+                await transform.DOLocalMoveX(transform.localPosition.x,0).SetDelay(animationTime).AsyncWaitForCompletion();
+                break;
+            case INVALID_DIALOGUE:
+                Debug.LogWarning("Invalid Dialogue String in Speechbubble");
+                return;
+            default:
+                transform.DOScale(1f,animationTime);
+                isOpen = true;
+                textbox.text = nextText;
+                await CloseSpeechbubble();
+                break;
+        }
+        
     }
 
 

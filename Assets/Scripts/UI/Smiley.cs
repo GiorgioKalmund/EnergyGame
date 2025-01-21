@@ -231,7 +231,12 @@ public class Smiley : MonoBehaviour
         {
             Vector3[] fourCornersArray = new Vector3[4];
             GetComponent<RectTransform>().GetWorldCorners(fourCornersArray);
-            model.relativePos = Camera.main.WorldToScreenPoint(fourCornersArray[0]);
+            if(GetComponentInParent<Canvas>().renderMode == RenderMode.ScreenSpaceCamera){
+                model.relativePos = Camera.main.WorldToScreenPoint(fourCornersArray[0]);
+            }
+            else{
+                model.relativePos = fourCornersArray[0];
+            }
             insted = 4;
         }
     }

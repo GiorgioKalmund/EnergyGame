@@ -13,10 +13,17 @@ MonoBehaviour:
   m_Name: B6_C_BGM
   m_EditorClassIdentifier: 
   DialogueText:
+  - $ENABLE
+  - $FROWN
+  - $LOOKAT
   - "Ich habs Dir ja gesagt, er ist verr\xFCckt! Komplett gegen den Fortschritt. "
   - "H\xE4tte Don Quijote nur einen Bruchteil deines Verstandes und deiner Intelligenz,
     dann w\xE4re ihm schon geholfen."
+  - $STOPLOOKAT
+  - $NEUTRAL
   - Na Don Quijote, wie finden Sie unsere neue Solarpanele?
+  - $SMILE
+  - $LOOKAT
   - "Ach ja, ist es nicht am\xFCsant. Da haben wir ja beide ja immer was zu lachen.
     Obwohl... In Deiner Anwesenheit ist meine Stimmung stehts \xFCberragend gut,
     so wie Du."

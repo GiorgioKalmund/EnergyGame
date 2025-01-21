@@ -39,12 +39,14 @@ public class FaceRenderer : MonoBehaviour
             c.transform.LookAt(mousePos.TransformPoint(transform.position - relativePos));
             //c.transform.Rotate(0,90,0);
             hasTweened = false;
-        }
-        else if(!hasTweened){
+        } else{
             mousePos.position = lookAt.transform.position*off;
-            c.transform.DOLookAt(mousePos.position + transform.position - relativePos, 0.5f);
+            c.transform.LookAt(mousePos.position + transform.position - relativePos);
             hasTweened = true;
         }
+        
+            
+        
     }
 
     public void setTexture()

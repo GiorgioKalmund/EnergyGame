@@ -146,10 +146,10 @@ public class ConnectCableMode : MonoBehaviour
                 return;
             }
             else{
-            PlaceCable();
-            if(endpoint.CompareTag("Endpoint")){
-                UIManager.Instance.DeactivateConnectingMode();
-            }
+                PlaceCable();
+                if(endpoint.CompareTag("Endpoint")){
+                    UIManager.Instance.DeactivateConnectingMode();
+                }
             }
             
         }

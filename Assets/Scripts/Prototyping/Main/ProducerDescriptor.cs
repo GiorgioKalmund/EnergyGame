@@ -99,6 +99,7 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
         if (BuilderInventory.Instance)
             BuilderInventory.Instance.AddSlotCapacity(1, instanceId);
 
+        //Debug.Log(buildingName +  " " + placement + " got destroyed, " + " on " + tileOn.coords + " " + tileOn.currentPlacementType);
         tileOn.currentPlacementType = this.placement;
         Destroy();
     }

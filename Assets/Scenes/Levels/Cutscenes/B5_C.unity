@@ -572,17 +572,18 @@ MonoBehaviour:
   skipButton: {fileID: 1618154357}
   dialogueSequence:
   - speaker: {fileID: 384885190}
-  - speaker: {fileID: 1044849711}
-  - speaker: {fileID: 1044849711}
   - speaker: {fileID: 384885190}
-  - speaker: {fileID: 1044849711}
   - speaker: {fileID: 384885190}
-  - speaker: {fileID: 1044849711}
-  - speaker: {fileID: 1044849711}
-  - speaker: {fileID: 1044849711}
+  - speaker: {fileID: 384885190}
+  - speaker: {fileID: 384885190}
   - speaker: {fileID: 384885190}
   - speaker: {fileID: 1044849711}
   - speaker: {fileID: 1044849711}
+  - speaker: {fileID: 1044849711}
+  - speaker: {fileID: 1044849711}
+  - speaker: {fileID: 1044849711}
+  - speaker: {fileID: 1044849711}
+  - speaker: {fileID: 384885190}
   - speaker: {fileID: 384885190}
   - speaker: {fileID: 384885190}
   - speaker: {fileID: 384885190}
@@ -778,7 +779,7 @@ PrefabInstance:
     - target: {fileID: 9190443903581576613, guid: 1ef692f879d18e8ffbf220baa7a311f1, type: 3}
       propertyPath: Dialogue
       value: 
-      objectReference: {fileID: 11400000, guid: 6b59ea660a7852844a816317cd48e6f3, type: 2}
+      objectReference: {fileID: 11400000, guid: 17163e89c8137c4448968d451a7f4a37, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1210,7 +1211,7 @@ PrefabInstance:
     - target: {fileID: 9190443903581576613, guid: 1ef692f879d18e8ffbf220baa7a311f1, type: 3}
       propertyPath: Dialogue
       value: 
-      objectReference: {fileID: 11400000, guid: 9b1bc5686eb8b6d47a984555331e7ee6, type: 2}
+      objectReference: {fileID: 11400000, guid: 03a72e6d74f6c1e4abf98d965b2b316c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

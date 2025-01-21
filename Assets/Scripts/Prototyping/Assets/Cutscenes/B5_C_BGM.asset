@@ -13,10 +13,17 @@ MonoBehaviour:
   m_Name: B5_C_BGM
   m_EditorClassIdentifier: 
   DialogueText:
+  - $ENABLE
+  - $LOOKAT
+  - $NEUTRAL
   - "Ach, ignorieren Sie einfach was Don Quijote sagt. Er ist v\xF6llig verr\xFCckt,
     schauen Sie sich Ihn doch an, wie er dort gegen die Windr\xE4der k\xE4mpft."
+  - $STOPLOOKAT
+  - $FROWN
+  - $LOOKAT
   - Ich hab's Dir ja gesagt! Oh entschuldige, jetzt ist mir ausversehen das "Du"
     rausgerutscht. Aber dann lass uns doch gleich dabei bleiben, oder?
+  - $SMILE
   - Ich meine, wir haben ja schon so viel zusammen erlebt... und kennen uns jetzt
     auch schon eine Zeit lang...
   - "Ah und bevor ich's vergesse hier ist dein N\xE4chster Auftrag. Zeig mir was

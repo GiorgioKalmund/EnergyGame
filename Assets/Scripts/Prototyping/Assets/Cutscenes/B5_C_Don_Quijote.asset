@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: B5_C_Don_Quijote
   m_EditorClassIdentifier: 
   DialogueText:
+  - $ENABLE
+  - $LOOKAT2
   - "Ich werde gegen dich k\xE4mpfen, du Ritter aus Preu\xDFen! Ganz egal wie riesig
     du bist!"
   - "Ganz egal, wie gro\xDF deine Schwerter sind!"
   - Ganz egal... ICH WERDE DICH BESIEGEN!
+  - $DISABLE

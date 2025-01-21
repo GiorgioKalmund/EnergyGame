@@ -48,7 +48,7 @@ public class SpeechBubble : MonoBehaviour
                 appear.Append(_smiley.GetImg().transform.DOScale(Vector3.one*1.5f,0.2f)).SetEase(Ease.InQuad);
                 appear.Append(_smiley.GetImg().transform.DOScale(Vector3.one,0.2f)).SetEase(Ease.OutQuad);
                 
-                appear.Play();
+                await appear.Play().AsyncWaitForCompletion();
                 break;
             case "$DISABLE":
                 Sequence disappear = DOTween.Sequence();

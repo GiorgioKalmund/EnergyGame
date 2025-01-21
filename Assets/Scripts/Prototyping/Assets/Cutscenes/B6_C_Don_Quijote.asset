@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: B6_C_Don_Quijote
   m_EditorClassIdentifier: 
   DialogueText:
+  - $ENABLE
   - "Sie meinen wohl die gro\xDFe Armee dort hinten? DIe wollen uns bestimmt bald
     angreifen, so wie die alle Ihre Schilder hoch halten. "
   - "Aber keine Sorge, ich werde Sie besch\xFCtzen."
+  - $LOOKAT
   - "Nur dich, du Energieplaner, dich werde ich garantiert NICHT besch\xFCtzen."
+  - $DISABLE

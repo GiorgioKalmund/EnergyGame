@@ -172,10 +172,9 @@ public class OverlaysDropdown : MonoBehaviour
         }
     }
 
-    private void LockElements(int[] elementsToLock)
+    private void LockElements(int[] e2Lock)
     {
-        Debug.Log("Locking" + elementsToLock);
-        foreach (var value in elementsToLock)
+        foreach (var value in e2Lock)
         {
             LockElement(value);
         }

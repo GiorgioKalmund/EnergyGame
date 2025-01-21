@@ -26,6 +26,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Texture2D cursorDownTexture;
     [SerializeField] private Texture2D cursorExplosiveTexture;
     [SerializeField] private Texture2D cursorExplosiveDownTexture;
+    [SerializeField] private Vector2 hotspot = new Vector2(5,2);
     
     private Texture2D currentCursorTexture;
     private Texture2D currentCursorDownTexture;
@@ -126,26 +127,26 @@ public class UIManager : MonoBehaviour
 
     private void SetCursorTexture()
     {
-        Cursor.SetCursor(currentCursorTexture, Vector2.zero, CursorMode.Auto);
+        Cursor.SetCursor(currentCursorTexture, hotspot, CursorMode.Auto);
     }
     
     private void SetCursorTextureDown()
     {
-        Cursor.SetCursor(currentCursorDownTexture, Vector2.zero, CursorMode.Auto);
+        Cursor.SetCursor(currentCursorDownTexture, hotspot, CursorMode.Auto);
     }
 
     private void SetDefaultCursorTextures()
     {
         currentCursorTexture = cursorDefaultTexture;
         currentCursorDownTexture = cursorDownTexture;
-        Cursor.SetCursor(currentCursorTexture, Vector2.zero, CursorMode.Auto);
+        Cursor.SetCursor(currentCursorTexture, hotspot, CursorMode.Auto);
     } 
     
     private void SetDestructionCursorTextures()
     {
         currentCursorTexture = cursorExplosiveTexture;
         currentCursorDownTexture = cursorExplosiveDownTexture;
-        Cursor.SetCursor(currentCursorTexture, Vector2.zero, CursorMode.Auto);
+        Cursor.SetCursor(currentCursorTexture, hotspot, CursorMode.Auto);
     }
 
     public void UpdateCurrentEnvironmentalImpact()

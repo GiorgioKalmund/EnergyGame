@@ -149,7 +149,7 @@ public class LevelMapManager : MonoBehaviour
     /*
      *  IMPORTANT: This method uses 1-based indexing for consistency with level names
      */
-    public void UnlockUntilMarkerId(int markerId)
+    private void UnlockUntilMarkerId(int markerId)
     {
         if (markerId < 0)
         {
@@ -161,8 +161,7 @@ public class LevelMapManager : MonoBehaviour
         {
             markerId = maxMarkerCount;
         }
-        //markers[0].Lock();
-        markers[markerId].Unlock();
+        markers[Math.Min(markers.Count - 1, markerId)].Unlock();
     }
 
     public GameObject GetPathObject()

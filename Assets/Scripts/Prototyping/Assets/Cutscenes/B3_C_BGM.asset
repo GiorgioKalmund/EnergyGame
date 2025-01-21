@@ -13,11 +13,16 @@ MonoBehaviour:
   m_Name: B3_C_BGM
   m_EditorClassIdentifier: 
   DialogueText:
+  - $ENABLE
+  - '$LOOKAT
+
+'
   - Das sieht ja spitze aus! Sie sind ja noch tausendmal besser als ich dachte!
   - $NEUTRAL
+  - $STOPLOOKAT
   - Hmm, du hast schon Recht. Aber was soll man machen, wir brauchen halt Energie
-  - Naja, irgendwie hat sie ja schon recht. Wir sollten schon darauf achten, nicht
-    so viel CO<sub>2</sub>
+  - $LOOKAT
   - "Naja, irgendwie hat sie ja schon recht. Wir sollten schon darauf achten, nicht
     so viel CO<sub>2</sub> auszusto\xDFen.\nIch bin mir aber sicher, dass Sie das
     schaffen."
+  - $DISABLE

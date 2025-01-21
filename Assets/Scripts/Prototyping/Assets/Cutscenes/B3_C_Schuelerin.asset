@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: B3_C_Schuelerin
   m_EditorClassIdentifier: 
   DialogueText:
+  - '$ENABLE
+
+'
   - Spitze?! Ich glaub' ich spinne! So macht ihr bitte nicht weiter! So viele neue
     Energiekraftwerke! Die erzeugen so viele Abgase!
   - "Aber es gibt doch verschiedene Kraftwerke! Der Energieplaner kennt sich sicher
     damit aus, der soll sich da was \xFCberlegen."
+  - $DISABLE

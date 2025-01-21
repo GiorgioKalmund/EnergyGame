@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: B7_C_Don_Quijote
   m_EditorClassIdentifier: 
   DialogueText:
+  - $ENABLE
   - Haben Sie das neueste schon gesehen?! Da ist ein riesiges..
   - "\xC4h"
   - Dings in unserem Fluss.
   - "Das..Das...bringt ja das Wasser ganz durcheinander. Das ist bestimmt schlecht,
     da m\xFCssen wir entgegenwirken."
   - Ich bin ja schon weg! Aber lassen Sie sich ja nicht von diesem Taugenichts blenden!
+  - $DISABLE

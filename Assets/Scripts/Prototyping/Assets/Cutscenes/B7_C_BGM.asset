@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: B7_C_BGM
   m_EditorClassIdentifier: 
   DialogueText:
+  - $ENABLE
+  - $FROWN
   - Jaja, ich rede mal mit meinem Energieplaner. Aber das muss ich mit ihm ZU ZWEIT
     besprechen.
+  - $SMILE
+  - $LOOKAT
   - "Sch\xF6n, dass wir endlich mal Zeit haben, ganz ungest\xF6rt,..zu zweit.."
   - Zwar leider nur kurz, aber wenn Du willst, kannst du gerne nach deiner Arbeit
     bei mir vorbei kommen!

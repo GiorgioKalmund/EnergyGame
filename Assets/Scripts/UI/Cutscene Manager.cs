@@ -48,6 +48,7 @@ public class Cutscene_Manager : MonoBehaviour
 
     public void SkipCurrentLine()
     {
+        if(currentTurnIndex >= dialogueSequence.Count) return; 
         SpeechBubble currentSpeaker = dialogueSequence[currentTurnIndex].speaker;
         currentSpeaker.CloseSpeechBubbleInstantly();
     }

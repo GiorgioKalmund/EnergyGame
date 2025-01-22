@@ -116,14 +116,15 @@ public class SpeechBubble : MonoBehaviour
     }
     public void CloseSpeechBubbleInstantly()
     {
-        // Kill current delayed close
-        DOTween.Kill(transform);
-        
         if (!isOpen)
         {
             Debug.LogWarning("Tried to close Speechbubble that was not open.");
             return;
         }
+        // Kill current delayed close
+        DOTween.Kill(transform);
+        
+        
 
         transform.DOScale(0f, animationTime);
         isOpen = false;

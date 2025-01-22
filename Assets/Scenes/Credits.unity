@@ -1686,7 +1686,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Deniz Bilgic\nKiara Kompony\nNina K\xF6nig\nLeonie Houzer\nPhillip Weinmann\nPhilipp
+  m_text: "Deniz Bilgic\nKiara Compony\nNina K\xF6nig\nLeonie Houzer\nPhillip Weinmann\nPhilipp
     Zent\nAndreas Zerr\nKira Zimmermann"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bbd234a8fdf2e4bd09aa1f5ddbe3a5c9, type: 2}

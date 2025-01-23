@@ -151,10 +151,10 @@ public class PlacementManager : MonoBehaviour
 
     private void PlaceStructure()
     {
-        if (InputManager.IsPointOverUI())
+        /* if (InputManager.IsPointOverUI())
         {
             return;
-        }
+        } */
 
         if(blocked || !currentGameObject){
             return;

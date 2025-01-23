@@ -153,6 +153,7 @@ public class UIManager : MonoBehaviour
     {
         if (LevelManager.Instance && currentEnvironmentText)
             currentEnvironmentText.text = $"{LevelManager.Instance.GetCurrentEnvironmentalImpact():F0} / {LevelManager.Instance.GetMaxEnvironmentalImpact():F0} t CO<sub>2</sub>";
+        UpdatePollutionColor();
     }
 
     public void SetQualityLevel(int level)
@@ -299,6 +300,14 @@ public class UIManager : MonoBehaviour
         else
         {
             budgetText.color = new Color(0.21f, 0.21f, 0.21f);
+        }
+    }
+    private void UpdatePollutionColor(){
+        if(LevelManager.Instance.currentEnvironmentalImpact > LevelManager.Instance.GetMaxEnvironmentalImpact()){
+            currentEnvironmentText.color = insufficientBudgetColor;
+
+        } else{
+            currentEnvironmentText.color = new Color(0.21f, 0.21f, 0.21f);
         }
     }
 

@@ -84,12 +84,9 @@ public class LevelManager : MonoBehaviour
         if (endpointsCompleted == endpointsCount)
         {
             // TODO: Trigger Win action
-            Debug.LogWarning("===GAME WON===");
-            isWon = true;
-            UIManager.Instance.UnlockNextLevelButton();
-
-            storedLevelCompletedCount = PlayerPrefs.GetInt("levels_completed");
-            PlayerPrefs.SetInt("levels_completed", ++storedLevelCompletedCount);
+            
+            CheckLevelWon();
+            
             
         }
         
@@ -108,6 +105,22 @@ public class LevelManager : MonoBehaviour
     public void LoadNextLevel(){
         if(!isWon) return;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+    }
+    /// <summary>
+    /// Checks and sets isWon if all conditions are met
+    /// </summary>
+    private void CheckLevelWon(){
+        bool hasEnoughBudget = BudgetManager.Instance.budget>=0;
+        bool notExcededPollution = currentEnvironmentalImpact <= maxEnvironmentalImpact;
+        isWon = hasEnoughBudget && notExcededPollution;
+        if(isWon) UnlockNextLevel();
+    }
+    public void UnlockNextLevel(){
+        Debug.Log("===GAME WON===");
+        UIManager.Instance.UnlockNextLevelButton();
+
+        storedLevelCompletedCount = PlayerPrefs.GetInt("levels_completed");
+        PlayerPrefs.SetInt("levels_completed", ++storedLevelCompletedCount);
     }
 }
 

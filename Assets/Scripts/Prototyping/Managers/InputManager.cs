@@ -180,7 +180,7 @@ public class InputManager : MonoBehaviour
 
 
         // Rotation around pivot
-        if (Input.GetMouseButton(2) && !IsPointOverUI()) // left mouse button for rotation
+        if (Input.GetMouseButton(2)) // left mouse button for rotation, M: Why was here IsPointOverUI anyways?
         {
             float horizontalRotation = Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime;
             float verticalRotation = -Input.GetAxis("Mouse Y") * rotationSpeed * Time.deltaTime;

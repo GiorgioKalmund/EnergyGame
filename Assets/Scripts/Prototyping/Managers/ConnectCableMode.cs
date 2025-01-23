@@ -123,7 +123,7 @@ public class ConnectCableMode : MonoBehaviour
             GridDataManager.SetGridDataAtPos(new Vector3Int(arrPosition.x,arrPosition.y,1),powerTower);
             
             tileBelow.GetComponent<TileDataWrapper>().tileData.currentPlacementType = PlacementType.Blocked;
-
+            powerTower.GetComponent<ProducerDescriptor>().SetTile(tileBelow.GetComponent<TileDataWrapper>().tileData); //💀 forgor, otherwise sell doesnt work
             GraphManager.Instance.wandlerArray[GraphManager.Instance.numOfWandler++] = powerTower.GetComponent<Wandler>();
 
         } else{

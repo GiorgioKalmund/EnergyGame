@@ -103,35 +103,28 @@ public class OverlaysDropdown : MonoBehaviour
 
    private void Start()
    {
-       Button powerTags = elements[0].AddComponent<Button>();
+       Button powerTags = elements[0].GetComponent<Button>();
        powerTags.onClick.AddListener(delegate{ToggleAllTagsWithType(TreeTagType.POWER);});
-       powerTags.targetGraphic = GetComponentInChildren<Image>();
        
-       Button co2Tags = elements[1].AddComponent<Button>();
+       Button co2Tags = elements[1].GetComponent<Button>();
        co2Tags.onClick.AddListener(delegate{ToggleAllTagsWithType(TreeTagType.CO2);});
-       co2Tags.targetGraphic = GetComponentInChildren<Image>();
        
-       Button financeTags = elements[2].AddComponent<Button>();
+       Button financeTags = elements[2].GetComponent<Button>();
        financeTags.onClick.AddListener(delegate{ToggleAllTagsWithType(TreeTagType.FINANCE);});
-       financeTags.targetGraphic = GetComponentInChildren<Image>();
         
        // Skip one index for the "divider"
        
-       Button sunOverlay = elements[4].AddComponent<Button>();
+       Button sunOverlay = elements[4].GetComponent<Button>();
        sunOverlay.onClick.AddListener(delegate{UIManager.Instance.ToggleOverlay(OverlayType.WIND);});
-       sunOverlay.targetGraphic = GetComponentInChildren<Image>();
        
-       Button windOverlay = elements[5].AddComponent<Button>();
+       Button windOverlay = elements[5].GetComponent<Button>();
        windOverlay.onClick.AddListener(delegate{UIManager.Instance.ToggleOverlay(OverlayType.SUN);});
-       windOverlay.targetGraphic = GetComponentInChildren<Image>();
 
-       Button waterOverlay = elements[6].AddComponent<Button>();
+       Button waterOverlay = elements[6].GetComponent<Button>();
        waterOverlay.onClick.AddListener(delegate{UIManager.Instance.ToggleOverlay(OverlayType.WATER);});
-       waterOverlay.targetGraphic = GetComponentInChildren<Image>();
        
-       Button coalOverlay = elements[7].AddComponent<Button>();
+       Button coalOverlay = elements[7].GetComponent<Button>();
        coalOverlay.onClick.AddListener(delegate{UIManager.Instance.ToggleOverlay(OverlayType.COAL);});
-       coalOverlay.targetGraphic = GetComponentInChildren<Image>();
        
        resetYPosition = elements[0].transform.localPosition.y;
 

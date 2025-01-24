@@ -11,7 +11,6 @@ public class OverlaysDropdown : MonoBehaviour
 {
     [Header("Text")] 
     [SerializeField] private TMP_Text toggleText;
-
     public float textAnimationTime = 0.1f;
     
    [Header("Elements")] 

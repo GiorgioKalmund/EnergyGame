@@ -73,6 +73,9 @@ public class GridDataManager : MonoBehaviour
     [SerializeField] private Color water3 = Color.white;
     [SerializeField] private Color water4 = Color.white;
 
+    [Header("COAL")]
+    [SerializeField] private Color coal1 = Color.white;
+
     [SerializeField] private GameObject endpointPrefab;
    
     /// <summary>
@@ -284,6 +287,29 @@ public class GridDataManager : MonoBehaviour
         Vector3Int gridPosition = grid.WorldToCell(mousePos + new Vector3(0.5f, 0, 0.5f));
         Vector3Int arrPosition = ConvertGridPosToArrayPos(gridPosition);
         return arrPosition;
+    }
+
+    public List<Color> GetWindColors()
+    {
+        return new List<Color>() { wind1, wind2, wind3, wind4 };
+    }
+    public List<Color> GetSunColors()
+    {
+        return new List<Color>() { sun1, sun2, sun3, sun4};
+    }
+    public List<Color> GetWaterColors()
+    {
+        return new List<Color>() { water1, water2, water3, water4 };
+    }
+    // TODO: If ever more coal colors are added, this has to be changed
+    public List<Color> GetCoalColors()
+    {
+        return new List<Color>() { coal1, coal1, coal1, coal1 };
+    }
+
+    public float[] GetIntensities()
+    {
+        return new[] { strength1, strength2, strength3, strength4 };
     }
 }
 

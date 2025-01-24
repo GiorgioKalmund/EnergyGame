@@ -339,20 +339,30 @@ public class UIManager : MonoBehaviour
         }
        overlayOpen = true;
        overlayOpenType = type;
+       
+       if (OverlayLegend.Instance)
+           OverlayLegend.Instance.Show();
     }
 
     public void HideOverlay()
     {
        overlayMaterial.color = Color.clear;
-       overlayOpen = false;
+       overlayOpen = false; 
+       
+       if (OverlayLegend.Instance)
+           OverlayLegend.Instance.Hide();
     }
 
     public void ToggleOverlay(OverlayType type)
     {
-       if (overlayOpen && overlayOpenType == type)
+        if (overlayOpen && overlayOpenType == type)
            HideOverlay();
-       else
+        else
            ShowOverlay(type);
+           
+        if (OverlayLegend.Instance)
+           OverlayLegend.Instance.SetLegend(type);
+       
     }
 
     public void ShowDON()

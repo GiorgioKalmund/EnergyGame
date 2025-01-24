@@ -5,6 +5,8 @@ using TMPro;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Serialization;
+using Unity.Mathematics;
+using Random = UnityEngine.Random;
 
 
 [RequireComponent(typeof(DialogueContainer))]
@@ -24,13 +26,19 @@ public class SpeechBubble : MonoBehaviour
     [SerializeField] private GameObject _lookAtObj;
     [SerializeField] private GameObject _lookAtObj2;
 
+    [SerializeField] private string _onLevelCompleteText;
     private void Start()
     {
         transform.localScale = Vector3.zero;
         if (smileyScaler)
             smileyScaler.transform.localScale = Vector3.zero;
-    }
 
+        LevelManager.Instance.LevelCompleted += SayTextOnLevelComplete; //M: keine ahnung warum aber muss hier hin und nicht in OnEnable
+    }
+    
+    void OnDisable() {
+        LevelManager.Instance.LevelCompleted -= SayTextOnLevelComplete;
+    }
     public async Task Talk()
     {
         if (!DialogueContainer)
@@ -100,7 +108,13 @@ public class SpeechBubble : MonoBehaviour
         }
         
     }
-
+    public async Task OpenSpeechbubbleWithCustomText(string text){
+        
+        transform.DOScale(1f,animationTime);
+        isOpen = true;
+        textbox.text = text;
+        await CloseSpeechbubble();
+    }
 
     public async Task CloseSpeechbubble()
     {
@@ -163,6 +177,11 @@ public class SpeechBubble : MonoBehaviour
         return INVALID_DIALOGUE;
     }
 
+    private void SayTextOnLevelComplete(){
+        if(_onLevelCompleteText != "")
+        OpenSpeechbubbleWithCustomText(_onLevelCompleteText);
+        
+    }
     private void OnDestroy()
     {
         DOTween.Kill(transform);

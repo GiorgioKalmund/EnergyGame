@@ -29,6 +29,11 @@ public class LevelManager : MonoBehaviour
     private bool isWon = false;
 
     private int storedLevelCompletedCount = 0;
+
+    public event Action LevelCompleted;
+    protected virtual void OnLevelCompleted(){
+        LevelCompleted?.Invoke();
+    }
     private void Awake()
     {
         // Singleton
@@ -117,6 +122,7 @@ public class LevelManager : MonoBehaviour
     }
     public void UnlockNextLevel(){
         Debug.Log("===GAME WON===");
+        OnLevelCompleted();
         UIManager.Instance.UnlockNextLevelButton();
 
         storedLevelCompletedCount = PlayerPrefs.GetInt("levels_completed");

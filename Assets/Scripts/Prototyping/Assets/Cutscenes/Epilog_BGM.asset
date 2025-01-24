@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fc7952d3fe584a4494e4205c57378cf, type: 3}
+  m_Name: Epilog_BGM
+  m_EditorClassIdentifier: 
+  DialogueText:
+  - $ENABLE
+  - 'Meine lieben Damen und Herren.
+
+    Liebe Bayern.'
+  - 'Es ist mir eine Ehre Ihnen heute unser bisher ambitioniertestes Projekt vorzustellen:'
+  - Bavaria One!
+  - 'Ja meine lieben Bayern, es ist eine Rakete!
+
+'
+  - "Sie ist die gr\xF6\xDFte Rakete aller Zeiten.\nSie ist so toll."
+  - "Alle anderen L\xE4nder werden sagen:\nOh, wie ist die bayerische Rakete toll!"
+  - Aber denken Sie doch an das Geld, wenn Bayern erst einmal wieder an der Spitze
+    steht.
+  - "Gibt es keine!\nEin riesiges Segel tr\xE4gt die Bavaria als Gewand."
+  - "Von der Erde aus, der kleinen, kleinen Erde aus, werden Laser ihre Fl\xFCgel
+    bestrahlen."
+  - Abheben wird sie nur durch die Kraft des Lichts.
+  - $LOOKAT
+  - Und da kommst du ins Spiel.
+  - Meine liebste Person auf der ganzen Welt.
+  - Mein Schatz.
+  - "All das w\xE4re nicht m\xF6glich gewesen ohne eine perfekte Energieplanung."
+  - "Dankesch\xF6n, mein Schatz!"
+  - "Mein Schatz, m\xF6chtest du mit mir mitkommen?"
+  - 'Wir werden die Sterne bereisen.
+
+
+'
+  - Kraftwerke bauen!
+  - Oh, du strotzt nur so vor Kraft
+  - '- werken.'
+  - $STOPLOOKAT
+  - Zehn, Neun, Acht..
+  - Nach den Sternen greifen, Don Quijote. Die Zukunft wartet nicht auf einen.
+  - Sieben, Sechs...
+  - "F\xFCnf, Vier..."
+  - Ignition Sequence Start.
+  - Drei, Zwei...
+  - Eins, und Liftoff!
+  - ...
+  - $FROWN
+  - "H\xE4?"
+  - Warum geht das denn nicht?
+  - Nein!
+  - 'Mein Segel!
+
+    Mein kostbares Segel!'
+  - Sie haben das Segel der Bavaria One als Klopapier benutzt!
+  - 'Das war''s dann wohl.
+
+    Alles umsonst.'
+  - Was ist denn, Don Quijote?
+  - 'Mhmm.
+
+    Danke.'
+  - $LOOKAT
+  - Schatz?
+  - Ich glaube, die vielen Kraftwerke brauche ich jetzt doch nicht mehr.
+  - "Wenn du doch Don Quijote dabei helfen w\xFCrdest, ein oder zwei wieder abzurei\xDFen?"

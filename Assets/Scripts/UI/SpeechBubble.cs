@@ -66,14 +66,14 @@ public class SpeechBubble : MonoBehaviour
                 appear.Append(smileyScaler.transform.DOScale(Vector3.one*1.5f,0.2f)).SetEase(Ease.InQuad);
                 appear.Append(smileyScaler.transform.DOScale(Vector3.one,0.2f)).SetEase(Ease.OutQuad);
                 
-                await appear.Play().AsyncWaitForCompletion();
+                await appear.Play().SetRecyclable().AsyncWaitForCompletion();
                 break;
             case "$DISABLE":
                 Sequence disappear = DOTween.Sequence();
                 disappear.Append(smileyScaler.transform.DOScale(Vector3.one*1.5f,0.2f)).SetEase(Ease.InQuad);
                 disappear.Append(smileyScaler.transform.DOScale(Vector3.zero,0.2f)).SetEase(Ease.OutQuad);
                 
-                await disappear.Play().AsyncWaitForCompletion();
+                await disappear.Play().SetRecyclable().AsyncWaitForCompletion();
                 break;
             case "$SMILE":
                 smiley.Expression = Expression.Smile;
@@ -100,9 +100,9 @@ public class SpeechBubble : MonoBehaviour
                 Debug.LogWarning("Invalid Dialogue String in Speechbubble");
                 return;
             default:
-                transform.DOScale(1f,animationTime);
                 isOpen = true;
                 textbox.text = nextText;
+                await transform.DOScale(1f,animationTime).SetRecyclable().AsyncWaitForCompletion();
                 await CloseSpeechbubble();
                 break;
         }
@@ -110,7 +110,7 @@ public class SpeechBubble : MonoBehaviour
     }
     public async Task OpenSpeechbubbleWithCustomText(string text){
         
-        transform.DOScale(1f,animationTime);
+        await transform.DOScale(1f,animationTime).SetRecyclable().AsyncWaitForCompletion();
         isOpen = true;
         textbox.text = text;
         await CloseSpeechbubble();

@@ -50,10 +50,6 @@ public class UIManager : MonoBehaviour
     [Header("Overlays")] 
     [SerializeField] private Material overlayMaterial;
 
-    [Header("Banners")] 
-    [SerializeField] private GameObject bannerInstance;
-    [SerializeField] private GameObject bannerParent;
-
     public bool overlayOpen;
     public OverlayType overlayOpenType;
 

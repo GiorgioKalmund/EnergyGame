@@ -8116,20 +8116,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   windTitle: "Windst\xE4rke"
   windUnit: m/s
-  windIntensities: []
-  windColors: []
   sunTitle: Sonnenstunden
   sunUnit: hr
-  sunIntensities: []
-  sunColors: []
   waterTitle: Wasserstrom
   waterUnit: m/s
-  waterIntensities: []
-  waterColors: []
-  coalTitle: Kohlevorkommen
-  coalUnit: 
-  coalIntensities: []
-  coalColors: []
+  coalTitle: 
+  coalUnit: Kohlevorkommen
   intensity1: {fileID: 9134911762717115626}
   intensity2: {fileID: 1156967349229291674}
   intensity3: {fileID: 960910196442505800}

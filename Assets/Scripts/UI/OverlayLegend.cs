@@ -23,8 +23,8 @@ public class OverlayLegend : MonoBehaviour
    private float[] waterIntensities;
    private List<Color> waterColors;
    [Header("COAL")]
-   [SerializeField] private string coalTitle = "Kohlevorkommen";
-   [SerializeField] private string coalUnit = "";
+   [SerializeField] private string coalTitle = "";
+   [SerializeField] private string coalUnit = "Kohlevorkommen";
    private float[] coalIntensities;
    private List<Color> coalColors;
 
@@ -140,20 +140,22 @@ public class OverlayLegend : MonoBehaviour
 
       for(int index = 0; index < texts.Length; index++)
       {
-         if (texts[index].text.Equals("Existiert"))
+         Debug.Log(texts[index].text + " " + index);
+         if (texts[index].text.Equals("Kohlevorkommen")) 
          {
                texts[index].transform.DOScale(1f, 0f);
-               texts[index].transform.DOLocalMoveY(texts[index].transform.localPosition.y + 100f, 0f);
+               texts[index].transform.DORotate(new Vector3(0, 0, 0), 0f);
+               texts[index].transform.DOLocalMoveY(texts[index].transform.localPosition.y + 110f, 0f);
          }
          if (index < intensities.Length)
          {
             float value = intensities[intensities.Length - index - 1];
             if (value.Equals(-1))
             {
-               texts[index].transform.DOLocalMoveY(texts[index].transform.localPosition.y - 100f, 0f);
+               texts[index].transform.DOLocalMoveY(texts[index].transform.localPosition.y - 110f, 0f);
                texts[index].transform.DORotate(new Vector3(0, 0, 90), 0f);
                texts[index].transform.DOScale(2f, 0f);
-               texts[index].text = "Existiert";
+               texts[index].text = $"{unit}";
             }
             else
             {

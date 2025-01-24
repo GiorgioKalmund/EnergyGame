@@ -314,6 +314,7 @@ public class UIManager : MonoBehaviour
 
     public void ShowOverlay(OverlayType type)
     {
+        Debug.Log("Showing Overlay: " + type.ToSafeString());
         if (!GridDataManager.Instance || !GridDataManager.Instance.OverlayTexturesAllExistent())
             Debug.LogError("UIManager: Needs GridDataManger Instance and overlay textures to show overlay!");
         
@@ -335,9 +336,12 @@ public class UIManager : MonoBehaviour
         }
        overlayOpen = true;
        overlayOpenType = type;
-       
+
        if (OverlayLegend.Instance)
+       {
+           OverlayLegend.Instance.SetLegend(type);
            OverlayLegend.Instance.Show();
+       }
     }
 
     public void HideOverlay()
@@ -355,10 +359,6 @@ public class UIManager : MonoBehaviour
            HideOverlay();
         else
            ShowOverlay(type);
-           
-        if (OverlayLegend.Instance)
-           OverlayLegend.Instance.SetLegend(type);
-       
     }
 
     public void ShowDON()

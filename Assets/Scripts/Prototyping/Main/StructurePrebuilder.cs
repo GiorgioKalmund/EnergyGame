@@ -11,13 +11,12 @@ public class StructurePrebuilder : MonoBehaviour
     private GameObject _windmill1;
     private GameObject _windmill2;
     private GameObject _cable;
-    private int _counter = 0;
+    
     void Start()
     {
         _windmill1 = Instantiate(_windmillPrefab,new Vector3(0,PlacementManager.Instance.cellIndicatorPlacementY,0),Quaternion.Euler(-90,180,180));
         _windmill2 = Instantiate(_windmillPrefab, new Vector3(1,PlacementManager.Instance.cellIndicatorPlacementY,0),Quaternion.Euler(-90,180,180));
-        //_windmill1.transform.rotation = Quaternion.Euler(-90,180,180);
-        //_windmill2.transform.rotation = Quaternion.Euler(-90,180,180);
+        
         GridDataManager.SetGridDataAtPos(new Vector3Int(0,0,1),_windmill1);
         GridDataManager.SetGridDataAtPos(new Vector3Int(1,0,1),_windmill2);
         GridDataManager.GetGridDataAtPos(new Vector3Int(0, 0, 0)).GetComponent<TileDataWrapper>().tileData.setPlacementType(PlacementType.Blocked);
@@ -27,20 +26,7 @@ public class StructurePrebuilder : MonoBehaviour
         StartCoroutine(ConnectWindmills());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(_counter < 3){
-            _counter++;
-        }
-        else if(_counter == 3){
-            
-
-            
-
-            ++_counter;
-        }
-    }
+    
     private IEnumerator ConnectWindmills(){
 
         yield return new WaitForEndOfFrame();

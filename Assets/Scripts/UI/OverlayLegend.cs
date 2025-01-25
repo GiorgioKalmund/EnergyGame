@@ -75,7 +75,7 @@ public class OverlayLegend : MonoBehaviour
          Debug.LogError("OverlayLegend: Could not find GridDataManager Instance!");
       }
       
-      if (intensities.Length == 0)
+      if (intensities?.Length == 0)
          intensities = new float[] { -1, -1, -1, -1 };
        
       Hide();

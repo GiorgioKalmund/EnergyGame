@@ -676,7 +676,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2954710773904093129, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
       propertyPath: constructionSlotToUnlock
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 3004811176714994903, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
       propertyPath: m_AnchorMax.y
@@ -712,19 +712,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3216179216171380646, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
       propertyPath: elementsToLock.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3216179216171380646, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
       propertyPath: elementsToLock.Array.data[0]
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3216179216171380646, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
       propertyPath: elementsToLock.Array.data[1]
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3216179216171380646, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
       propertyPath: elementsToLock.Array.data[2]
-      value: 5
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3216179216171380646, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+      propertyPath: elementsToLock.Array.data[3]
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3644909771561919961, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
       propertyPath: m_Pivot.x
@@ -829,6 +833,10 @@ PrefabInstance:
     - target: {fileID: 3790153747969839968, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4073293420807756503, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+      propertyPath: _onLevelCompleteText
+      value: Saubere Leistung!
       objectReference: {fileID: 0}
     - target: {fileID: 5521962446248631405, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2207,7 +2215,7 @@ MonoBehaviour:
   endpointsCompleted: 0
   endpointsCount: 0
   endpointDemands: 46000000
-  powerPlantInventoryCapacities: 000000000100000000000000000000000000000000000000
+  powerPlantInventoryCapacities: 000000000000000000000000000000000000000000000000
   nextID: 0
 --- !u!156049354 &6191906082463203712
 Grid:

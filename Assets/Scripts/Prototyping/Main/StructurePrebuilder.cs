@@ -15,9 +15,13 @@ public class StructurePrebuilder : MonoBehaviour
     void Start()
     {
         windmill1 = Instantiate(_windmillPrefab,new Vector3(0,PlacementManager.Instance.cellIndicatorPlacementY,0),Quaternion.identity);
-        windmill1.transform.rotation = Quaternion.Euler(0,180,0);
+        windmill2 = Instantiate(_windmillPrefab, new Vector3(1,PlacementManager.Instance.cellIndicatorPlacementY,0),Quaternion.identity);
+        windmill1.transform.rotation = Quaternion.Euler(-90,180,180);
+        windmill2.transform.rotation = Quaternion.Euler(-90,180,180);
         GridDataManager.SetGridDataAtPos(new Vector3Int(0,0,1),windmill1);
+        GridDataManager.SetGridDataAtPos(new Vector3Int(1,0,1),windmill2);
         GridDataManager.GetGridDataAtPos(new Vector3Int(0, 0, 0)).GetComponent<TileDataWrapper>().tileData.setPlacementType(PlacementType.Blocked);
+        GridDataManager.GetGridDataAtPos(new Vector3Int(1, 0, 0)).GetComponent<TileDataWrapper>().tileData.setPlacementType(PlacementType.Blocked);
         //_cable = Instantiate(_cablePrefab,Vector3.zero,Quaternion.identity);
     }
 
@@ -33,6 +37,8 @@ public class StructurePrebuilder : MonoBehaviour
             ConnectCableMode.Instance.SetEnpoint(GridDataManager.GetGridDataAtPos(new Vector3Int(2,2,1)));
             _cable =ConnectCableMode.Instance.PlaceCable();
             _cable.GetComponent<LineRenderer>().enabled = true;
+
+            
 
             ++counter;
         }

@@ -14,7 +14,7 @@ public class SpeechBubble : MonoBehaviour
 {
     //This is the current string to indicate that something went wrong when getting the dialogue string 
     public const string INVALID_DIALOGUE = "NULL";
-    public static float SPEECHBUBBLE_DURATION = 20f;
+    public static float SPEECHBUBBLE_DURATION = 20000f;
     [SerializeField] private TMP_Text textbox;
     [SerializeField] public DialogueContainer DialogueContainer;
     [SerializeField] public DialogueObjectSetting dialogueSetting;

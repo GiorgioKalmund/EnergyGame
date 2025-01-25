@@ -93,8 +93,7 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
 
         GraphManager.Instance.RemoveWandler(GetComponent<Wandler>());
         
-        if (UIManager.Instance.Mode == UIState.DESTROYING)
-            UIManager.Instance.ToggleDestructionMode();
+        
 
         if (BuilderInventory.Instance)
             BuilderInventory.Instance.AddSlotCapacity(1, instanceId);

@@ -837,6 +837,42 @@ PrefabInstance:
       value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 4073293420807756503, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+      propertyPath: CO2
+      value: 
+      objectReference: {fileID: 1296581260}
+    - target: {fileID: 4073293420807756503, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+      propertyPath: Strom
+      value: 
+      objectReference: {fileID: 1296581261}
+    - target: {fileID: 4073293420807756503, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+      propertyPath: OL_Wind
+      value: 
+      objectReference: {fileID: 1364297264}
+    - target: {fileID: 4073293420807756503, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+      propertyPath: Finanzen
+      value: 
+      objectReference: {fileID: 1296581259}
+    - target: {fileID: 4073293420807756503, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+      propertyPath: OL_Kohle
+      value: 
+      objectReference: {fileID: 1296581257}
+    - target: {fileID: 4073293420807756503, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+      propertyPath: OL_Sonne
+      value: 
+      objectReference: {fileID: 135274863}
+    - target: {fileID: 4073293420807756503, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+      propertyPath: OL_Wasser
+      value: 
+      objectReference: {fileID: 1296581258}
+    - target: {fileID: 4073293420807756503, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+      propertyPath: OverlayDropdown
+      value: 
+      objectReference: {fileID: 1296581262}
+    - target: {fileID: 4073293420807756503, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+      propertyPath: builderInventory
+      value: 
+      objectReference: {fileID: 1296581263}
+    - target: {fileID: 4073293420807756503, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
       propertyPath: _onLevelCompleteText
       value: Saubere Leistung!
       objectReference: {fileID: 0}
@@ -865,6 +901,41 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+--- !u!1 &1296581257 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8324332066552878495, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+  m_PrefabInstance: {fileID: 1296581256}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1296581258 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3095933212470517722, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+  m_PrefabInstance: {fileID: 1296581256}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1296581259 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2925718775229285739, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+  m_PrefabInstance: {fileID: 1296581256}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1296581260 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6218145991353231228, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+  m_PrefabInstance: {fileID: 1296581256}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1296581261 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7617151329670473034, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+  m_PrefabInstance: {fileID: 1296581256}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1296581262 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2548127207971271750, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+  m_PrefabInstance: {fileID: 1296581256}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1296581263 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2984599721983993228, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+  m_PrefabInstance: {fileID: 1296581256}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1364297264 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 28427261415732691, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}

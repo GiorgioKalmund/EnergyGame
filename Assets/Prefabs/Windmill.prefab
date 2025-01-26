@@ -206,8 +206,8 @@ MonoBehaviour:
   buildingName: Windkraft
   powerPlantType: 2
   placement: 0
-  cost: 8
-  maxProduction: 48
+  cost: 4
+  maxProduction: 19
   currentProduction: 0
   environmentalImpact: 3
   placed: 0
@@ -238,7 +238,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graphManager: {fileID: 0}
   InstanceID: 0
-  generating: 48
+  generating: 19
   efficiency: 1
   onStartConnectTo: {fileID: 0}
   tagTree: {fileID: 5449344369322635694}

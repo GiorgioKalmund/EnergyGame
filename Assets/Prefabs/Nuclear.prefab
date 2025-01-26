@@ -176,8 +176,8 @@ MonoBehaviour:
   buildingName: Atomkraft
   powerPlantType: 6
   placement: 3
-  cost: 17
-  maxProduction: 66
+  cost: 23
+  maxProduction: 93
   currentProduction: 0
   environmentalImpact: 5
   placed: 0
@@ -208,7 +208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graphManager: {fileID: 0}
   InstanceID: 0
-  generating: 66
+  generating: 93
   efficiency: 1
   onStartConnectTo: {fileID: 0}
   tagTree: {fileID: 5449344369322635694}

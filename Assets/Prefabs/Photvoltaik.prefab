@@ -206,8 +206,8 @@ MonoBehaviour:
   buildingName: Photovoltaik
   powerPlantType: 4
   placement: 0
-  cost: 7
-  maxProduction: 42
+  cost: 3
+  maxProduction: 14
   currentProduction: 0
   environmentalImpact: 2
   placed: 0
@@ -238,7 +238,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graphManager: {fileID: 0}
   InstanceID: 0
-  generating: 42
+  generating: 14
   efficiency: 1
   onStartConnectTo: {fileID: 0}
   tagTree: {fileID: 4119328465554458212}

@@ -8,6 +8,7 @@ using UnityEngine.Serialization;
 using Unity.Mathematics;
 using Random = UnityEngine.Random;
 using static System.Net.Mime.MediaTypeNames;
+using System.Threading;
 
 
 
@@ -42,6 +43,8 @@ public class SpeechBubble : MonoBehaviour
     [SerializeField] private GameObject OL_Kohle;
     [SerializeField] private GameObject builderInventory;
 
+    private CancellationTokenSource _flinkCancellationTokenSource;
+
 
     [SerializeField] private string _onLevelCompleteText;
     private void Start()
@@ -69,62 +72,87 @@ public class SpeechBubble : MonoBehaviour
             await transform.DOLocalMoveX(transform.localPosition.x,0).SetDelay(2*animationTime).AsyncWaitForCompletion(); //Schlimmster hack in diesem gesamten Projekt 
         } 
     }
-    private async void flink(GameObject gameobject)
+    private async void flink(GameObject gameObject)
     {
-        if(gameobject != null)
+        if (gameObject != null)
         {
-            Transform backdropTransform = gameobject.transform.Find("Backdrop");
+            Transform backdropTransform = gameObject.transform.Find("Backdrop");
             if (backdropTransform == null)
-            {  
+            {
                 return;
             }
-            UnityEngine.UI.Image image = backdropTransform.GetComponent<UnityEngine.UI.Image>();
+
+            var image = backdropTransform.GetComponent<UnityEngine.UI.Image>();
             if (image == null)
             {
-                
                 return;
             }
+
+            // Stop any previous blinking
+            _flinkCancellationTokenSource?.Cancel();
+            _flinkCancellationTokenSource = new CancellationTokenSource();
+            CancellationToken cancellationToken = _flinkCancellationTokenSource.Token;
 
             Color yellow = Color.yellow;
             Color white = Color.white;
-            float blinkDuration = 5f; 
-            float blinkInterval = 0.2f; 
+            float blinkDuration = 5f;
+            float blinkInterval = 0.2f;
 
             float elapsedTime = 0f;
-            while (elapsedTime < blinkDuration)
+            try
             {
-                image.color = yellow;
-                await Task.Delay((int)(blinkInterval * 1000));
-                image.color = white;
-                await Task.Delay((int)(blinkInterval * 1000));
-                elapsedTime += blinkInterval * 2;
-            }
+                while (elapsedTime < blinkDuration)
+                {
+                    // Check for cancellation
+                    cancellationToken.ThrowIfCancellationRequested();
 
-            image.color = white;
+                    image.color = yellow;
+                    await Task.Delay((int)(blinkInterval * 1000), cancellationToken);
+
+                    cancellationToken.ThrowIfCancellationRequested();
+                    image.color = white;
+                    await Task.Delay((int)(blinkInterval * 1000), cancellationToken);
+
+                    elapsedTime += blinkInterval * 2;
+                }
+
+                image.color = white; // Reset color to white
+            }
+            catch (OperationCanceledException)
+            {
+                image.color = white; // Ensure the color is reset
+            }
         }
     }
     public async Task OpenSpeechbubble(int index = -1)
     {
         string nextText = GetSpeechBubbleText(index);
 
+        _flinkCancellationTokenSource?.Cancel();
 
         switch (nextText.Trim())
         {
+            //T1
             case "Klick mal links auf das Strom-Symbol!":
                 OverlaysDropdown.Instance.Expand();
+                await Task.Yield();
                 flink(Strom);
                 break;
             case "Klick mal auf das Abgas-Symbol!":
                 OverlaysDropdown.Instance.Expand();
+                await Task.Yield();
                 flink(CO2);
                 break;
             case "Klick mal auf das Kosten-Symbol!":
                 OverlaysDropdown.Instance.Expand();
+                await Task.Yield();
                 flink(Finanzen);
                 break;
             case "Verlege eine Stromleitung vom Kraftwerk zum Strommast!":
                 BuilderInventory.Instance.ShowInventory();
                 break;
+            //T2
+            
             default:
                 break;
         }

@@ -7,6 +7,7 @@ using DG.Tweening;
 using UnityEngine.Serialization;
 using Unity.Mathematics;
 using Random = UnityEngine.Random;
+using static System.Net.Mime.MediaTypeNames;
 
 
 [RequireComponent(typeof(DialogueContainer))]
@@ -25,6 +26,21 @@ public class SpeechBubble : MonoBehaviour
     [SerializeField] private GameObject smileyScaler;
     [SerializeField] private GameObject _lookAtObj;
     [SerializeField] private GameObject _lookAtObj2;
+
+
+
+    //ik should be seperated into another script 
+    [Header("HintManager")]
+    [SerializeField] private GameObject OverlayDropdown;
+    [SerializeField] private GameObject Strom;
+    [SerializeField] private GameObject CO2;
+    [SerializeField] private GameObject Finanzen;
+    [SerializeField] private GameObject OL_Sonne;
+    [SerializeField] private GameObject OL_Wind;
+    [SerializeField] private GameObject OL_Wasser;
+    [SerializeField] private GameObject OL_Kohle;
+    [SerializeField] private GameObject builderInventory;
+
 
     [SerializeField] private string _onLevelCompleteText;
     private void Start()
@@ -52,10 +68,53 @@ public class SpeechBubble : MonoBehaviour
             await transform.DOLocalMoveX(transform.localPosition.x,0).SetDelay(2*animationTime).AsyncWaitForCompletion(); //Schlimmster hack in diesem gesamten Projekt 
         } 
     }
-    
+    private async void flink(GameObject gameobject)
+    {
+        if(gameobject != null)
+        {
+            
+            float blinkDuration = 5f; // Blinkdauer in Sekunden
+            float blinkInterval = 0.2f; // Intervall, wie oft es blinken soll (in Sekunden)
+
+            float elapsedTime = 0f;
+            while (elapsedTime < blinkDuration)
+            {
+
+                gameobject.SetActive(false);
+               
+                await Task.Delay((int)(blinkInterval * 1000));
+
+
+                gameobject.SetActive(true);
+            
+                await Task.Delay((int)(blinkInterval * 1000));
+
+                elapsedTime += blinkInterval * 2;
+            }
+
+
+            gameobject.SetActive(true);
+     
+
+        }
+    }
     public async Task OpenSpeechbubble(int index = -1)
     {
         string nextText = GetSpeechBubbleText(index);
+
+
+        switch (nextText.Trim())
+        {
+            case "Klick mal links auf das Strom-Symbol!":
+                OverlaysDropdown.Instance.Expand();
+                BuilderInventory.Instance.ShowInventory();
+                flink(Strom);
+                break;
+          
+            default:
+                break;
+        }
+
 
         if (nextText.Contains("Öffne"))
         {

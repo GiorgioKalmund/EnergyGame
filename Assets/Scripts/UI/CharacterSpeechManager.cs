@@ -21,7 +21,7 @@ public class CharacterSpeechManager : MonoBehaviour
     [SerializeField] private Dialogue co2Dialogue;
     [SerializeField] private Dialogue financeDialogue;
     [SerializeField] private Dialogue donDialogue;
-    [SerializeField] private Dialogue builderDialogue;
+    [SerializeField] public Dialogue builderDialogue;
     public static CharacterSpeechManager Instance { get; private set; }
 
     private void Awake()

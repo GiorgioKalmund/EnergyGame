@@ -41,6 +41,7 @@ public class OverlayLegend : MonoBehaviour
    [Header("Texts")] 
    [SerializeField] private TMP_Text title;
    [SerializeField] private TMP_Text[] texts;
+   [SerializeField] private TMP_Text coalText;
    
    
    public static OverlayLegend Instance { get; private set; }
@@ -137,25 +138,18 @@ public class OverlayLegend : MonoBehaviour
             intensity4.color = coalColors[3];
             break;
       }
+      
+      coalText.transform.gameObject.SetActive(type == OverlayType.COAL);
 
       for(int index = 0; index < texts.Length; index++)
       {
          Debug.Log(texts[index].text + " " + index);
-         if (texts[index].text.Equals("Kohlevorkommen")) 
-         {
-               texts[index].transform.DOScale(1f, 0f);
-               texts[index].transform.DORotate(new Vector3(0, 0, 0), 0f);
-               texts[index].transform.DOLocalMoveY(texts[index].transform.localPosition.y + 110f, 0f);
-         }
          if (index < intensities.Length)
          {
             float value = intensities[intensities.Length - index - 1];
             if (value.Equals(-1))
             {
-               texts[index].transform.DOLocalMoveY(texts[index].transform.localPosition.y - 110f, 0f);
-               texts[index].transform.DORotate(new Vector3(0, 0, 90), 0f);
-               texts[index].transform.DOScale(2f, 0f);
-               texts[index].text = $"{unit}";
+               texts[index].text = "";
             }
             else
             {

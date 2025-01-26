@@ -64,7 +64,7 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
         LevelManager.Instance.AddEnvironmentalImpact(environmentalImpact);
         UpdateProductionTag();
     }
-    public void Sell()
+    public void Sell(bool excludeFromInventory = false)
     {
         BudgetManager.Instance.Sell(cost);
         tileOn.Reset();
@@ -95,7 +95,7 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
         
         
 
-        if (BuilderInventory.Instance)
+        if (BuilderInventory.Instance && !excludeFromInventory)
             BuilderInventory.Instance.AddSlotCapacity(1, instanceId);
 
         //Debug.Log(buildingName +  " " + placement + " got destroyed, " + " on " + tileOn.coords + " " + tileOn.currentPlacementType);

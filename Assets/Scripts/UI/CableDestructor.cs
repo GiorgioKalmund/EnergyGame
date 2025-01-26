@@ -23,7 +23,7 @@ public class CableDestructor : MonoBehaviour
 
     public void Destroy()
     {
-        GetComponentInParent<ProducerDescriptor>().Sell();
+        GetComponentInParent<ProducerDescriptor>().Sell(true);
     }
 
     public void Activate()

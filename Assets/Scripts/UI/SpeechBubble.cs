@@ -32,12 +32,14 @@ public class SpeechBubble : MonoBehaviour
         transform.localScale = Vector3.zero;
         if (smileyScaler)
             smileyScaler.transform.localScale = Vector3.zero;
-
-        LevelManager.Instance.LevelCompleted += SayTextOnLevelComplete; //M: keine ahnung warum aber muss hier hin und nicht in OnEnable
+        
+        if (LevelManager.Instance)
+            LevelManager.Instance.LevelCompleted += SayTextOnLevelComplete; //M: keine ahnung warum aber muss hier hin und nicht in OnEnable
     }
     
     void OnDisable() {
-        LevelManager.Instance.LevelCompleted -= SayTextOnLevelComplete;
+        if (LevelManager.Instance)
+            LevelManager.Instance.LevelCompleted -= SayTextOnLevelComplete;
     }
     public async Task Talk()
     {
@@ -179,7 +181,7 @@ public class SpeechBubble : MonoBehaviour
 
     private void SayTextOnLevelComplete(){
         if(_onLevelCompleteText != "")
-        OpenSpeechbubbleWithCustomText(_onLevelCompleteText);
+            OpenSpeechbubbleWithCustomText(_onLevelCompleteText);
         
     }
     private void OnDestroy()

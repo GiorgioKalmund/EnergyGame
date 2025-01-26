@@ -10,6 +10,7 @@ using Random = UnityEngine.Random;
 using static System.Net.Mime.MediaTypeNames;
 
 
+
 [RequireComponent(typeof(DialogueContainer))]
 public class SpeechBubble : MonoBehaviour
 {
@@ -72,30 +73,34 @@ public class SpeechBubble : MonoBehaviour
     {
         if(gameobject != null)
         {
-            
-            float blinkDuration = 5f; // Blinkdauer in Sekunden
-            float blinkInterval = 0.2f; // Intervall, wie oft es blinken soll (in Sekunden)
+            Transform backdropTransform = gameobject.transform.Find("Backdrop");
+            if (backdropTransform == null)
+            {  
+                return;
+            }
+            UnityEngine.UI.Image image = backdropTransform.GetComponent<UnityEngine.UI.Image>();
+            if (image == null)
+            {
+                
+                return;
+            }
+
+            Color yellow = Color.yellow;
+            Color white = Color.white;
+            float blinkDuration = 5f; 
+            float blinkInterval = 0.2f; 
 
             float elapsedTime = 0f;
             while (elapsedTime < blinkDuration)
             {
-
-                gameobject.SetActive(false);
-               
+                image.color = yellow;
                 await Task.Delay((int)(blinkInterval * 1000));
-
-
-                gameobject.SetActive(true);
-            
+                image.color = white;
                 await Task.Delay((int)(blinkInterval * 1000));
-
                 elapsedTime += blinkInterval * 2;
             }
 
-
-            gameobject.SetActive(true);
-     
-
+            image.color = white;
         }
     }
     public async Task OpenSpeechbubble(int index = -1)
@@ -107,10 +112,19 @@ public class SpeechBubble : MonoBehaviour
         {
             case "Klick mal links auf das Strom-Symbol!":
                 OverlaysDropdown.Instance.Expand();
-                BuilderInventory.Instance.ShowInventory();
                 flink(Strom);
                 break;
-          
+            case "Klick mal auf das Abgas-Symbol!":
+                OverlaysDropdown.Instance.Expand();
+                flink(CO2);
+                break;
+            case "Klick mal auf das Kosten-Symbol!":
+                OverlaysDropdown.Instance.Expand();
+                flink(Finanzen);
+                break;
+            case "Verlege eine Stromleitung vom Kraftwerk zum Strommast!":
+                BuilderInventory.Instance.ShowInventory();
+                break;
             default:
                 break;
         }

@@ -209,7 +209,7 @@ MonoBehaviour:
   cost: 3
   maxProduction: 14
   currentProduction: 0
-  environmentalImpact: 2
+  environmentalImpact: 1
   placed: 0
   selected: 0
   id: 0

@@ -41,7 +41,6 @@ public class SpeechBubble : MonoBehaviour
     [SerializeField] private GameObject OL_Wind;
     [SerializeField] private GameObject OL_Wasser;
     [SerializeField] private GameObject OL_Kohle;
-    [SerializeField] private GameObject builderInventory;
 
     private CancellationTokenSource _flinkCancellationTokenSource;
 
@@ -279,7 +278,7 @@ public class SpeechBubble : MonoBehaviour
     {
         if (!isOpen)
         {
-            Debug.LogWarning("Tried to close Speechbubble that was not open.");
+            Debug.LogWarning("INSTANT: Tried to close Speechbubble that was not open.");
             return;
         }
         // Kill current delayed close

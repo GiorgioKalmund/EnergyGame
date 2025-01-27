@@ -128,6 +128,7 @@ public class SpeechBubble : MonoBehaviour
     {
         string nextText = GetSpeechBubbleText(index);
 
+        ///////////////////////////////////////
         _flinkCancellationTokenSource?.Cancel();
 
         switch (nextText.Trim())
@@ -151,13 +152,56 @@ public class SpeechBubble : MonoBehaviour
             case "Verlege eine Stromleitung vom Kraftwerk zum Strommast!":
                 BuilderInventory.Instance.ShowInventory();
                 break;
-            //T2
-            
+            //T2 Wind
+            case "Öffne doch mal die Windkarte.":
+                OverlaysDropdown.Instance.Expand();
+                await Task.Yield();
+                flink(OL_Wind);
+                break;
+            case "Bau mal eins, das so richtig abhebt!":
+                BuilderInventory.Instance.ShowInventory();
+                break;
+            //T3 Solar
+            case "Öffne doch mal die Sonnenkarte!":
+                OverlaysDropdown.Instance.Expand();
+                await Task.Yield();
+                flink(OL_Sonne);
+                break;
+            case "Bau mal eins, das sich so richtig sonnt!":
+                BuilderInventory.Instance.ShowInventory();
+                break;
+            //T4 Wasser
+            case "Öffne doch mal die Strömungskarte!":
+                OverlaysDropdown.Instance.Expand();
+                await Task.Yield();
+                flink(OL_Wasser);
+                break;
+            case "Bau mal eins, das so voll mit dem Strom geht!":
+                BuilderInventory.Instance.ShowInventory();
+                break;
+            //T5 Kohle
+            case "Öffne doch mal die Kohlekarte.":
+                OverlaysDropdown.Instance.Expand();
+                await Task.Yield();
+                flink(OL_Kohle);
+                break;
+            case "Bau mal eins, das die Fossilien so richtig einäschert!":
+                BuilderInventory.Instance.ShowInventory();
+                break;
+            //T6 Gas
+            case "Bau mal eins, das so richtig Gas gibt!":
+                BuilderInventory.Instance.ShowInventory();
+                break;
+            //T7 Atom
+            case "Bau mal eins, das so richtig die Atome spaltet.":
+                BuilderInventory.Instance.ShowInventory();
+                break;
             default:
                 break;
         }
 
 
+        /////////////////////////////////////////
         if (nextText.Contains("Öffne"))
         {
             if (OverlaysDropdown.Instance)

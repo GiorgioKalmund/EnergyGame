@@ -910,6 +910,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 682851886}
     - target: {fileID: 4073293420807756503, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+      propertyPath: builderInventory
+      value: 
+      objectReference: {fileID: 1168036763}
+    - target: {fileID: 4073293420807756503, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
       propertyPath: _onLevelCompleteText
       value: Saubere Leistung!
       objectReference: {fileID: 0}

@@ -2027,7 +2027,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentProduction: 0
   currentEnvironmentalImpact: 0
-  maxEnvironmentalImpact: 15
+  maxEnvironmentalImpact: 25
   endpointsCompleted: 0
   endpointsCount: 0
   endpointDemands: 3200000041000000

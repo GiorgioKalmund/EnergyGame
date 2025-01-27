@@ -66,10 +66,6 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
     }
     public void Sell(bool excludeFromInventory = false)
     {
-        BudgetManager.Instance.Sell(cost);
-        tileOn.Reset();
-
-        LevelManager.Instance.ReduceEnvironmentalImpact(environmentalImpact);
 
         GraphManager g = GraphManager.Instance;
         Wandler w = GetComponentInChildren<Wandler>();
@@ -82,24 +78,34 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
             }
         }
 
-        for(int j = 0; j < neighbors.Count; j++){
-            Wandler neighbor = neighbors.ElementAt(j);
-            //Destroy only surrounding power cables not power plants 
-            if(neighbor.gameObject.GetComponentInChildren<PowerCable>()){
-                g.RemoveWandler(neighbor);
-                // Destroy(neighbor.gameObject);
-            }
-        }
-
         GraphManager.Instance.RemoveWandler(GetComponent<Wandler>());
         
+        if (!excludeFromInventory)
+        {
+            for(int j = 0; j < neighbors.Count; j++){
+                Wandler neighbor = neighbors.ElementAt(j);
+                //Destroy only surrounding power cables not power plants 
+                if(neighbor.gameObject.GetComponentInChildren<PowerCable>()){
+                    g.RemoveWandler(neighbor);
+                    // Destroy(neighbor.gameObject);
+                }
+            }
+            
+            BudgetManager.Instance.Sell(cost);
+            tileOn.Reset();
+
+            LevelManager.Instance.ReduceEnvironmentalImpact(environmentalImpact);
+            
+            if (BuilderInventory.Instance)
+                BuilderInventory.Instance.AddSlotCapacity(1, instanceId);
+            
+            tileOn.currentPlacementType = this.placement;
+        }
+        
         
 
-        if (BuilderInventory.Instance && !excludeFromInventory)
-            BuilderInventory.Instance.AddSlotCapacity(1, instanceId);
 
         //Debug.Log(buildingName +  " " + placement + " got destroyed, " + " on " + tileOn.coords + " " + tileOn.currentPlacementType);
-        tileOn.currentPlacementType = this.placement;
         Destroy();
     }
 

@@ -24,6 +24,7 @@ public class CableDestructor : MonoBehaviour
     public void Destroy()
     {
         GetComponentInParent<ProducerDescriptor>().Sell(true);
+        //GameObject.Destroy(this);
     }
 
     public void Activate()

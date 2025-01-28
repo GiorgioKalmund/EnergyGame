@@ -11,6 +11,7 @@ showStatusBar = false
 scopes = {
 	"OpenInspectorPreview.66F56946" = "0"
 	"currentGroup.66F56946" = "menu"
+	"last_search.66F56946" = ""
 }
 providers = {
 	asset = {

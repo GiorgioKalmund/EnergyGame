@@ -226,6 +226,11 @@ public class LevelMapManager : MonoBehaviour
             currentMap = LevelMapType.BAUSTELLE;
     }
 
+    public void GoHome(string homeName)
+    {
+        SceneManager.LoadScene(homeName);
+    }
+
     private void OnDestroy()
     {
         DOTween.Kill(movingElement.transform);

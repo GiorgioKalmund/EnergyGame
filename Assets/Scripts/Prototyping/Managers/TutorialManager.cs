@@ -59,9 +59,11 @@ public class TutorialManager : MonoBehaviour
     }
     
     void DisableInterruped(){
+        _tutSpeechbubble.isOpen = false;
+        _tutSpeechbubble.OpenSpeechbubble();
         _tutSpeechbubble.IsInterruped = false;
         _hasEnabledNextSensor = false;
-        _tutSpeechbubble.OpenSpeechbubble();
+        
     }
 
 }

@@ -9,6 +9,7 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private SpeechBubble _tutSpeechbubble;
     private int _currentSensor = 0;
     private bool _hasEnabledNextSensor = false;
+    private bool _hasOpenedSpeechbubble = false;
     void OnEnable(){
         TutorialSensor.continueTutorial += DisableInterruped;
     }
@@ -19,8 +20,13 @@ public class TutorialManager : MonoBehaviour
         
     }
     void Update(){
-        if(!_tutSpeechbubble.isOpen && _tutSpeechbubble.DialogueContainer.HasNextLine() && !_tutSpeechbubble.IsInterruped){
+        if(!_tutSpeechbubble.isOpen && _tutSpeechbubble.DialogueContainer.HasNextLine() && !_tutSpeechbubble.IsInterruped && !_hasOpenedSpeechbubble){
             _tutSpeechbubble.OpenSpeechbubble();
+            Debug.Log("Opening Speechbubble");
+            _hasOpenedSpeechbubble = true;
+        }
+        else{
+            _hasOpenedSpeechbubble = false;
         }
 
         if(_tutSpeechbubble.IsInterruped && !_hasEnabledNextSensor){
@@ -35,6 +41,7 @@ public class TutorialManager : MonoBehaviour
     void DisableInterruped(){
         _tutSpeechbubble.IsInterruped = false;
         _hasEnabledNextSensor = false;
+        _tutSpeechbubble.OpenSpeechbubble();
     }
 
 }

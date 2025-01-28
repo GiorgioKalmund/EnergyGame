@@ -81,6 +81,15 @@ public class SpeechBubble : MonoBehaviour
 
         if(isOpen) return;
         ///////////////////////////////////////
+        _flinkCancellationTokenSource?.Cancel();
+
+
+        /////////////////////////////////////////
+        if (nextText.Contains("Öffne"))
+        {
+            if (OverlaysDropdown.Instance)
+                OverlaysDropdown.Instance.Expand();
+        }
         switch(nextText.Trim()){
             case "$ENABLE":
                 Sequence appear = DOTween.Sequence();
@@ -117,6 +126,10 @@ public class SpeechBubble : MonoBehaviour
             case "$STOPLOOKAT":
                 smiley.cutsceneLookAt();
                 break;
+            case "$TUTORIAL":
+                IsInterruped = true;
+                OpenSpeechbubble();
+                break;
             case INVALID_DIALOGUE:
                 Debug.LogWarning("Invalid Dialogue String in Speechbubble");
                 return;
@@ -143,7 +156,9 @@ public class SpeechBubble : MonoBehaviour
     
     public void CloseSpeechBubbleInstantly()
     {
-        if(IsInterruped) return;
+        if(IsInterruped){
+            return;
+        }
         if (!isOpen)
         {
             Debug.LogWarning("INSTANT: Tried to close Speechbubble that was not open.");

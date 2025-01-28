@@ -15,6 +15,8 @@ public class Cutscene_Manager : MonoBehaviour
         public SpeechBubble speaker; 
     }
 
+    SpeechBubble currentSpeaker;
+
     public List<DialogueTurn> dialogueSequence; 
     public bool isDialogueActive = false;
 
@@ -49,6 +51,12 @@ public class Cutscene_Manager : MonoBehaviour
         skipButton.SetActive(false);
 
         
+    }
+
+    void Update(){
+        if(currentSpeaker && !currentSpeaker.isOpen){
+            ShowNextDialogue();
+        }
     }
 
     public void SkipCurrentLine()

@@ -2024,7 +2024,7 @@ MonoBehaviour:
   maxEnvironmentalImpact: 1000
   endpointsCompleted: 0
   endpointsCount: 0
-  endpointDemands: 1000000023000000640000008700000046000000
+  endpointDemands: 100000001f0000005a0000007b0000004b000000
   powerPlantInventoryCapacities: 0a0000000a0000000a0000000a0000000a0000000a000000
   nextID: 0
 --- !u!156049354 &6191906082463203712

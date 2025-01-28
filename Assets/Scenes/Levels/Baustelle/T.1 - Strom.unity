@@ -1096,6 +1096,26 @@ PrefabInstance:
       propertyPath: elements.Array.data[5]
       value: 
       objectReference: {fileID: 135274863}
+    - target: {fileID: 3216179216171380646, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+      propertyPath: elementsToLock.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3216179216171380646, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+      propertyPath: elementsToLock.Array.data[0]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3216179216171380646, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+      propertyPath: elementsToLock.Array.data[1]
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3216179216171380646, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+      propertyPath: elementsToLock.Array.data[2]
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3216179216171380646, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
+      propertyPath: elementsToLock.Array.data[3]
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3644909771561919961, guid: 0ee9a06a26751e1459cc4328192c26c4, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1526,12 +1546,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 8.019038, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_renderer: {fileID: 1413452169}
-  m_maskType: 0
   _SortingLayer: 0
   _SortingLayerID: 0
   _SortingOrder: 0
+  m_hasFontAssetChanged: 0
+  m_renderer: {fileID: 1413452169}
+  m_maskType: 0
 --- !u!23 &1413452169
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2478,7 +2498,7 @@ PrefabInstance:
     - target: {fileID: 7874358633279477564, guid: 4df33afdf6ab54fc0be0ac3fde008583, type: 3}
       propertyPath: sunTexture
       value: 
-      objectReference: {fileID: 2800000, guid: 6afd1e6341604f74db9d51b748978177, type: 3}
+      objectReference: {fileID: 2800000, guid: caf0a11b8749a4afba7e6d76b0691892, type: 3}
     - target: {fileID: 7874358633279477564, guid: 4df33afdf6ab54fc0be0ac3fde008583, type: 3}
       propertyPath: coalTexture
       value: 

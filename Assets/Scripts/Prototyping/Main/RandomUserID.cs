@@ -1,22 +1,23 @@
 using System;
 using UnityEngine;
-using Random = System.Random;
+using Random = UnityEngine.Random;
 
 public class RandomUserID : MonoBehaviour
 {
 
-    public static string RandomID()
+    public static string RandomID(int length = 5)
     {
-        char[] chars = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
-        Random random = new Random((int)Time.time);
+        char[] chars = "abcdefghijklmnopqrstuvwxyz1234567890".ToCharArray();
+        int charslength = chars.Length - 1;
 
-        int length = chars.Length;
+        string randomID = "";
+        
+        for (int index = 0; index < length; index++)
+        {
+            int randomInt = Random.Range(0, charslength);
+            randomID += $"{chars[randomInt]}";
+        }
 
-        int randomInt1 = random.Next(0, length);
-        int randomInt2 = random.Next(0, length);
-        int randomInt3 = random.Next(0, 9);
-        int randomInt4 = random.Next(0, 9);
-
-        return $"{chars[randomInt1]}" + $"{chars[randomInt2]}" + randomInt3 + "" + randomInt4;
+        return randomID;
     }
 }

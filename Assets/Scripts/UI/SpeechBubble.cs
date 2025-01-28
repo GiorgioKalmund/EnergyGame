@@ -133,10 +133,7 @@ public class SpeechBubble : MonoBehaviour
             case INVALID_DIALOGUE:
                 Debug.LogWarning("Invalid Dialogue String in Speechbubble");
                 return;
-            case "$TUTORIAL":
-                IsInterruped = true;
-                OpenSpeechbubble();
-                break;
+            
             default:
                 isOpen = true;
                 textbox.text = nextText;

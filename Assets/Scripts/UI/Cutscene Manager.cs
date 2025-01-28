@@ -53,11 +53,7 @@ public class Cutscene_Manager : MonoBehaviour
         
     }
 
-    void Update(){
-        if(currentSpeaker && !currentSpeaker.isOpen){
-            ShowNextDialogue();
-        }
-    }
+    
 
     public void SkipCurrentLine()
     {

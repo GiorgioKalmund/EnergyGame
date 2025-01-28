@@ -18,6 +18,7 @@ MonoBehaviour:
     Ich geh dir einen Tipp:'
   - Die Steckdose ist es nicht.
   - Klick mal links auf das Strom-Symbol!
+  - $TUTORIAL
   - Ah! Jetzt siehst du's. Strom kommt von den Kraftwerken.
   - "Leider k\xF6nnen Kabel den Strom nicht ohne Verluste leiten."
   - "Au\xDFerdem machen Kraftwerke nicht nur Strom, sondern produzieren auch Abgase."

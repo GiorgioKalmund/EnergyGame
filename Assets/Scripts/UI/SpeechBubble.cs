@@ -46,6 +46,9 @@ public class SpeechBubble : MonoBehaviour
 
 
     [SerializeField] private string _onLevelCompleteText;
+
+    public bool IsInterruped { get; internal set; }
+
     private void Start()
     {
         transform.localScale = Vector3.zero;

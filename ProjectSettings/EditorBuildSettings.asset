@@ -39,43 +39,43 @@ EditorBuildSettings:
     path: Assets/Scenes/Levels/Cutscenes/B1_C.unity
     guid: 68e8f7e09ca42f5428c4b75104a037c6
   - enabled: 1
-    path: Assets/Scenes/Levels/Bayern/B.1.unity
+    path: Assets/Scenes/Levels/Cutscenes/Bayern/B.1.unity
     guid: bbe86b5339fa6d14bb054fbb8c64705e
   - enabled: 1
     path: Assets/Scenes/Levels/Cutscenes/B2_C.unity
     guid: 072da869ec7afd93f83df5d722b66bac
   - enabled: 1
-    path: Assets/Scenes/Levels/Bayern/B.2.unity
+    path: Assets/Scenes/Levels/Cutscenes/Bayern/B.2.unity
     guid: 3ede484e33db90e4a849466649d19eab
   - enabled: 1
     path: Assets/Scenes/Levels/Cutscenes/B3_C.unity
     guid: 1ec36619ee02b0e1d949ea0d0b00af67
   - enabled: 1
-    path: Assets/Scenes/Levels/Bayern/B.3.unity
+    path: Assets/Scenes/Levels/Cutscenes/Bayern/B.3.unity
     guid: cdd0f8e3aa0c8af4192250623cd7f3d9
   - enabled: 1
     path: Assets/Scenes/Levels/Cutscenes/B4_C.unity
     guid: bd28f8359f84b19f28865fd5f5a93a33
   - enabled: 1
-    path: Assets/Scenes/Levels/Bayern/B.4.unity
+    path: Assets/Scenes/Levels/Cutscenes/Bayern/B.4.unity
     guid: 20baaa145ff65c741a42fa5b220fe9a3
   - enabled: 1
     path: Assets/Scenes/Levels/Cutscenes/B5_C.unity
     guid: 18bd047fa2abce14c9067f4e3a38ae4f
   - enabled: 1
-    path: Assets/Scenes/Levels/Bayern/B.5.unity
+    path: Assets/Scenes/Levels/Cutscenes/Bayern/B.5.unity
     guid: 1e4991c6058338043ae0b940960aa318
   - enabled: 1
     path: Assets/Scenes/Levels/Cutscenes/B6_C.unity
     guid: dd38bf09be32a1443b9b60d078d7ce2b
   - enabled: 1
-    path: Assets/Scenes/Levels/Bayern/B.6.unity
+    path: Assets/Scenes/Levels/Cutscenes/Bayern/B.6.unity
     guid: d3755cd25e6d3404e80041f1d5cf83be
   - enabled: 1
     path: Assets/Scenes/Levels/Cutscenes/B7_C.unity
     guid: 1c535cff4e1b1064380ea9955a6a91e5
   - enabled: 1
-    path: Assets/Scenes/Levels/Bayern/B.7.unity
+    path: Assets/Scenes/Levels/Cutscenes/Bayern/B.7.unity
     guid: 737fe0a48e83069488a9523a8978e444
   - enabled: 1
     path: Assets/Scenes/Levels/Cutscenes/Epilog.unity

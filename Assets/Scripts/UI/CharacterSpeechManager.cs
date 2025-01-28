@@ -49,7 +49,7 @@ public class CharacterSpeechManager : MonoBehaviour
             builderBubble.transform.gameObject.GetComponent<DialogueContainer>().Dialogue = builderDialogue;
         
         if(isTutorial){
-            _ = builderBubble.Talk();
+            //_ = builderBubble.Talk();
         } else{
         StartCoroutine(StartFirstBuilderDialogue(5));
         }

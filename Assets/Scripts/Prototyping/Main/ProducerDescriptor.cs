@@ -72,7 +72,7 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
         
         // Hardcoded aber nt
         bool powerTower = buildingName == "Power Tower";
-        
+         
         if (!exclude || powerTower)
         {
         
@@ -87,7 +87,6 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
                     }
                 }
         
-            GraphManager.Instance.RemoveWandler(GetComponent<Wandler>());
             
             
             for(int j = 0; j < neighbors.Count; j++){
@@ -110,6 +109,7 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
                 BuilderInventory.Instance.AddSlotCapacity(1, instanceId);
             
         }
+        GraphManager.Instance.RemoveWandler(GetComponent<Wandler>());
         
         //Debug.Log(buildingName +  " " + placement + " got destroyed, " + " on " + tileOn.coords + " " + tileOn.currentPlacementType);
         Destroy();

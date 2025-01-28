@@ -17,16 +17,19 @@ MonoBehaviour:
 
     Ich geh dir einen Tipp:'
   - Die Steckdose ist es nicht.
-  - Klick mal links auf das Strom-Symbol!
   - $TUTORIAL
+  - Klick mal links auf das Strom-Symbol!
   - Ah! Jetzt siehst du's. Strom kommt von den Kraftwerken.
   - "Leider k\xF6nnen Kabel den Strom nicht ohne Verluste leiten."
   - "Au\xDFerdem machen Kraftwerke nicht nur Strom, sondern produzieren auch Abgase."
+  - $TUTORIAL
   - Klick mal auf das Abgas-Symbol!
   - Und einen kleinen Geldbeutel.
+  - $TUTORIAL
   - Klick mal auf das Kosten-Symbol!
   - Oh, ich sehe wir produzieren noch nicht genug Strom!
   - Ich glaube, da fehlt eine Stromleitung!
   - Siehst du es?
   - Verlege eine Stromleitung vom Kraftwerk zum Strommast!
+  - $TUTORIAL
   - Den Knopf findest du unten links.

@@ -1733,6 +1733,7 @@ MonoBehaviour:
   - {fileID: 2070645147}
   - {fileID: 1296581259}
   _tutSpeechbubble: {fileID: 1296581257}
+  tutorialLevel: 1
 --- !u!4 &2036098549
 Transform:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ public class TutorialManager : MonoBehaviour
 {
     [SerializeField] private TutorialSensor[] _sensors;
     [SerializeField] private SpeechBubble _tutSpeechbubble;
+    [SerializeField] private int tutorialLevel;
     private int _currentSensor = 0;
     private bool _hasEnabledNextSensor = false;
     private bool _hasOpenedSpeechbubble = false;
@@ -34,6 +35,25 @@ public class TutorialManager : MonoBehaviour
             _sensors[_currentSensor].Enable();
             _currentSensor++;
             _hasEnabledNextSensor = true;
+            switch(tutorialLevel){
+                case 1:
+                    switch(_currentSensor){
+                        case 1:
+                            OverlaysDropdown.Instance.Expand();
+                            break;
+                        case 2:
+                            OverlaysDropdown.Instance.Expand();
+                            break;
+                        case 3:
+                            OverlaysDropdown.Instance.Expand();
+                            break;
+                        case 4:
+                            OverlaysDropdown.Instance.CollapseAllTags();
+                            BuilderInventory.Instance.ShowInventory();
+                            break;
+                    }
+                    break;
+            }
         }
 
     }

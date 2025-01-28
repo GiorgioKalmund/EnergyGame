@@ -133,75 +133,6 @@ public class SpeechBubble : MonoBehaviour
         ///////////////////////////////////////
         _flinkCancellationTokenSource?.Cancel();
 
-        switch (nextText.Trim())
-        {
-            //T1
-            case "Klick mal links auf das Strom-Symbol!":
-                OverlaysDropdown.Instance.Expand();
-                await Task.Yield();
-                flink(Strom);
-                break;
-            case "Klick mal auf das Abgas-Symbol!":
-                OverlaysDropdown.Instance.Expand();
-                await Task.Yield();
-                flink(CO2);
-                break;
-            case "Klick mal auf das Kosten-Symbol!":
-                OverlaysDropdown.Instance.Expand();
-                await Task.Yield();
-                flink(Finanzen);
-                break;
-            case "Verlege eine Stromleitung vom Kraftwerk zum Strommast!":
-                BuilderInventory.Instance.ShowInventory();
-                break;
-            //T2 Wind
-            case "Öffne doch mal die Windkarte.":
-                OverlaysDropdown.Instance.Expand();
-                await Task.Yield();
-                flink(OL_Wind);
-                break;
-            case "Bau mal eins, das so richtig abhebt!":
-                BuilderInventory.Instance.ShowInventory();
-                break;
-            //T3 Solar
-            case "Öffne doch mal die Sonnenkarte!":
-                OverlaysDropdown.Instance.Expand();
-                await Task.Yield();
-                flink(OL_Sonne);
-                break;
-            case "Bau mal eins, das sich so richtig sonnt!":
-                BuilderInventory.Instance.ShowInventory();
-                break;
-            //T4 Wasser
-            case "Öffne doch mal die Strömungskarte!":
-                OverlaysDropdown.Instance.Expand();
-                await Task.Yield();
-                flink(OL_Wasser);
-                break;
-            case "Bau mal eins, das so voll mit dem Strom geht!":
-                BuilderInventory.Instance.ShowInventory();
-                break;
-            //T5 Kohle
-            case "Öffne doch mal die Kohlekarte.":
-                OverlaysDropdown.Instance.Expand();
-                await Task.Yield();
-                flink(OL_Kohle);
-                break;
-            case "Bau mal eins, das die Fossilien so richtig einäschert!":
-                BuilderInventory.Instance.ShowInventory();
-                break;
-            //T6 Gas
-            case "Bau mal eins, das so richtig Gas gibt!":
-                BuilderInventory.Instance.ShowInventory();
-                break;
-            //T7 Atom
-            case "Bau mal eins, das so richtig die Atome spaltet.":
-                BuilderInventory.Instance.ShowInventory();
-                break;
-            default:
-                break;
-        }
-
 
         /////////////////////////////////////////
         if (nextText.Contains("Öffne"))
@@ -245,6 +176,10 @@ public class SpeechBubble : MonoBehaviour
             case "$STOPLOOKAT":
                 smiley.cutsceneLookAt();
                 break;
+            case "$TUTORIAL":
+                IsInterruped = true;
+                OpenSpeechbubble();
+                break;
             case INVALID_DIALOGUE:
                 Debug.LogWarning("Invalid Dialogue String in Speechbubble");
                 return;
@@ -252,7 +187,7 @@ public class SpeechBubble : MonoBehaviour
                 isOpen = true;
                 textbox.text = nextText;
                 await transform.DOScale(1f,animationTime).SetRecyclable().AsyncWaitForCompletion();
-                await CloseSpeechbubble();
+                await Task.Delay(20000);
                 break;
         }
         
@@ -279,6 +214,9 @@ public class SpeechBubble : MonoBehaviour
     }
     public void CloseSpeechBubbleInstantly()
     {
+        if(IsInterruped){
+            return;
+        }
         if (!isOpen)
         {
             Debug.LogWarning("INSTANT: Tried to close Speechbubble that was not open.");

@@ -60,7 +60,7 @@ public class CharacterSpeechManager : MonoBehaviour
         if (action == SpeechBubbleAction.OPEN)
             endpointsBubble.OpenSpeechbubble();
         else if (action == SpeechBubbleAction.CLOSE)
-            endpointsBubble.CloseSpeechbubble();
+            endpointsBubble.CloseSpeechBubbleInstantly();
         else
             endpointsBubble.ToggleSpeechBubble();
     }
@@ -70,7 +70,7 @@ public class CharacterSpeechManager : MonoBehaviour
         if (action == SpeechBubbleAction.OPEN)
             co2Bubble.OpenSpeechbubble();
         else if (action == SpeechBubbleAction.CLOSE)
-            co2Bubble.CloseSpeechbubble();
+            co2Bubble.CloseSpeechBubbleInstantly();
         else
             co2Bubble.ToggleSpeechBubble();
     }
@@ -80,7 +80,7 @@ public class CharacterSpeechManager : MonoBehaviour
         if (action == SpeechBubbleAction.OPEN)
             financeBubble.OpenSpeechbubble();
         else if (action == SpeechBubbleAction.CLOSE)
-            financeBubble.CloseSpeechbubble();
+            financeBubble.CloseSpeechBubbleInstantly();
         else
             financeBubble.ToggleSpeechBubble();
     }
@@ -90,7 +90,7 @@ public class CharacterSpeechManager : MonoBehaviour
         if (action == SpeechBubbleAction.OPEN)
             donBubble.OpenSpeechbubble();
         else if (action == SpeechBubbleAction.CLOSE)
-            donBubble.CloseSpeechbubble();
+            donBubble.CloseSpeechBubbleInstantly();
         else
             donBubble.ToggleSpeechBubble();
     }
@@ -99,7 +99,7 @@ public class CharacterSpeechManager : MonoBehaviour
         if(action == SpeechBubbleAction.OPEN){
             builderBubble.OpenSpeechbubble();
         } else if(action == SpeechBubbleAction.CLOSE){
-            builderBubble.CloseSpeechbubble();
+            builderBubble.CloseSpeechBubbleInstantly();
         } else{
             builderBubble.ToggleSpeechBubble();
         }

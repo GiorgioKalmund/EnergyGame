@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class Cutscene_Manager : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class Cutscene_Manager : MonoBehaviour
 
     private int currentTurnIndex = 0;
 
+    SpeechBubble _currentSpeaker = null;
+    
     public void StartDialogue()
     {
         if (isDialogueActive)
@@ -44,6 +47,8 @@ public class Cutscene_Manager : MonoBehaviour
         StartDialogue();
         skipButton.GetComponentInChildren<TextMeshProUGUI>().text = "Start";
         skipButton.SetActive(false);
+
+        
     }
 
     public void SkipCurrentLine()
@@ -53,37 +58,32 @@ public class Cutscene_Manager : MonoBehaviour
         currentSpeaker.CloseSpeechBubbleInstantly();
     }
 
+    void Update(){
 
-
-    public async void ShowNextDialogue()
-    {
-        if (!isDialogueActive)
-        {
-            EndDialogue();
-            return;
-        }
-
-        if (currentTurnIndex >= dialogueSequence.Count)
-        {
-            EndDialogue();
-            return;
-        }
-
-        DialogueTurn currentTurn = dialogueSequence[currentTurnIndex];
-        SpeechBubble currentSpeaker = currentTurn.speaker;
-
-        // Check if the current speaker has dialogue left
-        if (!currentSpeaker.DialogueContainer.HasNextLine())
-        {
-            EndDialogue();
-            return;
-        }
-
-        await currentSpeaker.OpenSpeechbubble();
-        currentTurnIndex++;
-        //currentSpeaker.CloseSpeechBubbleInstantly();
-
+        if(_currentSpeaker && !_currentSpeaker.isOpen && isDialogueActive){
         ShowNextDialogue();
+        }
+    }
+
+    
+
+    void ShowNextDialogue(){
+        if(!isDialogueActive || currentTurnIndex >= dialogueSequence.Count){
+            EndDialogue();
+            return;
+        }
+        
+        DialogueTurn currentTurn = dialogueSequence[currentTurnIndex];
+        _currentSpeaker = currentTurn.speaker;
+
+        if(!_currentSpeaker.DialogueContainer.HasNextLine()){
+            EndDialogue();
+            return;
+        }
+        _currentSpeaker.OpenSpeechbubble();
+        currentTurnIndex++;
+        
+        
     }
 
     public void EndDialogue()

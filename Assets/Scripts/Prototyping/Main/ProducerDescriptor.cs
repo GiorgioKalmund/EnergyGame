@@ -66,22 +66,30 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
     }
     public void Sell(bool excludeFromInventory = false)
     {
-
-        GraphManager g = GraphManager.Instance;
-        Wandler w = GetComponentInChildren<Wandler>();
-        List<Wandler> neighbors = new();
-        for (int i = 0; i < g.numOfWandler; i++)
-        {
-            if(g.Matrix[w.InstanceID, i] != 0 || g.Matrix[i, w.InstanceID] != 0){
-                neighbors.Add(g.wandlerArray[i]);
-                
-            }
-        }
-
-        GraphManager.Instance.RemoveWandler(GetComponent<Wandler>());
+        bool exclude = excludeFromInventory;
+        if (powerPlantType == PowerPlantType.NOTSELECTED && instanceId == 0)
+            exclude = true;
         
-        if (!excludeFromInventory)
+        // Hardcoded aber nt
+        bool powerTower = buildingName == "Power Tower";
+        
+        if (!exclude || powerTower)
         {
+        
+            GraphManager g = GraphManager.Instance;
+            Wandler w = GetComponentInChildren<Wandler>();
+            List<Wandler> neighbors = new();
+                for (int i = 0; i < g.numOfWandler; i++)
+                {
+                    if(g.Matrix[w.InstanceID, i] != 0 || g.Matrix[i, w.InstanceID] != 0){
+                        neighbors.Add(g.wandlerArray[i]);
+                        
+                    }
+                }
+        
+            GraphManager.Instance.RemoveWandler(GetComponent<Wandler>());
+            
+            
             for(int j = 0; j < neighbors.Count; j++){
                 Wandler neighbor = neighbors.ElementAt(j);
                 //Destroy only surrounding power cables not power plants 
@@ -91,20 +99,18 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
                 }
             }
             
-            BudgetManager.Instance.Sell(cost);
             tileOn.Reset();
+            tileOn.currentPlacementType = this.placement;
+            
+            BudgetManager.Instance.Sell(cost);
 
             LevelManager.Instance.ReduceEnvironmentalImpact(environmentalImpact);
             
-            if (BuilderInventory.Instance)
+            if (BuilderInventory.Instance && !powerTower)
                 BuilderInventory.Instance.AddSlotCapacity(1, instanceId);
             
-            tileOn.currentPlacementType = this.placement;
         }
         
-        
-
-
         //Debug.Log(buildingName +  " " + placement + " got destroyed, " + " on " + tileOn.coords + " " + tileOn.currentPlacementType);
         Destroy();
     }

@@ -2015,7 +2015,7 @@ MonoBehaviour:
   endpointsCompleted: 0
   endpointsCount: 0
   endpointDemands: 3c0000006e000000
-  powerPlantInventoryCapacities: 630000006300000063000000630000006300000063000000
+  powerPlantInventoryCapacities: 0a0000000a0000000a0000000a0000000a0000000a000000
   nextID: 0
 --- !u!156049354 &6191906082463203712
 Grid:

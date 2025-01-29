@@ -7,9 +7,9 @@ using UnityEngine;
 public class GraphManager : MonoBehaviour
 {
     public static GraphManager Instance { get; private set;}
-    public int[,] Matrix { get; } = new int[100, 100];
+    public int[,] Matrix { get; } = new int[255, 255];
     public Wandler[] wandlerArray = new Wandler[255];
-    public Wandler[] Endpoints = new Wandler[100];
+    public Wandler[] Endpoints = new Wandler[15];
     public int numOfEndpoints = 0;
     public int numOfWandler = 0;
 

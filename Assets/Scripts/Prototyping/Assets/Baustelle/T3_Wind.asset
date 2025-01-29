@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DialogueText:
   - "Ganz sch\xF6n windig hier, was?"
+  - $TUTORIAL
   - "\xD6ffne doch mal die Windkarte."
   - "Jetzt siehst du, wo der Wind am st\xE4rksten bl\xE4st."
   - Ob man den Wind in Strom verwandeln kann? Ja, mit einem Windrad!
@@ -21,4 +22,7 @@ MonoBehaviour:
     beim Bau. '
   - "Kosten tut es auch nicht so viel. Allerdings l\xE4rmt es, weshalb man es nicht
     zu nah an Wohnh\xE4user bauen sollte."
+  - '$TUTORIAL
+
+'
   - Bau mal eins, das so richtig abhebt!

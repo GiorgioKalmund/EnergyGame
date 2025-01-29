@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DialogueText:
   - Wow. Wasser.
+  - '$TUTORIAL
+
+'
   - "\xD6ffne doch mal die Str\xF6mungskarte!"
   - "Hier siehst du, wo das Wasser am schnellsten flie\xDFt."
   - "Ob man die Str\xF6mung in Strom umwandeln kann? Ja, das kann man! Mit dem Wasserkraftwerk!"

@@ -53,6 +53,20 @@ public class TutorialManager : MonoBehaviour
                             break;
                     }
                     break;
+                case 2:
+                    switch(_currentSensor){
+                        case 1: 
+                            OverlaysDropdown.Instance.Expand();
+                            break;
+                        case 2:
+                            OverlaysDropdown.Instance.CollapseAllTags();
+                            //BuilderInventory.Instance.ShowInventory();
+                            break;
+                    }
+                    break;
+                case 3: case 4: case 5:
+                    OverlaysDropdown.Instance.Expand();
+                    break;
             }
         }
 

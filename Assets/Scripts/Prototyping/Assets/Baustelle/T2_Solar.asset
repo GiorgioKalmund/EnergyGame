@@ -10,10 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8fc7952d3fe584a4494e4205c57378cf, type: 3}
-  m_Name: T_2_Solar
+  m_Name: T2_Solar
   m_EditorClassIdentifier: 
   DialogueText:
   - "Ziemlich hei\xDF hier, was?"
+  - '$TUTORIAL
+
+'
   - "\xD6ffne doch mal die Sonnenkarte!"
   - Die Sonnenkarte zeigt dir, wie stark die Sonne wo strahlt.
   - Ob man die Strahlung in Strom umwandeln kann? Ja, das kann man! Mit der Photovoltaik-Anlage!

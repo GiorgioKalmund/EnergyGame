@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: 0
-  Expression: 0
+  Expression: 1
   models:
   - {fileID: 919132149155446097, guid: b17c7ca08973f444ea1e6d855f7c3cbe, type: 3}
   - {fileID: 919132149155446097, guid: 798ee041f6a6e254e92071dc87dd27c7, type: 3}

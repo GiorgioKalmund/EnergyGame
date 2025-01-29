@@ -27,7 +27,7 @@ public class Wandler : MonoBehaviour
     [SerializeField]
     public bool Endpoint;
     private bool EndpointCompleted;
-    [SerializeField] TagSelectionTree endpointTree = null;
+    [SerializeField] public TagSelectionTree endpointTree = null;
     public int endpointDemand;
     public int distance = -1;
     public bool visited = false;

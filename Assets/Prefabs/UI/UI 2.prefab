@@ -8746,6 +8746,10 @@ PrefabInstance:
       propertyPath: smiley
       value: 
       objectReference: {fileID: 3225668233595760510}
+    - target: {fileID: 6412217222729839287, guid: 814e56fb7bde54e4aa45cb4a9919fc19, type: 3}
+      propertyPath: dialogueSetting
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9956,6 +9960,10 @@ PrefabInstance:
       propertyPath: smiley
       value: 
       objectReference: {fileID: 7554210848308712221}
+    - target: {fileID: 6412217222729839287, guid: 814e56fb7bde54e4aa45cb4a9919fc19, type: 3}
+      propertyPath: dialogueSetting
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10073,6 +10081,10 @@ PrefabInstance:
       propertyPath: smiley
       value: 
       objectReference: {fileID: 8851764524900646575}
+    - target: {fileID: 6412217222729839287, guid: 814e56fb7bde54e4aa45cb4a9919fc19, type: 3}
+      propertyPath: dialogueSetting
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10524,6 +10536,10 @@ PrefabInstance:
       propertyPath: smiley
       value: 
       objectReference: {fileID: 8940071281616598310}
+    - target: {fileID: 6412217222729839287, guid: 814e56fb7bde54e4aa45cb4a9919fc19, type: 3}
+      propertyPath: dialogueSetting
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: B7_Pollution
   m_EditorClassIdentifier: 
   DialogueText:
-  - '*Hust* Das scheint mir ein bisschen zu viele Abgase!'
+  - "*Hust* Das stinkt hier aber ganz sch\xF6n!"
+  - So viel Smog in der Luft!

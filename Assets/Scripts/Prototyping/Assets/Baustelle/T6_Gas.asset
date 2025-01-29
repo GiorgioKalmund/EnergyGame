@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DialogueText:
   - Riechst du das auch?
-  - "Riecht f\xFCr mich nach Energie?"
+  - "Riecht f\xFCr mich nach Energie!"
   - Erdgas wird aus dem Ausland importiert.
   - Und zwar nicht wegen des guten Geruchs.
   - Nein, sondern weil man es in Strom verwandeln kann.

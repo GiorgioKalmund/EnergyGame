@@ -15,7 +15,7 @@ MonoBehaviour:
   DialogueText:
   - 'Wir brauchen Strom. Und woher kommt Strom?
 
-    Ich geh dir einen Tipp:'
+    Ich geb dir einen Tipp:'
   - Die Steckdose ist es nicht.
   - $TUTORIAL
   - Klick mal links auf das Strom-Symbol!

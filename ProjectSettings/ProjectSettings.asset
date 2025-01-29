@@ -42,12 +42,12 @@ PlayerSettings:
   m_SplashScreenLogos:
   - logo: {fileID: 21300000, guid: e38868ae8807b4015b46e51c62fdb0b6, type: 3}
     duration: 2
-  m_VirtualRealitySplashScreen: {fileID: 2800000, guid: 525505bea458f2b49bb4c89a87b0c187, type: 3}
+  m_VirtualRealitySplashScreen: {fileID: 2800000, guid: 5325f2ad67c784e708155729f53f668c, type: 3}
   m_HolographicTrackingLossScreen: {fileID: 0}
   defaultScreenWidth: 1920
   defaultScreenHeight: 1080
-  defaultScreenWidthWeb: 1000
-  defaultScreenHeightWeb: 625
+  defaultScreenWidthWeb: 1024
+  defaultScreenHeightWeb: 640
   m_StereoRenderingPath: 0
   m_ActiveColorSpace: 1
   unsupportedMSAAFallback: 0
@@ -369,7 +369,8 @@ PlayerSettings:
   openGLRequireES31: 0
   openGLRequireES31AEP: 0
   openGLRequireES32: 0
-  m_TemplateCustomTags: {}
+  m_TemplateCustomTags:
+    PRODUCT_DESCRIPTION: 
   mobileMTRendering:
     Android: 1
     iPhone: 1
@@ -630,7 +631,7 @@ PlayerSettings:
   ps4IncludedModules: []
   ps4attribVROutputEnabled: 0
   monoEnv: 
-  splashScreenBackgroundSourceLandscape: {fileID: 21300000, guid: 525505bea458f2b49bb4c89a87b0c187, type: 3}
+  splashScreenBackgroundSourceLandscape: {fileID: 21300000, guid: 5325f2ad67c784e708155729f53f668c, type: 3}
   splashScreenBackgroundSourcePortrait: {fileID: 0}
   blurSplashScreenBackground: 1
   spritePackerPolicy: 

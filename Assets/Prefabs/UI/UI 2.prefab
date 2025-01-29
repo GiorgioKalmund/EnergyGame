@@ -7967,7 +7967,7 @@ MonoBehaviour:
   endpointsBubble: {fileID: 6547016452613586534}
   co2Bubble: {fileID: 3923675788144407923}
   financeBubble: {fileID: 8593855717022408395}
-  donBubble: {fileID: 8593855717022408395}
+  donBubble: {fileID: 7689944400844575483}
   builderBubble: {fileID: 4073293420807756503}
   endpointsDialogue: {fileID: 11400000, guid: 4f84432ddf6dc394db2c1ee237cefb2e, type: 2}
   co2Dialogue: {fileID: 11400000, guid: 0ea683a02afb4c84aa0c27abc1666ba7, type: 2}
@@ -10083,6 +10083,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3119695641137796968, guid: 814e56fb7bde54e4aa45cb4a9919fc19, type: 3}
   m_PrefabInstance: {fileID: 3622281854631829580}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7689944400844575483 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6412217222729839287, guid: 814e56fb7bde54e4aa45cb4a9919fc19, type: 3}
+  m_PrefabInstance: {fileID: 3622281854631829580}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28eaf50da21ebec47a09bb58553f79e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5307063208294719136
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -58,8 +58,7 @@ public class Cutscene_Manager : MonoBehaviour
     public void SkipCurrentLine()
     {
         if(currentTurnIndex >= dialogueSequence.Count) return; 
-        SpeechBubble currentSpeaker = dialogueSequence[currentTurnIndex].speaker;
-        currentSpeaker.CloseSpeechBubbleInstantly();
+        _currentSpeaker.CloseSpeechBubbleInstantly();
     }
 
     void Update(){
@@ -81,7 +80,9 @@ public class Cutscene_Manager : MonoBehaviour
         _currentSpeaker = currentTurn.speaker;
 
         if(!_currentSpeaker.DialogueContainer.HasNextLine()){
-            EndDialogue();
+            _currentSpeaker.CloseSpeechBubbleInstantly();
+            //EndDialogue();
+            currentTurnIndex++;
             return;
         }
         _currentSpeaker.OpenSpeechbubble();
@@ -92,6 +93,7 @@ public class Cutscene_Manager : MonoBehaviour
 
     public void EndDialogue()
     {
+        _currentSpeaker.CloseSpeechBubbleInstantly();
         isDialogueActive = false;
         //CloseAllSpeechBubbles();
 

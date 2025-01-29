@@ -14,7 +14,12 @@ public class PointerDownTutorialSensor : TutorialSensor, IPointerDownHandler
     public override void Enable()
     {
         uiButton = GetComponentInChildren<Button>();
-        originalColor = uiButton.targetGraphic.color;
+        if(uiButton.image){   
+            originalColor = uiButton.targetGraphic.color;
+        }
+        if(GetComponent<RawImage>()){
+            originalColor = GetComponent<RawImage>().color;
+        }
 
         Debug.Log("Pointer down has been enabled");
 
@@ -35,7 +40,13 @@ public class PointerDownTutorialSensor : TutorialSensor, IPointerDownHandler
 
     public void stopBlinking(){
         StopAllCoroutines();
-        uiButton.image.color = originalColor;
+        if(uiButton.image){   
+            uiButton.image.color = originalColor;
+        }
+        if(GetComponent<RawImage>()){
+            GetComponent<RawImage>().color = originalColor;
+        }
+        
     }
 
     private IEnumerator BlinkEffect()
@@ -43,11 +54,21 @@ public class PointerDownTutorialSensor : TutorialSensor, IPointerDownHandler
         while (true)
         {
             // Change to blink color
-            uiButton.image.color = blinkColor;
+            if(uiButton.image){   
+                uiButton.image.color = blinkColor;
+            }
+            if(GetComponent<RawImage>()){
+                GetComponent<RawImage>().color = blinkColor;
+            }
             yield return new WaitForSeconds(blinkTime);
 
             // // Revert to original color
-            uiButton.image.color = originalColor;
+            if(uiButton.image){   
+                uiButton.image.color = originalColor;
+            }
+            if(GetComponent<RawImage>()){
+                GetComponent<RawImage>().color = originalColor;
+            }
             yield return new WaitForSeconds(blinkTime);
         }
     }

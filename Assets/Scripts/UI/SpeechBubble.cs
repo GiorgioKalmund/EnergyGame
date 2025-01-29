@@ -137,7 +137,7 @@ public class SpeechBubble : MonoBehaviour
             default:
                 isOpen = true;
                 textbox.text = nextText;
-                transform.DOScale(1f,animationTime).SetRecyclable();
+                transform.DOScale(1f,animationTime);
                 break;
         }
         

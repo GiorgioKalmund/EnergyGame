@@ -41,6 +41,8 @@ public class LevelMapMarker : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     [SerializeField] private TMP_Text popupDescriptionText;
     private bool popupOpen;
     
+    private SFX sfx;
+    
     private void Start()
     {
         LevelMapManager.Instance.AddMarker(this);
@@ -78,6 +80,11 @@ public class LevelMapMarker : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         DOTween.defaultRecyclable = true;
     }
 
+    private void OnEnable()
+    {
+        sfx = GameObject.FindWithTag("SFX").GetComponent<SFX>();
+    }
+
     private void OpenPopup(){
         if (popupOpen)
             return;
@@ -105,13 +112,13 @@ public class LevelMapMarker : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         LevelMapManager.Instance.CurrentlySelectedMarker = this;
         
         popupButton.interactable = true;
+        sfx.LevelSelect();
     }
     public void ClosePopup(){
         if (!popupOpen)
             return;
         
         popupOpen = false;
-        
         if (popup.transform)
             popup.transform.DOScale(0.0f, popupTime).SetRecyclable();
          
@@ -119,6 +126,8 @@ public class LevelMapMarker : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         
         if (popup.transform)
             popup.transform.DOLocalMoveY(yPos - popupYOffset,popupTime).SetEase(popupEase).SetRecyclable();
+        
+        sfx.LevelUnselect();
     }
 
     private void TogglePopup()

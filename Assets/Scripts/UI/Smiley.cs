@@ -12,7 +12,7 @@ public class Smiley : MonoBehaviour
 {
     [Header("Character")]
     [SerializeField]
-    private Smileys character;
+    public Smileys character;
     
     public Expression Expression;
     [SerializeField]
@@ -244,7 +244,7 @@ public class Smiley : MonoBehaviour
     }
 }
 
-enum Smileys{
+public enum Smileys{
     Baumeister,
     Greta,
     Don,

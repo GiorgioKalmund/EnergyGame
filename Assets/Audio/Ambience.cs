@@ -50,9 +50,12 @@ public class Ambience : MonoBehaviour
             music.Play();
         }
 
-        if (isBaustell)
+        if (PlayerPrefs.GetInt("levels_completed") <= 7 && isBaustell)
         {
             ChangeScreenSound("baustelle");
+        } else if (PlayerPrefs.GetInt("levels_completed") > 7 && isBaustell)
+        {
+            ChangeScreenSound("bayern");
         }
     }
 

@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.InputSystem.Composites;
 
 public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
 {
@@ -31,6 +33,8 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
     [Header("Tag")]
     [SerializeField] private TagSelectionTree tagTree;
 
+    private SFX sfx;
+
     public void Awake()
     {
         if (buildingName == "")
@@ -47,12 +51,11 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
         
         //maxProduction = GetComponent<Wandler>().generating;
         if(tagTree) tagTree.Setup(this);
-        
     }
 
-    public bool isPlaced()
+    private void OnEnable()
     {
-        return placed == true;
+        sfx = GameObject.FindWithTag("SFX").GetComponent<SFX>();
     }
 
     public void Place(TileData tile)
@@ -108,6 +111,8 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
             if (BuilderInventory.Instance && !powerTower)
                 BuilderInventory.Instance.AddSlotCapacity(1, instanceId);
             
+            
+            sfx.DestroySound();
         }
         GraphManager.Instance.RemoveWandler(GetComponent<Wandler>());
         

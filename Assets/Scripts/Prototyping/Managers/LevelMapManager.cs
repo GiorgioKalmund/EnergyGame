@@ -97,7 +97,6 @@ public class LevelMapManager : MonoBehaviour
         blackoutImage.DOFade(0f, moveAnimationTime / 2);
     }
 
-    // TODO: Dynamically load from storage / player prefs
     private void LoadCurrentMap()
     {
        currentMap = LevelMapType.BAUSTELLE;

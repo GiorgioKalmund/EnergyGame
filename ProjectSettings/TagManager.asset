@@ -8,6 +8,8 @@ TagManager:
   - PowerTower
   - Endpoint
   - Undefined
+  - SFX
+  - Voices
   layers:
   - Default
   - TransparentFX

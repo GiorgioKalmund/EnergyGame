@@ -52,6 +52,7 @@ public class PlacementManager : MonoBehaviour
     private bool validNewPlacement = false;
     
     public static PlacementManager Instance { get; private set; }
+    private SFX sfx;
 
 
     //private int coalCounter = 0;
@@ -95,6 +96,8 @@ public class PlacementManager : MonoBehaviour
         {
             cellSprite = cellIndicator.GetComponentInChildren<SpriteRenderer>();
         }
+        
+        sfx = GameObject.FindWithTag("SFX").GetComponent<SFX>();
     }
 
     public void StartPlacement(int ID)
@@ -114,7 +117,9 @@ public class PlacementManager : MonoBehaviour
         {
             throw new Exception("GameObject could not be instantiated!");
         }
-        switch(currentGameObject.GetComponentInChildren<ProducerDescriptor>().powerPlantType){
+
+        PowerPlantType type = currentGameObject.GetComponentInChildren<ProducerDescriptor>().powerPlantType;
+        switch(type){
             case PowerPlantType.COALPLANT:
                 UIManager.Instance.ShowOverlay(OverlayType.COAL);
                 break;
@@ -131,6 +136,7 @@ public class PlacementManager : MonoBehaviour
                 Debug.Log("No type");
                 break;
         }
+        sfx.Click();
         
         SelectionManager.Instance.ClearSelection();
         if (currentGameObject.GetComponent<ProducerDescriptor>())
@@ -159,13 +165,10 @@ public class PlacementManager : MonoBehaviour
         if(blocked || !currentGameObject){
             return;
         }
-        
 
         UIManager.Instance.HideOverlay();
         ProducerDescriptor producerDescriptor = currentGameObject.GetComponent<ProducerDescriptor>();
         producerDescriptor.Place(lastHoveredTileData);
-
-        
 
         //insert into gridData array
         Vector3 powerplantPos = producerDescriptor.gameObject.transform.position;
@@ -174,10 +177,6 @@ public class PlacementManager : MonoBehaviour
         cellPos.z = 1;
         GridDataManager.SetGridDataAtPos(cellPos, producerDescriptor.gameObject);
         
-
-        
-        
-
         /* Handle Tile */
         lastHoveredTileData.setPlacementType(PlacementType.Blocked);
         lastHoveredTileData.SetCurrentBuilding(producerDescriptor);
@@ -188,9 +187,9 @@ public class PlacementManager : MonoBehaviour
         //reset CellIndicator
         cellSprite.color = spriteColorRegular;
         cellIndicator.SetActive(false);
-        //UIManager.Instance.DeactivateConnectingMode();
+        
+        sfx.PlacePower(producerDescriptor.powerPlantType);
 
-        //InputManager.Instance.OnClicked += StopPlacement;
         InputManager.Instance.OnClicked -= PlaceStructure;
         BuilderInventory.Instance.ShowInventory();
     }

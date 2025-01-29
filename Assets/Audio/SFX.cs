@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SFX : MonoBehaviour
@@ -7,6 +8,7 @@ public class SFX : MonoBehaviour
 
     [Header("Audio Source")] 
     [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioSource _powerPlantSource;
 
     [Header("SFX UI")] 
     [SerializeField] private AudioClip start;
@@ -86,41 +88,37 @@ public class SFX : MonoBehaviour
         }
     }
 
-    public void PlacePower(string powerPlant)
+    public void PlacePower(PowerPlantType type)
     {
-        if (powerPlant.Equals("Atom"))
+        switch (type)
         {
-            _audioSource.PlayOneShot(atom);
-        }
-        else if (powerPlant.Equals("Kohle"))
-        {
-            _audioSource.PlayOneShot(kohle);
-        }
-        else  if (powerPlant.Equals("Wasser"))
-        {
-            _audioSource.PlayOneShot(wasser);
-        }
-        else  if (powerPlant.Equals("Photo"))
-        {
-            _audioSource.PlayOneShot(photo);
-        }
-        else  if (powerPlant.Equals("Gas"))
-        {
-            _audioSource.PlayOneShot(gas);
-        }
-        else  if (powerPlant.Equals("Wind"))
-        {
-            _audioSource.PlayOneShot(wind);
-        }
-        else  if (powerPlant.Equals("Turm"))
-        {
-            _audioSource.PlayOneShot(tower);
+            case PowerPlantType.NUCLEAR:
+                _powerPlantSource.PlayOneShot(atom);
+                break;
+            case PowerPlantType.WINDMILL:
+                _powerPlantSource.PlayOneShot(wind);
+                break;
+            case PowerPlantType.SOLARPANEL:
+                _powerPlantSource.PlayOneShot(photo);
+                break;
+            case PowerPlantType.GAS:
+                _powerPlantSource.PlayOneShot(gas);
+                break;
+            case PowerPlantType.HYDROPOWER:
+                _powerPlantSource.PlayOneShot(wasser);
+                break;
+            case PowerPlantType.COALPLANT:
+                _powerPlantSource.PlayOneShot(kohle);
+                break;
+            case PowerPlantType.NOTSELECTED:
+                _powerPlantSource.PlayOneShot(tower);
+                break;
         }
     }
 
     public void DestroySound()
     {
-        _audioSource.PlayOneShot(destroy);
+        _powerPlantSource.PlayOneShot(destroy);
     }
 
     public void Anzeige(string name)

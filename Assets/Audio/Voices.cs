@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Voices : MonoBehaviour
@@ -19,32 +20,33 @@ public class Voices : MonoBehaviour
     [SerializeField] private AudioClip[] monopolyM;
 
 
-    public void CharacterSpeak(string character)
+    public void CharacterSpeak(Smileys smileys)
     {
-        if (character.Equals("Bürgermeisterin"))
+        Debug.Log(smileys.ToSafeString() + " speaking now!");
+        int index = 0;
+        switch (smileys)
         {
-            int index = Random.Range(0, 8);
-            _audioSource.PlayOneShot(bürgermeisterin[index]);
-        }
-        else if (character.Equals("Bau"))
-        {
-            int index = Random.Range(0, 7);
-            _audioSource.PlayOneShot(bauarbeiter[index]);
-        }
-        else if (character.Equals("CO2"))
-        {
-            int index = Random.Range(0, 4);
-            _audioSource.PlayOneShot(grüner[index]);
-        }
-        else if (character.Equals("Money"))
-        {
-            int index = Random.Range(0, 5);
-            _audioSource.PlayOneShot(monopoly[index]);
-        }
-        else if (character.Equals("Quiote"))
-        {
-            int index = Random.Range(0, 5);
-            _audioSource.PlayOneShot(quiote[index]);
+            case Smileys.Bürgermeisterin:
+                index = Random.Range(0, 8);
+                _audioSource.PlayOneShot(bürgermeisterin[index]);
+                break;
+            case Smileys.Baumeister:
+                index = Random.Range(0, 7);
+                _audioSource.PlayOneShot(bauarbeiter[index]);
+                break;
+            case Smileys.Greta:
+                index = Random.Range(0, 4);
+                _audioSource.PlayOneShot(grüner[index]);
+                break;
+            case Smileys.Monopoly:
+                index = Random.Range(0, 5);
+                _audioSource.PlayOneShot(monopoly[index]);
+                break;
+            case Smileys.Don:
+                index = Random.Range(0, 5);
+                _audioSource.PlayOneShot(quiote[index]);
+                break;
+                
         }
     }
 

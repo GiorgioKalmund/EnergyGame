@@ -8742,6 +8742,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character Speech Bubble
       objectReference: {fileID: 0}
+    - target: {fileID: 6412217222729839287, guid: 814e56fb7bde54e4aa45cb4a9919fc19, type: 3}
+      propertyPath: smiley
+      value: 
+      objectReference: {fileID: 3225668233595760510}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8905,6 +8909,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3308466423729207256, guid: 7adfca393b1b4e640b6b2163e7958081, type: 3}
   m_PrefabInstance: {fileID: 986406291005563587}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7554210848308712221 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7306415251116732894, guid: 7adfca393b1b4e640b6b2163e7958081, type: 3}
+  m_PrefabInstance: {fileID: 986406291005563587}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1c441dd150a8074ab28fc52cf3b52a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1834120100188423416
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9047,6 +9062,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3308466423729207256, guid: 7adfca393b1b4e640b6b2163e7958081, type: 3}
   m_PrefabInstance: {fileID: 1834120100188423416}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8940071281616598310 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7306415251116732894, guid: 7adfca393b1b4e640b6b2163e7958081, type: 3}
+  m_PrefabInstance: {fileID: 1834120100188423416}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1c441dd150a8074ab28fc52cf3b52a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1898259556422987607
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9590,6 +9616,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &9215716982453184259 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7306415251116732894, guid: 7adfca393b1b4e640b6b2163e7958081, type: 3}
+  m_PrefabInstance: {fileID: 1909900288457119453}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1c441dd150a8074ab28fc52cf3b52a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2223967924615712768
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9812,6 +9849,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3308466423729207256, guid: 7adfca393b1b4e640b6b2163e7958081, type: 3}
   m_PrefabInstance: {fileID: 2283977135126499185}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8851764524900646575 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7306415251116732894, guid: 7adfca393b1b4e640b6b2163e7958081, type: 3}
+  m_PrefabInstance: {fileID: 2283977135126499185}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1c441dd150a8074ab28fc52cf3b52a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3440547432170040444
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9904,6 +9952,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character Speech Bubble
       objectReference: {fileID: 0}
+    - target: {fileID: 6412217222729839287, guid: 814e56fb7bde54e4aa45cb4a9919fc19, type: 3}
+      propertyPath: smiley
+      value: 
+      objectReference: {fileID: 7554210848308712221}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10017,6 +10069,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character Speech Bubble
       objectReference: {fileID: 0}
+    - target: {fileID: 6412217222729839287, guid: 814e56fb7bde54e4aa45cb4a9919fc19, type: 3}
+      propertyPath: smiley
+      value: 
+      objectReference: {fileID: 8851764524900646575}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10164,6 +10220,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7adfca393b1b4e640b6b2163e7958081, type: 3}
+--- !u!114 &3225668233595760510 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7306415251116732894, guid: 7adfca393b1b4e640b6b2163e7958081, type: 3}
+  m_PrefabInstance: {fileID: 5307063208294719136}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1c441dd150a8074ab28fc52cf3b52a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &7227276229003192696 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3308466423729207256, guid: 7adfca393b1b4e640b6b2163e7958081, type: 3}
@@ -10313,6 +10380,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character Speech Bubble
       objectReference: {fileID: 0}
+    - target: {fileID: 6412217222729839287, guid: 814e56fb7bde54e4aa45cb4a9919fc19, type: 3}
+      propertyPath: smiley
+      value: 
+      objectReference: {fileID: 9215716982453184259}
     - target: {fileID: 6826557105753939153, guid: 814e56fb7bde54e4aa45cb4a9919fc19, type: 3}
       propertyPath: m_SizeDelta.y
       value: 3100
@@ -10438,6 +10509,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character Speech Bubble
       objectReference: {fileID: 0}
+    - target: {fileID: 6412217222729839287, guid: 814e56fb7bde54e4aa45cb4a9919fc19, type: 3}
+      propertyPath: smiley
+      value: 
+      objectReference: {fileID: 8940071281616598310}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

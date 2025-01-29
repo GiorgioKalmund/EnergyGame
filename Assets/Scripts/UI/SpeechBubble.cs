@@ -47,6 +47,9 @@ public class SpeechBubble : MonoBehaviour
 
     [SerializeField] private string _onLevelCompleteText;
 
+    private Voices voices;
+    private SFX sfx;
+
     public bool IsInterruped { get; internal set; }
 
     private void Start()
@@ -57,8 +60,15 @@ public class SpeechBubble : MonoBehaviour
         
         if (LevelManager.Instance)
             LevelManager.Instance.LevelCompleted += SayTextOnLevelComplete; //M: keine ahnung warum aber muss hier hin und nicht in OnEnable
+
     }
-    
+
+    private void OnEnable()
+    {
+        sfx = GameObject.FindWithTag("SFX").GetComponent<SFX>();
+        voices = GameObject.FindWithTag("Voices").GetComponent<Voices>();
+    }
+
     void OnDisable() {
         if (LevelManager.Instance)
             LevelManager.Instance.LevelCompleted -= SayTextOnLevelComplete;
@@ -82,7 +92,6 @@ public class SpeechBubble : MonoBehaviour
         if(isOpen) return;
         ///////////////////////////////////////
         _flinkCancellationTokenSource?.Cancel();
-
 
         /////////////////////////////////////////
         if (nextText.Contains("Öffne"))
@@ -136,6 +145,7 @@ public class SpeechBubble : MonoBehaviour
             
             default:
                 isOpen = true;
+                voices.CharacterSpeak(smiley.character);
                 textbox.text = nextText;
                 transform.DOScale(1f,animationTime);
                 break;
@@ -147,7 +157,6 @@ public class SpeechBubble : MonoBehaviour
         transform.DOScale(1f,animationTime).SetRecyclable();
         isOpen = true;
         textbox.text = text;
-        
     }
 
     
@@ -164,11 +173,11 @@ public class SpeechBubble : MonoBehaviour
         // Kill current delayed close
         DOTween.Kill(transform);
         
-        
 
+        sfx.Click();
+        
         transform.DOScale(0f, animationTime);
         StartCoroutine(CloseSpeechbubbleTextSeconds(animationTime));
-        
     }
 
     //Call this in the smiley button

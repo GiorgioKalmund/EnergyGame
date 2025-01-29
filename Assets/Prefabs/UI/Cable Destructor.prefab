@@ -329,7 +329,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &1565862249764799486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -360,3 +360,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destructor: {fileID: 3829493694232097244}
+  animationTime: 0.3

@@ -29,7 +29,15 @@ public class CableDestructor : MonoBehaviour
 
     public void Activate()
     {
-        destructor.transform.DOScale(Vector3.one, animationTime);
+        LineRenderer renderer = GetComponentInParent<LineRenderer>();
+        if(renderer?.enabled==false){
+            return;
+        } else if(renderer?.enabled == true){
+            destructor.transform.DOScale(Vector3.one, animationTime);
+        } else{
+            destructor.transform.DOScale(Vector3.one, animationTime);
+        }
+        
     }
 
     public void Deactivate()

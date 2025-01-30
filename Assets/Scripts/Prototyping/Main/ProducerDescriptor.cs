@@ -115,9 +115,10 @@ public class ProducerDescriptor : MonoBehaviour, ISelectableEntity
             sfx.DestroySound();
         }
         GraphManager.Instance.RemoveWandler(GetComponent<Wandler>());
-        
+        LevelManager.Instance.CheckLevelWonFunc();
         //Debug.Log(buildingName +  " " + placement + " got destroyed, " + " on " + tileOn.coords + " " + tileOn.currentPlacementType);
         Destroy();
+        
     }
 
     public void Destroy()

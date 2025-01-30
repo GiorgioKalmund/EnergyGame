@@ -91,10 +91,7 @@ public class LevelManager : MonoBehaviour
             
             //FIXME
             StartCoroutine(CheckLevelWon());
-            
-            
         }
-        
         return endpointsCompleted;
     }
     /// <summary>
@@ -115,12 +112,21 @@ public class LevelManager : MonoBehaviour
     /// <summary>
     /// Checks and sets isWon if all conditions are met
     /// </summary>
-    private IEnumerator CheckLevelWon(){
+    public IEnumerator CheckLevelWon(){
         yield return new WaitForSeconds(0.1f);
         bool hasEnoughBudget = BudgetManager.Instance.budget>=0;
         bool notExcededPollution = currentEnvironmentalImpact <= maxEnvironmentalImpact;
         isWon = hasEnoughBudget && notExcededPollution && endpointsCompleted >= endpointsCount;
         if(isWon) UnlockNextLevel();
+    }
+
+    public void CheckLevelWonFunc()
+    {
+        bool hasEnoughBudget = BudgetManager.Instance.budget>=0;
+        bool notExcededPollution = currentEnvironmentalImpact <= maxEnvironmentalImpact;
+        isWon = hasEnoughBudget && notExcededPollution && endpointsCompleted >= endpointsCount;
+        if(isWon)
+            UnlockNextLevel();
     }
     public void UnlockNextLevel(){
         Debug.Log("===GAME WON===");

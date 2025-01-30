@@ -48,6 +48,11 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene(creditSceneName);
     }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
     
     private void OnDestroy()
     {

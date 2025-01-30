@@ -285,7 +285,7 @@ public class UIManager : MonoBehaviour
         nextLevelLock.SetActive(false);
         nextLevelButton.interactable = true;
     }
-
+    
     public void UpdateBudgetColor()
     {
         if (BudgetManager.Instance.GetBudget() < 0)

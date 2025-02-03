@@ -58,4 +58,13 @@ public class MainMenu : MonoBehaviour
     {
         DOTween.KillAll();
     }
+
+    void Update(){
+        if(Input.GetKey(KeyCode.RightControl)){
+            if(Input.GetKey(KeyCode.L)){
+                PlayerPrefs.DeleteAll();
+                NewUserId();
+            }
+        }
+    }
 }

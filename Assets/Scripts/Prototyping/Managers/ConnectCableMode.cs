@@ -57,9 +57,9 @@ public class ConnectCableMode : MonoBehaviour
     /// <param name="isStartpoint">Sets the startpoint if set to true, else the endpoint</param>
     public void SetConnectionPoints()
     {
-        if(InputManager.IsPointOverUI()){
+        /* if(InputManager.IsPointOverUI()){
             return;
-        }
+        } */
         
         Vector3Int arrPosition = GridDataManager.GetArrayPositionAtMousePosition();
         if(arrPosition.z <0){

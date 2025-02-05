@@ -60,7 +60,7 @@ public class MainMenu : MonoBehaviour
     }
 
     void Update(){
-        if(Input.GetKey(KeyCode.RightControl)){
+        if(Input.GetKey(KeyCode.LeftShift)){
             if(Input.GetKey(KeyCode.L)){
                 PlayerPrefs.DeleteAll();
                 NewUserId();

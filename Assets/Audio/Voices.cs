@@ -1,7 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class Voices : MonoBehaviour
 {
@@ -18,7 +21,15 @@ public class Voices : MonoBehaviour
     [Header("Meckern")]
     [SerializeField] private AudioClip[] grünerM;
     [SerializeField] private AudioClip[] monopolyM;
+    [SerializeField] private AudioClip[] quioteM;
 
+    private string scene;
+
+
+    private void Start()
+    {
+        scene = SceneManager.GetActiveScene().name;
+    }
 
     public void CharacterSpeak(Smileys smileys)
     {
@@ -35,16 +46,41 @@ public class Voices : MonoBehaviour
                 _audioSource.PlayOneShot(bauarbeiter[index]);
                 break;
             case Smileys.Greta:
-                index = Random.Range(0, 4);
-                _audioSource.PlayOneShot(grüner[index]);
+                if (scene.LastIndexOf("Cutscene") <= 0)
+                {
+                    index = Random.Range(0, 2);
+                    _audioSource.PlayOneShot(grünerM[index]);
+                }
+                else
+                {
+                    index = Random.Range(0, 4);
+                    _audioSource.PlayOneShot(grüner[index]);
+                }
+                
                 break;
             case Smileys.Monopoly:
-                index = Random.Range(0, 5);
-                _audioSource.PlayOneShot(monopoly[index]);
+                if (scene.LastIndexOf("Cutscene") <= 0)
+                {
+                    index = Random.Range(0, 3);
+                    _audioSource.PlayOneShot(monopolyM[index]);
+                }
+                else
+                {
+                    index = Random.Range(0, 5);
+                    _audioSource.PlayOneShot(monopoly[index]);
+                }
                 break;
             case Smileys.Don:
-                index = Random.Range(0, 5);
-                _audioSource.PlayOneShot(quiote[index]);
+                if (scene.LastIndexOf("Cutscene") <= 0)
+                {
+                    index = Random.Range(0, 2);
+                    _audioSource.PlayOneShot(quioteM[index]);
+                }
+                else
+                {
+                    index = Random.Range(0, 5);
+                    _audioSource.PlayOneShot(quiote[index]);
+                }
                 break;
                 
         }

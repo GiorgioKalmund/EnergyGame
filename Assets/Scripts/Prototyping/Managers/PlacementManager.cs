@@ -137,6 +137,7 @@ public class PlacementManager : MonoBehaviour
                 break;
         }
         sfx.Click();
+        sfx.PowerMap(type);
         
         SelectionManager.Instance.ClearSelection();
         if (currentGameObject.GetComponent<ProducerDescriptor>())

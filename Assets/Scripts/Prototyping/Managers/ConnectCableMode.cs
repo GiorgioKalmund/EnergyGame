@@ -23,6 +23,8 @@ public class ConnectCableMode : MonoBehaviour
     private PowerCable cachedCableScript;
 
     private GameObject cachedPowerTower;
+
+    private SFX sfx;
     
     void Awake(){
         if (Instance && Instance != this)
@@ -39,7 +41,7 @@ public class ConnectCableMode : MonoBehaviour
         cachedCable = Instantiate(cablePrefab, new Vector3(0,-1000,0), Quaternion.identity);
         cachedCableScript = cachedCable.GetComponent<PowerCable>();
         cachedPowerTower = Instantiate(powerTowerPrefab,new Vector3(0,-1000,0),Quaternion.identity);
-        
+        sfx = GameObject.FindWithTag("SFX").GetComponent<SFX>();
     }
 
     
@@ -193,6 +195,7 @@ public class ConnectCableMode : MonoBehaviour
         cachedCableScript.placed = false;
         cachedCableScript.startPos = startpoint.GetComponent<ProducerDescriptor>().cableAnchor.position;
         cachedCable.GetComponent<LineRenderer>().enabled = true;
+        sfx.CableNew();
     }
     public void SetStartpoint(GameObject start){
         startpoint = start;

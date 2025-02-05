@@ -302,7 +302,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -693,6 +693,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f0db68b159c8a224f918171a03c8a287, type: 3}
   - {fileID: 8300000, guid: a8fcb4e913c7552438801cffec3d6d36, type: 3}
   - {fileID: 8300000, guid: ef9220363aa73824892d5c1e7d25c6d2, type: 3}
+  quioteM:
+  - {fileID: 8300000, guid: 6b2dae9009690234999e93e43a4464ca, type: 3}
+  - {fileID: 8300000, guid: cf547cc615cef6448b5c19965d7fece9, type: 3}
 --- !u!1 &4908136942296360333
 GameObject:
   m_ObjectHideFlags: 0
@@ -739,7 +742,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -1125,6 +1128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 4432723650491905326}
   _powerPlantSource: {fileID: 4851029632481142262}
+  ambience: {fileID: 4187517379792056426}
   start: {fileID: 8300000, guid: 30daa41f1a3550e43812f9bdbac4667b, type: 3}
   back: {fileID: 8300000, guid: 022d93a0177182d46b24ce667ffc3736, type: 3}
   click: {fileID: 8300000, guid: e0c8d806a359f14409e6a113865a0403, type: 3}
@@ -1132,6 +1136,8 @@ MonoBehaviour:
   buildMenu2: {fileID: 8300000, guid: e98decb1d00fc654d9f00dacd2331748, type: 3}
   level1: {fileID: 8300000, guid: 3dffa331da6fcf648885d1a18cfb4b5a, type: 3}
   level2: {fileID: 8300000, guid: 335ba1ce449076f4ab4755d8255dd0a8, type: 3}
+  cableStart: {fileID: 8300000, guid: e022ee6b79dcbdb45a938b2f55a4c0da, type: 3}
+  cableEnd: {fileID: 8300000, guid: 6248cb72698092d4a9f262bc92eddf1f, type: 3}
   atom: {fileID: 8300000, guid: 49f7a267041fb7945910d4708d3ff4a1, type: 3}
   gas: {fileID: 8300000, guid: 079e2b132ea189745ae6d4eb34639793, type: 3}
   wind: {fileID: 8300000, guid: acee5c2d81d9893419fb3976a8801d84, type: 3}
@@ -1143,6 +1149,7 @@ MonoBehaviour:
   cash: {fileID: 8300000, guid: f1e242192e48a844b9a7b293945ecbed, type: 3}
   co2: {fileID: 8300000, guid: e0386f3cc62e24a4ba099200abeb8fd2, type: 3}
   strom: {fileID: 8300000, guid: d4fdd13660207974fb2f9ef4bd4c2a60, type: 3}
+  cityHappy: {fileID: 8300000, guid: 364ecb25513cb2b44b46bfc5ccf0fb4b, type: 3}
 --- !u!1 &6082294775883137247
 GameObject:
   m_ObjectHideFlags: 0
@@ -1189,7 +1196,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

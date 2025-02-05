@@ -19,6 +19,8 @@ public class LevelManager : MonoBehaviour
     public int endpointsCount = 0;
     public static LevelManager Instance { get; private set; }
 
+    private SFX sfx;
+
     //Endpoints von oben links nach unten rechts auf der Map durchnummeriert
     public int[] endpointDemands;
 
@@ -50,6 +52,7 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         UIManager.Instance.UpdateCurrentEnvironmentalImpact();
+        sfx = GameObject.FindWithTag("SFX").GetComponent<SFX>();
     }
 
     public void AddEnvironmentalImpact(float impact)
@@ -84,6 +87,7 @@ public class LevelManager : MonoBehaviour
     /// <returns>Number of completed endpoints</returns>
     public int CompleteEndpoint()
     {
+        sfx.CitySatisfied();
         endpointsCompleted++;
         UIManager.Instance.SetEndpointsCompleted(endpointsCompleted);
         if (endpointsCompleted == endpointsCount)

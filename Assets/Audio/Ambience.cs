@@ -93,9 +93,21 @@ public class Ambience : MonoBehaviour
             sonne.mute = !sonne.mute;
             kohle.mute = true;
             wasser.mute = true;
+        }else if (overlay.Equals("sonne2"))
+        {
+            wind.mute = true;
+            sonne.mute = false;
+            kohle.mute = true;
+            wasser.mute = true;
         }else if (overlay.Equals("wind"))
         {
             wind.mute = !wind.mute;
+            sonne.mute = true;
+            kohle.mute = true;
+            wasser.mute = true;
+        }else if (overlay.Equals("wind2"))
+        {
+            wind.mute = false;
             sonne.mute = true;
             kohle.mute = true;
             wasser.mute = true;
@@ -105,11 +117,23 @@ public class Ambience : MonoBehaviour
             sonne.mute = true;
             kohle.mute = true;
             wasser.mute = !wasser.mute;
+        }else if (overlay.Equals("wasser2"))
+        {
+            wind.mute = true;
+            sonne.mute = true;
+            kohle.mute = true;
+            wasser.mute = false;
         }else if (overlay.Equals("kohle"))
         {
             wind.mute = true;
             sonne.mute = true;
             kohle.mute = !kohle.mute;
+            wasser.mute = true;
+        }else if (overlay.Equals("kohle2"))
+        {
+            wind.mute = true;
+            sonne.mute = true;
+            kohle.mute = false;
             wasser.mute = true;
         }
     }

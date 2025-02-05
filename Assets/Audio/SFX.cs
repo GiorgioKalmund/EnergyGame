@@ -9,6 +9,7 @@ public class SFX : MonoBehaviour
     [Header("Audio Source")] 
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioSource _powerPlantSource;
+    [SerializeField] private Ambience ambience;
 
     [Header("SFX UI")] 
     [SerializeField] private AudioClip start;
@@ -23,6 +24,10 @@ public class SFX : MonoBehaviour
     [SerializeField] private AudioClip level2;
     private bool isBuildMenu;
     private bool isOverlay;
+
+    [Header("SFX Cable")] 
+    [SerializeField] private AudioClip cableStart;
+    [SerializeField] private AudioClip cableEnd;
 
     [Header("SFX Power Plants")] 
     [SerializeField] private AudioClip atom;
@@ -39,6 +44,7 @@ public class SFX : MonoBehaviour
     [SerializeField] private AudioClip cash;
     [SerializeField] private AudioClip co2;
     [SerializeField] private AudioClip strom;
+    [SerializeField] private AudioClip cityHappy;
 
     public void StartGameSound()
     {
@@ -114,6 +120,41 @@ public class SFX : MonoBehaviour
                 _powerPlantSource.PlayOneShot(tower);
                 break;
         }
+        
+        ambience.ChangeLevelSound("none");
+    }
+    
+    public void PowerMap(PowerPlantType type)
+    {
+        switch (type)
+        {
+            case PowerPlantType.WINDMILL:
+                ambience.ChangeLevelSound("wind2");
+                break;
+            case PowerPlantType.SOLARPANEL:
+                ambience.ChangeLevelSound("sonne2");
+                break;
+            case PowerPlantType.HYDROPOWER:
+                ambience.ChangeLevelSound("wasser2");
+                break;
+            case PowerPlantType.COALPLANT:
+                ambience.ChangeLevelSound("kohle2");
+                break;
+        }
+    }
+
+    public void CitySatisfied()
+    {
+        _audioSource.PlayOneShot(cityHappy);
+    }
+
+    public void CableNew()
+    {
+        _audioSource.PlayOneShot(cableStart);
+    }
+    public void CableDone()
+    {
+        _audioSource.PlayOneShot(cableEnd);
     }
 
     public void DestroySound()

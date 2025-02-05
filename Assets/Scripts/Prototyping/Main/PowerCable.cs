@@ -17,6 +17,8 @@ public class PowerCable : MonoBehaviour
 
    public TagSelectionTree tagTree;
 
+   private SFX sfx;
+
    [Header("Destructor")] 
    [SerializeField] private GameObject destructorButton;
 
@@ -33,6 +35,7 @@ public class PowerCable : MonoBehaviour
        _lineRenderer = GetComponent<LineRenderer>();
        _lineRenderer.positionCount = lineVertexCount;
        lineFunctionDivisor = 0.9f * lineVertexCount;
+       sfx = GameObject.FindWithTag("SFX").GetComponent<SFX>();
    }
 
    void Update() {
@@ -45,6 +48,7 @@ public class PowerCable : MonoBehaviour
    public void Place()
    {
        placed = true;
+       sfx.CableDone();
        
        // Place it 50% of the way towards the end position
        Vector3 newPos = startPos + (endPos - startPos) * 0.5f;
@@ -61,6 +65,7 @@ public class PowerCable : MonoBehaviour
            endPos = PlacementManager.Instance.GetCellIndicatorTransform().position;
            endPos.y = PlacementManager.Instance.cellIndicatorPlacementY + ConnectCableMode.Instance.cableYOffset;
        }
+       
        
        Vector3 direction = endPos - startPos;
        _lineRenderer.SetPosition(0, startPos);

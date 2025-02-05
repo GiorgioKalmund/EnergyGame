@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Ambience : MonoBehaviour
 {
@@ -27,6 +28,10 @@ public class Ambience : MonoBehaviour
     [SerializeField] private AudioSource music;
     [SerializeField] private AudioClip mMusic;
     [SerializeField] private AudioClip gMusic;
+    private static float lastMusicTime;
+    private string scene;
+    private bool isDone = true;
+    
 
     private void Start()
     {
@@ -47,6 +52,17 @@ public class Ambience : MonoBehaviour
         {
             startScreen.mute = true;
             music.clip = gMusic;
+            
+            scene = SceneManager.GetActiveScene().name;
+        
+            if (scene.Contains("T"))
+            {
+                isDone = false;
+                Debug.Log(lastMusicTime);
+                music.time = lastMusicTime;
+            } 
+            
+            
             music.Play();
         }
 
@@ -56,6 +72,17 @@ public class Ambience : MonoBehaviour
         } else if (PlayerPrefs.GetInt("levels_completed") > 7 && isBaustell)
         {
             ChangeScreenSound("bayern");
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (!isDone)
+        {
+            isDone = true;
+            lastMusicTime = music.time;
+            Debug.Log(music.time);
+            Debug.Log(lastMusicTime);
         }
     }
 

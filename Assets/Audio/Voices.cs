@@ -29,7 +29,6 @@ public class Voices : MonoBehaviour
     private string[] sceneArr;
     private bool isCutscene;
 
-
     private void Start()
     {
         scene = SceneManager.GetActiveScene().name;
@@ -40,7 +39,7 @@ public class Voices : MonoBehaviour
             if (s.Equals("C"))
             {
                 isCutscene = true;
-            }
+            } 
         }
     }
 

@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
@@ -24,11 +26,22 @@ public class Voices : MonoBehaviour
     [SerializeField] private AudioClip[] quioteM;
 
     private string scene;
+    private string[] sceneArr;
+    private bool isCutscene;
 
 
     private void Start()
     {
         scene = SceneManager.GetActiveScene().name;
+        sceneArr = scene.Split('_');
+        
+        foreach(string s in sceneArr)
+        {
+            if (s.Equals("C"))
+            {
+                isCutscene = true;
+            }
+        }
     }
 
     public void CharacterSpeak(Smileys smileys)
@@ -46,8 +59,9 @@ public class Voices : MonoBehaviour
                 _audioSource.PlayOneShot(bauarbeiter[index]);
                 break;
             case Smileys.Greta:
-                if (scene.LastIndexOf("Cutscene") <= 0)
+                if (!isCutscene)
                 {
+                    
                     index = Random.Range(0, 2);
                     _audioSource.PlayOneShot(grünerM[index]);
                 }
@@ -59,8 +73,9 @@ public class Voices : MonoBehaviour
                 
                 break;
             case Smileys.Monopoly:
-                if (scene.LastIndexOf("Cutscene") <= 0)
+                if (!isCutscene)
                 {
+                    
                     index = Random.Range(0, 3);
                     _audioSource.PlayOneShot(monopolyM[index]);
                 }
@@ -71,7 +86,7 @@ public class Voices : MonoBehaviour
                 }
                 break;
             case Smileys.Don:
-                if (scene.LastIndexOf("Cutscene") <= 0)
+                if (!isCutscene)
                 {
                     index = Random.Range(0, 2);
                     _audioSource.PlayOneShot(quioteM[index]);
